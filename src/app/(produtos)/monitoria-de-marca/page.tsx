@@ -5,7 +5,6 @@ import CompaniesSection from "@/components/(lp)/companies-section"
 import FAQSection from "@/components/(lp)/faq-section"
 import Footer from "@/components/(lp)/footer"
 import PricingSection from "@/components/(lp)/pricing-section"
-import RandomToast from "@/components/(lp)/random-toast"
 import RisksSection from "@/components/(lp)/risks-section"
 import TestimonialsSection from "@/components/(lp)/testimonials-section"
 import TrademarkRegistration from "@/components/(lp)/trademark-registration"
@@ -23,7 +22,6 @@ export default function Page() {
         <FAQSection />
       </div>
       <Footer />
-      <RandomToast />
     </main>
   )
 }
