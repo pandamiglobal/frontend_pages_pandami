@@ -42,9 +42,6 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@smithery/cli": "latest",
-    "@smithery-ai/github": "latest",
-    "@smithery-ai/brave-search": "latest",
     "@testing-library/cypress": "^10.0.3",
     "@types/node": "^20",
     "@types/react": "^18",
