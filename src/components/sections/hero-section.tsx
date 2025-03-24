@@ -71,28 +71,28 @@ export function HeroSection() {
           <div className="flex flex-col gap-8">
             {/* Content Card */}
             <div className="bg-white rounded-3xl p-4 md:p-8 border border-[#E5E7EB] border-solid">
-              <h1 className="text-[36px] font-bold text-[#111827] leading-tight">
+              <h1 className="text-[36px] font-bold text-[#111827] leading-tight md:text-left text-center">
                 Empresa séria, <span className="text-[#0047FF]">registra</span>{" "}
                 <span className="text-[#0047FF]">e protege</span> sua marca
               </h1>
 
-              <p className="mt-6 text-base md:text-lg text-[#374151]">
+              <p className="mt-6 text-base md:text-lg text-[#374151] md:text-left text-center">
                 Somos referências em proteção e registro de marcas no Brasil. Com um processo ágil e sem burocracia,
                 ajudamos você a transformar sua marca em um ativo valioso e protegido.
               </p>
 
               <div className="mt-12 flex items-center">
-                <div className="flex gap-1 justify-center items-center max-md:flex-col">
+                <div className="flex gap-1 justify-center items-center max-md:flex-col max-md:items-start">
                   <div className="flex -space-x-3">
-                    {["person1", "person2", "person3"].map((name, i) => (
+                    {["jonas", "jonas32", "jonas2"].map((name, i) => (
                       <Avatar key={name} className="border-2 border-white w-12 h-12">
-                        <AvatarImage src={`https://i.pravatar.cc/100?u=${name}${i}`} alt={`${name}'s avatar`} />
+                        <AvatarImage src={`https://i.pravatar.cc/100?u=${name}`} alt={`${name}'s avatar`} />
                         <AvatarFallback>{name.substring(0, 2).toUpperCase()}</AvatarFallback>
                       </Avatar>
                     ))}
                   </div>
 
-                  <div className="ml-4 flex flex-col">
+                  <div className="ml-4 flex flex-col max-md:ml-0">
                     <span className="text-sm font-medium text-[#374151]">+500 recomendações</span>
                     <div className="flex">
                       {[1, 2, 3, 4, 5].map((star) => (
@@ -172,7 +172,7 @@ export function HeroSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-[#0047FF] via-[#0037C3] to-[#002B99] hover:opacity-90 text-white font-medium py-4 px-6 rounded-full flex items-center justify-start relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-[#0047FF] via-[#0037C3] to-[#002B99] hover:opacity-90 text-white font-medium py-4 px-2 md:px-6 rounded-full flex items-center justify-start relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="ml-4 relative z-10">
                   {isSubmitting ? "ENVIANDO..." : "QUERO UMA CONSULTORIA GRATUITA"}

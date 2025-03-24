@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import Image from "next/image"
 import { Globe, Menu, ChevronDown } from "lucide-react"
@@ -7,7 +9,9 @@ import { PrimaryButton } from "@/components/ui/primary-button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import type { INavItem } from "@/@types/@header"
+import { useState } from "react"
 
 const navItems: INavItem[] = [
   {
@@ -47,16 +51,24 @@ const navItems: INavItem[] = [
 ]
 
 export function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false)
+    setOpenDropdown(null)
+  }
+
   return (
     <header className="w-full border-b py-4 bg-background">
       <Container>
         <div className="md:hidden flex items-center justify-between w-full">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center" onClick={handleLinkClick}>
             <Image src="/logo.svg" alt="PPPI Logo" width={120} height={40} className="h-10 w-auto" />
           </Link>
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Sheet>
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <Menu className="h-6 w-6" />
@@ -64,16 +76,43 @@ export function Header() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[250px] sm:w-[300px]">
                 <nav className="flex flex-col gap-4 mt-8">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.title}
-                      href={item.href}
-                      className="text-base font-medium text-foreground hover:text-primary flex items-center"
-                    >
-                      {item.icon && <item.icon className="h-5 w-5 mr-2" />}
-                      {item.title}
-                    </Link>
-                  ))}
+                  <Accordion type="single" collapsible className="w-full">
+                    {navItems.map((item) => (
+                      <AccordionItem key={item.title} value={item.title} className="border-0">
+                        {item.hasDropdown ? (
+                          <>
+                            <AccordionTrigger className="text-base font-medium text-foreground hover:text-primary hover:no-underline py-3">
+                              {item.icon && <item.icon className="h-5 w-5 mr-2" />}
+                              {item.title}
+                            </AccordionTrigger>
+                            <AccordionContent>
+                              <div className="flex flex-col gap-2 pl-4">
+                                {item.dropdownItems?.map((dropdownItem) => (
+                                  <Link
+                                    key={dropdownItem.title}
+                                    href={dropdownItem.href}
+                                    className="text-sm text-muted-foreground hover:text-primary py-2"
+                                    onClick={handleLinkClick}
+                                  >
+                                    {dropdownItem.title}
+                                  </Link>
+                                ))}
+                              </div>
+                            </AccordionContent>
+                          </>
+                        ) : (
+                          <Link
+                            href={item.href}
+                            className="text-base font-medium text-foreground hover:text-primary flex items-center py-3"
+                            onClick={handleLinkClick}
+                          >
+                            {item.icon && <item.icon className="h-5 w-5 mr-2" />}
+                            {item.title}
+                          </Link>
+                        )}
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
                 </nav>
 
                 <div className="flex flex-col gap-4 mt-8">
@@ -84,7 +123,7 @@ export function Header() {
                     </select>
                   </div>
 
-                  <Link href="https://api.whatsapp.com/send?phone=48988793250">
+                  <Link href="https://api.whatsapp.com/send?phone=48988793250" onClick={handleLinkClick}>
                     <PrimaryButton className="w-full">Fale conosco</PrimaryButton>
                   </Link>
                 </div>
@@ -94,7 +133,7 @@ export function Header() {
         </div>
         <div className="hidden md:flex items-center justify-between">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center" onClick={handleLinkClick}>
               <Image src="/logo.svg" alt="PPPI Logo" width={120} height={40} className="h-10 w-auto" />
             </Link>
 
@@ -102,7 +141,7 @@ export function Header() {
               {navItems.map((item) => (
                 <div key={item.title} className="mr-8 last:mr-0">
                   {item.hasDropdown ? (
-                    <DropdownMenu>
+                    <DropdownMenu open={openDropdown === item.title} onOpenChange={(open) => setOpenDropdown(open ? item.title : null)}>
                       <DropdownMenuTrigger 
                         data-testid={`menu-${item.title.toLowerCase()}`}
                         className="flex items-center text-base font-medium text-foreground hover:text-primary"
@@ -117,6 +156,7 @@ export function Header() {
                             <Link 
                               href={dropdownItem.href}
                               data-testid={`submenu-${dropdownItem.title.toLowerCase().replace(/\s+/g, '-')}`}
+                              onClick={handleLinkClick}
                             >
                               {dropdownItem.title}
                             </Link>
@@ -129,6 +169,7 @@ export function Header() {
                       href={item.href}
                       data-testid={`menu-${item.title.toLowerCase()}`}
                       className="text-base font-medium text-foreground hover:text-primary flex items-center"
+                      onClick={handleLinkClick}
                     >
                       {item.icon && <item.icon className="h-5 w-5 mr-2" />}
                       {item.title}
@@ -153,7 +194,7 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link href="https://api.whatsapp.com/send?phone=48988793250">
+            <Link href="https://api.whatsapp.com/send?phone=48988793250" onClick={handleLinkClick}>
               <PrimaryButton>Fale conosco</PrimaryButton>
             </Link>
           </div>
