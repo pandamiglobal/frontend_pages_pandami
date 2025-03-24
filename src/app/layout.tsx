@@ -7,6 +7,7 @@ import { Header } from "@/components/header"
 import Script from "next/script"
 import { Metadata } from "next"
 import defaultSeo from "@/common/config/default-seo"
+import { PiBotChat } from "@/components/pi-bot-widget"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <PiBotChat />
         </ThemeProvider>
       </body>
     </html>
