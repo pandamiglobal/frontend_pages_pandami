@@ -4,6 +4,7 @@ import { Space_Grotesk } from "next/font/google"
 import { ThemeProvider } from "@/app/providers"
 import Footer from "@/components/footer"
 import { Header } from "@/components/header"
+import Script from "next/script"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -25,6 +26,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <Script id="microsoft-clarity">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "SEU_ID_DO_CLARITY");
+          `}
+        </Script>
+      </head>
       <body className={`${spaceGrotesk.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Header />

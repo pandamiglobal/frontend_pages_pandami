@@ -11,7 +11,13 @@ import { PopoverTrigger } from "@radix-ui/react-popover";
 import { InfoIcon } from "lucide-react";
 
 const formSchema = z.object({
-	brandSearch: z.string().min(2, "O nome da marca é obrigatório").max(50),
+	brandSearch: z.string({
+		message: "O nome da marca é obrigatório"
+	}).trim().min(2, {
+		message: "O nome da marca deve ter pelo menos 2 caracteres"
+	}).max(50, {
+		message: "O nome da marca deve ter no máximo 50 caracteres"
+	}),
 	searchType: z.enum(["exact", "radical"], {
 		required_error: "Você deve escolher um tipo de busca",
 	}),
@@ -28,7 +34,7 @@ export default function TradeMarkForm({ onSubmit, isDisabled = false }: TradeMar
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isSubmitting },
 		watch,
 		setValue
 	} = useForm<FormValues>({
@@ -36,7 +42,8 @@ export default function TradeMarkForm({ onSubmit, isDisabled = false }: TradeMar
 		defaultValues: {
 			brandSearch: "",
 			searchType: "exact",
-		}
+		},
+		mode: "onTouched"
 	});
 
 	const searchType = watch("searchType");
@@ -107,14 +114,16 @@ export default function TradeMarkForm({ onSubmit, isDisabled = false }: TradeMar
 				<Input
 					id="brand-search"
 					type="text"
+					name="brandSearch"
 					placeholder="Digite o nome da marca para consulta inpi"
 					className="md:min-w-[calc(100%-200px)] h-[50px] sm:h-[62px] backdrop-blur-sm border-[#afb1b2] placeholder-slate-400 focus:border-[#2845EF] focus:ring-[#2845EF] shadow-none transition-all duration-300"
-					{...register("brandSearch")}
+					register={register}
+					aria-invalid={errors.brandSearch ? "true" : "false"}
 				/>
 
 				<Button
 					type="submit"
-					disabled={isDisabled}
+					disabled={isDisabled || isSubmitting}
 					className="bg-[#2845EF] shadow-none font-bold hover:bg-[#2845EF]/90 h-[50px] sm:h-[62px] cursor-pointer rounded-[12px] text-sm md:text-base w-full sm:w-[200px] whitespace-nowrap px-4 md:px-8"
 				>
 					Buscar Marca
@@ -122,7 +131,7 @@ export default function TradeMarkForm({ onSubmit, isDisabled = false }: TradeMar
 			</form>
 			{errors.brandSearch && (
 				<div className="flex font-medium items-center justify-start py-2 text-red-600 text-sm mt-1">
-					{errors.brandSearch.message}
+					{errors.brandSearch.message || "O nome da marca é obrigatório"}
 				</div>
 			)}
 		</div>
