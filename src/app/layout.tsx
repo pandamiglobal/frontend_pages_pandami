@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/app/providers"
 import Footer from "@/components/footer"
 import { Header } from "@/components/header"
 import Script from "next/script"
+import { Metadata } from "next"
+import defaultSeo from "@/common/config/default-seo"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -13,11 +15,18 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 })
 
-export const metadata = {
-  title: "PPPI",
-  description: "PPPI - Plataforma de Produtos e Ferramentas",
-  generator: 'v0.dev'
-}
+export const metadata: Metadata = {
+  title: defaultSeo.title,
+  description: defaultSeo.description,
+  robots: {
+    follow: true,
+    index: true,
+    'max-snippet': -1,
+    'max-video-preview': -1,
+    'max-image-preview': 'large'
+  },
+  openGraph: defaultSeo.openGraph
+};
 
 export default function RootLayout({
   children,
@@ -33,7 +42,7 @@ export default function RootLayout({
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
               y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "SEU_ID_DO_CLARITY");
+            })(window, document, "clarity", "script", "q5o6qhr6ia");
           `}
         </Script>
       </head>
