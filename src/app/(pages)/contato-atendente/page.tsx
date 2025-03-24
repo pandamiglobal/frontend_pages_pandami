@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react';
-import styles from '../../../../styles/loading.css';
 
 export default function ContatoAtendente() {
     const whatsappLink = 'https://wa.me/4888793250';
@@ -15,17 +14,11 @@ export default function ContatoAtendente() {
     }, []);
 
     return (
-        <div className={styles.container} style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '100vh',
-            textAlign: 'center'
-        }}>
-            <div className={styles.content}>
-                <div className={styles.loadingSpinner}></div>
-                <h1>Redirecionando você para um atendente</h1>
-                <p>Por favor, aguarde...</p>
+        <div className="flex items-center justify-center min-h-screen bg-[#f0f2f5]">
+            <div className="text-center p-8">
+                <div className="w-[50px] h-[50px] border-4 border-[#f3f3f3] border-t-[#25D366] rounded-full animate-spin mx-auto mb-8"></div>
+                <h1 className="text-[#333] text-2xl mb-4">Redirecionando você para um atendente</h1>
+                <p className="text-[#666] text-base">Por favor, aguarde...</p>
             </div>
         </div>
     );
