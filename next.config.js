@@ -7,6 +7,9 @@ const nextConfig = {
       'pppi.com.br'
     ],
   },
+  experimental: {
+    optimizeFonts: false,
+  },
 };
 
 module.exports = nextConfig; 

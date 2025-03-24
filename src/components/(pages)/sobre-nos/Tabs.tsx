@@ -183,7 +183,7 @@ export default function TabsSection() {
                         </Card>
                     </TabsContent>
 
-                    {/* Equipe Tab */}
+                    {/* 
                     <TabsContent value="equipe" className="mt-4">
                         <Card>
                             <CardContent className="p-6">
@@ -194,7 +194,6 @@ export default function TabsSection() {
                                 </p>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                    {/* Membro 1 */}
                                     <div className="bg-[#F5F5F5] rounded-xl p-6 flex flex-col items-center text-center">
                                         <Avatar className="w-24 h-24 border-4 border-white mb-4">
                                             <AvatarImage src="https://i.pravatar.cc/150?u=exec1" alt="Foto de Ana Silva" />
@@ -208,7 +207,6 @@ export default function TabsSection() {
                                         <Badge className="bg-[#E5E7EB] text-[#374151] hover:bg-[#E5E7EB]/90">Liderança</Badge>
                                     </div>
 
-                                    {/* Membro 2 */}
                                     <div className="bg-[#F5F5F5] rounded-xl p-6 flex flex-col items-center text-center">
                                         <Avatar className="w-24 h-24 border-4 border-white mb-4">
                                             <AvatarImage src="https://i.pravatar.cc/150?u=exec2" alt="Foto de Carlos Mendes" />
@@ -222,7 +220,6 @@ export default function TabsSection() {
                                         <Badge className="bg-[#E5E7EB] text-[#374151] hover:bg-[#E5E7EB]/90">Inovação</Badge>
                                     </div>
 
-                                    {/* Membro 3 */}
                                     <div className="bg-[#F5F5F5] rounded-xl p-6 flex flex-col items-center text-center">
                                         <Avatar className="w-24 h-24 border-4 border-white mb-4">
                                             <AvatarImage src="https://i.pravatar.cc/150?u=exec3" alt="Foto de Juliana Costa" />
@@ -264,6 +261,7 @@ export default function TabsSection() {
                             </CardContent>
                         </Card>
                     </TabsContent>
+                    */}
                 </Tabs>
             </Container>
         </section>
