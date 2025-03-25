@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 export default function ContatoAtendente() {
-    const whatsappLink = 'https://wa.me/4888793250';
+    const whatsappLink = 'https://wa.me/4888809713';
 
     useEffect(() => {
         const timer = setTimeout(() => {
