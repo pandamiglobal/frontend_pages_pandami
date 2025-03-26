@@ -7,6 +7,8 @@ import TrademarkTable from "./trade-mark-table";
 
 import { useState } from "react";
 import usePublicSearchByBrand from "@/common/hooks/use-public-search-by-brand";
+import useCreateLead from "@/common/hooks/use-create-lead";
+import { EOriginLead } from "@/@types/@lead";
 
 export default function TradeMarkList() {
   const [searchData, setSearchData] = useState({} as any);
@@ -14,6 +16,7 @@ export default function TradeMarkList() {
     raws: []
   });
   const [isOpen, setIsOpen] = useState(false);
+
   const { data: leadData, refreshData: refreshLeadData } = useLeadCache();
   const { execPublicSearchByBrand, loading, loadingMessage } = usePublicSearchByBrand();
 
@@ -26,18 +29,22 @@ export default function TradeMarkList() {
     const objectFormated = {
       brand: values.brandSearch,
       isRadical: values.searchType === "exact" ? false : true,
+      isInternational: values.searchType === "international" ? true : false,
     };
+
     refreshLeadData();
     setSearchData(objectFormated);
-    console.log(leadData)
 
     if (leadData && leadData.email && leadData.name) {
-      await execPublicSearchByBrand({
+      const result = await execPublicSearchByBrand({
         brand: values.brandSearch,
         isRadical: values.searchType === "exact" ? false : true,
+        isInternational: values.searchType === "international" ? true : false,
         email: leadData.email,
         name: leadData.name,
-      })
+      });
+
+      setData(result);
       return;
     }
 
@@ -53,7 +60,7 @@ export default function TradeMarkList() {
         )
       }
       {data?.raws && Array.isArray(data.raws) && data.raws.length > 0 && (
-        <TrademarkTable data={data.raws} />
+        <TrademarkTable data={data.raws} international_search={true} />
       )}
       <TradeMarkModal
         isOpen={isOpen}

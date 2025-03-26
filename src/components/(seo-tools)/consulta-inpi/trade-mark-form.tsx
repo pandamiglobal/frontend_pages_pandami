@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent } from "../../ui/popover";
 import { PopoverTrigger } from "@radix-ui/react-popover";
-import { InfoIcon } from "lucide-react";
+import { Globe2Icon, GlobeIcon, InfoIcon } from "lucide-react";
 
 const formSchema = z.object({
 	brandSearch: z.string({
@@ -18,7 +18,7 @@ const formSchema = z.object({
 	}).max(50, {
 		message: "O nome da marca deve ter no máximo 50 caracteres"
 	}),
-	searchType: z.enum(["exact", "radical"], {
+	searchType: z.enum(['exact', 'radical', 'international'], {
 		required_error: "Você deve escolher um tipo de busca",
 	}),
 });
@@ -95,6 +95,28 @@ export default function TradeMarkForm({ onSubmit, isDisabled = false }: TradeMar
 							<PopoverContent className="p-2 md:p-3 bg-white shadow-lg text-gray-500 text-sm md:text-base">
 								A busca por radical considera variações do nome, encontrando
 								registros que tenham raízes ou partes do nome informados.
+							</PopoverContent>
+						</Popover>
+					</div>
+					<div className="flex items-center gap-2 relative">
+						<input
+							type="radio"
+							value="international"
+							id="international"
+							{...register("searchType")}
+							checked={searchType === "international"}
+							onChange={() => setValue("searchType", "international")}
+							className="form-radio"
+						/>
+						<Label htmlFor="international" className="text-gray-600 text-sm md:text-base flex items-center gap-1">
+							<Globe2Icon size={18} /> Fazer busca internacional
+						</Label>
+						<Popover>
+							<PopoverTrigger className="text-gray-500 cursor-pointer">
+								<InfoIcon size={15} />
+							</PopoverTrigger>
+							<PopoverContent className="p-2 md:p-3 bg-white shadow-lg text-gray-500 text-sm md:text-base">
+								A busca será realizada pelo nome exato no banco do "Registro Mundial de Marcas". Os registros encontrados não são atualizados em tempo real.
 							</PopoverContent>
 						</Popover>
 					</div>

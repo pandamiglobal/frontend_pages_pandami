@@ -2,12 +2,16 @@ import { useState } from "react";
 import { useLeadCache } from "./use-lead-cache";
 import toast from "react-hot-toast";
 import api from "../config/api";
+import useCreateLead from "./use-create-lead";
+import { EOriginLead } from "@/@types/@lead";
+import createLeadAction from "../actions/create-lead-action";
 
 interface IFormValues {
     name: string;
     email: string;
     brand: string;
     isRadical: boolean;
+    isInternational: boolean;
 }
 
 export default function usePublicSearchByBrand() {
@@ -30,12 +34,24 @@ export default function usePublicSearchByBrand() {
             await new Promise(resolve => setTimeout(resolve, 2000));
             setLoadingMessage("Só mais um pouquinho...");
 
+            // Chamada da action server para criar o lead
+            createLeadAction({
+                brand: data.brand,
+                email: data.email,
+                name: data.name,
+                phone_number: '99999999999',
+                origin: EOriginLead.seo_tool,
+                origin_font: 'pagina-busca-inpi',
+                description: 'Lead coletado no formulário da ferramenta de busca no INPI',
+            })
+
             const response = await api.post(
                 `/brand/public-brand-find/${data.brand}`,
                 {
                     name: data.name,
                     email: data.email,
                     radical: data.isRadical,
+                    international: data.isInternational,
                 }
             );
 

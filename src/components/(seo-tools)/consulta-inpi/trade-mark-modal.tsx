@@ -101,6 +101,7 @@ export default function TradeMarkModal({
 			...data,
 			brand: searchData.brand,
 			isRadical: searchData.isRadical,
+			isInternational: searchData.searchType === "international" ? true : false,
 		})
 
 		if (response) {

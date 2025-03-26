@@ -15,12 +15,35 @@ import despachoData from "@/common/lib/mapper-despachos.json";
 
 interface TradeMarkTable {
   data: any;
+  international_search: boolean;
 }
 
-export default function TrademarkTable({ data }: TradeMarkTable) {
+export default function TrademarkTable({ data, international_search = false }: TradeMarkTable) {
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(25);
+
+  // MAPPING dos status de marca na pesquisa internacional
+  const tradeMarkStatus = {
+    RECEIVED: "Recebido", // A solicitação foi aceita e ainda não atribuída a um examinador.
+    UNDER_EXAMINATION: "Em Exame", // A solicitação foi aceita e atribuída a um examinador.
+    APPLICATION_PUBLISHED: "Aplicação Publicada", // A marca foi adicionada ao registro e publicada para oposição pública.
+    REGISTRATION_PENDING: "Registro Pendente", // Status transitório antes do registro.
+    REGISTERED: "Registrado", // A marca foi registrada com sucesso.
+    WITHDRAWN: "Retirado", // O proprietário retirou a solicitação, tornando-a inativa.
+    REFUSED: "Recusado", // O pedido foi recusado, invalidado ou rejeitado.
+    OPPOSITION_PENDING: "Oposição Pendente", // Oposição apresentada e ainda não decidida.
+    APPEALED: "Recorrido", // Um recurso contra a recusa final está pendente.
+    CANCELLATION_PENDING: "Cancelamento Pendente", // A marca está sendo contestada e pode ser removida.
+    CANCELLED: "Cancelado", // A marca foi cancelada ou invalidada e removida do registro.
+    SURRENDERED: "Renunciado", // O proprietário removeu voluntariamente a marca do registro.
+    EXPIRED: "Expirado", // A marca foi removida do registro por falta de renovação.
+    APPEALABLE: "Recorrível", // Passível de recurso.
+    START_OF_OPPOSITION_PERIOD: "Início do Período de Oposição", // Período inicial em que pode ser apresentada oposição.
+    ACCEPTANCE_PENDING: "Aceitação Pendente", // Status antes da aceitação oficial.
+    ACCEPTED: "Aceito", // A solicitação foi aceita e registrada.
+    REMOVED_FROM_REGISTER: "Removido do Registro", // A marca foi removida do registro após expiração ou falha na manutenção.
+  }
 
   useEffect(() => {
     if (!Array.isArray(data)) {
@@ -30,6 +53,12 @@ export default function TrademarkTable({ data }: TradeMarkTable) {
 
     try {
       const updatedData = data.map((row: any) => {
+        if (international_search) {
+          const despacho = tradeMarkStatus[row.despacho.status as keyof typeof tradeMarkStatus];
+
+          return { ...row, situacao: despacho };
+        }
+
         if (!row?.despacho?.[0]?.despacho?.[0]?.$?.codigo) {
           return { ...row, situacao: "Não encontrado" };
         }
@@ -83,7 +112,7 @@ export default function TrademarkTable({ data }: TradeMarkTable) {
           ))}
         </TableBody>
       </Table>
-      
+
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 py-4 px-3 md:px-4">
         <select
           value={itemsPerPage}
