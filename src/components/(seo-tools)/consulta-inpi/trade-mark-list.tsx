@@ -60,7 +60,7 @@ export default function TradeMarkList() {
         )
       }
       {data?.raws && Array.isArray(data.raws) && data.raws.length > 0 && (
-        <TrademarkTable data={data.raws} international_search={true} />
+        <TrademarkTable data={data.raws} searchData={searchData} />
       )}
       <TradeMarkModal
         isOpen={isOpen}

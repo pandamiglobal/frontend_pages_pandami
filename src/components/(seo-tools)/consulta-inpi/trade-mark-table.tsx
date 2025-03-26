@@ -15,10 +15,10 @@ import despachoData from "@/common/lib/mapper-despachos.json";
 
 interface TradeMarkTable {
   data: any;
-  international_search: boolean;
+  searchData: any;
 }
 
-export default function TrademarkTable({ data, international_search = false }: TradeMarkTable) {
+export default function TrademarkTable({ data, searchData }: TradeMarkTable) {
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(25);
@@ -53,7 +53,7 @@ export default function TrademarkTable({ data, international_search = false }: T
 
     try {
       const updatedData = data.map((row: any) => {
-        if (international_search) {
+        if (searchData.isInternational) {
           const despacho = tradeMarkStatus[row.despacho.status as keyof typeof tradeMarkStatus];
 
           return { ...row, situacao: despacho };

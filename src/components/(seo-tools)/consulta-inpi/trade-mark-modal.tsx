@@ -96,12 +96,11 @@ export default function TradeMarkModal({
 	const seconds = timeLeft % 60;
 
 	const handleGetBrandResult = async (data: FormValues) => {
-		
 		const response = await execPublicSearchByBrand({
 			...data,
 			brand: searchData.brand,
 			isRadical: searchData.isRadical,
-			isInternational: searchData.searchType === "international" ? true : false,
+			isInternational: searchData.isInternational,
 		})
 
 		if (response) {
