@@ -34,7 +34,7 @@ export interface TrademarkRegistrationLead {
 export async function submitTrademarkRegistrationLead(data: TrademarkRegistrationLead): Promise<any> {
   try {
     const response = await api.post(
-      "https://web-api.pppi.com.br/brand/trademark-registration-lead",
+      "https://web-api.pppi.com.br/brand/lead",
       data
     );
     return response.data;

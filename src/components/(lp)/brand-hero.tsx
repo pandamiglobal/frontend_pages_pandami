@@ -14,6 +14,7 @@ import { getCompanySizeFromString, submitTrademarkRegistrationLead } from "@/com
 import { FormInput } from "@/components/ui/form-input";
 import { FormSelect } from "@/components/ui/form-select";
 import { FormTextarea } from "@/components/ui/form-textarea";
+import { EOriginLead } from "@/@types/@lead";
 
 // Definindo os schemas de validação com Zod
 const step1Schema = z.object({
@@ -124,7 +125,8 @@ export default function BrandHero() {
         company_size: getCompanySizeFromString(completeFormData.porteEmpresa) || ECompanySize.small,
         company_segment: completeFormData.segmento,
         company_on_market: completeFormData.tempoMercado,
-        website: completeFormData.website || undefined
+        website: completeFormData.website || undefined,
+        origin: EOriginLead.page
       };
       
       const response = await submitTrademarkRegistrationLead(leadData);
@@ -390,12 +392,6 @@ export default function BrandHero() {
       return (
         <form onSubmit={handleSubmitStep2(onSubmitStep2)} className="space-y-6">
           <div>
-            <label
-              htmlFor="segmento"
-              className="block text-[#4b5563] text-base font-medium mb-2"
-            >
-              Qual o segmento da sua marca?
-            </label>
             <FormSelect
               id="segmento"
               label="Qual o segmento da sua marca?"
@@ -414,12 +410,6 @@ export default function BrandHero() {
           </div>
 
           <div>
-            <label
-              htmlFor="tempoMercado"
-              className="block text-[#4b5563] text-base font-medium mb-2"
-            >
-              Há quanto tempo sua marca está no mercado?
-            </label>
             <FormSelect
               id="tempoMercado"
               label="Há quanto tempo sua marca está no mercado?"
