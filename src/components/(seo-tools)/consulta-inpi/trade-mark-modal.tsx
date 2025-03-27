@@ -200,7 +200,7 @@ export default function TradeMarkModal({
 						</form>
 					</div>
 				</div>
-				<div className="px-4 md:px-5 pb-4 md:pb-5">
+				{/* <div className="px-4 md:px-5 pb-4 md:pb-5">
 					<div className="relative w-full border-2 border-slate-700 bg-slate-800 rounded-lg overflow-hidden">
 						<div className="p-3 md:p-4 space-y-3">
 							<h2 className="text-lg md:text-xl font-bold text-white text-center">
@@ -224,7 +224,7 @@ export default function TradeMarkModal({
 							</Button>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</DialogContent>
 		</Dialog>
 	);

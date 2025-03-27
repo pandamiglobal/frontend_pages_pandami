@@ -34,6 +34,10 @@ export default function usePublicSearchByBrand() {
             await new Promise(resolve => setTimeout(resolve, 2000));
             setLoadingMessage("Só mais um pouquinho...");
 
+            data.brand = data.brand.toLowerCase();
+            data.name = data.name.toLowerCase();
+            data.email = data.email.toLowerCase();
+
             // Chamada da action server para criar o lead
             createLeadAction({
                 brand: data.brand,
