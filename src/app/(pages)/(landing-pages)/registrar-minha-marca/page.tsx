@@ -46,7 +46,7 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white" data-no-header data-no-bot data-no-footer>
+    <div className="min-h-screen bg-white overflow-hidden" data-no-header data-no-bot data-no-footer>
       <HeroContact />
       <WhyRegisterSection />
       <Testimonials />
