@@ -4,7 +4,8 @@ const nextConfig = {
   images: {
     domains: [
       'cms.pppi.com.br',
-      'pppi.com.br'
+      'pppi.com.br',
+      'images.pexels.com'
     ],
   }
 };

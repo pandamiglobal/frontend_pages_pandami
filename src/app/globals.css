@@ -1,1 +1,13 @@
 @import '../../styles/globals.css';
+
+header:has(+ [data-no-header]) {
+    display: none;
+}
+
+[data-no-footer] ~ footer {
+    display: none;
+}
+
+[data-no-bot] ~ .pi-bot {
+    display: none;
+}
