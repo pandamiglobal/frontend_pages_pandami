@@ -182,7 +182,7 @@ export default function BrandHero() {
           <div className="lg:max-w-xl flex flex-col h-full">
             {/* Logo */}
             <div className="w-full bg-white lg:rounded-[0_0_32px_0] lg:pt-8">
-              <div className="mb-8">
+              {/* <div className="mb-8">
                 <div className="flex items-center justify-center md:items-center md:justify-start">
                   <img
                     src="logo.svg"
@@ -190,7 +190,7 @@ export default function BrandHero() {
                     className="w-[80px] md:w-[80px]"
                   />
                 </div>
-              </div>
+              </div> */}
 
               {/* Heading */}
               <h2 className="text-[#374151] text-base text-center md:text-start lg:text-lg mb-1">
@@ -257,7 +257,7 @@ export default function BrandHero() {
 
               <div className="grid grid-cols-3 md:gap-4">
                 <Counter
-                  target={3000}
+                  target={1000}
                   duration={800}
                   label="Marcas registradas"
                 />
@@ -330,7 +330,7 @@ export default function BrandHero() {
           <div className="bg-[rgba(0,0,0,0.7)] text-white rounded-[32px] p-4 py-8 lg:p-8 flex justify-center items-center mt-6 lg:hidden">
             <div className="grid grid-cols-3 md:gap-4">
               <Counter
-                target={3000}
+                target={1000}
                 duration={800}
                 label="Marcas registradas"
               />

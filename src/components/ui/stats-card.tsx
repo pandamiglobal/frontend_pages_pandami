@@ -14,7 +14,7 @@ export function StatsCard({ className }: StatsCardProps) {
 
   useEffect(() => {
     const duration = 2000 // 2 segundos para a animação completa
-    const finalValues = [100, 70, 87000]
+    const finalValues = [1000, 70, 87000]
     const steps = 50 // número de passos para a animação
 
     const interval = duration / steps

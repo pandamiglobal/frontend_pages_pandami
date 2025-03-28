@@ -110,7 +110,7 @@ export default function AboutUs() {
                                             </h4>
                                         </div>
                                         <p className="text-sm text-slate-600">
-                                            Mais de 7.000 marcas registradas com sucesso em diversos
+                                            Mais de 1.000 marcas registradas com sucesso em diversos
                                             segmentos
                                         </p>
                                     </div>

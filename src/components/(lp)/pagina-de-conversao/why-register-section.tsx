@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 
 export function WhyRegisterSection() {
   const scrollToForm = () => {
@@ -75,7 +76,7 @@ export function WhyRegisterSection() {
                 <div className="flex items-center mb-3">
                   <Award className="h-6 w-6 mr-2 text-blue-300" />
                   <span className="font-medium text-lg">
-                    Mais de 7.000 marcas registradas
+                    Mais de 1.000 marcas registradas
                   </span>
                 </div>
               </div>
@@ -298,14 +299,15 @@ export function WhyRegisterSection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <Button
-            onClick={scrollToForm}
-            size="lg"
-            className="bg-gradient-to-r from-[#0057FF] to-[#007BFF] hover:from-[#0044CC] hover:to-[#0066CC] text-white py-6 px-8 text-lg shadow-lg hover:shadow-xl transition-all"
-          >
-            Fale com especialista da 3PI
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <Link href="https://api.whatsapp.com/send?phone=48988793250">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-[#0057FF] to-[#007BFF] hover:from-[#0044CC] hover:to-[#0066CC] text-white py-6 px-8 text-lg shadow-lg hover:shadow-xl transition-all"
+            >
+              Fale com especialista da 3PI
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
 
           <p className="mt-4 text-slate-500 text-sm">
             Análise de marca gratuita e sem compromisso

@@ -59,7 +59,7 @@ export function FloatingNotification({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className={cn("fixed z-50 max-w-sm w-[calc(100%-20px)]", positionClasses[position], className)}
+          className={cn("fixed z-50 max-w-[350px] w-[calc(100%-20px)]", positionClasses[position], className)}
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}

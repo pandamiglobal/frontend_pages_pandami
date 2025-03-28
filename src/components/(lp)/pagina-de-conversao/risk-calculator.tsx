@@ -384,7 +384,7 @@ export function RiskCalculatorSection() {
             <h3 className="text-lg font-medium">{currentQuestion.question}</h3>
             <button
               onClick={() => setShowSourceInfo(!showSourceInfo)}
-              className="text-xs text-primary hover:underline flex items-center gap-1"
+              className="text-xs text-primary flex items-center gap-1 cursor-default"
             >
               <FileText className="h-4 w-4" />
               Fonte legal

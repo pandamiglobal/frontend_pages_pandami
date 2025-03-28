@@ -92,7 +92,7 @@ export function TestimonialsSliderSection() {
 
     return (
         <>
-            <style jsx global>
+            {/* <style jsx global>
                 {scrollbarHideClass}
             </style>
             <section className="max-w-7xl mx-auto px-4 py-12">
@@ -139,7 +139,7 @@ export function TestimonialsSliderSection() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
         </>
     )
 }

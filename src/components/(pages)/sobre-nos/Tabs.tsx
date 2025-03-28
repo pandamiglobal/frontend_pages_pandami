@@ -35,7 +35,7 @@ export default function TabsSection() {
                                             uma proteção completa para nossos clientes.
                                         </p>
                                         <p className="text-[#374151]">
-                                            Hoje, atendemos mais de 5.000 clientes em todo o Brasil, desde startups até grandes corporações,
+                                            Hoje, atendemos mais de 1.000 clientes em todo o Brasil, desde startups até grandes corporações,
                                             sempre mantendo nosso compromisso com a excelência e a inovação.
                                         </p>
                                     </div>
