@@ -40,7 +40,7 @@ export default function WhatsappTestimonials() {
                                 <div className="bg-[#128C7E] text-white p-3 flex items-center">
                                     <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
                                         <img
-                                            src="https://randomuser.me/api/portraits/men/32.jpg"
+                                            src="/testimonials/registrar-minha-marca/carlos-mendes.jpg"
                                             alt="persona"
                                             className="w-10 h-10 rounded-full"
                                         />
@@ -106,7 +106,7 @@ export default function WhatsappTestimonials() {
                                 <div className="bg-[#128C7E] text-white p-3 flex items-center">
                                     <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
                                         <img
-                                            src="https://randomuser.me/api/portraits/women/40.jpg"
+                                            src="/testimonials/registrar-minha-marca/mariana-souza.jpg"
                                             alt="persona"
                                             className="w-10 h-10 rounded-full"
                                         />
@@ -172,7 +172,7 @@ export default function WhatsappTestimonials() {
                                 <div className="bg-[#128C7E] text-white p-3 flex items-center">
                                     <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
                                         <img
-                                            src="https://randomuser.me/api/portraits/men/60.jpg"
+                                            src="/testimonials/registrar-minha-marca/thiago-lima.jpg"
                                             alt="persona"
                                             className="w-10 h-10 rounded-full"
                                         />

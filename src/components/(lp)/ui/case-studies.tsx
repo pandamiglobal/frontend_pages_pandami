@@ -84,8 +84,8 @@ export function CaseStudies() {
         {caseStudies.map((study) => (
           <TabsContent key={study.id} value={study.id}>
             <Card>
-              <CardContent className="p-6" ref={study.id === activeTab ? contentRef : null}>
-                <div className="grid md:grid-cols-2 gap-8">
+              <CardContent className="p-4 md:p-6" ref={study.id === activeTab ? contentRef : null}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                   <div>
                     <div className="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-3">
                       {study.industry}
@@ -117,7 +117,7 @@ export function CaseStudies() {
                     </div>
                   </div>
 
-                  <div className="bg-slate-50 p-6 rounded-lg">
+                  <div className="bg-slate-50 p-4 md:p-6 rounded-lg">
                     <h5 className="text-lg font-bold mb-4 text-center">Antes vs. Depois</h5>
 
                     <div className="space-y-6">
@@ -142,11 +142,11 @@ export function CaseStudies() {
                       </div>
                     </div>
 
-                    <div className="mt-12 text-center">
+                    <div className="mt-8 md:mt-12 text-center">
                       <Button
                         onClick={() => document.getElementById("form-section")?.scrollIntoView({ behavior: "smooth" })}
                         size='lg'
-                        className="uppercase"
+                        className="uppercase max-w-full"
                       >
                         Quero minha consulta gratuita
                       </Button>

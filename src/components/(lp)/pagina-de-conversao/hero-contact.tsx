@@ -19,6 +19,7 @@ import * as z from "zod";
 import useCreateLead from "@/common/hooks/use-create-lead";
 import { EOriginLead } from "@/@types/@lead";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 const formSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
@@ -228,8 +229,8 @@ export function HeroContact() {
                   <div className="mt-5 text-center text-sm text-gray-400">
                     <span>
                       Ao submeter esse formulário, você autoriza que a 3PI.
-                      entrar em contato e declara estar ciente da Política de
-                      Privacidade.
+                      entrar em contato e declara estar ciente da <Link href={'/politica-de-privacidade'}>Política de
+                      Privacidade.</Link>
                     </span>
                   </div>
 
