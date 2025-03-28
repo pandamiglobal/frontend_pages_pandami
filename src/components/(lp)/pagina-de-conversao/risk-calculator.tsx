@@ -353,7 +353,7 @@ export function RiskCalculatorSection() {
             Quero minha consulta gratuita
           </Button>
 
-          <Button variant="outline" onClick={resetCalculator} className="text-base !border-none !font-normal">
+          <Button variant="outline" onClick={resetCalculator} className="text-base !border-none !font-normal !bg-white">
             Refazer análise
           </Button>
         </CardFooter>

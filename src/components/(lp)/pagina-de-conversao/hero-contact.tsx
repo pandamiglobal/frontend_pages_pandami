@@ -75,7 +75,7 @@ export function HeroContact() {
   };
 
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden">
+    <section className="relative py-12 md:py-28 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-[#001E63] via-[#0055FF] to-[#0066CC] z-0">
         <div
           className="absolute inset-0 opacity-15"
@@ -90,7 +90,7 @@ export function HeroContact() {
       </div>
 
       <div className="container relative mx-auto px-4 md:px-6 z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-20 items-center">
           {/* Coluna de conteúdo */}
           <div className="relative">
             <div className="absolute -top-10 -left-10 w-20 h-20 bg-blue-300 opacity-20 rounded-full blur-xl"></div>
@@ -102,14 +102,14 @@ export function HeroContact() {
                   alt="3PI Logo"
                   width={200}
                   height={200}
-                  className="w-[250px] md:w-[250px]"
+                  className="w-[150px] md:w-[250px]"
                   style={{ filter: "contrast(1.1) saturate(1.2)" }}
                   priority
                 />
               </div>
             </div>
 
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 font-sans leading-tight text-white text-center md:text-start">
+            <h1 className="text-3xl md:text-6xl font-bold tracking-tight mb-6 font-sans leading-tight text-white text-center md:text-start">
               Registre sua{" "}
               <span className="relative inline-block text-white">
                 Marca
@@ -117,12 +117,12 @@ export function HeroContact() {
               </span>
             </h1>
 
-            <p className="text-xl font-normal mb-8 text-blue-50 max-w-xl leading-relaxed text-center md:text-start">
+            <p className="text-base md:text-xl font-normal mb-4 md:mb-8 text-blue-50 max-w-xl leading-relaxed text-center md:text-start">
               Garanta a Exclusividade do sua marca para fins jurídicos e
               comerciais no Brasil
             </p>
 
-            <div className="md:flex items-center hidden px-8 justify-between gap-x-8 text-blue-100 backdrop-blur-sm bg-white/10 p-4 rounded-xl border border-white/10">
+            <div className="md:flex items-center hidden px-8 justify-between gap-x-8 text-blue-100 backdrop-blur-sm bg-white/10 md:p-4 rounded-xl border border-white/10">
               <div className="flex items-center whitespace-nowrap">
                 <Shield className="h-5 w-5 mr-2 text-blue-200" />
                 <span>+7 mil registros</span>
