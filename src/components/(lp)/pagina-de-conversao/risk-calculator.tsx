@@ -348,12 +348,13 @@ export function RiskCalculatorSection() {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline" onClick={resetCalculator} className="text-base">
-            Refazer análise
-          </Button>
+        <CardFooter className="flex flex-col justify-between gap-3">
           <Button onClick={() => document.getElementById("form-section")?.scrollIntoView({ behavior: "smooth" })} size={"lg"} className="text-base uppercase text-white">
             Quero minha consulta gratuita
+          </Button>
+
+          <Button variant="outline" onClick={resetCalculator} className="text-base !border-none !font-normal">
+            Refazer análise
           </Button>
         </CardFooter>
       </Card>
