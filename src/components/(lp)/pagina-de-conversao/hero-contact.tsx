@@ -90,7 +90,7 @@ export function HeroContact() {
       </div>
 
       <div className="container relative mx-auto px-4 md:px-6 z-10">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Coluna de conteúdo */}
           <div className="relative">
             <div className="absolute -top-10 -left-10 w-20 h-20 bg-blue-300 opacity-20 rounded-full blur-xl"></div>
@@ -139,17 +139,17 @@ export function HeroContact() {
           </div>
 
           {/* Coluna do formulário */}
-          <div className="relative">
+          <div className="relative" id="form-section">
             <div className="absolute -z-10 -top-5 -right-5 w-40 h-40 bg-blue-400 opacity-20 rounded-full blur-xl"></div>
 
-            <Card className="border-0 shadow-2xl bg-white backdrop-blur-md text-slate-900 rounded-2xl p-8 overflow-hidden">
+            <Card className="border-0 shadow-2xl bg-white backdrop-blur-md text-slate-900 rounded-2xl p-2 md:p-8 overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
               <CardContent className="p-3 md:p-8">
                 <h2 className="text-2xl font-bold mb-6 text-center bg-[#171342] bg-clip-text text-transparent">
                   Descubra se sua marca está disponível para registro agora mesmo
                 </h2>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" id="form-section">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-medium text-slate-700">
                       Nome da marca

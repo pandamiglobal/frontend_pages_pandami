@@ -39,6 +39,7 @@ export default function Hero() {
                                 <GlowButton
                                     size="lg"
                                     className="text-lg py-6 bg-gradient-to-r from-primary to-blue-700 hover:from-blue-700 hover:to-primary transition-all duration-300 shadow-lg"
+                                    onClick={() => document.getElementById("form-section")?.scrollIntoView({ behavior: "smooth" })}
                                 >
                                     QUERO MINHA CONSULTA GRATUITA
                                 </GlowButton>

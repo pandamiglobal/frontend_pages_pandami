@@ -57,7 +57,7 @@ export default function LandingPage() {
       <WhatsappTestimonials />
       <Tool />
       <Footer />
-      <FloatingNotification messages={notificationMessages}  position={"bottom-center"}/>
+      <FloatingNotification messages={notificationMessages}  position={"bottom-left"}/>
     </div>
   );
 }
