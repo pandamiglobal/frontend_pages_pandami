@@ -49,14 +49,14 @@ export default function AboutUs() {
                                     </div>
                                 </div>
 
-                                <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg border border-gray-100">
+                                <div className="absolute max-md:-top-6 md:-bottom-6 right-6 md:-right-6 bg-white p-2 md:p-4 rounded-lg shadow-lg border border-gray-100">
                                     <div className="flex items-center gap-3">
                                         <div className="bg-primary/10 p-2 rounded-full">
                                             <Shield className="h-6 w-6 text-primary" />
                                         </div>
                                         <div>
                                             <p className="text-sm text-slate-500">Desde</p>
-                                            <p className="text-xl font-bold text-primary">2005</p>
+                                            <p className="text-base md:text-xl font-bold text-primary">2005</p>
                                         </div>
                                     </div>
                                 </div>

@@ -57,7 +57,7 @@ export function HeroContact() {
         description: data.message,
         brand: data.name,
         origin: EOriginLead.page,
-      })
+      }, 'Sucesso! em breve um de nossos consultores logo entrará em contato.')
       reset({
         name: "",
         phone: "",
@@ -90,7 +90,6 @@ export function HeroContact() {
       </div>
 
       <div className="container relative mx-auto px-4 md:px-6 z-10">
-        <BackgroundBeams className="opacity-40" />
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Coluna de conteúdo */}
           <div className="relative">
@@ -150,7 +149,7 @@ export function HeroContact() {
                   Descubra se sua marca está disponível para registro agora mesmo
                 </h2>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" id="form-section">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-medium text-slate-700">
                       Nome da marca
@@ -219,7 +218,7 @@ export function HeroContact() {
 
                   <Button
                     type="submit"
-                    className="w-full py-6 bg-gradient-to-r from-[#0057FF] to-[#007BFF] hover:from-[#0044CC] hover:to-[#0066CC] text-white transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl"
+                    className="w-full py-6 bg-gradient-to-r from-[#0057FF] to-[#007BFF] hover:from-[#0044CC] hover:to-[#0066CC] text-white transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl text-lg"
                     disabled={isSubmitting}
                   >
                     VERIFICAR DISPONIBILIDADE

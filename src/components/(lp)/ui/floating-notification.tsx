@@ -8,7 +8,7 @@ import { cn } from "@/common/lib/utils"
 interface FloatingNotificationProps {
   messages: string[]
   interval?: number
-  position?: "top-right" | "bottom-right" | "bottom-left" | "top-left"
+  position?: "top-right" | "bottom-right" | "bottom-left" | "top-left" | "bottom-center"
   className?: string
 }
 
@@ -26,6 +26,7 @@ export function FloatingNotification({
     "top-right": "top-4 right-4",
     "bottom-right": "bottom-4 right-4",
     "bottom-left": "bottom-4 left-4",
+    "bottom-center": "bottom-4 left-1/2 !transform -translate-x-1/2",
     "top-left": "top-4 left-4",
   }
 
@@ -58,7 +59,7 @@ export function FloatingNotification({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className={cn("fixed z-50 max-w-sm", positionClasses[position], className)}
+          className={cn("fixed z-50 max-w-sm w-full", positionClasses[position], className)}
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}

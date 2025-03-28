@@ -349,11 +349,11 @@ export function RiskCalculatorSection() {
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="outline" onClick={resetCalculator}>
-            Recalcular
+          <Button variant="outline" onClick={resetCalculator} className="text-base">
+            Refazer análise
           </Button>
-          <Button onClick={() => document.getElementById("form-section")?.scrollIntoView({ behavior: "smooth" })}>
-            Garantir meu registro
+          <Button onClick={() => document.getElementById("form-section")?.scrollIntoView({ behavior: "smooth" })} size={"lg"} className="text-base uppercase text-white">
+            Quero minha consulta gratuita
           </Button>
         </CardFooter>
       </Card>
@@ -403,8 +403,8 @@ export function RiskCalculatorSection() {
               <div
                 key={index}
                 className={`p-3 border rounded-lg cursor-pointer transition-all ${selectedOption === option.value
-                    ? "border-primary bg-primary/5"
-                    : "border-gray-200 hover:border-primary/50"
+                  ? "border-primary bg-primary/5"
+                  : "border-gray-200 hover:border-primary/50"
                   }`}
                 onClick={() => handleSelectOption(option.value)}
               >

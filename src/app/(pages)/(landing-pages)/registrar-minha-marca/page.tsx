@@ -39,10 +39,10 @@ export default function LandingPage() {
   }
 
   const notificationMessages = [
-    "João acabou de solicitar uma análise gratuita. Restam apenas 7 vagas esta semana!",
-    "Ana conseguiu o registro de sua marca em apenas 10 meses após nossa análise.",
-    "Última vaga para análise gratuita hoje! Agende agora.",
-    "Carlos economizou R$ 3.500 evitando erros no registro com nossa análise prévia.",
+    "João Matos acabou de solicitar uma análise gratuita.",
+    "Carlos Ribeiro economizou R$ 3.500 evitando erros no registro com nossa análise gratuita.",
+    "Fernanda de SP acabou de enviar os dados para análise.",
+    "Rafael acaba de evitar um processo por uso indevido de marca."
   ];
 
   return (
@@ -57,7 +57,7 @@ export default function LandingPage() {
       <WhatsappTestimonials />
       <Tool />
       <Footer />
-      <FloatingNotification messages={notificationMessages} />
+      <FloatingNotification messages={notificationMessages}  position={"bottom-center"}/>
     </div>
   );
 }
