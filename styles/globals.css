@@ -122,6 +122,10 @@
   @apply text-gray-600 text-sm sm:text-sm md:text-base leading-[140%] font-normal;
 }
 
+.text-5 {
+  @apply text-gray-600 text-xs md:text-sm leading-[140%] font-normal;
+}
+
 .post-content {
   p {
     @apply text-gray-700 text-base sm:text-lg md:text-xl leading-[140%] font-normal;

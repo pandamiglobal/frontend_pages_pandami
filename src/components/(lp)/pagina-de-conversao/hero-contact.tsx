@@ -103,14 +103,14 @@ export function HeroContact() {
                   alt="3PI Logo"
                   width={200}
                   height={200}
-                  className="w-[150px] md:w-[250px]"
+                  className="w-[150px] md:w-[180px]"
                   style={{ filter: "contrast(1.1) saturate(1.2)" }}
                   priority
                 />
               </div>
             </div>
 
-            <h1 className="text-3xl md:text-6xl font-bold tracking-tight mb-6 font-sans leading-tight text-white text-center md:text-start">
+            <h1 className="title-1 tracking-tight mb-6 !text-white text-center md:text-start">
               Registre sua{" "}
               <span className="relative inline-block text-white">
                 Marca
@@ -118,21 +118,20 @@ export function HeroContact() {
               </span>
             </h1>
 
-            <p className="text-base md:text-xl font-normal mb-4 md:mb-8 text-blue-50 max-w-xl leading-relaxed text-center md:text-start">
-              Garanta a Exclusividade do sua marca para fins jurídicos e
-              comerciais no Brasil
+            <p className="text-1 leading-relaxed text-center md:text-start !text-blue-50 md:max-w-xl w-full mb-4 md:mb-8">
+              Garanta a Exclusividade do sua marca para fins jurídicos e comerciais no Brasil
             </p>
 
-            <div className="md:flex items-center hidden px-8 justify-between gap-x-8 text-blue-100 backdrop-blur-sm bg-white/10 md:p-4 rounded-xl border border-white/10">
-              <div className="flex items-center whitespace-nowrap">
+            <div className="md:flex flex-col gap-4 min-xl:max-w-[450px] items-start xl:gap-0 xl:flex-row xl:items-center hidden px-8 justify-between gap-x-8 text-blue-100 backdrop-blur-sm bg-white/10 md:p-4 rounded-xl border border-white/10">
+              <div className="flex items-center whitespace-nowrap max-xl:bg-black/10 max-xl:p-3 max-xl:w-full rounded-lg">
                 <Shield className="h-5 w-5 mr-2 text-blue-200" />
                 <span>+7 mil registros</span>
               </div>
-              <div className="flex items-center whitespace-nowrap">
+              <div className="flex items-center whitespace-nowrap max-xl:bg-black/10 max-xl:p-3 max-xl:w-full rounded-lg">
                 <Clock className="h-5 w-5 mr-2 text-blue-200" />
                 <span>99% de aprovação</span>
               </div>
-              <div className="flex items-center whitespace-nowrap">
+              <div className="flex items-center whitespace-nowrap max-xl:bg-black/10 max-xl:p-3 max-xl:w-full rounded-lg">
                 <PowerCircle className="h-5 w-5 mr-2 text-blue-200" />
                 <span>Zero burocracia</span>
               </div>
@@ -146,7 +145,7 @@ export function HeroContact() {
             <Card className="border-0 shadow-2xl bg-white backdrop-blur-md text-slate-900 rounded-2xl p-2 md:p-8 overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
               <CardContent className="p-3 md:p-8">
-                <h2 className="text-2xl font-bold mb-6 text-center bg-[#171342] bg-clip-text text-transparent">
+                <h2 className="title-4 mb-6 text-center bg-[#171342] bg-clip-text text-transparent">
                   Descubra se sua marca está disponível para registro agora mesmo
                 </h2>
 
@@ -230,7 +229,7 @@ export function HeroContact() {
                     <span>
                       Ao submeter esse formulário, você autoriza que a 3PI.
                       entrar em contato e declara estar ciente da <Link href={'/politica-de-privacidade'}>Política de
-                      Privacidade.</Link>
+                        Privacidade.</Link>
                     </span>
                   </div>
 

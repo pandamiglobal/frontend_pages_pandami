@@ -5,6 +5,7 @@ import api from "../config/api";
 import useCreateLead from "./use-create-lead";
 import { EOriginLead } from "@/@types/@lead";
 import createLeadAction from "../actions/create-lead-action";
+import { AlertCircle } from "lucide-react";
 
 interface IFormValues {
     name: string;
@@ -64,10 +65,19 @@ export default function usePublicSearchByBrand() {
 
             if (response.data.raws && Array.isArray(response.data.raws)) {
                 const allResults = response.data.raws;
+
                 if (allResults.length > 0) {
                     toast.success(`Marca ${data.brand} consultada com sucesso. ${allResults.length} resultados encontrados.`);
                 } else {
-                    toast.error(`Marca ${data.brand} não encontrada`);
+                    toast.error(`Marca "${data.brand}" não foi encontrada!`, {
+                        duration: 6000,
+                        style: {
+                            backgroundColor: '#e28426'
+                        },
+                        icon: '⚠️'
+                    });
+
+                    return null; //return null para marca não encontrada
                 }
 
                 saveData({
@@ -82,7 +92,13 @@ export default function usePublicSearchByBrand() {
 
                 return { ...response.data, raws: allResults };
             } else {
-                toast.error("A consulta não retornou resultados válidos");
+                toast.error(`Marca "${data.brand}" não foi encontrada!`, {
+                    duration: 6000,
+                    style: {
+                        backgroundColor: '#e28426'
+                    },
+                    icon: '⚠️'
+                });
             }
 
             return null;
@@ -93,6 +109,8 @@ export default function usePublicSearchByBrand() {
             setIsDisabled(false);
             setLoadingMessage("");
         }
+
+        return false;
     };
 
     return { execPublicSearchByBrand, loading, loadingMessage, isDisabled };

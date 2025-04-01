@@ -59,6 +59,11 @@ export default function TradeMarkList() {
           <p>{loadingMessage}</p>
         )
       }
+      {
+        data == null && (
+          <p className="text-center text-gray-600">Nenhuma marca encontrada.</p>
+        )
+      }
       {data?.raws && Array.isArray(data.raws) && data.raws.length > 0 && (
         <TrademarkTable data={data.raws} searchData={searchData} />
       )}

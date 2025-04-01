@@ -103,9 +103,7 @@ export default function TradeMarkModal({
 			isInternational: searchData.isInternational,
 		})
 
-		if (response) {
-			setData(response);
-		}
+		setData(response);
 
 		setIsOpen(false);
 		reset();

@@ -34,18 +34,18 @@ export function WhyRegisterSection() {
       {/* Decorative elements */}
       <div className="absolute top-20 right-20 w-48 h-48 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
 
-      <div className="container relative mx-auto px-4 md:px-6 z-10">
+      <div className="container relative z-10 flex flex-col gap-16 md:gap-20">
         {/* Section header */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <div className="inline-block uppercase bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+        <div className="text-center  max-w-[900px] mx-auto">
+          <div className="inline-block uppercase bg-primary/10 px-4 py-2 rounded-full mb-4 text-5 !font-medium !text-primary">
             Referência no Brasil em Proteção de Marcas
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 font-heading bg-gradient-to-r from-[#001E63] via-[#0055FF] to-[#0066CC] bg-clip-text text-transparent">
+          <h2 className="title-1 mb-6 font-heading bg-gradient-to-r !from-[#001E63] !via-[#0055FF] !to-[#0066CC] !bg-clip-text !text-transparent">
             Empresa séria registra
           </h2>
 
-          <p className="text-xl text-slate-600">
+          <p className="text-2 !text-slate-600">
             É fundamental garantir o registro da sua marca. Caso contrário, a
             qualquer momento, você pode perder todo o investimento feito no seu
             negócio
@@ -53,7 +53,7 @@ export function WhyRegisterSection() {
         </div>
 
         {/* Main content */}
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ">
           {/* Left column - Image */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -72,10 +72,10 @@ export function WhyRegisterSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <div className="absolute bottom-0 left-0 right-0 p-6">
                 <div className="flex items-center mb-3">
                   <Award className="h-6 w-6 mr-2 text-blue-300" />
-                  <span className="font-medium text-lg">
+                  <span className="text-1 !text-white !font-medium">
                     Mais de 1.000 marcas registradas
                   </span>
                 </div>
@@ -137,10 +137,10 @@ export function WhyRegisterSection() {
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-slate-900">
+                    <h3 className="text-2 !font-bold mb-2 text-slate-900">
                       {item.title}
                     </h3>
-                    <p className="text-slate-600">{item.description}</p>
+                    <p className="text-3s !text-slate-600">{item.description}</p>
                   </div>
                 </motion.li>
               ))}
@@ -149,8 +149,8 @@ export function WhyRegisterSection() {
         </div>
 
         {/* Process cards */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-center mb-10 text-slate-900">
+        <div className="">
+          <h3 className="title-4 text-center !text-slate-900 mb-10">
             Entenda nosso Método de Registro de Marca
           </h3>
 
@@ -199,7 +199,7 @@ export function WhyRegisterSection() {
         </div>
 
         {/* Comparison */}
-        <div className="mb-16 max-w-4xl mx-auto">
+        <div className=" max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold text-center mb-10 text-slate-900">
             Porque somos a escolha certa para seguir com seu registro
           </h3>
