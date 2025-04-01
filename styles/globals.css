@@ -106,6 +106,10 @@
   @apply text-gray-900 text-lg sm:text-xl md:text-2xl font-bold;
 }
 
+.title-5 {
+  @apply text-gray-900 text-base sm:text-lg md:text-xl font-bold;
+}
+
 .text-1 {
   @apply text-gray-900 text-lg sm:text-xl md:text-2xl font-normal;
 }
