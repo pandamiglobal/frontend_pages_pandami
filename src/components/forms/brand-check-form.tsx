@@ -50,7 +50,12 @@ export function BrandCheckForm({ articleUri }: { articleUri: string }) {
             origin_font: 'brand-check-form'
         });
 
-        reset();
+        reset({
+            brand: "",
+            phone: "",
+        }, {
+            keepDefaultValues: false
+        });
     }
 
     return (

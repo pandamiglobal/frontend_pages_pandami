@@ -23,7 +23,6 @@ import Link from "next/link";
 
 const formSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-  email: z.string().email("Email inválido"),
   phone: z.string({
     message: 'Telefone é obrigatório'
   })
@@ -63,7 +62,6 @@ export function HeroContact() {
         name: "",
         phone: "",
         message: "",
-        email: "",
       }, {
         keepDefaultValues: false
       });
@@ -146,8 +144,10 @@ export function HeroContact() {
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
               <CardContent className="p-3 md:p-8">
                 <h2 className="title-4 mb-6 text-center bg-[#171342] bg-clip-text text-transparent">
-                  Descubra se sua marca está disponível para registro agora mesmo
+                  Consulte se o nome da sua marca está disponível para registro
                 </h2>
+
+                <p className="max-w-[400px] mx-auto text-4 !text-gray-400 text-center !font-medium">Resgate abaixo a sua consultoria gratuita com um dos nossos especialistas</p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <div className="space-y-2">
@@ -164,23 +164,6 @@ export function HeroContact() {
                     />
                     {errors.name && (
                       <p className="text-sm text-red-500">{errors.name.message}</p>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-medium text-slate-700">
-                      E-mail
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="Digite seu e-mail"
-                      register={register}
-                      className={errors.name ? "border-red-500" : ""}
-                    />
-                    {errors.email && (
-                      <p className="text-sm text-red-500">{errors.email.message}</p>
                     )}
                   </div>
 
@@ -221,7 +204,7 @@ export function HeroContact() {
                     className="w-full py-6 bg-gradient-to-r from-[#0057FF] to-[#007BFF] hover:from-[#0044CC] hover:to-[#0066CC] text-white transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl text-lg"
                     disabled={isSubmitting}
                   >
-                    VERIFICAR DISPONIBILIDADE
+                    RESGATAR AGORA
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
 
