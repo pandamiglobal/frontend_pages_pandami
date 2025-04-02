@@ -56,10 +56,10 @@ export function EbookFormModal({ onClose }: EbookFormModalProps) {
       description: "usuário fazendo download do ebook",
       origin: EOriginLead.seo_tool,
       origin_font: "ebook-form-modal"
-    })
+    }, 'Ebook baixado com sucesso!')
 
     try {
-      const response = await fetch('/ebooks/[E-book] Como-Criar-um-Nome-de-Marca-Forte-e-Registravel.pdf')
+      const response = await fetch('/ebooks/como-Criar-um-Nome-de-Marca-Forte-e-Registravel.pdf')
       if (!response.ok) throw new Error('Arquivo não encontrado')
 
       // Cria o blob do arquivo
@@ -82,7 +82,7 @@ export function EbookFormModal({ onClose }: EbookFormModalProps) {
 
       onClose()
     } catch (error) {
-      toast.error("Não foi possível baixar o seu ebook. Por favor, tente novamente.")
+      // toast.error("Não foi possível baixar o seu ebook. Por favor, tente novamente.")
     }
   }
 
