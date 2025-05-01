@@ -10,7 +10,7 @@ import ImpactSection from "@/components/sections/lp-dev/impact-section";
 import RisksSection from "@/components/sections/lp-dev/risks-section";
 import SolutionsSection from "@/components/sections/lp-dev/solutions-section";
 import StoriesSection from "@/components/sections/lp-dev/stories-section";
-import { AnimatedSection } from "@/components/ui/animated-section";
+import { FadeInSection } from "@/components/ui/fade-in-section";
 
 export default function InstitucionalPage() {
     const faq = [
@@ -40,39 +40,39 @@ export default function InstitucionalPage() {
         <div
             data-no-header
             data-no-footer
-            className="h-screen"
+            className="min-h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth"
         >
             <HeroSection />
-            <AnimatedSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <RisksSection />
-            </AnimatedSection>
-            <AnimatedSection>
+            </FadeInSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <BenefitsSection />
-            </AnimatedSection>
-            <AnimatedSection>
+            </FadeInSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <StoriesSection />
-            </AnimatedSection>
-            <AnimatedSection>
+            </FadeInSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <CTASection />
-            </AnimatedSection>
-            <AnimatedSection>
+            </FadeInSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <SolutionsSection />
-            </AnimatedSection>
-            <AnimatedSection>
+            </FadeInSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <ComparisonSection />
-            </AnimatedSection>
-            <AnimatedSection>
+            </FadeInSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <ImpactSection />
-            </AnimatedSection>
-            <AnimatedSection>
+            </FadeInSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <GlobalPresenceSection />
-            </AnimatedSection>
-            <AnimatedSection>
+            </FadeInSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <BlogSection />
-            </AnimatedSection>
-            <AnimatedSection>
+            </FadeInSection>
+            <FadeInSection className="min-h-screen snap-start">
                 <FAQSection faq={faq} />
-            </AnimatedSection>
+            </FadeInSection>
             <Footer />
         </div>
     );
