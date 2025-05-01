@@ -1,4 +1,4 @@
-import { AlertTriangle, DollarSign, TrendingUp, Clock } from "lucide-react"
+import { AlertTriangle, DollarSign, TrendingUp, Clock, GlobeLock } from "lucide-react"
 import { Container } from "@/components/ui/container"
 
 export default function RisksSection() {
@@ -55,8 +55,8 @@ export default function RisksSection() {
               {/* Card 2 */}
               <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-4">
-                  <div className="bg-[#fff2ee] p-3 rounded-full shrink-0">
-                    <DollarSign className="w-6 h-6 text-[#f47834]" />
+                  <div className="bg-[#fef2f2] p-3 rounded-full shrink-0">
+                    <DollarSign className="w-6 h-6 text-[#d56463]" />
                   </div>
 
                   <p className="text-lg font-medium text-gray-800">Perda de dinheiro garantida</p>
@@ -66,8 +66,8 @@ export default function RisksSection() {
               {/* Card 3 */}
               <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-4">
-                  <div className="bg-[#f0f9ff] p-3 rounded-full shrink-0">
-                    <TrendingUp className="w-6 h-6 text-[#0ea5e9]" />
+                  <div className="bg-[#fef2f2] p-3 rounded-full shrink-0">
+                    <GlobeLock className="w-6 h-6 text-[#d56463]" />
                   </div>
 
                   <p className="text-lg font-medium text-gray-800">Negócio travado sem expansão</p>
