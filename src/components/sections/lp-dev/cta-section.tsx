@@ -63,7 +63,7 @@ export default function CTASection() {
 
           <div className="text-center">
             <Link
-              href="#contato"
+              href="https://wa.me/5548988809713?text=Ol%C3%A1!%20Quero%20garantir%20a%20seguran%C3%A7a%20da%20minha%20marca!"
               className="inline-block w-full py-4 px-8 bg-[#f47834] text-white text-lg font-medium rounded-full hover:bg-[#e06724] transition-colors"
             >
               Fale conosco

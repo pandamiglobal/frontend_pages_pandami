@@ -21,13 +21,13 @@ export default function HeroSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="#registrar"
+              href="https://wa.me/5548988809713?text=Ol%C3%A1!%20Quero%20garantir%20a%20seguran%C3%A7a%20da%20minha%20marca!"
               className="py-4 px-2 md:px-6 rounded-full flex items-center justify-center md:justify-start relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed bg-[#f47834] text-white font-medium hover:bg-[#e06724] transition-colors"
             >
               Registrar Minha Marca
             </Link>
             <Link
-              href="#consultoria"
+              href="https://wa.me/5548988809713?text=Ol%C3%A1!%20Quero%20minha%20consultoria%20gratuita%20em%20ciberseguran%C3%A7a!"
               className="py-4 px-2 md:px-6 rounded-full flex items-center justify-center md:justify-start relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed bg-white text-[#f47834] border-2 border-[#f47834] font-medium hover:bg-gray-50 transition-colors"
             >
               Consultoria em Cibersegurança

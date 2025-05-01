@@ -181,7 +181,7 @@ export default function ImpactSection() {
         {/* CTA Button */}
         <div className="text-center">
           <Link
-            href="#contato"
+            href="https://wa.me/5548988809713?text=Ol%C3%A1!%20Quero%20garantir%20a%20seguran%C3%A7a%20da%20minha%20marca!"
             className="inline-block px-8 py-4 bg-[#f47834] text-white text-lg font-medium rounded-full hover:bg-[#e06724] transition-colors"
           >
             Proteger a minha marca!
