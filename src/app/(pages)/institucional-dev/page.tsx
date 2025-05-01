@@ -40,7 +40,7 @@ export default function InstitucionalPage() {
         <div
             data-no-header
             data-no-footer
-            className="h-screen overflow-y-auto snap-y snap-mandatory"
+            className="h-screen"
         >
             <HeroSection />
             <AnimatedSection>

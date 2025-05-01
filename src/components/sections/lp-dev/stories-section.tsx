@@ -112,7 +112,7 @@ export default function StoriesSection() {
       <Container section={true} >
         <div className="text-center mb-8 md:mb-12">
           <h2 className="title-2 max-w-[900px] mx-auto !text-[#0038ff] mb-4 md:mb-6">
-            De vulnerável a protegida:{" "}
+            De vulneráveis a protegidas:{" "}
             <span className="text-[#0038ff]">histórias reais de marcas que garantiram seu futuro</span>
           </h2>
         </div>
