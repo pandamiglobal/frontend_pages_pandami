@@ -28,6 +28,7 @@ export default function Home() {
       answer: "O custo do registro de uma marca é bem acessível, especialmente quando comparado ao prejuízo que você pode ter se outra pessoa registrar antes de você. Imagine ter que mudar o nome, o logotipo, os produtos e até perder a confiança dos seus clientes.\n\nProteger sua marca agora é um investimento que vale muito mais do que o preço do registro. Para saber o valor exato, preencha o formulário em nosso site e nossa equipe irá te ajudar a garantir a proteção da sua marca de maneira fácil e prática."
     }
   ]
+  
   return (
     <main>
       <HeroSection />

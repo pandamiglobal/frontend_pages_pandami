@@ -42,12 +42,14 @@ export function BrandCheckForm({ articleUri }: { articleUri: string }) {
 
     const onSubmit = async (data: FormValues) => {
         execCreateLead({
-            brand: data.brand,
-            name: 'Nome não informado',
-            phone_number: data.phone,
-            description: `Lead coletado no modal de verificação de marca no artigo ${articleUri}`,
-            origin: EOriginLead.seo_archive,
-            origin_font: 'brand-check-form'
+            data: {
+                brand: data.brand,
+                name: 'Nome não informado',
+                phone_number: data.phone,
+                description: `Lead coletado no modal de verificação de marca no artigo ${articleUri}`,
+                origin: EOriginLead.seo_archive,
+                origin_font: 'brand-check-form'
+            }
         });
 
         reset({

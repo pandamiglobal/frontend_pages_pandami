@@ -52,11 +52,13 @@ export function BrandCheckModal({ isOpen, onClose, brandName, articleUri }: Bran
 
     const onSubmit = async (data: FormValues) => {
         execCreateLead({
-            brand: brandName,
-            name: data.name,
-            phone_number: data.phone,
-            description: `Lead coletado no modal de verificação de marca no artigo ${articleUri}`,
-            origin: EOriginLead.seo_archive
+            data: {
+                brand: brandName,
+                name: data.name,
+                phone_number: data.phone,
+                description: `Lead coletado no modal de verificação de marca no artigo ${articleUri}`,
+                origin: EOriginLead.seo_archive
+            }
         });
 
         reset();

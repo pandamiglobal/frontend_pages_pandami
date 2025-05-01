@@ -46,11 +46,14 @@ export function HeroSection() {
   const onSubmit = async (data: FormValues) => {
     try {
       await execCreateLead({
-        name: data.name,
-        phone_number: data.phone,
-        description: data.message,
-        brand: '',
-        origin: EOriginLead.page,
+        data: {
+          name: data.name,
+          phone_number: data.phone,
+          description: data.message,
+          brand: '',
+          origin: EOriginLead.page,
+        },
+        show_modal: true
       })
       reset({
         name: "",

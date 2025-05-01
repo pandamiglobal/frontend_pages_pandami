@@ -52,12 +52,16 @@ export function HeroContact() {
     try {
       setIsSubmitting(true);
       await execCreateLead({
-        name: 'Nome não informado',
-        phone_number: data.phone,
-        description: data.message,
-        brand: data.name,
-        origin: EOriginLead.page,
-      }, 'Sucesso! em breve um de nossos consultores logo entrará em contato.')
+        data: {
+          name: 'Nome não informado',
+          phone_number: data.phone,
+          description: data.message,
+          brand: data.name,
+          origin: EOriginLead.page,
+        },
+        show_modal: true,
+        sucess_message: 'Sucesso! em breve um de nossos consultores logo entrará em contato.'
+      })
       reset({
         name: "",
         phone: "",
