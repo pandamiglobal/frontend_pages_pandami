@@ -37,7 +37,7 @@ export default function HeroSection() {
         </div>
       </Container>
       
-      <GlobeAlternative className="absolute bottom-[-150px] min-w-[400px]:bottom-[-200px] sm:bottom-[-300px] left-1/2 -translate-x-1/2" />
+      <GlobeAlternative className="absolute bottom-[-100px] min-w-[400px]:bottom-[-200px] sm:bottom-[-300px] left-1/2 -translate-x-1/2" />
     </section>
   )
 }
