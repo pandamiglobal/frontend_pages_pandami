@@ -1,10 +1,11 @@
 import { Container } from "@/components/ui/container"
 import Link from "next/link"
-import { GlobeAlternative } from "./globe-alternative"
+import Image from "next/image"
+import { AnimatedTitle } from "./animated-title"
 
 export default function HeroSection() {
   return (
-    <section className="snap-start min-h-screen flex pt-12 justify-center overflow-hidden relative">
+    <section className="snap-start min-h-screen flex pt-12 justify-center overflow-hidden relative hero">
       {/* Background com grid pattern e gradiente animado */}
       <div className="absolute inset-0 bg-[#F3F4F6]">
         <div className="absolute inset-0 bg-grid-pattern"></div>
@@ -14,9 +15,7 @@ export default function HeroSection() {
       {/* Content Container */}
       <Container section={true} className="z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="title-1 mb-6">
-            Proteção Inteligente para <span className="text-[#f47834]">Marcas</span>
-          </h1>
+          <AnimatedTitle />
           <p className="text-3 !text-gray-700 mb-8">
             Registro de marcas e cibersegurança avançada com tecnologia de IA para proteger seu negócio em tempo real
           </p>
@@ -36,8 +35,9 @@ export default function HeroSection() {
           </div>
         </div>
       </Container>
-      
-      <GlobeAlternative className="absolute bottom-[-100px] min-w-[400px]:bottom-[-200px] sm:bottom-[-300px] left-1/2 -translate-x-1/2" />
+
+      <Image src="/globe.png" alt="Globe" width={400} height={400} className="block w-[600px] absolute bottom-0 left-1/2 -translate-x-1/2" />
+      {/* <GlobeAlternative className="absolute bottom-[-100px] min-w-[400px]:bottom-[-200px] sm:bottom-[-300px] left-1/2 -translate-x-1/2" /> */}
     </section>
   )
 }
