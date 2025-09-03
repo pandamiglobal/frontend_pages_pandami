@@ -87,10 +87,14 @@ export function HeroSection() {
               <div className="mt-12 flex items-center">
                 <div className="flex gap-1 justify-center items-center max-md:flex-col max-md:items-start">
                   <div className="flex -space-x-3">
-                    {["jonas", "jonas32", "jonas2"].map((name, i) => (
-                      <Avatar key={name} className="border-2 border-white w-12 h-12">
-                        <AvatarImage src={`https://i.pravatar.cc/100?u=${name}`} alt={`${name}'s avatar`} />
-                        <AvatarFallback>{name.substring(0, 2).toUpperCase()}</AvatarFallback>
+                    {[
+                      { name: "Carlos Mendes", img: "/testimonials/registrar-minha-marca/carlos-mendes.jpg" },
+                      { name: "Mariana Souza", img: "/testimonials/registrar-minha-marca/mariana-souza.jpg" },
+                      { name: "Thiago Lima", img: "/testimonials/registrar-minha-marca/thiago-lima.jpg" }
+                    ].map((person) => (
+                      <Avatar key={person.name} className="border-2 border-white w-12 h-12">
+                        <AvatarImage src={person.img} alt={`Foto de ${person.name}`} />
+                        <AvatarFallback>{person.name.split(' ')[0][0]}{person.name.split(' ')[1][0]}</AvatarFallback>
                       </Avatar>
                     ))}
                   </div>

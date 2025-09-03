@@ -13,11 +13,11 @@ export function StatsCard({ className }: StatsCardProps) {
           <span className="text-sm text-[#4B5563] mt-2">Marcas registradas</span>
         </div>
         <div className="flex flex-col items-center">
-          <span className="text-[42px] font-bold text-[#111827] leading-none">+70</span>
+          <span className="text-[42px] font-bold text-[#111827] leading-none">+700</span>
           <span className="text-sm text-[#4B5563] mt-2">Empresas protegidas</span>
         </div>
         <div className="flex flex-col items-center">
-          <span className="text-[42px] font-bold text-[#111827] leading-none">+87 mil</span>
+          <span className="text-[42px] font-bold text-[#111827] leading-none">+870 mil</span>
           <span className="text-sm text-[#4B5563] mt-2">Takedowns</span>
         </div>
       </div>

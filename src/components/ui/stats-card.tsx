@@ -14,7 +14,7 @@ export function StatsCard({ className }: StatsCardProps) {
 
   useEffect(() => {
     const duration = 2000 // 2 segundos para a animação completa
-    const finalValues = [1000, 70, 87000]
+    const finalValues = [1000, 700, 870000]
     const steps = 50 // número de passos para a animação
 
     const interval = duration / steps
@@ -44,7 +44,7 @@ export function StatsCard({ className }: StatsCardProps) {
   }, [])
 
   // Formatar o terceiro número para exibir "mil" quando atingir o valor final
-  const formatCount3 = count3 >= 87000 ? "87 mil" : count3.toLocaleString()
+  const formatCount3 = count3 >= 870000 ? "870 mil" : count3.toLocaleString()
 
   return (
     <div
