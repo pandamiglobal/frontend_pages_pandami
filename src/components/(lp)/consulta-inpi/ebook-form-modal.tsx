@@ -50,13 +50,16 @@ export function EbookFormModal({ onClose }: EbookFormModalProps) {
 
   const onSubmit = async (data: FormValues) => {
     await execCreateLead({
-      name: data.name,
-      phone_number: data.phone,
-      brand: "",
-      description: "usuário fazendo download do ebook",
-      origin: EOriginLead.seo_tool,
-      origin_font: "ebook-form-modal"
-    }, 'Ebook baixado com sucesso!')
+      data: {
+        name: data.name,
+        phone_number: data.phone,
+        brand: "",
+        description: "usuário fazendo download do ebook",
+        origin: EOriginLead.seo_tool,
+        origin_font: "ebook-form-modal"
+      },
+      sucess_message: 'Ebook baixado com sucesso!'
+    })
 
     try {
       const response = await fetch('/ebooks/como-Criar-um-Nome-de-Marca-Forte-e-Registravel.pdf')

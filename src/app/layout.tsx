@@ -9,6 +9,7 @@ import { Metadata } from "next"
 import defaultSeo from "@/common/config/default-seo"
 import { PiBotChat } from "@/components/pi-bot-widget"
 import ChatwootWidget from "@/components/chatwoot-widget"
+import { Modal } from "@/components/ui/modal/modal"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
           <Footer />
           {/* <PiBotChat /> */}
           <ChatwootWidget />
+          <Modal />
         </ThemeProvider>
       </body>
     </html>

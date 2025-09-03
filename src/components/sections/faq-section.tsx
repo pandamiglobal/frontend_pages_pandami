@@ -15,7 +15,7 @@ export interface FAQ {
 
 export default function FAQSection({ faq }: { faq: FAQ[] }) {
   return (
-    <section className="w-full py-16 bg-white">
+    <section className="w-full snap-start py-16 bg-white">
       <Container>
         <h2 className="text-2xl md:text-3xl font-bold text-center md:mb-12 mb-8">
           Perguntas frequentes

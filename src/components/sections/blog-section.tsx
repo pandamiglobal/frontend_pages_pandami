@@ -26,7 +26,7 @@ export async function BlogSection() {
   }))
 
   return (
-    <section className="py-16 bg-white border-b border-[#E5E7EB]">
+    <section className="py-16 bg-white border-b border-[#E5E7EB] snap-start">
       <Container>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-[#111827] mb-4">Blog de Marcas</h2>
