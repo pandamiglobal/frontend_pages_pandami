@@ -8,9 +8,21 @@ export default async function BlogGrid({ searchParams }: { searchParams: { page?
   const currentPage = Number(searchParams?.page) || 1;
   const limit = 9;
 
-  const data = await getPosts(currentPage, limit) as { posts: IPost[], pagination: IPagination };
-
-  if (!data) return null;
+  const data = await getPosts(currentPage, limit);
+  
+  // Verificação adicional para garantir que data e data.posts existam
+  if (!data || !data.posts) {
+    return (
+      <section className="w-full bg-white">
+        <Container section={true}>
+          <h2 className="text-2xl md:text-3xl font-bold text-center md:mb-12 mb-8">
+            Nosso Blog
+          </h2>
+          <p className="text-center">Nenhum artigo encontrado. Por favor, tente novamente mais tarde.</p>
+        </Container>
+      </section>
+    );
+  }
 
   return (
     <section className="w-full bg-white">
@@ -20,21 +32,27 @@ export default async function BlogGrid({ searchParams }: { searchParams: { page?
         </h2>
         <div className="relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {data.posts.map((post) => {
-              const parsedUrl = new URL(post.link);
-              const path = parsedUrl.pathname + parsedUrl.search + parsedUrl.hash;
+            {data.posts.length > 0 ? (
+              data.posts.map((post) => {
+                const parsedUrl = new URL(post.link);
+                const path = parsedUrl.pathname + parsedUrl.search + parsedUrl.hash;
 
-              return (
-                <BlogCard key={post.id} post={post} uri={path} />
-              );
-            })}
+                return (
+                  <BlogCard key={post.id} post={post} uri={path} />
+                );
+              })
+            ) : (
+              <p className="col-span-3 text-center">Nenhum artigo publicado no momento.</p>
+            )}
           </div>
-          <div className="mt-12">
-            <ClientPagination
-              currentPage={data.pagination.current_page}
-              totalPages={data.pagination.total_pages}
-            />
-          </div>
+          {data.posts.length > 0 && (
+            <div className="mt-12">
+              <ClientPagination
+                currentPage={data.pagination.current_page}
+                totalPages={data.pagination.total_pages}
+              />
+            </div>
+          )}
         </div>
       </Container>
     </section>

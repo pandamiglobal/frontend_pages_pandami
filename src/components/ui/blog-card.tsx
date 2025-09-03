@@ -3,6 +3,17 @@ import Image from "next/image"
 import Link from "next/link"
 
 export default function BlogCard({ post, uri }: { post: IPost, uri: string }) {
+    // Verifica se o post tem todos os dados necessários
+    if (!post || !post.title || !post.date) {
+        return null;
+    }
+
+    // Garante que rttpg_featured_image_url existe e tem a propriedade full como array
+    const imageUrl = post.rttpg_featured_image_url?.full?.[0] || "/placeholder.svg";
+    
+    // Garante que temos um excerpt válido
+    const excerpt = post.rttpg_excerpt || post.excerpt?.rendered || "";
+
     return (
         <Link 
             href={`${uri}`} 
@@ -10,8 +21,8 @@ export default function BlogCard({ post, uri }: { post: IPost, uri: string }) {
         >
             <div className="relative h-48 overflow-hidden">
                 <Image
-                    src={post.rttpg_featured_image_url.full[0] || "/placeholder.svg"}
-                    alt={post.title.rendered}
+                    src={imageUrl}
+                    alt={post.title.rendered || "Post image"}
                     width={400}
                     height={300}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -29,7 +40,7 @@ export default function BlogCard({ post, uri }: { post: IPost, uri: string }) {
                     {post.title.rendered}
                 </h2>
                 <p className="text-gray-600 mb-4 line-clamp-3">
-                    {post.rttpg_excerpt.length > 150 ? post.rttpg_excerpt.slice(0, 180) + '...' : post.rttpg_excerpt}
+                    {excerpt.length > 150 ? excerpt.slice(0, 180) + '...' : excerpt}
                 </p>
                 <div className="flex items-center text-blue-600 font-medium group-hover:text-blue-700 transition-colors duration-300">
                     Ler mais
