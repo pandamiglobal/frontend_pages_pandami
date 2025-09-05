@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://pppi.com.br/sitemap.xml
+Sitemap: https://pandami.com.br/sitemap.xml
