@@ -1,6 +1,6 @@
 export default {
-    title: 'Consulta INPI, Registro De Marca E Monitoria | PPPI',
-    blog_title: 'Blog PPPI',
+    title: 'Visagismo com IA | PandaMi',
+    blog_title: 'Blog | PandaMi',
     description: 'Registre e proteja sua marca. Gere leads qualificados com nossa solução completa para negócios B2B. 🚀 Aumente sua competitividade com monitoramento inteligente e registro de marca eficiente!',
     openGraph: {
         type: 'website',

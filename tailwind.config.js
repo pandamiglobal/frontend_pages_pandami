@@ -18,7 +18,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-space-grotesk)"],
+        sans: ["var(--font-ubuntu)"],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -1,6 +1,6 @@
 import type React from "react"
 import "./globals.css"
-import { Space_Grotesk } from "next/font/google"
+import { Ubuntu } from "next/font/google"
 import { ThemeProvider } from "@/app/providers"
 import Footer from "@/components/footer"
 import { Header } from "@/components/header"
@@ -11,10 +11,10 @@ import { PiBotChat } from "@/components/pi-bot-widget"
 import ChatwootWidget from "@/components/chatwoot-widget"
 import { Modal } from "@/components/ui/modal/modal"
 
-const spaceGrotesk = Space_Grotesk({
+const ubuntu = Ubuntu({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-ubuntu",
   display: "swap",
 })
 
@@ -49,7 +49,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${spaceGrotesk.variable} font-sans`}>
+      <body className={`${ubuntu.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Header />
           {children}

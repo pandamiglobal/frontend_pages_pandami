@@ -15,34 +15,16 @@ import { useState } from "react"
 
 const navItems: INavItem[] = [
   {
-    title: "Principal",
-    href: "/",
+    title: "Início",
+    href: "#home",
   },
   {
-    title: "Sobre nós",
-    href: "/sobre-nos",
+    title: "Benefícios",
+    href: "#benefits",
   },
   {
-    title: "Produtos",
-    href: "/produtos",
-    hasDropdown: true,
-    dropdownItems: [
-      {
-        title: "Registro de Marca",
-        href: "/registro-de-marca",
-      },
-    ],
-  },
-  {
-    title: "Ferramentas",
-    href: "/ferramentas",
-    hasDropdown: true,
-    dropdownItems: [
-      {
-        title: "Consulta de Marca",
-        href: "/consulta-inpi",
-      },
-    ],
+    title: "Planos",
+    href: "#plans",
   },
   {
     title: "Blog",
@@ -64,7 +46,7 @@ export function Header() {
       <Container>
         <div className="md:hidden flex items-center justify-between w-full">
           <Link href="/" className="flex items-center" onClick={handleLinkClick}>
-            <Image src="/logo.svg" alt="PPPI Logo" width={120} height={40} className="h-10 w-auto" />
+            <Image src="/logo.svg" alt="PPPI Logo" width={160} height={24} className="h-8 w-auto" />
           </Link>
           <div className="flex items-center gap-2">
             <ThemeToggle />
@@ -134,7 +116,7 @@ export function Header() {
         <div className="hidden md:flex items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center" onClick={handleLinkClick}>
-              <Image src="/logo.svg" alt="PPPI Logo" width={120} height={40} className="h-10 w-auto" />
+              <Image src="/logo.svg" alt="PPPI Logo" width={160} height={24} className="h-8 w-auto" />
             </Link>
 
             <nav className="hidden md:flex items-center ml-8">

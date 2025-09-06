@@ -8,8 +8,8 @@ import FAQSection from "@/components/sections/faq-section"
 export default function Home() {
   const faq = [
     {
-      question: "Quem é a PPPI?",
-      answer: "A PPPI surgiu de uma parceria entre um advogado com mais de 16 anos de experiência em propriedade intelectual, que já atendeu grandes marcas, e especialistas renomados em cibersegurança. Em pouco tempo, nos consolidamos como uma empresa referência no Brasil, oferecendo proteção e registro para importantes empresas."
+      question: "Quem é a PandaMi?",
+      answer: "A PandaMi surgiu de uma parceria entre um advogado com mais de 16 anos de experiência em propriedade intelectual, que já atendeu grandes marcas, e especialistas renomados em cibersegurança. Em pouco tempo, nos consolidamos como uma empresa referência no Brasil, oferecendo proteção e registro para importantes empresas."
     },
     {
       question: "O que é o registro de marca e por que isso importante?",
