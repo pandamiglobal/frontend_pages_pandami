@@ -32,10 +32,7 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
-      <PartnersSection />
-      <CyberSecuritySection />
-      <TestimonialsSection />
-      <BlogSection />
+     
       <FAQSection faq={faq} />
     </main>
   )

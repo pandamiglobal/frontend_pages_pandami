@@ -1,18 +1,28 @@
 import { cn } from "@/common/lib/utils"
-import { type ButtonHTMLAttributes, forwardRef } from "react"
+import { type ButtonHTMLAttributes, forwardRef, ReactNode } from "react"
 
 export interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "outline" | "white"
   size?: "default" | "sm" | "lg"
+  icon?: ReactNode
+  iconPosition?: "left" | "right"
 }
 
 const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryButtonProps>(
-  ({ className, variant = "default", size = "default", children, ...props }, ref) => {
+  ({ 
+    className, 
+    variant = "default", 
+    size = "default", 
+    icon, 
+    iconPosition = "right", 
+    children, 
+    ...props 
+  }, ref) => {
     return (
       <button
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+          "inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-full",
           {
             "bg-gradient-to-r from-[hsl(var(--primary-gradient-from))] to-[hsl(var(--primary-gradient-to))] text-primary-foreground hover:from-[hsl(var(--primary-gradient-hover-from))] hover:to-[hsl(var(--primary-gradient-hover-to))]":
               variant === "default",
@@ -28,7 +38,13 @@ const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryButtonProps>(
         )}
         {...props}
       >
+        {icon && iconPosition === "left" && (
+          <span className="mr-2">{icon}</span>
+        )}
         {children}
+        {icon && iconPosition === "right" && (
+          <span className="ml-2">{icon}</span>
+        )}
       </button>
     )
   },

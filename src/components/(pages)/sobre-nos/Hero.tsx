@@ -6,7 +6,7 @@ export default function Hero() {
         <section className="bg-[#F5F5F5]">
             <Container section={true}>
                 <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
-                    {/* <Badge className="mb-4 bg-[#0047FF] hover:bg-[#0047FF]/90 text-white rounded-full p-1">Nossa História</Badge> */}
+                  
                     <h1 className="title-3 text-[#111827] mb-6">
                         Protegendo o que importa: <span className="text-[#0047FF]">sua marca</span> e <span className="text-[#0047FF]">seus dados</span>
                     </h1>

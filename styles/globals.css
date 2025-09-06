@@ -13,13 +13,13 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 20 66% 57%;
+    --primary-foreground: 0 97% 100%;
 
-    --primary-gradient-from: 224 100% 50%;
-    --primary-gradient-to: 224 100% 38%;
-    --primary-gradient-hover-from: 224 100% 38%;
-    --primary-gradient-hover-to: 224 100% 30%;
+    --primary-gradient-from: 20 66% 57%;
+    --primary-gradient-to: 21 51% 50%;
+    --primary-gradient-hover-from: 20 52% 51%;
+    --primary-gradient-hover-to: 21 51% 44%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;

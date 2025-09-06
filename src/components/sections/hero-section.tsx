@@ -68,7 +68,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="py-10 md:py-16 bg-[#F5F5F5]">
+    <section className="pt-24 pb-10 md:pb-16 bg-[#F5F5F5]">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(400px,1fr)_1fr] gap-8">
           <div className="flex flex-col gap-8">

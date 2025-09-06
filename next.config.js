@@ -3,8 +3,8 @@ const nextConfig = {
   /* config options here */
   images: {
     domains: [
-      'cms.pppi.com.br',
-      'pppi.com.br',
+      'cms.pandami.com.br',
+      'pandami.com.br',
       'images.pexels.com'
     ],
   }
