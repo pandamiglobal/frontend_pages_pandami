@@ -41,9 +41,9 @@ export function WhyVisagismSection() {
 				{/* Primeira linha de cards */}
 				<div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-6 lg:mb-8">
 					{/* Card 1 - Sintonia Humana - Card maior */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8 ">
 						<div className="w-full lg:w-[320px]">
-							<h3 className="text-2xl lg:text-3xl font-medium text-stone-900 mb-2 lg:mb-3">
+							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[0].title}
 							</h3>
 							<p className="text-base lg:text-lg text-gray-700 leading-relaxed">
@@ -62,9 +62,9 @@ export function WhyVisagismSection() {
 					</div>
 
 					{/* Card 2 - Visual Inteligente - Card menor */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8 justify-between">
 						<div className="w-full lg:w-[288px]">
-							<h3 className="text-2xl lg:text-3xl font-medium text-stone-900 mb-2 lg:mb-3">
+							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[1].title}
 							</h3>
 							<p className="text-base lg:text-lg text-gray-700 leading-relaxed">
@@ -86,9 +86,9 @@ export function WhyVisagismSection() {
 				{/* Segunda linha de cards */}
 				<div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
 					{/* Card 3 - Imagem Comunica - Card menor */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8">
-						<div className="w-full lg:w-[288px]">
-							<h3 className="text-2xl lg:text-3xl font-medium text-stone-900 mb-2 lg:mb-3">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8 justify-between">
+						<div className="w-full lg:w-[240px]">
+							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[2].title}
 							</h3>
 							<p className="text-base lg:text-lg text-gray-700 leading-relaxed">
@@ -107,9 +107,9 @@ export function WhyVisagismSection() {
 					</div>
 
 					{/* Card 4 - Suas Regras - Card maior */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8 justify-between">
 						<div className="w-full lg:w-[320px]">
-							<h3 className="text-2xl lg:text-3xl font-medium text-stone-900 mb-2 lg:mb-3">
+							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[3].title}
 							</h3>
 							<p className="text-base lg:text-lg text-gray-700 leading-relaxed">
