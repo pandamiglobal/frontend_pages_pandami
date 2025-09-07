@@ -1,6 +1,6 @@
 import type React from "react"
 import "./globals.css"
-import { Ubuntu } from "next/font/google"
+import { Ubuntu, Fahkwang } from "next/font/google"
 import { ThemeProvider } from "@/app/providers"
 import Footer from "@/components/footer"
 import { Header } from "@/components/header"
@@ -15,6 +15,13 @@ const ubuntu = Ubuntu({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
   variable: "--font-ubuntu",
+  display: "swap",
+})
+
+const fahkwang = Fahkwang({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-fahkwang",
   display: "swap",
 })
 
@@ -49,7 +56,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${ubuntu.variable} font-sans`}>
+      <body className={`${ubuntu.variable} ${fahkwang.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Header />
           {children}

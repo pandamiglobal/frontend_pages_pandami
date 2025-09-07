@@ -19,6 +19,7 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-ubuntu)"],
+        fahkwang: ["var(--font-fahkwang)"],
       },
       colors: {
         border: "hsl(var(--border))",

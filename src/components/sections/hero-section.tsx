@@ -1,229 +1,79 @@
 "use client"
 
 import { Container } from "@/components/ui/container"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { RotatingBadge } from "@/components/ui/rotating-badge"
-import { StatsCard } from "@/components/ui/stats-card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Star } from "lucide-react"
 import Link from "next/link"
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { toast } from "sonner"
-import useCreateLead from "@/common/hooks/use-create-lead"
-import { EOriginLead } from "@/@types/@lead"
+import Image from "next/image"
+import { ArrowRight } from "lucide-react"
+import { PrimaryButton } from "@/components/ui/primary-button"
+import { HeroIcon } from "@/components/svg/hero-icon"
 
-const formSchema = z.object({
-  name: z.string().min(1, "Nome é obrigatório"),
-  phone: z.string({
-    message: 'Telefone é obrigatório'
-  })
-    .min(14, "Telefone inválido")
-    .regex(/^\(\d{2}\) \d{5}-\d{4}$/, "Telefone inválido")
-    .transform((val) => val.replace(/[^\d]/g, "")),
-  message: z.string().min(5, "Mensagem deve ter no mínimo 5 caracteres"),
-})
 
-type FormValues = z.infer<typeof formSchema>
+const heroPersonImage = "/lp/images/hero/heroPersonImage_Female1.png"
+
 
 export function HeroSection() {
-  const { execCreateLead } = useCreateLead();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    control,
-    formState: { errors, isSubmitting },
-  } = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-  })
-
-  const nameValue = watch("name");
-
-  const onSubmit = async (data: FormValues) => {
-    try {
-      await execCreateLead({
-        data: {
-          name: data.name,
-          phone_number: data.phone,
-          description: data.message,
-          brand: '',
-          origin: EOriginLead.page,
-        },
-        show_modal: true
-      })
-      reset({
-        name: "",
-        phone: "",
-        message: ""
-      }, {
-        keepDefaultValues: false
-      })
-    } catch (error) {
-      toast.error("Erro ao enviar mensagem. Tente novamente.")
-    }
-  }
-
   return (
-    <section className="pt-24 pb-10 md:pb-16 bg-[#F5F5F5]">
-      <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(400px,1fr)_1fr] gap-8">
-          <div className="flex flex-col gap-8">
-            {/* Content Card */}
-            <div className="bg-white rounded-3xl p-4 md:p-8 border border-[#E5E7EB] border-solid">
-              <h1 className="text-[36px] font-bold text-[#111827] leading-tight md:text-left text-center">
-                Empresa séria, <span className="text-[#0047FF]">registra</span>{" "}
-                <span className="text-[#0047FF]">e protege</span> sua marca
-              </h1>
+		<section className="relative bg-[#f7f7f7] overflow-hidden min-h-screen md:min-h-0">
+			{/* Background Grid Pattern */}
+			<div className="absolute inset-0 bg-grid-pattern opacity-70"></div>
 
-              <p className="mt-6 text-base md:text-lg text-[#374151] md:text-left text-center">
-                Somos referências em proteção e registro de marcas no Brasil. Com um processo ágil e sem burocracia,
-                ajudamos você a transformar sua marca em um ativo valioso e protegido.
-              </p>
+			<Container>
+				<div className="relative pt-32  lg:pt-20 pb-0 flex flex-col items-center">
+					{/* Content */}
+					<div className="z-10 flex flex-col lg:flex-row items-center justify-between w-full">
+						<div className="w-full max-w-[600px] flex flex-col gap-4 md:gap-6 px-4 text-center lg:text-left">
+							<h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-black leading-tight">
+								A tecnologia que vai aposentar salões comuns{" "}
+							</h1>
 
-              <div className="mt-12 flex items-center">
-                <div className="flex gap-1 justify-center items-center max-md:flex-col max-md:items-start">
-                  <div className="flex -space-x-3">
-                    {[
-                      { name: "Carlos Mendes", img: "/testimonials/registrar-minha-marca/carlos-mendes.jpg" },
-                      { name: "Mariana Souza", img: "/testimonials/registrar-minha-marca/mariana-souza.jpg" },
-                      { name: "Thiago Lima", img: "/testimonials/registrar-minha-marca/thiago-lima.jpg" }
-                    ].map((person) => (
-                      <Avatar key={person.name} className="border-2 border-white w-12 h-12">
-                        <AvatarImage src={person.img} alt={`Foto de ${person.name}`} />
-                        <AvatarFallback>{person.name.split(' ')[0][0]}{person.name.split(' ')[1][0]}</AvatarFallback>
-                      </Avatar>
-                    ))}
-                  </div>
+							<p className="text-gray-600 max-w-[520px] text-sm sm:text-base md:text-lg mx-auto lg:mx-0">
+								Nossa inteligência artificial elimina a tentativa e erro:
+								analisa o rosto, preferências e características únicas do seu
+								cliente para sugerir cortes, cores e estilos ideais.
+							</p>
 
-                  <div className="ml-4 flex flex-col max-md:ml-0">
-                    <span className="text-sm font-medium text-[#374151]">+500 recomendações</span>
-                    <div className="flex">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-[#FFC107] text-[#FFC107]" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
+							<div className="flex gap-3 items-center justify-center lg:justify-start flex-wrap mt-2">
+								<Link href="/#">
+									<PrimaryButton
+										icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+										size="lg"
+									>
+										Comece grátis
+									</PrimaryButton>
+								</Link>
+								<Link href="/#plans">
+									<PrimaryButton variant="outline" size="lg">
+										Ver planos
+									</PrimaryButton>
+								</Link>
+							</div>
+						</div>
 
-                <div className="ml-auto">
-                  <RotatingBadge text="SÉRIA • REGISTRA • EMPRESA " className="w-20 h-20" />
-                </div>
-              </div>
-            </div>
-
-            {/* Stats Card */}
-            <StatsCard />
-          </div>
-
-          {/* Form Card */}
-          <div className="bg-white rounded-3xl p-4 md:p-8 border border-[#E5E7EB] border-solid">
-            <h2 className="text-xl font-bold text-center text-[#111827]">
-              Resgate agora uma consultoria <span className="text-[#0047FF]">GRATUITA</span> em propriedade intelectual, vagas limitadas.
-            </h2>
-
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-[#374151] mb-2">
-                  Nome completo
-                </label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="Digite seu nome completo"
-                  register={register}
-                  className={errors.name ? "border-red-500" : ""}
-                />
-                {errors.name && (
-                  <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-[#374151] mb-2">
-                  Seu número de telefone
-                </label>
-                <Input
-                  id="phone"
-                  control={control}
-                  name="phone"
-                  placeholder="(00) 00000-0000"
-                  inputMask="(99) 99999-9999"
-                  register={register}
-                  className={errors.phone ? "border-red-500" : ""}
-                />
-                {errors.phone && (
-                  <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-[#374151] mb-2">
-                  Fale sobre sua marca
-                </label>
-                <Textarea
-                  id="message"
-                  rows={2}
-                  placeholder="Conte-nos sobre sua marca"
-                  {...register("message")}
-                  className={errors.message ? "border-red-500" : ""}
-                />
-                {errors.message && (
-                  <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>
-                )}
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-[#0047FF] via-[#0037C3] to-[#002B99] hover:opacity-90 text-white font-medium py-4 px-2 md:px-6 rounded-full flex items-center justify-start relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <span className="ml-4 relative z-10">
-                  {isSubmitting ? "ENVIANDO..." : "QUERO UMA CONSULTORIA GRATUITA"}
-                </span>
-                <span className="ml-auto bg-white rounded-full p-1 text-[#0047FF] relative z-10">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M5 12H19M19 12L12 5M19 12L12 19"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <div
-                  className="absolute top-0 -left-[100%] w-[120%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"
-                  style={{
-                    animation: "shineEffect 3s infinite linear",
-                  }}
-                ></div>
-                <style jsx>{`
-                  @keyframes shineEffect {
-                    0% { transform: translateX(0%); }
-                    100% { transform: translateX(100%); }
-                  }
-                `}</style>
-              </button>
-
-              <p className="text-center text-sm text-[#4B5563]">
-                Ao continuar você concorda com nossos{" "}
-                <Link href="/termos-de-uso" className="text-[#0047FF]">
-                  termos de uso
-                </Link>{" "}
-                e{" "}
-                <Link href="/politica-de-privacidade" className="text-[#0047FF]">
-                  política de privacidade
-                </Link>
-              </p>
-            </form>
-          </div>
-        </div>
-      </Container>
-    </section>
-  )
+						{/* Hero Images */}
+						<div className="relative block mt-6 lg:mt-0 w-full max-w-[400px] lg:max-w-[486px]">
+							<div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 z-0">
+								<div
+									data-svg-wrapper
+									data-layer="heroIconImage"
+									className="Heroiconimage opacity-40 lg:opacity-100"
+								>
+									<HeroIcon className="w-full h-full object-contain" />
+								</div>
+							</div>
+							<div className="relative w-full h-auto aspect-[3/4] lg:w-[486px] lg:h-[659px] lg:-mt-8">
+								<Image
+									src={heroPersonImage}
+									alt="Hero Person"
+									width={486}
+									height={659}
+									className="w-full h-full object-cover"
+									priority
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</Container>
+		</section>
+	);
 }
-

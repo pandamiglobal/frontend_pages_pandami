@@ -1,8 +1,5 @@
 import { HeroSection } from "@/components/sections/hero-section"
-import { PartnersSection } from "@/components/sections/partners-section"
-import { CyberSecuritySection } from "@/components/sections/cyber-security-section"
-import { TestimonialsSection } from "@/components/sections/testimonials-section"
-import { BlogSection } from "@/components/sections/blog-section"
+
 import FAQSection from "@/components/sections/faq-section"
 
 export default function Home() {
