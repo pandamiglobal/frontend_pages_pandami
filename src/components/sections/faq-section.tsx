@@ -9,7 +9,7 @@ import {
 import { Container } from "../ui/container";
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import { PrimaryButton } from "../ui/primary-button";
-import { ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -74,7 +74,7 @@ export default function FAQSection({ faq }: { faq: FAQ[] }) {
                     <Link href="/#">
                       <PrimaryButton
                         size="lg"
-                        icon={<ChevronRight className="h-4 w-4" />}
+                        icon={<ArrowRight className="h-4 w-4" />}
                         className="w-full md:w-auto justify-center"
                       >
                         Comece grátis
@@ -131,7 +131,7 @@ export default function FAQSection({ faq }: { faq: FAQ[] }) {
             <Link href="/#">
               <PrimaryButton
                 size="lg"
-                icon={<ChevronRight className="h-4 w-4" />}
+                icon={<ChevronRight className="h-16 w-16" />}
                 className="w-full justify-center"
               >
                 Comece grátis
