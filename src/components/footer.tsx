@@ -83,10 +83,10 @@ export default function Footer() {
 						<ul className="space-y-2 text-sm text-gray-600">
 							<li>
 								<Link
-									href="/politicas-de-privacidade"
+									href="/politica-de-privacidade"
 									className="hover:text-primary transition-colors"
 								>
-									Políticas de Privacidade
+									Política de Privacidade
 								</Link>
 							</li>
 							<li>

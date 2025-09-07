@@ -1,5 +1,5 @@
 import { HeroSection } from "@/components/sections/hero-section"
-
+import { WhyVisagismSection } from "@/components/sections/why-visagism-section"
 import FAQSection from "@/components/sections/faq-section"
 
 export default function Home() {
@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
-     
+      <WhyVisagismSection />
       <FAQSection faq={faq} />
     </main>
   )

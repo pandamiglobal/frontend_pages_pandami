@@ -94,7 +94,7 @@ export default function Page() {
                 <h4 className="wp-block-heading"><strong>4.4. Conteúdo de Terceiros</strong></h4>
                 <p>
                     O site pode conter links para sites de terceiros que não são operados ou controlados pela PPPI. A PPPI não se
-                    responsabiliza pelo conteúdo, políticas de privacidade ou práticas de sites de terceiros. A inclusão de tais links no
+                    responsabiliza pelo conteúdo, política de privacidade ou práticas de sites de terceiros. A inclusão de tais links no
                     site não implica qualquer endosso ou associação com esses sites. O acesso e uso de sites de terceiros são de
                     responsabilidade exclusiva do Usuário.
                 </p>
