@@ -5,24 +5,28 @@ import FAQSection from "@/components/sections/faq-section"
 export default function Home() {
   const faq = [
     {
-      question: "Quem é a PandaMi?",
-      answer: "A PandaMi surgiu de uma parceria entre um advogado com mais de 16 anos de experiência em propriedade intelectual, que já atendeu grandes marcas, e especialistas renomados em cibersegurança. Em pouco tempo, nos consolidamos como uma empresa referência no Brasil, oferecendo proteção e registro para importantes empresas."
+      question: "Como a IA analisa meu rosto e sugere os melhores cortes?",
+      answer: "Nossa tecnologia de IA analisa o formato do seu rosto, características faciais e textura do cabelo para recomendar os estilos que melhor complementam sua aparência. O sistema considera diversos fatores como proporções faciais, cor de pele e estilo pessoal para oferecer sugestões personalizadas de cortes que valorizam seus traços naturais."
     },
     {
-      question: "O que é o registro de marca e por que isso importante?",
-      answer: "O registro de marca é a única forma de garantir que ninguém mais possa usar o nome ou logotipo do seu negócio. Sem essa proteção, sua marca fica vulnerável a cópias e concorrência desleal. Imagine construir sua reputação e, de repente, alguém tomar o controle do nome da sua empresa. Não corra esse risco!"
+      question: "Preciso baixar algum app ou é direto no salão?",
+      answer: "Não é necessário baixar nenhum aplicativo. Nosso sistema funciona diretamente no salão, onde nossos profissionais utilizam a tecnologia durante a consulta. Você pode simplesmente agendar uma visita e experimentar a análise de IA como parte do seu atendimento personalizado."
     },
     {
-      question: "Por que devo registrar minha marca o quanto antes?",
-      answer: "Se você já usa um nome comercial, cada dia sem registro é um dia de risco. Qualquer pessoa pode registrá-lo antes de você e impedir seu uso, forçando mudanças que podem custar caro. Proteger sua marca hoje evita grandes problemas amanhã!"
+      question: "A IA realmente acerta? E se eu não gostar do resultado?",
+      answer: "Nossa IA tem alto índice de satisfação entre os clientes, mas entendemos que o gosto pessoal é fundamental. Se você não gostar das sugestões iniciais, nossos profissionais trabalharão com você para ajustar as recomendações. Além disso, oferecemos garantia de satisfação para que você saia do salão com um visual que realmente ame."
     },
     {
-      question: "Preciso de um CNPJ para registrar uma marca?",
-      answer: "Não! Pessoas físicas também podem registrar, desde que comprovem atividade na área. Ou seja, se você é empreendedor individual, influencer ou criador de conteúdo, sua marca também pode (e deve) ser protegida!"
+      question: "Funciona para todos os tipos de cabelo e etnias?",
+      answer: "Sim! Nossa tecnologia foi treinada com uma base de dados diversificada, contemplando diferentes tipos de cabelo, texturas e características étnicas variadas. Nosso sistema foi desenvolvido para ser inclusivo e atender às necessidades específicas de cada cliente, independente do seu tipo de cabelo ou origem étnica."
     },
     {
-      question: "Quanto custa registrar uma marca?",
-      answer: "O custo do registro de uma marca é bem acessível, especialmente quando comparado ao prejuízo que você pode ter se outra pessoa registrar antes de você. Imagine ter que mudar o nome, o logotipo, os produtos e até perder a confiança dos seus clientes.\n\nProteger sua marca agora é um investimento que vale muito mais do que o preço do registro. Para saber o valor exato, preencha o formulário em nosso site e nossa equipe irá te ajudar a garantir a proteção da sua marca de maneira fácil e prática."
+      question: "Como fica a privacidade das fotos das clientes?",
+      answer: "Levamos a privacidade muito a sério. As fotos utilizadas para análise são processadas com criptografia de ponta a ponta e não são compartilhadas com terceiros. Após a consulta, você pode optar por manter ou excluir suas imagens do nosso sistema. Cumprimos rigorosamente todas as normas de proteção de dados vigentes."
+    },
+    {
+      question: "Posso testar antes de decidir implementar no salão?",
+      answer: "Certamente! Oferecemos demonstrações gratuitas para profissionais interessados em implementar nossa tecnologia. Um especialista pode visitar seu salão para uma apresentação completa do sistema, onde você e sua equipe poderão testar todas as funcionalidades antes de tomar qualquer decisão."
     }
   ]
   
