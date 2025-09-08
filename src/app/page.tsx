@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/sections/hero-section"
 import { WhyVisagismSection } from "@/components/sections/why-visagism-section"
 import FAQSection from "@/components/sections/faq-section"
 import CarouselSection from "@/components/(lp)/carousel-section"
+import { CtaSection } from "@/components/sections/cta-section"
 
 export default function Home() {
   const faq = [
@@ -37,6 +38,7 @@ export default function Home() {
       <WhyVisagismSection />
       <CarouselSection />
       <FAQSection faq={faq} />
+      <CtaSection />
     </main>
   )
 }

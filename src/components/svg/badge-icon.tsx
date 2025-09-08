@@ -4,9 +4,9 @@ interface BadgeIconProps {
   className?: string
 }
 
-export function BadgeIcon({ className = "w-76 h-80" }: BadgeIconProps) {
+export function BadgeIcon({ className = "" }: BadgeIconProps) {
   return (
-		<div className="">
+		<div className="absolute bottom-6 z-99 w-fit justify-center p-4 bg-white rounded-full">
 			<svg
 				width="76"
 				height="80"

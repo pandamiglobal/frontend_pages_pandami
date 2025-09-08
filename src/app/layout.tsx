@@ -61,8 +61,6 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
-          {/* <PiBotChat /> */}
-          <ChatwootWidget />
           <Modal />
         </ThemeProvider>
       </body>

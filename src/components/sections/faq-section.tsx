@@ -12,6 +12,7 @@ import { PrimaryButton } from "../ui/primary-button";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { HeroIcon } from "../svg/hero-icon";
 
 export interface FAQ {
   question: string;

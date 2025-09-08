@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 type ImageComparisonSliderProps = {
   beforeImage: string
@@ -21,57 +22,53 @@ export function ImageComparisonSlider({
 }: ImageComparisonSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(100)
   const [direction, setDirection] = useState<'increasing' | 'decreasing'>('decreasing')
-  const [isAnimating, setIsAnimating] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number | null>(null)
+  const animationSpeed = 0.8; // Velocidade de animação em % por frame
+  const pauseDuration = 800; // Duração da pausa em ms
   
   // Função para animar o slider usando requestAnimationFrame
-  // para obter animações mais suaves
   const animate = () => {
     setSliderPosition((prev) => {
       if (direction === 'decreasing') {
         // Diminuindo (mostrando mais da imagem "depois")
-        const newPos = prev - 0.5
+        const newPos = prev - animationSpeed;
         if (newPos <= 0) {
           // Pausa antes de mudar de direção
-          setTimeout(() => {
-            setDirection('increasing')
-          }, 800)
-          return 0
+          setTimeout(() => setDirection('increasing'), pauseDuration);
+          return 0;
         }
-        return newPos
+        return newPos;
       } else {
         // Aumentando (mostrando mais da imagem "antes")
-        const newPos = prev + 0.5
+        const newPos = prev + animationSpeed;
         if (newPos >= 100) {
           // Pausa antes de mudar de direção
-          setTimeout(() => {
-            setDirection('decreasing')
-          }, 800)
-          return 100
+          setTimeout(() => setDirection('decreasing'), pauseDuration);
+          return 100;
         }
-        return newPos
+        return newPos;
       }
-    })
+    });
     
     // Continua a animação
-    animationRef.current = requestAnimationFrame(animate)
-  }
+    animationRef.current = requestAnimationFrame(animate);
+  };
 
-  // Inicia a animação quando o componente é montado
+  // Inicia e limpa a animação
   useEffect(() => {
-    if (isAnimating) {
-      animationRef.current = requestAnimationFrame(animate)
-    }
+    animationRef.current = requestAnimationFrame(animate);
     
     // Limpa a animação quando o componente é desmontado
     return () => {
       if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
+        cancelAnimationFrame(animationRef.current);
       }
-    }
-  }, [direction, isAnimating])
+    };
+  }, [direction]);
 
+  const labelStyle = "absolute bg-black/70 text-white px-2 py-1 text-xs rounded-md font-medium transition-opacity duration-300";
+  
   return (
     <div
       ref={containerRef}
@@ -79,60 +76,52 @@ export function ImageComparisonSlider({
     >
       {/* Imagem "depois" (camada de fundo) */}
       <div className="absolute inset-0">
-        <img 
+        <Image 
           src={afterImage}
           alt={afterAlt}
-          className="w-full h-full object-cover"
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          loading="lazy"
+          className="object-cover"
         />
       </div>
 
       {/* Imagem "antes" (camada superior) com máscara de clipping */}
-      <div className="absolute inset-0">
-        <div 
-          className="absolute inset-0"
-          style={{
-            clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
-            transition: 'clip-path 0.05s linear'
-          }}
-        >
-          <img 
-            src={beforeImage}
-            alt={beforeAlt}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-
-      {/* Linha divisória */}
       <div 
-        className="absolute inset-y-0 border-r-2 border-white shadow-md pointer-events-none"
-        style={{ 
-          left: `${sliderPosition}%`,
-          transition: 'left 0.05s linear'
+        className="absolute inset-0"
+        style={{
+          clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`
         }}
       >
-        {/* Indicador na linha divisória */}
-        <div className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-white shadow-lg flex items-center justify-center">
-          <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-        </div>
+        <Image 
+          src={beforeImage}
+          alt={beforeAlt}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          loading="lazy"
+          className="object-cover"
+        />
       </div>
 
-      {/* Rótulo "Antes" - visível quando a maior parte da imagem "antes" está visível */}
+      {/* Linha divisória com indicador */}
       <div 
-        className="absolute bottom-3 left-3 bg-black/70 text-white px-2 py-1 text-xs rounded-md font-medium transition-opacity duration-300"
-        style={{ 
-          opacity: sliderPosition > 50 ? 1 : 0,
-        }}
+        className="absolute inset-y-0 border-r-2 border-white shadow-md pointer-events-none"
+        style={{ left: `${sliderPosition}%` }}
+      >
+       
+      </div>
+
+      {/* Rótulos "Antes" e "Depois" */}
+      <div 
+        className={`${labelStyle} bottom-3 left-3`}
+        style={{ opacity: sliderPosition > 50 ? 1 : 0 }}
       >
         Antes
       </div>
       
-      {/* Rótulo "Depois" - visível quando a maior parte da imagem "depois" está visível */}
       <div 
-        className="absolute bottom-3 right-3 bg-black/70 text-white px-2 py-1 text-xs rounded-md font-medium transition-opacity duration-300"
-        style={{ 
-          opacity: sliderPosition <= 50 ? 1 : 0,
-        }}
+        className={`${labelStyle} bottom-3 right-3`}
+        style={{ opacity: sliderPosition <= 50 ? 1 : 0 }}
       >
         Depois
       </div>
