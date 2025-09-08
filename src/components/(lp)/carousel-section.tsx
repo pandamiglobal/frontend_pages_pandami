@@ -324,7 +324,7 @@ export default function CarouselSection() {
 						<div className="flex flex-col justify-start items-center gap-14">
 							{/* Linha superior - Mulheres */}
 							<section className="w-full" aria-label="Transformações femininas">
-								<MarqueeRow items={womenPairs} speed={75} />
+								<MarqueeRow items={womenPairs} speed={95} />
 							</section>
 
 							{/* Linha inferior - Homens (direção invertida) */}
@@ -332,7 +332,7 @@ export default function CarouselSection() {
 								className="w-full"
 								aria-label="Transformações masculinas"
 							>
-								<MarqueeRow items={menPairs} reverse speed={75} />
+								<MarqueeRow items={menPairs} reverse speed={95} />
 							</section>
 						</div>
 					</Container>
