@@ -38,6 +38,12 @@ export const CtaSection: React.FC = () => {
 						</div>
 
 						{/* Imagem */}
+						{/* Elementos decorativos */}
+						<div className="relative right-1/2  -mb-20 md:left-auto md:right-10 md:translate-x-0 z-0 opacity-40 md:opacity-70">
+							<div className="w-[489px] h-[252px] md:w-full md:h-full">
+								<HeroIcon className="w-full h-full" />
+							</div>
+						</div>
 						<div className="md:absolute md:left-24 md:bottom-0 z-20">
 							<Image
 								src="/lp/images/ctasection/ctaSection_womanImage.png"
@@ -48,12 +54,6 @@ export const CtaSection: React.FC = () => {
 							/>
 						</div>
 
-						{/* Elementos decorativos */}
-						<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-auto md:right-10 md:translate-x-0 z-0 opacity-40 md:opacity-70">
-							<div className="w-[489px] h-[252px] md:w-full md:h-full">
-								<HeroIcon className="w-full h-full" />
-							</div>
-						</div>
 						<div className="absolute left-0 top-0 w-80 h-80 bg-gradient-to-br from-orange-400/25 to-white/25 rounded-full blur-[50px] z-0" />
 					</div>
 				</div>
