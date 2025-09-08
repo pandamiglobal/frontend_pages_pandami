@@ -117,23 +117,21 @@ export function ImageComparisonSlider({
         </div>
       </div>
 
-      {/* Rótulo "Antes" - visível apenas na parte esquerda da divisória */}
+      {/* Rótulo "Antes" - visível quando a maior parte da imagem "antes" está visível */}
       <div 
         className="absolute bottom-3 left-3 bg-black/70 text-white px-2 py-1 text-xs rounded-md font-medium transition-opacity duration-300"
         style={{ 
-          opacity: sliderPosition > 5 ? 1 : 0,
-          clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+          opacity: sliderPosition > 50 ? 1 : 0,
         }}
       >
         Antes
       </div>
       
-      {/* Rótulo "Depois" - visível apenas na parte direita da divisória */}
+      {/* Rótulo "Depois" - visível quando a maior parte da imagem "depois" está visível */}
       <div 
         className="absolute bottom-3 right-3 bg-black/70 text-white px-2 py-1 text-xs rounded-md font-medium transition-opacity duration-300"
         style={{ 
-          opacity: sliderPosition < 95 ? 1 : 0,
-          clipPath: `inset(0 0 0 ${sliderPosition}%)`,
+          opacity: sliderPosition <= 50 ? 1 : 0,
         }}
       >
         Depois
