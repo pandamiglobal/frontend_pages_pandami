@@ -93,6 +93,8 @@
   --foreground-rgb: 26, 34, 56;
   --background-rgb: 243, 244, 246;
   --primary-color: 244, 120, 52; /* #f47834 */
+
+  @apply scroll-smooth
 }
 
   h1, h2, h3  {

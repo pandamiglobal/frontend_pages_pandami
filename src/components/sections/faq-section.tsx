@@ -115,7 +115,7 @@ export default function FAQSection({ faq }: { faq: FAQ[] }) {
         </div>
         
         {/* Mobile testimonial and CTA */}
-        <div className="mt-8 md:hidden">
+        <div id="faq" className="mt-8 md:hidden">
           <div className="flex items-center justify-center flex-col">
             <div className="flex -space-x-2 mb-2">
               {testimonialAvatars.map((avatar, i) => (

@@ -13,7 +13,7 @@ const heroPersonImage = "/lp/images/hero/heroPersonImage_Female1.png"
 
 export function HeroSection() {
   return (
-		<section className="relative bg-[#f7f7f7] overflow-hidden min-h-screen md:min-h-0">
+		<section id="home" className="relative bg-[#f7f7f7] overflow-hidden min-h-screen md:min-h-0">
 			{/* Background Grid Pattern */}
 			<div className="absolute inset-0 bg-grid-pattern opacity-70"></div>
 

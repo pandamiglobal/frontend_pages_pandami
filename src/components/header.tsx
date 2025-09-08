@@ -13,15 +13,15 @@ import { useState, useEffect } from "react"
 const navItems: INavItem[] = [
   {
     title: "Início",
-    href: "#home",
+    href: "/#home",
   },
   {
     title: "Benefícios",
-    href: "#benefits",
+    href: "/#benefits",
   },
   {
     title: "Planos",
-    href: "#plans",
+    href: "/#pricing",
   },
   {
     title: "Blog",
