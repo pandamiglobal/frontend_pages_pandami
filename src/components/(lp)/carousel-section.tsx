@@ -306,7 +306,7 @@ export default function CarouselSection() {
 			<div className="bg-neutral-800">
 				<section
 					id="carousel"
-					className="w-full pt-20 pb-20 bg-neutral-50  overflow-hidden relative flex flex-col justify-center items-center   rounded-bl-[32px] rounded-br-[32px]"
+					className="w-full pt-20 pb-40 bg-neutral-50  overflow-hidden relative flex flex-col justify-center items-center   rounded-bl-[32px] rounded-br-[32px]"
 				>
 					<Container>
 						{/* Cabeçalho da seção otimizado */}
@@ -340,8 +340,8 @@ export default function CarouselSection() {
 
 				{/* Seção separada para o badge */}
 				<section
-					id="badge"
-					className="w-full py-10 h-20 z-20  bg-neutral-800  relative flex flex-col justify-center items-center"
+					id="benefits"
+					className="w-full py-10  h-20 z-20  bg-neutral-800  relative flex flex-col justify-center items-center"
 				>
 					<BadgeIcon />
 				</section>

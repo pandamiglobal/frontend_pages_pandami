@@ -72,7 +72,7 @@ function BenefitItem({ icon: Icon, title, description }: BenefitItemData) {
 
 export function BenefitsSection() {
   return (
-    <section id="benefits" className="w-full bg-neutral-800 pt-2 pb-16 md:pt-2 md:pb-20">
+    <section id="benefits-2" className="w-full bg-neutral-800 pt-2 pb-16 md:pt-2 md:pb-20">
       <Container>
         <h2 className="text-white text-3xl md:text-4xl font-semibold mb-8 md:mb-12 text-center">Uma Ferramenta, Dois Mundos de Possibilidades</h2>
         {/* Linha 1 */}

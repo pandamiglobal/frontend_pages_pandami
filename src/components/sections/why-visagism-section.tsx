@@ -32,7 +32,7 @@ export function WhyVisagismSection() {
 	];
 
 	return (
-		<section id="benefits" className="w-full pb-10 pt-24 lg:pb-14 bg-neutral-50">
+		<section id="why" className="w-full pb-10 pt-24 lg:pb-14 bg-neutral-50">
 			<Container>
 				<h2 className="text-3xl lg:text-4xl font-semibold text-center mb-6 lg:mb-8 text-stone-900">
 					Por que Visagismo?
