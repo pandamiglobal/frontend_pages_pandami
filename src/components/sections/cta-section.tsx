@@ -48,9 +48,9 @@ export const CtaSection: React.FC = () => {
 							<Image
 								src="/lp/images/ctasection/ctaSection_womanImage.png"
 								alt="Mulher usando o visagismo Pandami"
-								width={351}
-								height={444}
-								className="w-full h-auto md:w-80 md:h-96"
+								width={400}
+								height={500}
+								className="w-full h-auto md:w-96 md:h-128"
 							/>
 						</div>
 

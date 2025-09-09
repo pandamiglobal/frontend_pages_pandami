@@ -3,6 +3,9 @@ import { WhyVisagismSection } from "@/components/sections/why-visagism-section"
 import FAQSection from "@/components/sections/faq-section"
 import CarouselSection from "@/components/(lp)/carousel-section"
 import { CtaSection } from "@/components/sections/cta-section"
+import { BenefitsSection } from "@/components/sections/benefits-section"
+
+// Removidos imports específicos da seção de benefícios (agora componentizada)
 
 export default function Home() {
   const faq = [
@@ -36,7 +39,8 @@ export default function Home() {
     <main>
       <HeroSection />
       <WhyVisagismSection />
-      <CarouselSection />
+  <CarouselSection />
+  <BenefitsSection />
       <FAQSection faq={faq} />
       <CtaSection />
     </main>
