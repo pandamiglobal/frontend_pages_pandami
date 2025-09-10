@@ -262,7 +262,7 @@ export function Header() {
       {/* Dropdown de Idioma */}
       {activeDropdown === 'language' && (
         <div 
-          className="absolute top-[72px] right-4 md:right-64 z-40 bg-background border border-border rounded-md shadow-lg"
+          className="absolute md:fixed top-[82px] right-4 md:right-80 z-50 bg-background/95 backdrop-blur-md border border-border rounded-md shadow-lg"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="py-2">
