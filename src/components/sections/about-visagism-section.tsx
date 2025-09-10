@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AboutVisagismComparisonSlider } from "@/components/(lp)/about-visagism-comparison-slider";
 import Image from "next/image";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import { PrimaryButton } from "@/components/ui/primary-button";
 
 interface VariantSet {
@@ -125,7 +125,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
       gsap.set(sliderRef.current, { x: direction * 50, autoAlpha: 0 });
       tl.to(textRef.current, { x: 0, autoAlpha: 1 }, 0.05)
         .to(sliderRef.current, { x: 0, autoAlpha: 1 }, 0.1)
-        .add(() => gsap.set([textRef.current, sliderRef.current], { clearProps: 'willChange' }));
+        .add(() => { gsap.set([textRef.current, sliderRef.current], { clearProps: 'willChange' }); });
     }
     return () => { tl.kill(); };
   }, [data, direction]);
@@ -146,7 +146,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
                   alt={`variante ${i + 1}`}
                   fill
                   className="object-cover"
-                  sizes="(max-width:768px) 25vw, 8vw"
+                  sizes="(max-width:1280px) 25vw, 8vw"
                 />
               </div>
             ))}
@@ -168,7 +168,11 @@ function GenderContent({ data, direction }: GenderContentProps) {
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mt-2">
-          <PrimaryButton size="lg" className="flex-1">
+          <PrimaryButton
+            size="lg"
+            className="flex-1"
+            icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+          >
             Comece grátis
           </PrimaryButton>
           <PrimaryButton

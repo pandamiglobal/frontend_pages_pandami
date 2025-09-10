@@ -223,7 +223,11 @@ export function SocialProofSection() {
               <p className="text-neutral-600 text-sm md:text-base">{current.name}, {current.age} anos</p>
             </div>
             <div className="mt-6">
-              <PrimaryButton size="lg" className="w-full md:w-auto px-8">
+              <PrimaryButton
+                size="lg"
+                className="w-full md:w-auto px-8"
+                icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+              >
                 Quero no meu salão
               </PrimaryButton>
             </div>

@@ -13,10 +13,10 @@ export default async function BlogGrid({ searchParams }: { searchParams: { page?
   // Verificação adicional para garantir que data e data.posts existam
   if (!data || !data.posts) {
     return (
-      <section className="w-full bg-white">
+      <section className="w-full bg-white min-h-screen">
         <Container section={true}>
           <h2 className="text-2xl md:text-3xl font-bold text-center md:mb-12 mb-8">
-            Nosso Blog
+            Blog Pandami
           </h2>
           <p className="text-center">Nenhum artigo encontrado. Por favor, tente novamente mais tarde.</p>
         </Container>
@@ -28,7 +28,7 @@ export default async function BlogGrid({ searchParams }: { searchParams: { page?
     <section className="w-full bg-white">
       <Container section={true}>
         <h2 className="text-2xl md:text-3xl font-bold text-center md:mb-12 mb-8">
-          Nosso Blog
+          Blog Pandami
         </h2>
         <div className="relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
