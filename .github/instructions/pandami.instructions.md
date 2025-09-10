@@ -4,7 +4,7 @@ applyTo: '**'
 Provide project context and coding guidelines that AI should follow when generating code, answering questions, or reviewing changes.
 
 
-Este projeto é uma landing page para a Pandami, uma plataforma de visagismo online. A página é construída usando Next.js 15 e TailwindCSS 4.
+Este projeto é uma landing page para a Pandami, uma plataforma de visagismo online. A página é construída usando Next.js 15 e TailwindCSS 4, usamos depedências da Shadcn UI.
 
 ## Configuração da Importação de fontes
 
