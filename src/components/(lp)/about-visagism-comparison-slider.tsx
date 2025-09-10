@@ -92,7 +92,7 @@ export function AboutVisagismComparisonSlider({
         alt={afterAlt}
         fill
         sizes="(max-width:768px) 100vw, 50vw"
-        className="object-cover"
+        className="object-cover object-center"
         priority={false}
       />
       <div
@@ -104,7 +104,7 @@ export function AboutVisagismComparisonSlider({
           alt={beforeAlt}
           fill
           sizes="(max-width:768px) 100vw, 50vw"
-          className="object-cover"
+          className="object-cover object-center"
           priority={false}
         />
       </div>
