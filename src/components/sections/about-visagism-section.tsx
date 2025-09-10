@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
+import gsap from "gsap";
 import { Container } from "@/components/ui/container";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AboutVisagismComparisonSlider } from "@/components/(lp)/about-visagism-comparison-slider";
@@ -44,7 +45,17 @@ const chips = [
 
 export function AboutVisagismSection() {
   const [gender, setGender] = useState<"woman" | "man">("woman");
+  const prevGender = useRef<"woman" | "man">("woman");
+  const directionRef = useRef<1 | -1>(1); // 1 indo para 'man', -1 voltando para 'woman'
   const data = gender === "woman" ? woman : man;
+
+  // Atualiza direção ao mudar gênero
+  useEffect(() => {
+    if (gender !== prevGender.current) {
+      directionRef.current = gender === "man" && prevGender.current === "woman" ? 1 : -1;
+      prevGender.current = gender;
+    }
+  }, [gender]);
 
   const ChipIcon = useMemo(
     () => (
@@ -81,10 +92,14 @@ export function AboutVisagismSection() {
           </TabsList>
 
           <TabsContent value="woman" className="w-full">
-            <GenderContent data={woman} />
+            {gender === "woman" && (
+              <GenderContent key={gender} data={woman} direction={directionRef.current} />
+            )}
           </TabsContent>
           <TabsContent value="man" className="w-full">
-            <GenderContent data={man} />
+            {gender === "man" && (
+              <GenderContent key={gender} data={man} direction={directionRef.current} />
+            )}
           </TabsContent>
         </Tabs>
       </Container>
@@ -92,11 +107,33 @@ export function AboutVisagismSection() {
   );
 }
 
-function GenderContent({ data }: { data: VariantSet }) {
+interface GenderContentProps { data: VariantSet; direction: 1 | -1 }
+
+function GenderContent({ data, direction }: GenderContentProps) {
+  const textRef = useRef<HTMLDivElement | null>(null);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const first = useRef(true);
+
+  useEffect(() => {
+    if (first.current) { first.current = false; return; }
+    const reduce = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.6 } });
+    if (textRef.current && sliderRef.current) {
+      gsap.set([textRef.current, sliderRef.current], { willChange: 'transform, opacity' });
+      gsap.set(textRef.current, { x: direction * 70, autoAlpha: 0 });
+      gsap.set(sliderRef.current, { x: direction * 50, autoAlpha: 0 });
+      tl.to(textRef.current, { x: 0, autoAlpha: 1 }, 0.05)
+        .to(sliderRef.current, { x: 0, autoAlpha: 1 }, 0.1)
+        .add(() => gsap.set([textRef.current, sliderRef.current], { clearProps: 'willChange' }));
+    }
+    return () => { tl.kill(); };
+  }, [data, direction]);
+
   return (
-  <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-10">
+    <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-10">
       {/* Right side (texto / variantes / chips / ações) – em mobile fica abaixo */}
-  <div className="md:w-1/2 flex flex-col gap-6 bg-white rounded-3xl border border-gray-200 p-6 md:p-8 h-full">
+      <div ref={textRef} className="md:w-1/2 flex flex-col gap-6 bg-white rounded-3xl border border-gray-200 p-6 md:p-8 h-full">
         <div>
           <h3 className="text-xl md:text-2xl font-medium text-stone-900 mb-4">
             Outros estilos que também combinam com você
@@ -144,8 +181,8 @@ function GenderContent({ data }: { data: VariantSet }) {
         </div>
       </div>
 
-      {/* Left slider */}
-    <div className="md:w-1/2">
+  {/* Left slider */}
+  <div ref={sliderRef} className="md:w-1/2">
         <AboutVisagismComparisonSlider
           before={data.mainBefore}
           after={data.mainAfter}
