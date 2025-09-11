@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { Container } from "@/components/ui/container";
+import { cn } from "@/common/lib/utils";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AboutVisagismComparisonSlider } from "@/components/(lp)/about-visagism-comparison-slider";
 import Image from "next/image";
@@ -113,6 +114,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
   const textRef = useRef<HTMLDivElement | null>(null);
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const first = useRef(true);
+  const [selectedVariantIndex, setSelectedVariantIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (first.current) { first.current = false; return; }
@@ -130,6 +132,15 @@ function GenderContent({ data, direction }: GenderContentProps) {
     return () => { tl.kill(); };
   }, [data, direction]);
 
+  // Sempre que o dataset (gênero) mudar, limpar seleção para voltar ao padrão
+  useEffect(() => {
+    setSelectedVariantIndex(null);
+  }, [data]);
+
+  const handleVariantClick = (idx: number) => {
+    setSelectedVariantIndex((curr) => (curr === idx ? null : idx));
+  };
+
   return (
     <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-10">
       {/* Right side (texto / variantes / chips / ações) – em mobile fica abaixo */}
@@ -139,17 +150,32 @@ function GenderContent({ data, direction }: GenderContentProps) {
             Outros estilos que também combinam com você
           </h3>
           <div className="grid grid-cols-4 gap-4">
-            {data.variants.map((v, i) => (
-              <div key={i} className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden">
-                <Image
-                  src={v}
-                  alt={`variante ${i + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width:1280px) 25vw, 8vw"
-                />
-              </div>
-            ))}
+            {data.variants.map((v, i) => {
+              const isActive = selectedVariantIndex === i;
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => handleVariantClick(i)}
+                  className={cn(
+                    "relative w-full aspect-[3/4] rounded-2xl overflow-hidden border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                    isActive
+                      ? "border-orange-400 ring-2 ring-orange-300"
+                      : "border-gray-200 hover:border-gray-300"
+                  )}
+                >
+                  <Image
+                    src={v}
+                    alt={`Estilo ${i + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width:1280px) 25vw, 8vw"
+                    priority={isActive}
+                  />
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -189,7 +215,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
   <div ref={sliderRef} className="md:w-1/2">
         <AboutVisagismComparisonSlider
           before={data.mainBefore}
-          after={data.mainAfter}
+          after={selectedVariantIndex !== null ? data.variants[selectedVariantIndex] : data.mainAfter}
           beforeAlt="Antes do visagismo"
           afterAlt="Depois do visagismo"
       className="w-full"

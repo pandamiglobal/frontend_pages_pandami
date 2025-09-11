@@ -1,42 +1,67 @@
 import type { MetadataRoute } from 'next'
 import { parseStringPromise } from 'xml2js'
 
+// Ensure Node.js runtime (xml2js relies on Node APIs)
+export const runtime = 'nodejs'
+// Revalidate daily when running in dynamic contexts (doesn't affect static export)
+export const revalidate = 86400
+
+type WpImage = { 'image:loc': string[] }
+type WpUrlEntry = {
+  loc: string[]
+  lastmod: string[]
+  'image:image'?: WpImage[]
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const wpSitemapUrl = `${process.env.NEXT_PUBLIC_API_URL}post/sitemap` // Altere para a URL correta
-  let wpUrls: Array<{ url: string; lastModified: string, images: string[] }> = []
-  const publicURL = new URL(process.env.NEXT_PUBLIC_SITE_URL as string);
+  // Resolve base URL de forma segura para evitar exceções em build/export
+  const envSite =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.SITE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '') ||
+    'http://localhost:3000'
+  const siteBase = envSite.replace(/\/$/, '')
+
+  const apiBase = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '')
+  const wpSitemapUrl = apiBase ? `${apiBase}/post/sitemap` : ''
+
+  let wpUrls: Array<{ url: string; lastModified: string; images: string[] }> = []
 
   try {
-    const response = await fetch(wpSitemapUrl)
-    const xmlData = await response.text()
+    if (wpSitemapUrl) {
+      const response = await fetch(wpSitemapUrl)
+      if (!response.ok) throw new Error(`Failed to fetch WP sitemap: ${response.status}`)
+      const xmlData = await response.text()
 
-    const trimmedXml = xmlData.trim()
+      const trimmedXml = xmlData.trim()
 
-    if (!trimmedXml.includes('<?xml') || !trimmedXml.includes('<urlset')) {
-      console.error('Invalid XML response:', xmlData.substring(0, 200)) // Log only first 200 chars
-      throw new Error('Invalid XML response from WordPress')
-    }
-    const parsedXml = await parseStringPromise(xmlData, {
-      trim: true,
-      explicitArray: true,
-      normalizeTags: true,
-      strict: false // Add this to be more lenient with XML parsing
-    })
-
-    if (parsedXml?.urlset?.url) {
-      wpUrls = parsedXml.urlset.url.map((item: any) => {
-        const images: string[] = [];
-
-        item['image:image'].map((image: { 'image:loc': string[] }) => {
-          images.push(...image['image:loc']);
+      if (!trimmedXml.includes('<?xml') || !trimmedXml.includes('<urlset')) {
+        console.error('Invalid XML response:', xmlData.substring(0, 200)) // Log only first 200 chars
+      } else {
+        const parsedXml = await parseStringPromise(xmlData, {
+          trim: true,
+          explicitArray: true,
+          normalizeTags: true,
+          strict: false // be more lenient with XML parsing
         })
 
-        return {
-          url: item.loc[0],
-          lastModified: item.lastmod[0],
-          images: images
+        if (parsedXml?.urlset?.url) {
+          wpUrls = (parsedXml.urlset.url as WpUrlEntry[]).map((item) => {
+            const images: string[] = []
+
+            const imgArr = Array.isArray(item['image:image']) ? item['image:image'] : []
+            imgArr.forEach((image) => {
+              if (Array.isArray(image['image:loc'])) images.push(...image['image:loc'])
+            })
+
+            return {
+              url: item.loc?.[0] || '',
+              lastModified: item.lastmod?.[0] || new Date().toISOString(),
+              images
+            }
+          })
         }
-      })
+      }
     }
   } catch (error) {
     console.error('Erro ao buscar ou parsear o sitemap do WordPress:', error)
@@ -44,35 +69,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const nextPages: MetadataRoute.Sitemap[number][] = [
     {
-      url: `${publicURL}`,
+      url: `${siteBase}/`,
       lastModified: new Date().toISOString(),
       changeFrequency: 'weekly',
       priority: 1.0,
       // images: [],
     },
     {
-      url: `${publicURL}blog`,
+      url: `${siteBase}/blog`,
       lastModified: new Date().toISOString(),
       changeFrequency: 'monthly',
       priority: 0.8,
       // images: ['https://seusite.com/image-sobre.jpg'],
     },
     {
-      url: `${publicURL}consulta-inpi`,
+      url: `${siteBase}/consulta-inpi`,
       lastModified: new Date().toISOString(),
       changeFrequency: 'monthly',
       priority: 0.8,
       // images: ['https://seusite.com/image-sobre.jpg'],
     },
     {
-      url: `${publicURL}registro-de-marca`,
+      url: `${siteBase}/registro-de-marca`,
       lastModified: new Date().toISOString(),
       changeFrequency: 'monthly',
       priority: 0.8,
       // images: ['https://seusite.com/image-sobre.jpg'],
     },
     {
-      url: `${publicURL}sobre-nos`,
+      url: `${siteBase}/sobre-nos`,
       lastModified: new Date().toISOString(),
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -81,8 +106,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   const wpEntries: MetadataRoute.Sitemap[number][] = wpUrls.map(item => {
-    const regex = new RegExp(`^https?:\/\/(www\.)?${process.env.POST_SITEMAP_DOMAIN}\/`);
-    let url = item.url.replace(regex, `${process.env.NEXT_PUBLIC_SITE_URL as string}`);
+    const regex = new RegExp(`^https?:\/\/(www\.)?${process.env.POST_SITEMAP_DOMAIN || ''}\/`)
+    let url = item.url.replace(regex, `${siteBase}/`)
     if (url.startsWith('http://')) {
       url = url.replace('http://', 'https://');
     }

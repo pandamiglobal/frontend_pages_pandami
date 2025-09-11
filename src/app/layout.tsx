@@ -7,8 +7,6 @@ import { Header } from "@/components/header"
 import Script from "next/script"
 import { Metadata } from "next"
 import defaultSeo from "@/common/config/default-seo"
-import { PiBotChat } from "@/components/pi-bot-widget"
-import ChatwootWidget from "@/components/chatwoot-widget"
 import { Modal } from "@/components/ui/modal/modal"
 
 const ubuntu = Ubuntu({
@@ -25,7 +23,14 @@ const fahkwang = Fahkwang({
   display: "swap",
 })
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  process.env.SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '') ||
+  'http://localhost:3000'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: defaultSeo.title,
   description: defaultSeo.description,
   robots: {
