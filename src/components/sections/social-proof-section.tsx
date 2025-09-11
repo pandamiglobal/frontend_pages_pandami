@@ -92,6 +92,21 @@ export function SocialProofSection() {
   const firstRender = useRef(true);
   const prevIndex = useRef(index);
   const directionRef = useRef<1 | -1>(1); // 1 = avançando, -1 = retrocedendo
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detecta se é mobile
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
 
   // Animação slide-in direcional a cada mudança de slide
   useEffect(() => {
@@ -156,51 +171,61 @@ export function SocialProofSection() {
   }
 
   return (
-    <section id="socialproof" className="py-20 bg-neutral-50">
-      <Container>
+    <section id="socialproof" className="py-20 bg-neutral-50 overflow-hidden">
+      <Container className="overflow-visible">
         <h2 className="text-3xl md:text-4xl font-semibold text-center mb-10 text-stone-900">
           Deu o que falar no salão
         </h2>
 
         {/* Navegação */}
-  <div ref={navRef} className="flex items-center justify-center gap-6 mb-10">
+  <div ref={navRef} className="flex items-center justify-center gap-4 sm:gap-6 mb-10 max-w-full px-2">
           <button
             onClick={prev}
             aria-label="Anterior"
-            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition"
+            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition flex-shrink-0"
           >
-            <ArrowLeft className="size-5" />
+            <ArrowLeft className="size-4 sm:size-5" />
           </button>
-          <ul className="flex gap-4 items-center">
-            {testimonials.map((t, i) => (
-              <li key={t.id}>
-                <button
-                  aria-label={`Ver depoimento de ${t.name}`}
-                  onClick={() => setIndex(i)}
-                  className={cn(
-                    "relative size-12 rounded-full border overflow-hidden transition",
-                    i === index
-                      ? "border-orange-400 ring-2 ring-orange-200"
-                      : "border-white/70 opacity-70 hover:opacity-100"
-                  )}
-                >
-                  <Image
-                    src={t.avatar}
-                    alt={t.name}
-                    width={128}
-                    height={128}
-                    className="w-12 h-12 object-cover object-center"
-                    sizes="256px"
-                    priority={i === index}
-                  />
-                </button>
-              </li>
-            ))}
+          <ul className="flex gap-2 sm:gap-4 items-center overflow-x-hidden max-w-[calc(100%-5rem)]">
+            {/* No mobile: apenas 3 avatares (anterior, atual e próximo) */}
+            {testimonials.map((t, i) => {
+              // Determina os 3 índices visíveis no mobile (para telas pequenas)
+              const prevIdx = index === 0 ? testimonials.length - 1 : index - 1;
+              const nextIdx = index === testimonials.length - 1 ? 0 : index + 1;
+              const isVisibleOnMobile = i === prevIdx || i === index || i === nextIdx;
+              
+              return (
+                <li key={t.id} className={cn(
+                  !isVisibleOnMobile && "hidden sm:block", // Oculta no mobile se não for um dos 3 avatares visíveis
+                )}>
+                  <button
+                    aria-label={`Ver depoimento de ${t.name}`}
+                    onClick={() => setIndex(i)}
+                    className={cn(
+                      "relative size-12 rounded-full border overflow-hidden transition",
+                      i === index
+                        ? "border-orange-400 ring-2 ring-orange-200"
+                        : "border-white/70 opacity-70 hover:opacity-100"
+                    )}
+                  >
+                    <Image
+                      src={t.avatar}
+                      alt={t.name}
+                      width={128}
+                      height={128}
+                      className="w-12 h-12 object-cover object-center"
+                      sizes="256px"
+                      priority={i === index}
+                    />
+                  </button>
+                </li>
+              );
+            })}
           </ul>
           <button
             onClick={next}
             aria-label="Próximo"
-            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition"
+            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition flex-shrink-0"
           >
             <ArrowRight className="size-5" />
           </button>
