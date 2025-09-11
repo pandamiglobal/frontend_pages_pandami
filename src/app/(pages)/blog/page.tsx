@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function BlogPage({ searchParams }: { searchParams: { page?: string } }) {
     return (
         <>
-            <main>
+            <main className="w-full flex flex-col gap-16 py-16">
                 <BlogGrid searchParams={searchParams} />
             </main>
         </>
