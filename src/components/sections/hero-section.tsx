@@ -30,7 +30,7 @@ export function HeroSection() {
 								<span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#C16C3F]"> <br />
 									IA de Visagismo
 								</span>{" "}
-								 <br /> para  cabeleleiros 
+								 <br /> para  cabeleireiros 
 							</h1>
 
 							<p className="text-gray-600 max-w-[520px] text-sm sm:text-base md:text-lg mx-auto lg:mx-0">
