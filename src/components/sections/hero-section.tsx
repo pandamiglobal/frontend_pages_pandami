@@ -24,7 +24,7 @@ export function HeroSection() {
 				<div className="relative pt-32  lg:pt-20 pb-0 flex flex-col items-center">
 					{/* Content */}
 					<div className="z-10 flex flex-col lg:flex-row items-center justify-between w-full">
-						<div className="w-full max-w-[800px] flex flex-col gap-4 md:gap-6 px-4 text-center lg:text-left">
+						<div className="w-full max-w-[800px] flex flex-col gap-4 md:gap-6 px-0 text-center lg:text-left">
 							<h1 className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[48px] text-black leading-tight">
 								A primeira{" "}
 								<span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#C16C3F]"> <br />
@@ -39,17 +39,18 @@ export function HeroSection() {
 								cliente para sugerir cortes, cores e estilos ideais.
 							</p>
 
-							<div className="flex gap-3 items-center justify-center lg:justify-start flex-wrap mt-2">
+							<div className="flex gap-3 items-center justify-center lg:justify-start mt-2">
 								<Link href="/#">
-									<PrimaryButton
+									<PrimaryButton 
 										icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 										size="lg"
+										className="px-4"
 									>
 										Comece grátis
 									</PrimaryButton>
 								</Link>
 								<Link href="/#plans">
-									<PrimaryButton variant="outline" size="lg">
+									<PrimaryButton variant="outline" size="lg" className="px-4" >
 										Ver planos
 									</PrimaryButton>
 								</Link>
