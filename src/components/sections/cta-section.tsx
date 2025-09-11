@@ -12,7 +12,7 @@ export const CtaSection: React.FC = () => {
 			<Container>
 				{" "}
 				<div className="relative">
-					<div className="px-6 md:px-16 py-8 bg-orange-50 rounded-2xl flex flex-col md:flex-row-reverse justify-between items-center gap-8 md:gap-10 overflow-hidden ">
+					<div className="px-6 md:px-16 py-8 mt-96 md:mt-0 bg-orange-50 rounded-2xl flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-8 md:gap-10 overflow-hidden ">
 						{/* Textos e botão */}
 						<div className="w-full md:w-1/2 lg:max-w-[560px] flex flex-col gap-6 z-10">
 							<div className="flex flex-col gap-3">
@@ -30,7 +30,7 @@ export const CtaSection: React.FC = () => {
 								<PrimaryButton
 									size="lg"
 									icon={<ArrowRight className="h-4 w-4" />}
-									className="max-w-72 px-4"
+									className="w-full md:max-w-72 px-4"
 								>
 									Comece grátis
 								</PrimaryButton>
@@ -40,17 +40,17 @@ export const CtaSection: React.FC = () => {
 						{/* Imagem */}
 						{/* Elementos decorativos */}
 						<div className="relative right-1/2  -mb-20 md:left-auto md:right-10 md:translate-x-0 z-0 opacity-40 md:opacity-70">
-							<div className="w-[489px] h-[252px] md:w-full md:h-full">
+							<div className="w-96 h-64 lg:w-full lg:h-full -rotate-45 md:rotate-0">
 								<HeroIcon className="w-full h-full" />
 							</div>
 						</div>
-						<div className="md:absolute md:left-24 md:bottom-0 z-20">
+						<div className="absolute -top-[200px] md:-top-[140px] md:left-24 z-20">
 							<Image
 								src="/lp/images/ctasection/ctaSection_womanImage.png"
 								alt="Mulher usando o visagismo Pandami"
 								width={400}
 								height={500}
-								className="w-full h-auto md:w-96 md:h-128"
+								className="w-80 h-auto max-w-96  md:w-96 md:h-128"
 							/>
 						</div>
 

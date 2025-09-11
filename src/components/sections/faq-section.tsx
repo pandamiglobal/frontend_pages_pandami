@@ -9,10 +9,8 @@ import {
 import { Container } from "../ui/container";
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import { PrimaryButton } from "../ui/primary-button";
-import { ArrowRight, ChevronRight } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { HeroIcon } from "../svg/hero-icon";
 
 export interface FAQ {
   question: string;
@@ -23,86 +21,87 @@ const testimonialAvatars = [
   {
     src: "/testimonials/home/ana-paula.jpg",
     alt: "Ana Paula",
-    initials: "AP"
+    initials: "AP",
   },
   {
-    src: "/testimonials/home/carlos-men.jpg", 
+    src: "/testimonials/home/carlos-men.jpg",
     alt: "Carlos Mendes",
-    initials: "CM"
+    initials: "CM",
   },
   {
     src: "/testimonials/home/jorge-santana.jpg",
     alt: "Jorge Santana",
-    initials: "JS"
+    initials: "JS",
   },
   {
     src: "/testimonials/home/maria-silva.jpg",
     alt: "Maria Silva",
-    initials: "MS"
-  }
+    initials: "MS",
+  },
 ];
 
 export default function FAQSection({ faq }: { faq: FAQ[] }) {
   return (
     <section className="w-full py-10 md:py-16 bg-white">
       <Container className="px-4 md:px-6">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16">
-          {/* Left column with title and CTA for desktop */}
-          <div className="w-full md:w-5/12 lg:w-4/12">
-            <div className="md:sticky md:top-20">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
+          {/* Left column: Title, description, testimonials, CTA */}
+          <div className="w-full lg:w-5/12 xl:w-4/12 order-1 lg:order-1">
+            <div className="lg:sticky lg:top-20">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">
                 Perguntas frequentes
               </h2>
-              <p className="text-gray-700 mb-6 hidden md:block">
-                Tudo que você precisa saber sobre a Pandami, desde a compra à usabilidade.
+              <p className="text-gray-700 mb-6 md:mb-8">
+                Tudo que você precisa saber sobre a Pandami, desde a compra à
+                usabilidade.
               </p>
-              
-              {/* Testimonial avatars */}
-              <div className="hidden md:block mt-8">
+
+              {/* Testimonials and CTA - positioned after description on mobile, sticky on desktop */}
+              <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
-                  <div className="flex -space-x-2">
+                  <div className="flex -space-x-2 justify-center lg:justify-start">
                     {testimonialAvatars.map((avatar, i) => (
-                      <Avatar key={i} className="border-2 border-white h-9 w-9">
+                      <Avatar
+                        key={i}
+                        className="border-2 border-white h-8 w-8 md:h-9 md:w-9"
+                      >
                         <AvatarImage src={avatar.src} alt={avatar.alt} />
                         <AvatarFallback>{avatar.initials}</AvatarFallback>
                       </Avatar>
                     ))}
                   </div>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 text-center lg:text-left">
                     +2 mil homens e mulheres já descobriram sua melhor versão
                   </p>
-                  <div className="mt-2">
-                    <Link href="/#">
-                      <PrimaryButton
-                        size="lg"
-                        icon={<ArrowRight className="h-4 w-4" />}
-                        className="w-full md:w-auto justify-center"
-                      >
-                        Comece grátis
-                      </PrimaryButton>
-                    </Link>
-                  </div>
+                </div>
+                <div className="flex justify-center lg:justify-start">
+                  <Link href="/#" className="w-full">
+                    <PrimaryButton
+                      size="lg"
+                      icon={<ArrowRight className="h-4 w-4" />}
+                      className="w-full md:w-auto"
+                    >
+                      Comece grátis
+                    </PrimaryButton>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right column with accordion */}
-          <div className="w-full md:w-7/12 lg:w-8/12">
-            {/* Mobile version of the subtitle */}
-            <p className="text-gray-700 mb-6 md:hidden">
-              Tudo que você precisa saber sobre a Pandami, desde a compra à usabilidade.
-            </p>
-            
+          {/* Right column: Accordion */}
+          <div className="w-full lg:w-7/12 xl:w-8/12 order-2 lg:order-2">
             <Accordion type="single" collapsible className="space-y-2">
               {faq.map((item, index) => (
-                <AccordionItem 
-                  key={`faq-${index}`} 
-                  value={`faq-${index}`} 
+                <AccordionItem
+                  key={`faq-${index}`}
+                  value={`faq-${index}`}
                   className="border-b border-gray-200 overflow-hidden"
                 >
                   <AccordionTrigger className="px-2 py-4 hover:no-underline text-left">
-                    <span className="text-left font-medium text-sm md:text-base">{item.question}</span>
+                    <span className="text-left font-medium text-sm md:text-base font-sans">
+                      {item.question}
+                    </span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-4 pt-0">
                     <p className="text-gray-600 text-sm md:text-base">
@@ -112,32 +111,6 @@ export default function FAQSection({ faq }: { faq: FAQ[] }) {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
-        </div>
-        
-        {/* Mobile testimonial and CTA */}
-        <div id="faq" className="mt-8 md:hidden">
-          <div className="flex items-center justify-center flex-col">
-            <div className="flex -space-x-2 mb-2">
-              {testimonialAvatars.map((avatar, i) => (
-                <Avatar key={i} className="border-2 border-white h-8 w-8">
-                  <AvatarImage src={avatar.src} alt={avatar.alt} />
-                  <AvatarFallback>{avatar.initials}</AvatarFallback>
-                </Avatar>
-              ))}
-            </div>
-            <p className="text-xs text-gray-600 text-center mb-4">
-              +2 mil homens e mulheres já descobriram sua melhor versão
-            </p>
-            <Link href="/#">
-              <PrimaryButton
-                size="lg"
-                icon={<ChevronRight className="h-16 w-16" />}
-                className="w-full justify-center"
-              >
-                Comece grátis
-              </PrimaryButton>
-            </Link>
           </div>
         </div>
       </Container>

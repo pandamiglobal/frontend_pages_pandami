@@ -75,7 +75,7 @@ export function Header() {
   return (
     <>
       {/* Header Principal - Desktop e Mobile */}
-      <header className={`w-full border-b py-4 fixed top-0 left-0 right-0 z-50 ${isScrolled ? 'bg-background/80 backdrop-blur-md' : 'bg-background/60 backdrop-blur-sm'}`}>
+      <header className={`w-screen border-b py-4 fixed top-0 left-0 right-0 z-50 ${isScrolled ? 'bg-background/80 backdrop-blur-md' : 'bg-background/60 backdrop-blur-sm'}`}>
         <Container>
           <div className="flex items-center justify-between w-full">
             {/* Logo */}
@@ -96,7 +96,7 @@ export function Header() {
             </div>
 
             {/* Nav Items - Apenas Desktop */}
-            <nav className="hidden md:flex items-center justify-center flex-1">
+            <nav className="hidden lg:flex items-center justify-center flex-1">
               {navItems.map((item) => (
                 <div key={item.title} className="mr-8 last:mr-0">
                   {item.hasDropdown ? (
@@ -124,7 +124,7 @@ export function Header() {
             </nav>
 
             {/* Botões e controles - Desktop */}
-            <div className="hidden md:flex items-center space-x-4 flex-1 justify-end">
+            <div className="hidden lg:flex items-center space-x-4 flex-1 justify-end">
               <ThemeToggle />
 
               <button
@@ -147,7 +147,7 @@ export function Header() {
             </div>
 
             {/* Menu Mobile Toggle */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="lg:hidden flex items-center gap-2">
               <ThemeToggle />
               <button
                 className="p-2 rounded-md hover:bg-accent"
@@ -262,7 +262,7 @@ export function Header() {
       {/* Dropdown de Idioma */}
       {activeDropdown === 'language' && (
         <div 
-          className="absolute md:fixed top-[82px] right-4 md:right-80 z-50 bg-background/95 backdrop-blur-md border border-border rounded-md shadow-lg"
+          className="absolute lg:fixed top-[82px] right-4 lg:right-80 z-50 bg-background/95 backdrop-blur-md border border-border rounded-md shadow-lg"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="py-2">

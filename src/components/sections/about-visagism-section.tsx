@@ -196,7 +196,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
         <div className="flex flex-col md:flex-row gap-4 mt-2">
           <PrimaryButton
             size="lg"
-            className="flex-1"
+           
             icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
           >
             Comece grátis
@@ -204,7 +204,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
           <PrimaryButton
             size="lg"
             variant="outline"
-            className="flex-1"
+        
           >
             Quero no meu salão
           </PrimaryButton>
