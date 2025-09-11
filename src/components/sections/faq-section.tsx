@@ -51,7 +51,7 @@ export default function FAQSection({ faq }: { faq: FAQ[] }) {
               <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">
                 Perguntas frequentes
               </h2>
-              <p className="text-gray-700 mb-6 md:mb-8">
+              <p className="text-gray-700 mb-6 md:mb-8 ">
                 Tudo que você precisa saber sobre a Pandami, desde a compra à
                 usabilidade.
               </p>

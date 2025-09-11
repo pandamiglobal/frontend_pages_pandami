@@ -90,7 +90,7 @@ export function Header() {
                   alt="PPPI Logo"
                   width={160}
                   height={24}
-                  className="h-8 w-auto"
+                  className="h-6 lg:h-8 w-auto"
                 />
               </Link>
             </div>
@@ -172,9 +172,18 @@ export function Header() {
                   alt="PPPI Logo"
                   width={160}
                   height={24}
-                  className="h-8 w-auto"
+                  className="h-6 lg:h-8 w-auto"
                 />
               </Link>
+               <div className="flex items-center border rounded-md px-3 py-2 bg-card">
+                  <Globe className="h-5 w-5 mr-3 text-muted-foreground" />
+                  <select
+                    className="w-full bg-transparent focus:outline-none"
+                    defaultValue="pt-BR"
+                  >
+                    <option value="pt-BR">Português</option>
+                  </select>
+                </div>
               <button
                 className="p-2 rounded-full hover:bg-accent"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -183,7 +192,7 @@ export function Header() {
                 <X className="h-6 w-6" />
               </button>
             </div>
-            
+               
             <div className="py-8 overflow-y-auto h-[calc(100vh-80px)]">
               <nav className="space-y-6 mb-8">
                 {navItems.map((item) => (
@@ -200,19 +209,11 @@ export function Header() {
                 ))}
               </nav>
 
-              <div className="space-y-6 mt-10">
-                <div className="flex items-center border rounded-md px-3 py-3 bg-card">
-                  <Globe className="h-5 w-5 mr-3 text-muted-foreground" />
-                  <select
-                    className="w-full bg-transparent focus:outline-none"
-                    defaultValue="pt-BR"
-                  >
-                    <option value="pt-BR">Português (Brasil)</option>
-                  </select>
-                </div>
+              <div className="space-y-4 mt-10">
+               
 
-                <Link href="/#plans" onClick={handleLinkClick} className="block mb-4">
-                  <PrimaryButton className="w-full" variant="outline">Ver planos</PrimaryButton>
+                <Link href="/#plans" onClick={handleLinkClick} className="block">
+                  <PrimaryButton className="w-full" variant="outline" size="lg">Ver planos</PrimaryButton>
                 </Link>
 
                 <Link
@@ -220,10 +221,11 @@ export function Header() {
                   onClick={handleLinkClick}
                   className="block"
                 >
-                  <PrimaryButton icon={<ArrowRight className="h-5 w-5" />} className="w-full">
+                  <PrimaryButton icon={<ArrowRight className="h-5 w-5" />} className="w-full" size="lg">
                     Comece grátis
                   </PrimaryButton>
                 </Link>
+             
               </div>
             </div>
           </Container>
@@ -262,7 +264,7 @@ export function Header() {
       {/* Dropdown de Idioma */}
       {activeDropdown === 'language' && (
         <div 
-          className="absolute lg:fixed top-[82px] right-4 lg:right-80 z-50 bg-background/95 backdrop-blur-md border border-border rounded-md shadow-lg"
+          className="absolute md:fixed top-[82px] right-4 md:right-80 z-50 bg-background/95 backdrop-blur-md border border-border rounded-md shadow-lg"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="py-2">
@@ -270,7 +272,7 @@ export function Header() {
               className="w-full text-left px-4 py-2 hover:bg-accent"
               onClick={() => setActiveDropdown(null)}
             >
-              Português (Brasil)
+              Português
             </button>
           </div>
         </div>

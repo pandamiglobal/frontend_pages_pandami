@@ -7,9 +7,9 @@ export default function Footer() {
   return (
 		<footer className="py-16 bg-white border-t border-gray-200">
 			<Container>
-				<div className="flex flex-col md:flex-row justify-between">
+				<div className="flex flex-col md:flex-row justify-between items-center md:items-start">
 					{/* Logo e descrição */}
-					<div className="mb-8 md:mb-0 md:w-1/3">
+					<div className="mb-8 md:mb-0 md:w-1/3 text-center md:text-left flex flex-col items-center md:items-start">
 						<div className="flex items-center mb-6">
 							<Image
 								src="/logo.svg"
@@ -30,8 +30,8 @@ export default function Footer() {
 					</div>
 
 					{/* Links de Navegação */}
-					<div className="mb-8 md:mb-0">
-						<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
+					<div className="mb-8 md:mb-0 text-center md:text-left">
+						<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 md:after:left-0 after:right-0 md:after:right-auto after:mx-auto md:after:mx-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
 							Pandami
 						</h3>
 						<ul className="space-y-2 text-sm text-gray-600">
@@ -76,8 +76,8 @@ export default function Footer() {
 					</div>
 
 					{/* Links de Informações */}
-					<div className="mb-8 md:mb-0">
-						<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
+					<div className="mb-8 md:mb-0 text-center md:text-left">
+						<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 md:after:left-0 after:right-0 md:after:right-auto after:mx-auto md:after:mx-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
 							Informações
 						</h3>
 						<ul className="space-y-2 text-sm text-gray-600">
@@ -101,12 +101,12 @@ export default function Footer() {
 					</div>
 
 					{/* Informações de Contato */}
-					<div>
-						<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
+					<div className="text-center md:text-left">
+						<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 md:after:left-0 after:right-0 md:after:right-auto after:mx-auto md:after:mx-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
 							Atendimento
 						</h3>
 						<ul className="space-y-2 text-sm text-gray-600">
-							<li className="flex items-center gap-2">
+							<li className="flex items-center gap-2 justify-center md:justify-start">
 								<Mail className="h-4 w-4" />
 								<a
 									href="mailto:suporte@pandami.com.br"
@@ -115,7 +115,7 @@ export default function Footer() {
 									suporte@pandami.com.br
 								</a>
 							</li>
-							<li className="flex items-center gap-2">
+							<li className="flex items-center gap-2 justify-center md:justify-start">
 								<Phone className="h-4 w-4" />
 								<a
 									href="tel:08008789746"
@@ -124,7 +124,7 @@ export default function Footer() {
 									0800 878 9746
 								</a>
 							</li>
-							<li className="flex items-center gap-2">
+							<li className="flex items-center gap-2 justify-center md:justify-start">
 								<Clock className="h-4 w-4" />
 								<span>Seg-Sex: 8h às 18h</span>
 							</li>
@@ -132,7 +132,7 @@ export default function Footer() {
 					</div>
 				</div>
 				{/* logo title */}
-				<div className="mt-16">
+				<div className="mt-16 text-center">
 					<Image
 						src="/pandami-logo-title-footer.svg"
 						alt="Pandami"
