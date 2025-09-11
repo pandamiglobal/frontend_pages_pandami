@@ -21,7 +21,7 @@ export function HeroSection() {
 			<div className="absolute inset-0 bg-grid-pattern opacity-70"></div>
 
 			<Container>
-				<div className="relative pt-32  lg:pt-20 pb-0 flex flex-col items-center">
+				<div className="relative pt-24  lg:pt-20 pb-0 flex flex-col items-center">
 					{/* Content */}
 					<div className="z-10 flex flex-col lg:flex-row items-center justify-between w-full">
 						<div className="w-full max-w-[800px] flex flex-col gap-4 md:gap-6 px-0 text-center lg:text-left">
@@ -35,8 +35,7 @@ export function HeroSection() {
 
 							<p className="text-gray-600 max-w-[520px] text-sm sm:text-base md:text-lg mx-auto lg:mx-0">
 								Nossa inteligência artificial elimina a tentativa e erro:
-								analisa o rosto, preferências e características únicas do 
-								cliente para sugerir cortes, cores e estilos ideais.
+								analisa o rosto, preferências e características únicas  para sugerir cortes, cores e estilos ideais.
 							</p>
 
 							<div className="flex gap-3 items-center justify-center lg:justify-start mt-2">
@@ -58,7 +57,7 @@ export function HeroSection() {
 						</div>
 
 						{/* Hero Images */}
-						<div className="relative block mt-6 lg:mt-0 w-full max-w-[400px] lg:max-w-[480px]">
+						<div className="relative block -mt-6 lg:mt-0 w-full max-w-[250px] lg:max-w-[480px]">
 							<div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 z-0">
 								<div
 									data-svg-wrapper
@@ -74,7 +73,7 @@ export function HeroSection() {
 									alt="Hero Person"
 									width={486}
 									height={659}
-									className="w-full h-full object-cover"
+									className="md:w-full h-auto object-cover"
 									priority
 								/>
 							</div>
