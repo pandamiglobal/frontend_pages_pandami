@@ -57,7 +57,7 @@ export function HeroSection() {
 						</div>
 
 						{/* Hero Images */}
-						<div className="relative block -mt-6 lg:mt-0 w-full max-w-[250px] lg:max-w-[480px]">
+						<div className="relative block h-auto lg:mt-0 w-full max-w-[260px] lg:max-w-[480px]">
 							<div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 z-0">
 								<div
 									data-svg-wrapper
@@ -67,7 +67,7 @@ export function HeroSection() {
 									<HeroIcon className="w-full h-full object-contain" />
 								</div>
 							</div>
-							<div className="relative w-full h-auto aspect-[3/4] lg:w-[486px] lg:h-[659px] lg:-mt-8">
+							<div className="relative w-full h-auto aspect-[3/4] lg:w-[486px] lg:h-[659px] lg:-mt-6">
 								<Image
 									src={heroPersonImage}
 									alt="Hero Person"
