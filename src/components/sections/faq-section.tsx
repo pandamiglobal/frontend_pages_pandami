@@ -59,7 +59,7 @@ export default function FAQSection({ faq }: { faq: FAQ[] }) {
               {/* Testimonials and CTA - positioned after description on mobile, sticky on desktop */}
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
-                  <div className="flex -space-x-2 justify-center lg:justify-start">
+                  <div className="flex -space-x-2 justify-start">
                     {testimonialAvatars.map((avatar, i) => (
                       <Avatar
                         key={i}
@@ -70,7 +70,7 @@ export default function FAQSection({ faq }: { faq: FAQ[] }) {
                       </Avatar>
                     ))}
                   </div>
-                  <p className="text-sm text-gray-600 text-center lg:text-left">
+                  <p className="text-sm text-gray-600 text-left">
                     +2 mil homens e mulheres já descobriram sua melhor versão
                   </p>
                 </div>

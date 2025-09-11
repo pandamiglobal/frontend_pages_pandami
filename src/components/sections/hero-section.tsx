@@ -64,7 +64,7 @@ export function HeroSection() {
 									data-layer="heroIconImage"
 									className="Heroiconimage opacity-40 lg:opacity-100"
 								>
-									<HeroIcon className="w-full h-full object-contain" />
+									<HeroIcon className="w-96 h-64 lg:w-full lg:h-full object-contain" />
 								</div>
 							</div>
 							<div className="relative w-full h-auto aspect-[3/4] lg:w-[486px] lg:h-[659px] lg:-mt-6">
