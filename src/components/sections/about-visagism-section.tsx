@@ -147,7 +147,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
       <div ref={textRef} className="md:w-1/2 flex flex-col gap-6 bg-white rounded-3xl border border-gray-200 p-6 md:p-8 h-full">
         <div>
           <h3 className="text-xl md:text-2xl font-medium text-stone-900 mb-4">
-            Outros estilos que também combinam com você
+            Escolha abaixo outros estilos que também combinam com você
           </h3>
           <div className="grid grid-cols-4 gap-4">
             {data.variants.map((v, i) => {
@@ -170,7 +170,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
                     alt={`Estilo ${i + 1}`}
                     fill
                     className="object-cover"
-                    sizes="(max-width:1280px) 25vw, 8vw"
+                    sizes="(max-width:1280px) 50vw, 16vw"
                     priority={isActive}
                   />
                 </button>
