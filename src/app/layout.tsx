@@ -49,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning className={`${ubuntu.variable} ${fahkwang.variable}`}>
       <head>
         <Script id="microsoft-clarity">
           {`
@@ -61,7 +61,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${ubuntu.variable} ${fahkwang.variable} font-sans`}>
+      <body className={`font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Header />
           {children}

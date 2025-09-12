@@ -1,6 +1,12 @@
 @import 'tailwindcss';
 
+/* Tailwind v4: garanta que todas as rotas/arquivos sejam escaneados */
+@source '../src/**/*.{js,ts,jsx,tsx,mdx}';
 @source '../*.{js,ts,jsx,tsx,mdx}';
+
+/* Opcional: inclua outras raízes se existirem (pages/, components/ fora de src) */
+@source '../components/**/*.{js,ts,jsx,tsx,mdx}';
+@source '../pages/**/*.{js,ts,jsx,tsx,mdx}';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -15,9 +21,22 @@
   }
 }
 
+/* Utility para aplicar a fonte Fahkwang onde necessário (ex.: headings) */
+@utility font-fahkwang {
+  font-family: var(--font-fahkwang), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
 @theme {
-  --font-sans: var(--font-ubuntu);
-  --font-fahkwang: var(--font-fahkwang);
+  /*
+    Fonte base do projeto (Ubuntu) usada por font-sans.
+    Usa a variável injetada pelo next/font no <body> e adiciona fallbacks padrão.
+  */
+  --font-sans: var(--font-ubuntu), ui-sans-serif, system-ui, sans-serif;
+  /*
+    Removido o alias circular de --font-fahkwang para evitar sombra/loop.
+    Para Fahkwang, utilize a variável do next/font diretamente: var(--font-fahkwang)
+    através da utility .font-fahkwang e estilos globais de headings.
+  */
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -204,8 +223,8 @@
 }
 
 :root {
-  font-family: var(--font-ubuntu), system-ui, sans-serif;
-  font-family: var(--font-fahkwang), system-ui, sans-serif;
+  /* Padrão do projeto: Ubuntu como fonte base (body) via token --font-sans */
+  font-family: var(--font-sans);
 
   --foreground-rgb: 26, 34, 56;
   --background-rgb: 243, 244, 246;
