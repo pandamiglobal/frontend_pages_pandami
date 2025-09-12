@@ -12,19 +12,19 @@ export default function Statistics() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                    <div className="bg-white rounded-xl p-6 text-center shadow-xs">
                         <p className="text-4xl font-bold text-[#0047FF]">1000+</p>
                         <p className="text-lg text-[#374151]">Clientes Atendidos</p>
                     </div>
-                    <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                    <div className="bg-white rounded-xl p-6 text-center shadow-xs">
                         <p className="text-4xl font-bold text-[#0047FF]">98%</p>
                         <p className="text-lg text-[#374151]">Taxa de Sucesso</p>
                     </div>
-                    <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                    <div className="bg-white rounded-xl p-6 text-center shadow-xs">
                         <p className="text-4xl font-bold text-[#0047FF]">1500+</p>
                         <p className="text-lg text-[#374151]">Marcas Protegidas</p>
                     </div>
-                    <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                    <div className="bg-white rounded-xl p-6 text-center shadow-xs">
                         <p className="text-4xl font-bold text-[#0047FF]">13</p>
                         <p className="text-lg text-[#374151]">Anos de Experiência</p>
                     </div>

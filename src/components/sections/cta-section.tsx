@@ -54,7 +54,7 @@ export const CtaSection: React.FC = () => {
 							/>
 						</div>
 
-						<div className="absolute left-0 top-0 w-80 h-80 bg-gradient-to-br from-orange-400/25 to-white/25 rounded-full blur-[50px] z-0" />
+						<div className="absolute left-0 top-0 w-80 h-80 bg-linear-to-br from-orange-400/25 to-white/25 rounded-full blur-[50px] z-0" />
 					</div>
 				</div>
 			</Container>

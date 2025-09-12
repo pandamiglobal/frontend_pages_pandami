@@ -120,7 +120,7 @@ export default function TrademarkTable({ data, searchData }: TradeMarkTable) {
             setItemsPerPage(Number(e.target.value));
             setCurrentPage(1);
           }}
-          className="h-8 md:h-10 px-2 md:px-3 rounded-md border border-slate-700 bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 text-sm md:text-base w-full sm:w-auto"
+          className="h-8 md:h-10 px-2 md:px-3 rounded-md border border-slate-700 bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-slate-200 focus:outline-hidden focus:ring-2 focus:ring-slate-400 text-sm md:text-base w-full sm:w-auto"
         >
           <option value="5">5 / página</option>
           <option value="10">10 / página</option>

@@ -67,8 +67,8 @@ const clientBenefits: BenefitItemData[] = [
 
 function BenefitItem({ icon: Icon, title, description }: BenefitItemData) {
   return (
-    <li className="p-3 sm:p-4 rounded-xl bg-neutral-700/60 outline outline-1 outline-white/50 flex gap-3 sm:gap-4 items-start shadow-md transition-all hover:bg-neutral-700/80">
-      <div className="min-w-[2.5rem] w-10 h-10 sm:w-12 sm:h-12 bg-neutral-700 rounded-lg flex items-center justify-center shrink-0">
+    <li className="p-3 sm:p-4 rounded-xl bg-neutral-700/60 outline-solid outline-1 outline-white/50 flex gap-3 sm:gap-4 items-start shadow-md transition-all hover:bg-neutral-700/80">
+      <div className="min-w-10 w-10 h-10 sm:w-12 sm:h-12 bg-neutral-700 rounded-lg flex items-center justify-center shrink-0">
         <Icon className="text-white w-5 h-5 sm:w-6 sm:h-6" />
       </div>
       <div className="flex-1">
@@ -103,7 +103,7 @@ function Popover({ icon: Icon, value, label, bgColor, iconColor, position }: Pop
   };
 
   return (
-    <div className={`absolute ${positionClasses[position]} bg-white/80 backdrop-blur-sm rounded-lg flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 shadow outline outline-1 outline-white/50 max-w-[48%] sm:max-w-none z-10`}>
+    <div className={`absolute ${positionClasses[position]} bg-white/80 backdrop-blur-xs rounded-lg flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 shadow-sm outline-solid outline-1 outline-white/50 max-w-[48%] sm:max-w-none z-10`}>
       <div className={`min-w-6 w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 ${bgColorClass[bgColor as keyof typeof bgColorClass]} rounded flex items-center justify-center shrink-0`}>
         <Icon className={`${iconColorClass[iconColor as keyof typeof iconColorClass]} w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6`} />
       </div>

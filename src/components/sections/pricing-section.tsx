@@ -209,7 +209,7 @@ export function PricingSection() {
 								<TabsTrigger
 									key={p.id}
 									value={p.id}
-									className="relative rounded-full px-3 sm:px-4 md:px-6 py-2 text-xs sm:text-sm md:text-base data-[state=active]:bg-white dark:data-[state=active]:bg-neutral-700 data-[state=active]:shadow data-[state=active]:text-neutral-800 dark:data-[state=active]:text-neutral-100 min-w-0"
+									className="relative rounded-full px-3 sm:px-4 md:px-6 py-2 text-xs sm:text-sm md:text-base data-[state=active]:bg-white dark:data-[state=active]:bg-neutral-700 data-[state=active]:shadow-sm data-[state=active]:text-neutral-800 dark:data-[state=active]:text-neutral-100 min-w-0"
 								>
 									<div className="flex flex-row items-center gap-2">
 										<span className="whitespace-nowrap">{p.label}</span>

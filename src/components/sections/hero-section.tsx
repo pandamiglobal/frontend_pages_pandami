@@ -27,7 +27,7 @@ export function HeroSection() {
 						<div className="w-full max-w-[800px] flex flex-col gap-4 md:gap-6 px-0 text-center lg:text-left mb-4 lg:mb-0">
 							<h1 className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[48px] text-black leading-tight">
 								A primeira{" "}
-								<span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#C16C3F]"> <br />
+								<span className="text-gradient bg-clip-text text-transparent bg-linear-to-r from-primary to-[#C16C3F]"> <br />
 									IA de Visagismo
 								</span>{" "}
 								 <br /> para  cabeleireiros 
@@ -67,7 +67,7 @@ export function HeroSection() {
 									<HeroIcon className="w-96 h-64 lg:w-full lg:h-full object-contain" />
 								</div>
 							</div>
-							<div className="relative w-full h-auto aspect-[3/4] lg:w-[486px] lg:h-[659px]">
+							<div className="relative w-full h-auto aspect-3/4 lg:w-[486px] lg:h-[659px]">
 								<Image
 									src={heroPersonImage}
 									alt="Hero Person"

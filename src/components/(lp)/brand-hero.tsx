@@ -289,7 +289,7 @@ export default function BrandHero() {
               />
             </svg>
 
-            <div className="bg-white rounded-[32px] p-6 md:p-8 lg:max-w-xl mx-auto w-full border-solid border-[1px] border-[#ddd]">
+            <div className="bg-white rounded-[32px] p-6 md:p-8 lg:max-w-xl mx-auto w-full border-solid border border-[#ddd]">
               {/* Progress Steps */}
               <div className="flex items-center justify-between w-full max-w-full mb-5">
                 <div

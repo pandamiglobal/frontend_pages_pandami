@@ -49,18 +49,18 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
     "@testing-library/cypress": "^10.0.3",
     "@types/node": "^20",
     "@types/react": "19.1.12",
     "@types/react-dom": "19.1.9",
     "@types/sanitize-html": "^2.13.0",
     "@types/xml2js": "^0.4.14",
-    "autoprefixer": "^10.0.1",
     "cypress": "^14.2.0",
     "eslint-config-next": "15.5.3",
     "postcss": "^8",
     "start-server-and-test": "^2.0.3",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^4.1.13",
     "typescript": "^5"
   },
   "overrides": {

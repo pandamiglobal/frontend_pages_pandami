@@ -70,13 +70,13 @@ export default async function BlogPost({ params }: any) {
             <div>
                 <h2 className="title-4 px-3 text-gray-900 mb-4 border-b-2 md:mt-8 border-gray-200 pb-4">Ferramentas</h2>
                 <ul className="flex flex-col gap-4">
-                    <li className="px-3 text-4 !font-medium !text-primary underline">
+                    <li className="px-3 text-4 font-medium! text-primary! underline">
                         <Link className="w-full flex items-center gap-2" href="/consulta-inpi"><FileSearch className="w-4 h-4" /> Busca de marca no INPI</Link>
                     </li>
-                    <li className="px-3 text-4 !font-medium !text-primary underline">
+                    <li className="px-3 text-4 font-medium! text-primary! underline">
                         <Link className="w-full flex items-center gap-2" href="/consulta-inpi"><Globe2Icon className="w-4 h-4" /> Busca de marca internacional</Link>
                     </li>
-                    <li className="px-3 text-4 !font-medium !text-primary underline">
+                    <li className="px-3 text-4 font-medium! text-primary! underline">
                         <Link className="w-full flex items-center gap-2" href="/registrar-minha-marca"><ShieldCheckIcon className="w-4 h-4" /> Proteja sua marca</Link>
                     </li>
                 </ul>

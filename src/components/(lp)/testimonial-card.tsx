@@ -56,7 +56,7 @@ export function TestimonialCard({ name, videoUrl, id, description }: Testimonial
             <div className="absolute top-0 left-0 bottom-0 right-0 bg-black/40" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div
-                className="bg-[#0047FF]/80 rounded-full p-3 backdrop-blur-sm cursor-pointer hover:bg-[#0047FF] transition-colors"
+                className="bg-[#0047FF]/80 rounded-full p-3 backdrop-blur-xs cursor-pointer hover:bg-[#0047FF] transition-colors"
                 onClick={handlePlayClick}
               >
                 <Play className="h-12 w-12 text-white" fill="white" />

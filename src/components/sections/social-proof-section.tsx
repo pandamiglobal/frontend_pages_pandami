@@ -182,7 +182,7 @@ export function SocialProofSection() {
           <button
             onClick={prev}
             aria-label="Anterior"
-            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition flex-shrink-0"
+            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0"
           >
             <ArrowLeft className="size-4 sm:size-5" />
           </button>
@@ -225,7 +225,7 @@ export function SocialProofSection() {
           <button
             onClick={next}
             aria-label="Próximo"
-            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition flex-shrink-0"
+            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0"
           >
             <ArrowRight className="size-5" />
           </button>

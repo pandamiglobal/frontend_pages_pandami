@@ -63,7 +63,7 @@ export function GradientText({
   return (
     <h2
       ref={textRef}
-      className={cn("!bg-clip-text !text-transparent", className)}
+      className={cn("bg-clip-text! text-transparent!", className)}
       style={{
         backgroundImage: `linear-gradient(to right, ${gradientColors}, ${colors[0]})`,
         backgroundSize: "200% auto",

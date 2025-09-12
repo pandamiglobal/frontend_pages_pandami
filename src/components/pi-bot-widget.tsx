@@ -98,7 +98,7 @@ export function PiBotChat() {
   };
 
   return (
-    <div className="fixed right-5 bottom-5 flex flex-col items-end chat-widget z-[999] pi-bot">
+    <div className="fixed right-5 bottom-5 flex flex-col items-end chat-widget z-999 pi-bot">
       <AnimatePresence>
         {isOpen && (
           <motion.div

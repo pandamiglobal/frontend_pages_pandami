@@ -76,12 +76,12 @@ function BlogPostCard({ post }: { post: BlogPost }) {
           />
         </div>
 
-        <div className="flex flex-col flex-grow p-6">
+        <div className="flex flex-col grow p-6">
           <span className="text-sm text-[#6B7280] mb-2">{post.date}</span>
 
           <h3 className="text-xl font-bold text-[#111827] mb-3">{post.title.rendered}</h3>
 
-          <p className="text-[#374151] mb-4 flex-grow">{post.excerpt.rendered}</p>
+          <p className="text-[#374151] mb-4 grow">{post.excerpt.rendered}</p>
 
           <Link href={`/blog/${post.slug}`} className="text-[#0047FF] font-medium hover:underline mt-auto">
             Ler mais

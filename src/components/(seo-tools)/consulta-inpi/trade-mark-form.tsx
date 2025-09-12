@@ -138,7 +138,7 @@ export default function TradeMarkForm({ onSubmit, isDisabled = false }: TradeMar
 					type="text"
 					name="brandSearch"
 					placeholder="Digite o nome da marca para consulta inpi"
-					className="md:min-w-[calc(100%-200px)] h-[50px] sm:h-[62px] backdrop-blur-sm border-[#afb1b2] placeholder-slate-400 focus:border-[#2845EF] focus:ring-[#2845EF] shadow-none transition-all duration-300"
+					className="md:min-w-[calc(100%-200px)] h-[50px] sm:h-[62px] backdrop-blur-xs border-[#afb1b2] placeholder-slate-400 focus:border-[#2845EF] focus:ring-[#2845EF] shadow-none transition-all duration-300"
 					register={register}
 					aria-invalid={errors.brandSearch ? "true" : "false"}
 				/>

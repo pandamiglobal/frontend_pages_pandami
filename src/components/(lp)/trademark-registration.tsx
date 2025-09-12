@@ -15,7 +15,7 @@ export default function TrademarkRegistration() {
           <Button
             variant="ghost"
             size="lg"
-            className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30"
+            className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-xs hover:bg-white/30"
             aria-label="Play video"
           >
             <Play className="w-8 h-8 text-white fill-white" />

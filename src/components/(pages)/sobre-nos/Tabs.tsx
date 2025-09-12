@@ -49,11 +49,11 @@ export default function TabsSection() {
                                                     Mais de uma década protegendo marcas e dados de empresas brasileiras
                                                 </p>
                                                 <div className="mt-6 grid grid-cols-2 gap-4 w-full">
-                                                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                                                    <div className="bg-white p-4 rounded-lg shadow-xs">
                                                         <p className="text-3xl font-bold text-[#0047FF]">5000+</p>
                                                         <p className="text-sm text-[#374151]">Clientes Atendidos</p>
                                                     </div>
-                                                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                                                    <div className="bg-white p-4 rounded-lg shadow-xs">
                                                         <p className="text-3xl font-bold text-[#0047FF]">98%</p>
                                                         <p className="text-sm text-[#374151]">Taxa de Sucesso</p>
                                                     </div>
@@ -106,11 +106,11 @@ export default function TabsSection() {
                                             empresas possam inovar e crescer com a certeza de que seus ativos estão protegidos.
                                         </p>
                                         <div className="mt-6 grid grid-cols-2 gap-4">
-                                            <div className="bg-white p-4 rounded-lg shadow-sm">
+                                            <div className="bg-white p-4 rounded-lg shadow-xs">
                                                 <p className="text-sm font-medium text-[#374151]">Até 2025</p>
                                                 <p className="text-lg font-bold text-[#111827]">Expansão para toda América Latina</p>
                                             </div>
-                                            <div className="bg-white p-4 rounded-lg shadow-sm">
+                                            <div className="bg-white p-4 rounded-lg shadow-xs">
                                                 <p className="text-sm font-medium text-[#374151]">Compromisso</p>
                                                 <p className="text-lg font-bold text-[#111827]">Inovação Constante</p>
                                             </div>
@@ -168,13 +168,13 @@ export default function TabsSection() {
                                         e contribuem positivamente para as comunidades onde atuamos.
                                     </p>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                                        <div className="bg-white p-4 rounded-lg shadow-sm">
+                                        <div className="bg-white p-4 rounded-lg shadow-xs">
                                             <p className="font-medium text-[#111827]">Operações Paperless</p>
                                         </div>
-                                        <div className="bg-white p-4 rounded-lg shadow-sm">
+                                        <div className="bg-white p-4 rounded-lg shadow-xs">
                                             <p className="font-medium text-[#111827]">Energia Renovável</p>
                                         </div>
-                                        <div className="bg-white p-4 rounded-lg shadow-sm">
+                                        <div className="bg-white p-4 rounded-lg shadow-xs">
                                             <p className="font-medium text-[#111827]">Programas Sociais</p>
                                         </div>
                                     </div>

@@ -34,12 +34,12 @@ export default function RisksSection() {
                 na maioria dos casos, você só ficará sabendo dias depois, quando pode ser tarde demais para agir.
               </p>
             </div>
-            <video autoPlay loop src="videos/negado.mp4" className="border-solid border-[2px] border-[#ddd] spect-square md:aspect-video w-full min-h-[400px] rounded-[32px] order-1 md:order-2 responsive-image"></video>
+            <video autoPlay loop src="videos/negado.mp4" className="border-solid border-2 border-[#ddd] spect-square md:aspect-video w-full min-h-[400px] rounded-[32px] order-1 md:order-2 responsive-image"></video>
           </div>
 
           {/* Second risk item */}
           <div className="grid md:grid-cols-2 gap-8 items-center">
-            <video autoPlay loop src="videos/brand-hijacking.mp4" className="border-solid border-[2px] border-[#ddd] spect-square md:aspect-video w-full min-h-[400px] rounded-[32px] responsive-image"></video>
+            <video autoPlay loop src="videos/brand-hijacking.mp4" className="border-solid border-2 border-[#ddd] spect-square md:aspect-video w-full min-h-[400px] rounded-[32px] responsive-image"></video>
             <div>
               <h3 className="text-2xl font-bold mb-4">Risco de Apropriação Indevida "Brand Hijacking"</h3>
               <p className="text-[#555555] mb-4">
@@ -71,7 +71,7 @@ export default function RisksSection() {
                 parte dessa estatística?
               </p>
             </div>
-            <video autoPlay loop src="videos/prazos-indeferimento.mp4" className="border-solid border-[2px] border-[#ddd] spect-square md:aspect-video w-full min-h-[400px] rounded-[32px] order-1 md:order-2 responsive-image"></video>
+            <video autoPlay loop src="videos/prazos-indeferimento.mp4" className="border-solid border-2 border-[#ddd] spect-square md:aspect-video w-full min-h-[400px] rounded-[32px] order-1 md:order-2 responsive-image"></video>
           </div>
         </div>
 

@@ -80,13 +80,13 @@ export function AboutVisagismSection() {
           <TabsList className="mb-10 bg-neutral-100 rounded-full p-1 h-auto">
             <TabsTrigger
               value="woman"
-              className="data-[state=active]:bg-white data-[state=active]:shadow data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
+              className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
             >
               Feminino
             </TabsTrigger>
             <TabsTrigger
               value="man"
-              className="data-[state=active]:bg-white data-[state=active]:shadow data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
+              className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
             >
               Masculino
             </TabsTrigger>
@@ -159,7 +159,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
                   aria-pressed={isActive}
                   onClick={() => handleVariantClick(i)}
                   className={cn(
-                    "relative w-full aspect-[3/4] rounded-2xl overflow-hidden border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                    "relative w-full aspect-3/4 rounded-2xl overflow-hidden border transition focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary",
                     isActive
                       ? "border-orange-400 ring-2 ring-orange-300"
                       : "border-gray-200 hover:border-gray-300"

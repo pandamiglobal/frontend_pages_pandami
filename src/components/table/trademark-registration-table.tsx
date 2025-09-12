@@ -302,7 +302,7 @@ export default function TrademarkRegistrationTable({ theme = 'white' }) {
                                 <div className="flex flex-col gap-3">
                                     <h3 className="font-medium text-xl">{plan.title}</h3>
                                     {plan.planIndex === 2 ? (
-                                        <Button onClick={onClick} variant="default" className="whitespace-nowrap bg-gradient-to-r from-[#0047ff] to-[#0035c0] hover:opacity-70 cursor-pointer rounded-full px-4 py-2">
+                                        <Button onClick={onClick} variant="default" className="whitespace-nowrap bg-linear-to-r from-[#0047ff] to-[#0035c0] hover:opacity-70 cursor-pointer rounded-full px-4 py-2">
                                             Fale com um consultor
                                         </Button>
                                     ) : (
@@ -321,12 +321,12 @@ export default function TrademarkRegistrationTable({ theme = 'white' }) {
                                                     <div className="flex items-center gap-2">
                                                         {feature.hasFeature ? (
                                                             <>
-                                                                <Check className="min-h-5 h-5 min-w-5 w-5 text-teal-500 flex-shrink-0" />
+                                                                <Check className="min-h-5 h-5 min-w-5 w-5 text-teal-500 shrink-0" />
                                                                 <span className="ml-2 text-sm text-left">{feature.featureName}: {feature.featureText}</span>
                                                             </>
                                                         ) : (
                                                             <>
-                                                                <X className="h-5 w-5 text-red-400 flex-shrink-0" />
+                                                                <X className="h-5 w-5 text-red-400 shrink-0" />
                                                                 <span className="ml-2 text-sm text-gray-500">{feature.featureName}</span>
                                                             </>
                                                         )}
@@ -334,7 +334,7 @@ export default function TrademarkRegistrationTable({ theme = 'white' }) {
                                                 </AccordionTrigger>
                                                 {feature.hasFeature && (
                                                     <AccordionContent className="pt-2 pb-2 pl-7">
-                                                        <div className={`text-sm text-gray-600 ${theme == 'black' ? '!text-gray-300' : 'bg-gray-50'} p-3 rounded-md`}>
+                                                        <div className={`text-sm text-gray-600 ${theme == 'black' ? 'text-gray-300!' : 'bg-gray-50'} p-3 rounded-md`}>
                                                             {feature.information ? feature.information : "Sem informações adicionais disponíveis."}
                                                         </div>
                                                     </AccordionContent>
@@ -368,7 +368,7 @@ export default function TrademarkRegistrationTable({ theme = 'white' }) {
                             </div>
                             <div className="flex flex-col items-center">
                                 <p className="w-full text-left font-medium text-[24px] mb-2">Premium Pro</p>
-                                <Button variant="default" onClick={onClick} className="min-w-[280px] whitespace-nowrap bg-gradient-to-r from-[#0047ff] to-[#0035c0] hover:opacity-70 cursor-pointer rounded-full">Fale com um consultor</Button>
+                                <Button variant="default" onClick={onClick} className="min-w-[280px] whitespace-nowrap bg-linear-to-r from-[#0047ff] to-[#0035c0] hover:opacity-70 cursor-pointer rounded-full">Fale com um consultor</Button>
                             </div>
                         </div>
                     )}

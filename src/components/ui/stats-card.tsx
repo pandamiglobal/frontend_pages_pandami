@@ -49,7 +49,7 @@ export function StatsCard({ className }: StatsCardProps) {
   return (
     <div
       className={cn(
-        "bg-white rounded-3xl p-8 shadow-sm h-full flex items-center justify-center border border-[#E5E7EB] border-solid",
+        "bg-white rounded-3xl p-8 shadow-xs h-full flex items-center justify-center border border-[#E5E7EB] border-solid",
         className,
       )}
     >

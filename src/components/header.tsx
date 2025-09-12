@@ -75,7 +75,7 @@ export function Header() {
   return (
     <>
       {/* Header Principal - Desktop e Mobile */}
-      <header className={`w-screen border-b py-4 fixed top-0 left-0 right-0 z-50 ${isScrolled ? 'bg-background/80 backdrop-blur-md' : 'bg-background/60 backdrop-blur-sm'}`}>
+      <header className={`w-screen border-b py-4 fixed top-0 left-0 right-0 z-50 ${isScrolled ? 'bg-background/80 backdrop-blur-md' : 'bg-background/60 backdrop-blur-xs'}`}>
         <Container>
           <div className="flex items-center justify-between w-full">
             {/* Logo */}
@@ -178,7 +178,7 @@ export function Header() {
                <div className="flex items-center border rounded-md px-3 py-2 bg-card">
                   <Globe className="h-5 w-5 mr-3 text-muted-foreground" />
                   <select
-                    className="w-full bg-transparent focus:outline-none"
+                    className="w-full bg-transparent focus:outline-hidden"
                     defaultValue="pt-BR"
                   >
                     <option value="pt-BR">Português</option>

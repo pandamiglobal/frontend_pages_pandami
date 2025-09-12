@@ -127,7 +127,7 @@ export function ImageComparisonSlider({
       </div>
 
       {/* Overlay para efeito hover */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
     </div>
   )
 }

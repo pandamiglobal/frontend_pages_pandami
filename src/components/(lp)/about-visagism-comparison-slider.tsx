@@ -130,13 +130,13 @@ export function AboutVisagismComparisonSlider({
           isDraggingRef.current = true;
         }}
       >
-        <span className="h-14 w-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow border border-white/60"/>
+        <span className="h-14 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60"/>
       </button>
 
       {/* Labels */}
       <span
         className={cn(
-          "absolute top-4 left-4 px-4 py-1 rounded-md bg-white text-stone-900 text-sm font-medium shadow transition-opacity",
+          "absolute top-4 left-4 px-4 py-1 rounded-md bg-white text-stone-900 text-sm font-medium shadow-sm transition-opacity",
           position < 45 && "opacity-40"
         )}
       >
@@ -144,7 +144,7 @@ export function AboutVisagismComparisonSlider({
       </span>
       <span
         className={cn(
-          "absolute top-4 right-4 px-4 py-1 rounded-md bg-white text-stone-900 text-sm font-medium shadow transition-opacity",
+          "absolute top-4 right-4 px-4 py-1 rounded-md bg-white text-stone-900 text-sm font-medium shadow-sm transition-opacity",
           position > 55 && "opacity-40"
         )}
       >

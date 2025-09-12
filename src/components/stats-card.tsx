@@ -6,7 +6,7 @@ interface StatsCardProps {
 
 export function StatsCard({ className }: StatsCardProps) {
   return (
-    <div className={cn("bg-white rounded-3xl p-8 shadow-sm", className)}>
+    <div className={cn("bg-white rounded-3xl p-8 shadow-xs", className)}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 text-center">
         <div className="flex flex-col items-center">
           <span className="text-[42px] font-bold text-[#111827] leading-none">+1 mil</span>

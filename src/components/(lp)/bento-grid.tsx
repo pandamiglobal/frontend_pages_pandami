@@ -14,7 +14,7 @@ export default function BentoGrid() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card 1 - Lawyers */}
-          <Card className="bg-white rounded-xl shadow-sm overflow-hidden h-full relative">
+          <Card className="bg-white rounded-xl shadow-xs overflow-hidden h-full relative">
             <CardHeader className="pb-2">
               <div className="flex items-start gap-4">
                 <div className="p-2 rounded-lg bg-blue-100">
@@ -228,7 +228,7 @@ export default function BentoGrid() {
           </Card>
 
           {/* Card 2 - Consulting */}
-          <Card className="bg-white rounded-xl shadow-sm overflow-hidden h-full relative">
+          <Card className="bg-white rounded-xl shadow-xs overflow-hidden h-full relative">
             <CardHeader className="pb-2">
               <div className="flex items-start gap-4">
                 <div className="p-2 rounded-lg bg-blue-100">
@@ -325,7 +325,7 @@ export default function BentoGrid() {
           </Card>
 
           {/* Card 3 - Brand Hijacking (Full Width) */}
-          <Card className="bg-white rounded-xl shadow-sm overflow-hidden md:col-span-2 relative">
+          <Card className="bg-white rounded-xl shadow-xs overflow-hidden md:col-span-2 relative">
             <CardHeader className="pb-2">
               <div className="flex items-start gap-4">
                 <div className="p-2 rounded-lg bg-blue-100">

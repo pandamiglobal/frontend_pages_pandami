@@ -248,7 +248,7 @@ function MarqueeRow({ items, reverse = false, speed = 10 }: MarqueeRowProps) {
 					}}
 				>
 					{items.map((item, i) => (
-						<div key={`first-${i}`} className="relative flex-shrink-0">
+						<div key={`first-${i}`} className="relative shrink-0">
 							<ImageComparisonSlider
 								beforeImage={item.beforeSrc}
 								afterImage={item.afterSrc}
@@ -270,7 +270,7 @@ function MarqueeRow({ items, reverse = false, speed = 10 }: MarqueeRowProps) {
 					}}
 				>
 					{items.map((item, i) => (
-						<div key={`second-${i}`} className="relative flex-shrink-0">
+						<div key={`second-${i}`} className="relative shrink-0">
 							<ImageComparisonSlider
 								beforeImage={item.beforeSrc}
 								afterImage={item.afterSrc}
@@ -285,11 +285,11 @@ function MarqueeRow({ items, reverse = false, speed = 10 }: MarqueeRowProps) {
 
 			{/* Efeito de fade nas bordas laterais otimizado */}
 			<div
-				className="pointer-events-none absolute inset-y-0 left-0 bg-gradient-to-r from-neutral-50 to-transparent z-10"
+				className="pointer-events-none absolute inset-y-0 left-0 bg-linear-to-r from-neutral-50 to-transparent z-10"
 				style={{ width: `${ANIMATION_CONFIG.EDGE_FADE_WIDTH}px` }}
 			/>
 			<div
-				className="pointer-events-none absolute inset-y-0 right-0 bg-gradient-to-l from-neutral-50 to-transparent z-10"
+				className="pointer-events-none absolute inset-y-0 right-0 bg-linear-to-l from-neutral-50 to-transparent z-10"
 				style={{ width: `${ANIMATION_CONFIG.EDGE_FADE_WIDTH}px` }}
 			/>
 		</div>
@@ -313,7 +313,7 @@ export default function CarouselSection() {
 						<div className="max-w-3xl mx-auto text-center mb-12">
 							<h2 className="text-stone-900 text-4xl font-semibold mb-4">
 								Transformações reais de{" "}
-								<span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#C16C3F]">
+								<span className="text-gradient bg-clip-text text-transparent bg-linear-to-r from-primary to-[#C16C3F]">
 									visagismo
 								</span>{" "}
 								feito por IA

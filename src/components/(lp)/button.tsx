@@ -2,15 +2,15 @@ import { type ButtonHTMLAttributes, forwardRef } from "react"
 import { type VariantProps, cva } from "class-variance-authority"
 import { cn } from "@/common/lib/utils"
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
+  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-[#0047FF] via-[#0037C3] to-[#002B99] text-white shadow-[0px_4px_26px_0px_rgba(38,109,246,0.50)] hover:brightness-110",
+          "bg-linear-to-r from-[#0047FF] via-[#0037C3] to-[#002B99] text-white shadow-[0px_4px_26px_0px_rgba(38,109,246,0.50)] hover:brightness-110",
         destructive: "bg-[#ed0006] text-white hover:bg-[#ed0006]/90",
         outline: "border border-input hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-[#4b5563] hover:bg-[#4b5563]/90 text-[#fff]",
+        secondary: "bg-[#4b5563] hover:bg-[#4b5563]/90 text-white",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "underline-offset-4 hover:underline text-primary",
       },
