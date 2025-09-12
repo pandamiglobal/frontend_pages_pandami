@@ -1,3 +1,5 @@
+@config "../tailwind.config.js";
+
 body {
   /* background: linear-gradient(to bottom, rgb(2, 6, 23), rgb(15, 23, 42));
   color: var(--foreground);
