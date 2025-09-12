@@ -8,17 +8,19 @@ import Link from "next/link";
 import { BrandCheckForm } from "@/components/forms/brand-check-form";
 import { ScrollSyncWrapper } from "@/components/sections/scroll-sync-wrapper";
 import { FileSearch, Globe2Icon, ShieldCheckIcon } from "lucide-react";
+import { SlugPageProps } from "@/@types/next-page";
 
 export async function generateMetadata(
-    { params }: { params: { slug: string[] } }
+    { params }: any
 ): Promise<Metadata> {
     try {
-        const postSlug = Array.isArray(params.slug) ? params.slug[params.slug.length - 1] : params.slug;
+        const slugParts = Array.isArray(params.slug) ? params.slug : [params.slug];
+        const postSlug = slugParts[slugParts.length - 1];
         const post = await getMetadataPostBySlug(postSlug);
 
         // Construct the current URL
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://pppi.com.br';
-        const currentPath = `/blog/${Array.isArray(params.slug) ? params.slug.join('/') : params.slug}`;
+    const currentPath = `/blog/${slugParts.join('/')}`;
         const fullUrl = `${baseUrl}${currentPath}`;
 
         return {
@@ -59,7 +61,7 @@ export async function generateMetadata(
     }
 }
 
-export default async function BlogPost({ params }: { params: { slug: string[] } }) {
+export default async function BlogPost({ params }: any) {
     const postSlug = Array.isArray(params.slug) ? params.slug[params.slug.length - 1] : params.slug;
 
     const sidebar = (

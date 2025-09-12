@@ -1,6 +1,6 @@
 "use client"
 
-import type { ReactNode } from "react"
+import type { ReactNode, JSX } from "react"
 import { useRef, useEffect } from "react"
 
 type AnimatedElementProps = {

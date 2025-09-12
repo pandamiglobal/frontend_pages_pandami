@@ -7,11 +7,12 @@ export const metadata: Metadata = {
     title: defaultSeo.blog_title,
 };
 
-export default function BlogPage({ searchParams }: { searchParams: { page?: string } }) {
+export default async function BlogPage({ searchParams }: any) {
+    const resolvedSearchParams = typeof searchParams?.then === 'function' ? await searchParams : searchParams;
     return (
         <>
             <main className="w-full flex flex-col gap-16 py-16">
-                <BlogGrid searchParams={searchParams} />
+                <BlogGrid searchParams={resolvedSearchParams} />
             </main>
         </>
     );

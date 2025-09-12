@@ -3,36 +3,35 @@ applyTo: '**'
 ---
 Provide project context and coding guidelines that AI should follow when generating code, answering questions, or reviewing changes.
 
+This project is a landing page for Pandami, an online visagism platform. The page is built using Next.js 15 and TailwindCSS 4, and we use Shadcn UI dependencies.
 
-Este projeto é uma landing page para a Pandami, uma plataforma de visagismo online. A página é construída usando Next.js 15 e TailwindCSS 4, usamos depedências da Shadcn UI.
+## Font Import Setup
 
-## Configuração da Importação de fontes
+Whenever you need to modify font configuration, reference #file:globals.css #file:layout.tsx #file:tailwind.config.js as fonts are referenced in these files. Ensure consistency when importing to avoid build errors due to misconfiguration. Follow Clean Code principles and aim for best development practices for the technology.
 
-Sempre que for o caso de alterar a configuração fonte, referencie #file:globals.css #file:layout.tsx #file:tailwind.config.js as fontes são referenciadas nesses arquivos, assegure congruência na hora de importar para evitar erros de build por má configuração. Siga princípios Clean Code, e vise boas práticas de desenvolvimento para a tecnologia.
+## Page Styling
 
-## Estilização de páginas
+- Always prefer TailwindCSS for styling, avoid pure CSS.
+- When styling backgrounds, foregrounds, and primary color elements, or even gradients, prefer using TailwindCSS CSS variables in "#file:@/styles/globals.css".
+- Use TailwindCSS utility classes to maintain visual consistency and facilitate code maintenance.
 
-- Sempre prefira TailwindCSS para estilização, evite CSS puro.
-- Na hora de estilizar background, foreground e elementos de cores primárias, ou mesmo gradientes, dê preferência ao uso das variáveis CSS da TailwindCSS em "#file:@/styles/globals.css".
-- Utilize classes utilitárias do TailwindCSS para manter a consistência visual e facilitar a manutenção do código.
+## When Creating New Sections
+- Check the styling and semantic construction of existing sections to maintain visual and structural consistency throughout the project.
+- Follow the componentization applied to existing sections, creating reusable components when necessary and using components already used in other sections if they exist.
+- Consider responsiveness from the start, using TailwindCSS utility classes to ensure the section works well on different screen sizes.
+- Always use the <section> tag to define new sections on the page.
+- Always define an id for the section, which should be the same as the section name in lowercase and without spaces. Example: id="pricing" for the pricing section.
+- Always use the <Container> tag to wrap the section content, ensuring consistent alignment and spacing.
+- Always use descriptive and clear titles for each section, using <h2> or <h3> tags as appropriate.
+- Prefer CSS variables defined in "#file:@/styles/globals.css" for colors.
+- Always use icons from the "lucide-react" library to maintain visual consistency, and if they are brand or social media icons, use simple-icons.
+- Gray color classes are "neutral".
+- Use TailwindCSS utility classes to style the section, ensuring the appearance aligns with the overall page design.
+- Always use the Primary Button for primary buttons and the Secondary Button for secondary buttons, as applied in the Header for example.
 
-## Quando criando novas seções
-- Verifique a estilização e construção semântica das seções já existentes para manter a consistência visual e estrutural em todo o projeto.
-- Siga a componentização aplicada a secções já existentes, criando componentes reutilizáveis quando necessário e pegando componentes já usados em outras secções se eles existirem.
-- Considere a responsividade desde o início, utilizando as classes utilitárias do TailwindCSS para garantir que a seção funcione bem em diferentes tamanhos de tela.
-- Sempre utilize a tag <section> para definir novas seções na página.
-- Sempre defina um id para a seção, que deve ser o mesmo nome da seção em lowercase e sem espaços. Exemplo: id="pricing" para a seção de preços.
-- Sempre utilize a tag <Container> para envolver o conteúdo da seção, garantindo alinhamento e espaçamento consistentes.
-- Sempre utilize títulos descritivos e claros para cada seção, utilizando tags <h2> ou <h3> conforme apropriado.
-- Dê preferência às variáveis CSS definidas em "#file:@/styles/globals.css" para cores.
-- Sempre utilize os ícones da biblioteca "lucide-react" para manter a consistência visual e, se forem ícones de marcas ou redes sociais, utilize a simple-icons.
-- As classes de cores cinzas são "neutral".
-- Utilize classes utilitárias do TailwindCSS para estilizar a seção, garantindo que a aparência esteja alinhada com o design geral da página.
-- Sempre utilize o Primary Button para botões primários e o Secondary Button para botões secundários, como aplicado no Header por exemplo.
+## Using Fonts
 
-## Utilizando fontes
-
-- Já existem estilos globais para h1,h2,h3 usarem a fonte fahkwang, e para o projeto aplicar em :root a Ubuntu. 
-- Sempre prefira utilizar as fontes definidas no projeto, a menos que haja uma necessidade específica para uma fonte diferente.
-- Evite 'font-['Fahkwang']' ou 'font-['Ubuntu']' em classes Tailwind, não adicione classes em instâncias para fonte, as classes globais já definidas para h1,h2,h3 e body.
-- Utilize as classes utilitárias do TailwindCSS para aplicar estilos adicionais, como peso da fonte, tamanho e espaçamento, conforme necessário.
+- There are already global styles for h1, h2, h3 to use the Fahkwang font, and for the project to apply Ubuntu at :root.
+- Always prefer to use the fonts defined in the project, unless there is a specific need for a different font.
+- Avoid 'font-['Fahkwang']' or 'font-['Ubuntu']' in Tailwind classes, do not add classes in instances for fonts, the global classes are already defined for h1, h2, h3 and body in #global.css.
+- Use TailwindCSS utility classes to apply additional styles such as font weight, size and spacing as needed.

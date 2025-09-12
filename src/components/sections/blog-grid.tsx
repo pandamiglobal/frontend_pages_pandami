@@ -4,8 +4,9 @@ import ClientPagination from "../ui/client-pagination";
 import BlogCard from "../ui/blog-card";
 import { Container } from "../ui/container";
 
-export default async function BlogGrid({ searchParams }: { searchParams: { page?: string } }) {
-  const currentPage = Number(searchParams?.page) || 1;
+export default async function BlogGrid({ searchParams }: { searchParams?: any }) {
+  const sp = typeof searchParams?.then === 'function' ? await searchParams : searchParams;
+  const currentPage = Number(sp?.page) || 1;
   const limit = 9;
 
   const data = await getPosts(currentPage, limit);
