@@ -41,7 +41,7 @@ export function WhyVisagismSection() {
 				{/* Primeira linha de cards */}
 				<div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-6 lg:mb-8">
 					{/* Card 1 - Sintonia Humana - Card maior */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8 ">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8 gap-8">
 						<div className="w-full lg:w-[320px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[0].title}
@@ -56,13 +56,13 @@ export function WhyVisagismSection() {
 							alt="Sintonia Humana"
 							width={400}
 							height={300}
-							className="lg:w-[40%] w-full  h-full object-contain object-bottom"
-							sizes="(max-width: 768px) 100vw, 40vw"
+							className="lg:w-[40%] w-full max-w-[280px] max-h-[400px] md:max-w-[320px] lg:max-w-none h-full object-contain object-bottom mx-auto lg:mx-0"
+							sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 40vw"
 						/>
 					</div>
 
 					{/* Card 2 - Visual Inteligente - Card menor */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8 justify-between">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8 justify-between gap-8">
 						<div className="w-full lg:w-[288px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[1].title}
@@ -77,8 +77,8 @@ export function WhyVisagismSection() {
 							alt="Visual Inteligente"
 							width={400}
 							height={300}
-							className="lg:w-[40%] w-full  h-full object-contain object-right"
-							sizes="(max-width: 768px) 100vw, 30vw"
+							className="lg:w-[40%] w-full max-w-[280px] max-h-[400px] md:max-w-[320px] lg:max-w-none h-full object-contain object-right ml-auto"
+							sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 30vw"
 						/>
 					</div>
 				</div>
@@ -86,7 +86,7 @@ export function WhyVisagismSection() {
 				{/* Segunda linha de cards */}
 				<div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
 					{/* Card 3 - Imagem Comunica - Card menor */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8 justify-between">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8 justify-between gap-8">
 						<div className="w-full lg:w-[240px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[2].title}
@@ -101,13 +101,13 @@ export function WhyVisagismSection() {
 							alt="Imagem Comunica"
 							width={400}
 							height={300}
-							className="lg:w-[40%] w-full  h-full object-contain object-bottom"
-							sizes="(max-width: 768px) 100vw, 30vw"
+							className="lg:w-[40%] w-full max-w-[280px] max-h-[400px] md:max-w-[320px] lg:max-w-none h-full object-contain object-bottom mx-auto lg:mx-0"
+							sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 30vw"
 						/>
 					</div>
 
 					{/* Card 4 - Suas Regras - Card maior */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8 justify-between">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8 justify-between gap-4">
 						<div className="w-full lg:w-[320px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[3].title}
@@ -122,8 +122,8 @@ export function WhyVisagismSection() {
 							alt="Suas Regras"
 							width={400}
 							height={300}
-							className="lg:w-[40%] w-full  h-full object-contain object-bottom"
-							sizes="(max-width: 768px) 100vw, 30vw"
+							className="lg:w-[40%] w-full max-w-[280px] max-h-[400px] md:max-w-[320px] lg:max-w-none h-full object-contain object-bottom ml-auto"
+							sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 30vw"
 						/>
 					</div>
 				</div>

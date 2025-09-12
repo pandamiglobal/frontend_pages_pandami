@@ -6,6 +6,7 @@ import FAQSection from "@/components/sections/faq-section";
 import CarouselSection from "@/components/(lp)/carousel-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
+import { PricingSection } from "@/components/sections/pricing-section";
 
 // Removidos imports específicos da seção de benefícios (agora componentizada)
 
@@ -51,6 +52,7 @@ export default function Home() {
 			<BenefitsSection />
 			<AboutVisagismSection />
 			<SocialProofSection />
+			<PricingSection />
 			<FAQSection faq={faq} />
 			<CtaSection />
 		</main>

@@ -8,6 +8,6 @@ interface ContainerProps {
 }
 
 export function Container({ children, className, section = false }: ContainerProps) {
-  return <div className={cn("mx-auto w-full max-w-[1200px] px-4", section ? "md:py-16 py-8" : "", className)}>{children}</div>
+  return <div id="container" className={cn("mx-auto w-full max-w-[1200px] px-4", section ? "md:py-16 py-8" : "", className)}>{children}</div>
 }
 
