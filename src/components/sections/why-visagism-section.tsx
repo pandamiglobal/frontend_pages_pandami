@@ -67,8 +67,8 @@ export function WhyVisagismSection() {
 					</div>
 
 					{/* Card 2 - Card menor */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8 justify-between gap-8">
-						<div className="w-full lg:w-[288px]">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[52%] pt-8 pl-8 justify-between gap-8">
+						<div className="w-full lg:w-[320px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[1].title}
 							</h3>
