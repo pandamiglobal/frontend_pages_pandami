@@ -6,27 +6,27 @@ import Image from "next/image";
 export function WhyVisagismSection() {
 	const features = [
 		{
-			title: "Sintonia Humana",
+			title: "47 pontos de medição facial",
 			description:
 				"No visagismo levamos em conta todas as suas preferências, realidade e expectativas, e buscamos traduzir isso numa imagem com uma estética e harmonia que são 100% suas",
 			image: "/lp/images/bentogrid/BentoGrid-1_Sintonia-Humana.png",
 		},
 		{
-			title: "Visual Inteligente",
+			title: "Elimina tentativa e erro",
 			description:
-				"Nosso processo de análise facial é um estudo técnico e detalhado das suas características únicas, onde avaliamos cada linha, forma e volume, antes de você escolher qualquer procedimento",
+				"Cada rosto tem proporções matemáticas únicas. O que fica perfeito num rosto oval pode ser desastroso num quadrado. A IA calcula isso com precisão.",
 			image: "/lp/images/bentogrid/BentoGrid-2_Visual-Inteligente.png",
 		},
 		{
-			title: "Imagem Comunica",
+			title: "94% de aprovação",
 			description:
-				"Sente que não passa autoridade? Com o visagismo PandaMi sua imagem transmite exatamente a sua essência, para você dominar qualquer ocasião",
+				"Acabaram as surpresas desagradáveis. Clientes saem do salão postando no Instagram na mesma hora. Zero retrabalhos.",
 			image: "/lp/images/bentogrid/BentoGrid-3_Imagem-Comunica.png",
 		},
 		{
-			title: "Suas Regras",
+			title: "Cliente vê a lógica",
 			description:
-				"Chega de dar ouvidos a palpiteiros. A opinião que importa é a do seu cliente, validada pela nossa análise. Escolha a opção que mais te agrada sem revistas, sem filtro e sem medo de errar",
+				'"Este corte alonga seu rosto porque..." "Esta cor realça seu tom de pele porque..." Ela entende o porquê = confiança total.',
 			image: "/lp/images/bentogrid/BentoGrid-4_Suas-Regras.png",
 		},
 	];
@@ -34,15 +34,20 @@ export function WhyVisagismSection() {
 	return (
 		<section id="why" className="w-full pb-10 pt-24 lg:pb-14 bg-neutral-50">
 			<Container>
-				<h2 className="text-3xl lg:text-4xl font-semibold text-center mb-6 lg:mb-8 text-stone-900">
-					Por que Visagismo?
+				<h2 className="text-2xl lg:text-3xl font-semibold text-center mb-2   text-stone-900">
+					O que é visagismo e por que profissionais de elite usam?
 				</h2>
+				<p className="text-center text-gray-600 max-w-4xl mx-auto mb-12 lg:mb-8 px-4 lg:px-0">
+					Visagismo é a ciência que estuda qual corte e cor valorizam cada
+					formato de rosto. Vai muito além da intuição: usa cálculos matemáticos
+					para criar harmonia entre suas características faciais.
+				</p>
 
 				{/* Primeira linha de cards */}
 				<div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-6 lg:mb-8">
-					{/* Card 1 - Sintonia Humana - Card maior */}
+					{/* Card 1 - Card maior */}
 					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8 gap-8">
-						<div className="w-full lg:w-[320px]">
+						<div className="w-full lg:w-[380px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[0].title}
 							</h3>
@@ -61,7 +66,7 @@ export function WhyVisagismSection() {
 						/>
 					</div>
 
-					{/* Card 2 - Visual Inteligente - Card menor */}
+					{/* Card 2 - Card menor */}
 					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8 justify-between gap-8">
 						<div className="w-full lg:w-[288px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
@@ -85,7 +90,7 @@ export function WhyVisagismSection() {
 
 				{/* Segunda linha de cards */}
 				<div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-					{/* Card 3 - Imagem Comunica - Card menor */}
+					{/* Card 3 - Card menor */}
 					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[42%] pt-8 pl-8 justify-between gap-8">
 						<div className="w-full lg:w-[240px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
@@ -106,9 +111,9 @@ export function WhyVisagismSection() {
 						/>
 					</div>
 
-					{/* Card 4 - Suas Regras - Card maior */}
+					{/* Card 4 - Card maior */}
 					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8 justify-between gap-4">
-						<div className="w-full lg:w-[320px]">
+						<div className="w-full lg:w-[360px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[3].title}
 							</h3>

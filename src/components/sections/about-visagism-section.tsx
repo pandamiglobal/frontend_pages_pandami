@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/common/lib/utils";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { AboutVisagismComparisonSlider } from "@/components/(lp)/about-visagism-comparison-slider";
+import { AboutVisagismComparisonSlider } from "@/components/sections/about-visagism-comparison-slider";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { PrimaryButton } from "@/components/ui/primary-button";
@@ -39,9 +39,9 @@ const man: VariantSet = {
 };
 
 const chips = [
-  "Encontre cortes que realçam a beleza natural do seu rosto",
-  "Veja com que aspecto você ficaria com diferentes colorações",
-  "Visualize seu cabelo com o estilo de algum famoso que gosta",
+	"Veja como cada formato de rosto foi analisado",
+	"Compare o antes e depois de cada sugestão",
+	"Entenda por que cada corte funcionou perfeitamente",
 ];
 
 export function AboutVisagismSection() {
@@ -142,85 +142,90 @@ function GenderContent({ data, direction }: GenderContentProps) {
   };
 
   return (
-    <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-10">
-      {/* Right side (texto / variantes / chips / ações) – em mobile fica abaixo */}
-      <div ref={textRef} className="md:w-1/2 flex flex-col gap-6 bg-white rounded-3xl border border-gray-200 p-6 md:p-8 h-full">
-        <div>
-          <h3 className="text-xl md:text-2xl font-medium text-stone-900 mb-4">
-            Escolha abaixo outros estilos que também combinam com você
-          </h3>
-          <div className="grid grid-cols-4 gap-4">
-            {data.variants.map((v, i) => {
-              const isActive = selectedVariantIndex === i;
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  aria-pressed={isActive}
-                  onClick={() => handleVariantClick(i)}
-                  className={cn(
-                    "relative w-full aspect-3/4 rounded-2xl overflow-hidden border transition focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary",
-                    isActive
-                      ? "border-orange-400 ring-2 ring-orange-300"
-                      : "border-gray-200 hover:border-gray-300"
-                  )}
-                >
-                  <Image
-                    src={v}
-                    alt={`Estilo ${i + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width:1280px) 50vw, 16vw"
-                    priority={isActive}
-                  />
-                </button>
-              );
-            })}
-          </div>
-        </div>
+		<div className="flex flex-col-reverse md:flex-row gap-8 md:gap-10">
+			{/* Right side (texto / variantes / chips / ações) – em mobile fica abaixo */}
+			<div
+				ref={textRef}
+				className="md:w-1/2 flex flex-col gap-6 bg-white rounded-3xl border border-gray-200 p-6 md:p-8 h-full"
+			>
+				<div>
+					<h3 className="text-xl md:text-2xl font-medium text-stone-900 mb-4">
+						Veja nossa IA Pandami em ação (demonstração interativa)
+					</h3>
+					<div className="grid grid-cols-4 gap-4">
+						{data.variants.map((v, i) => {
+							const isActive = selectedVariantIndex === i;
+							return (
+								<button
+									key={i}
+									type="button"
+									aria-pressed={isActive}
+									onClick={() => handleVariantClick(i)}
+									className={cn(
+										"relative w-full aspect-3/4 rounded-2xl overflow-hidden border transition focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary",
+										isActive
+											? "border-orange-400 ring-2 ring-orange-300"
+											: "border-gray-200 hover:border-gray-300"
+									)}
+								>
+									<Image
+										src={v}
+										alt={`Estilo ${i + 1}`}
+										fill
+										className="object-cover"
+										sizes="(max-width:1280px) 50vw, 16vw"
+										priority={isActive}
+									/>
+								</button>
+							);
+						})}
+					</div>
+				</div>
 
-        <div className="flex flex-col gap-3">
-          {chips.map((c) => (
-            <div
-              key={c}
-              className="flex items-start gap-2 rounded-lg bg-orange-50 px-3 py-2"
-            >
-              <Sparkles className="size-5 text-stone-900/70 mt-0.5" strokeWidth={1.8} />
-              <p className="text-sm md:text-base text-stone-900 leading-snug">
-                {c}
-              </p>
-            </div>
-          ))}
-        </div>
+				<div className="flex flex-col gap-3">
+					{chips.map((c) => (
+						<div
+							key={c}
+							className="flex items-start gap-2 rounded-lg bg-orange-50 px-3 py-2"
+						>
+							<Sparkles
+								className="size-5 text-stone-900/70 mt-0.5"
+								strokeWidth={1.8}
+							/>
+							<p className="text-sm md:text-base text-stone-900 leading-snug">
+								{c}
+							</p>
+						</div>
+					))}
+				</div>
 
-        <div className="flex flex-col md:flex-row gap-4 mt-2">
-          <PrimaryButton
-            size="lg"
-           
-            icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
-          >
-            Comece grátis
-          </PrimaryButton>
-          <PrimaryButton
-            size="lg"
-            variant="outline"
-        
-          >
-            Quero no meu salão
-          </PrimaryButton>
-        </div>
-      </div>
+				<div className="flex flex-col md:flex-row gap-4 mt-2">
+					<PrimaryButton
+						size="lg"
+						icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+					>
+						Comece grátis
+					</PrimaryButton>
+					<PrimaryButton size="lg" variant="outline">
+						Quero no meu salão
+					</PrimaryButton>
+				</div>
+			</div>
 
-  {/* Left slider */}
-  <div ref={sliderRef} className="md:w-1/2">
-        <AboutVisagismComparisonSlider
-          before={data.mainBefore}
-          after={selectedVariantIndex !== null ? data.variants[selectedVariantIndex] : data.mainAfter}
-          beforeAlt="Antes do visagismo"
-          afterAlt="Depois do visagismo"
-      className="w-full"
-        />
-      </div>
-    </div>
-  );
+			{/* Left slider */}
+			<div ref={sliderRef} className="md:w-1/2">
+				<AboutVisagismComparisonSlider
+					before={data.mainBefore}
+					after={
+						selectedVariantIndex !== null
+							? data.variants[selectedVariantIndex]
+							: data.mainAfter
+					}
+					beforeAlt="Antes do visagismo"
+					afterAlt="Depois do visagismo"
+					className="w-full"
+				/>
+			</div>
+		</div>
+	);
 }

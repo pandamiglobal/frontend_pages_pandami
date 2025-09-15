@@ -69,7 +69,7 @@ const menPairs = [
  * @param reverse - Se verdadeiro, a direção da animação é invertida
  * @param speed - Velocidade da animação (maior = mais lento)
  */
-function MarqueeRow({ items, reverse = false, speed = 10 }: MarqueeRowProps) {
+function MarqueeRow({ items, reverse = false, speed = 20 }: MarqueeRowProps) {
 	// Referências otimizadas com tipos específicos
 	const containerRef = useRef<HTMLDivElement>(null);
 	const trackRef = useRef<HTMLDivElement>(null);
@@ -311,20 +311,26 @@ export default function CarouselSection() {
 					<Container>
 						{/* Cabeçalho da seção otimizado */}
 						<div className="max-w-3xl mx-auto text-center mb-12">
-							<h2 className="text-stone-900 text-4xl font-semibold mb-4">
+							<h2 className="text-stone-900 text-4xl font-semibold mb-2">
 								Transformações reais de{" "}
 								<span className="text-gradient bg-clip-text text-transparent bg-linear-to-r from-primary to-[#C16C3F]">
 									visagismo
 								</span>{" "}
-								feito por IA
+								feito por nossa IA
 							</h2>
+
+							<p className="text-center text-gray-600 max-w-4xl mx-auto mb-12 lg:mb-8 px-4 lg:px-0">
+								Cada resultado seguiu exatamente as recomendações da nossa
+								análise matemática. Veja como diferentes formatos de rosto foram
+								valorizados cientificamente.
+							</p>
 						</div>
 
 						{/* Carousel de imagens otimizado */}
 						<div className="flex flex-col justify-start items-center gap-14">
 							{/* Linha superior - Mulheres */}
 							<section className="w-full" aria-label="Transformações femininas">
-								<MarqueeRow items={womenPairs} speed={95} />
+								<MarqueeRow items={womenPairs} speed={1198} />
 							</section>
 
 							{/* Linha inferior - Homens (direção invertida) */}
@@ -332,7 +338,7 @@ export default function CarouselSection() {
 								className="w-full"
 								aria-label="Transformações masculinas"
 							>
-								<MarqueeRow items={menPairs} reverse speed={95} />
+								<MarqueeRow items={menPairs} reverse speed={1198} />
 							</section>
 						</div>
 					</Container>

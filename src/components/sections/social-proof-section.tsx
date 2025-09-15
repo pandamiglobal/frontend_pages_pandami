@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
-import { AboutVisagismComparisonSlider } from "@/components/(lp)/about-visagism-comparison-slider";
+import { AboutVisagismComparisonSlider } from "@/components/sections/about-visagism-comparison-slider";
 import { PrimaryButton } from "@/components/ui/primary-button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/common/lib/utils";
@@ -171,94 +171,113 @@ export function SocialProofSection() {
   }
 
   return (
-    <section id="socialproof" className="py-20 bg-neutral-50 overflow-hidden">
-      <Container className="overflow-visible">
-        <h2 className="text-3xl md:text-4xl font-semibold text-center mb-10 text-stone-900">
-          Deu o que falar no salão
-        </h2>
+		<section id="socialproof" className="py-20 bg-neutral-50 overflow-hidden">
+			<Container className="overflow-visible">
+				<h2 className="text-2xl lg:text-3xl font-semibold text-center mb-2   text-stone-900">
+					Clientes reais, transformações reais com análise PandaMi
+				</h2>
+				<p className="text-center text-gray-600 max-w-3xl mx-auto mb-12 lg:mb-8 px-4 lg:px-0">
+					Veja o que acontece quando profissionais usam nossa IA para escolher o
+					corte perfeito. Deslize nas fotos para ver o antes e depois.
+				</p>
 
-        {/* Navegação */}
-  <div ref={navRef} className="flex items-center justify-center gap-4 sm:gap-6 mb-10 max-w-full px-2">
-          <button
-            onClick={prev}
-            aria-label="Anterior"
-            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0"
-          >
-            <ArrowLeft className="size-4 sm:size-5" />
-          </button>
-          <ul className="flex gap-2 sm:gap-4 items-center overflow-x-hidden max-w-[calc(100%-5rem)]">
-            {/* No mobile: apenas 3 avatares (anterior, atual e próximo) */}
-            {testimonials.map((t, i) => {
-              // Determina os 3 índices visíveis no mobile (para telas pequenas)
-              const prevIdx = index === 0 ? testimonials.length - 1 : index - 1;
-              const nextIdx = index === testimonials.length - 1 ? 0 : index + 1;
-              const isVisibleOnMobile = i === prevIdx || i === index || i === nextIdx;
-              
-              return (
-                <li key={t.id} className={cn(
-                  !isVisibleOnMobile && "hidden sm:block", // Oculta no mobile se não for um dos 3 avatares visíveis
-                )}>
-                  <button
-                    aria-label={`Ver depoimento de ${t.name}`}
-                    onClick={() => setIndex(i)}
-                    className={cn(
-                      "relative size-12 rounded-full border overflow-hidden transition",
-                      i === index
-                        ? "border-orange-400 ring-2 ring-orange-200"
-                        : "border-white/70 opacity-70 hover:opacity-100"
-                    )}
-                  >
-                    <Image
-                      src={t.avatar}
-                      alt={t.name}
-                      width={128}
-                      height={128}
-                      className="w-12 h-12 object-cover object-center"
-                      sizes="256px"
-                      priority={i === index}
-                    />
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-          <button
-            onClick={next}
-            aria-label="Próximo"
-            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0"
-          >
-            <ArrowRight className="size-5" />
-          </button>
-        </div>
+				{/* Navegação */}
+				<div
+					ref={navRef}
+					className="flex items-center justify-center gap-4 sm:gap-6 mb-10 max-w-full px-2"
+				>
+					<button
+						onClick={prev}
+						aria-label="Anterior"
+						className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0"
+					>
+						<ArrowLeft className="size-4 sm:size-5" />
+					</button>
+					<ul className="flex gap-2 sm:gap-4 items-center overflow-x-hidden max-w-[calc(100%-5rem)]">
+						{/* No mobile: apenas 3 avatares (anterior, atual e próximo) */}
+						{testimonials.map((t, i) => {
+							// Determina os 3 índices visíveis no mobile (para telas pequenas)
+							const prevIdx = index === 0 ? testimonials.length - 1 : index - 1;
+							const nextIdx = index === testimonials.length - 1 ? 0 : index + 1;
+							const isVisibleOnMobile =
+								i === prevIdx || i === index || i === nextIdx;
 
-        {/* Slide atual */}
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch">
-          <div ref={leftRef} key={current.id + '-left'} className="lg:w-1/2">
-            <AboutVisagismComparisonSlider
-              before={current.before}
-              after={current.after}
-              beforeAlt="Antes do visagismo"
-              afterAlt="Depois do visagismo"
-              className="w-full h-[420px] md:h-[500px]"
-            />
-          </div>
-          <div ref={rightRef} key={current.id + '-right'} className="lg:w-1/2 bg-white rounded-[32px] border border-gray-200 p-6 md:p-8 flex flex-col justify-between">
-            <div className="flex flex-col gap-4">
-              <p className="text-stone-900 text-lg md:text-2xl leading-relaxed">“{current.text}”</p>
-              <p className="text-neutral-600 text-sm md:text-base">{current.name}, {current.age} anos</p>
-            </div>
-            <div className="mt-6">
-              <PrimaryButton
-                size="lg"
-                className="w-full md:w-auto px-8"
-                icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
-              >
-                Quero no meu salão
-              </PrimaryButton>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
+							return (
+								<li
+									key={t.id}
+									className={cn(
+										!isVisibleOnMobile && "hidden sm:block" // Oculta no mobile se não for um dos 3 avatares visíveis
+									)}
+								>
+									<button
+										aria-label={`Ver depoimento de ${t.name}`}
+										onClick={() => setIndex(i)}
+										className={cn(
+											"relative size-12 rounded-full border overflow-hidden transition",
+											i === index
+												? "border-orange-400 ring-2 ring-orange-200"
+												: "border-white/70 opacity-70 hover:opacity-100"
+										)}
+									>
+										<Image
+											src={t.avatar}
+											alt={t.name}
+											width={128}
+											height={128}
+											className="w-12 h-12 object-cover object-center"
+											sizes="256px"
+											priority={i === index}
+										/>
+									</button>
+								</li>
+							);
+						})}
+					</ul>
+					<button
+						onClick={next}
+						aria-label="Próximo"
+						className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0"
+					>
+						<ArrowRight className="size-5" />
+					</button>
+				</div>
+
+				{/* Slide atual */}
+				<div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch">
+					<div ref={leftRef} key={current.id + "-left"} className="lg:w-1/2">
+						<AboutVisagismComparisonSlider
+							before={current.before}
+							after={current.after}
+							beforeAlt="Antes do visagismo"
+							afterAlt="Depois do visagismo"
+							className="w-full h-[420px] md:h-[500px]"
+						/>
+					</div>
+					<div
+						ref={rightRef}
+						key={current.id + "-right"}
+						className="lg:w-1/2 bg-white rounded-[32px] border border-gray-200 p-6 md:p-8 flex flex-col justify-between"
+					>
+						<div className="flex flex-col gap-4">
+							<p className="text-stone-900 text-lg md:text-2xl leading-relaxed">
+								“{current.text}”
+							</p>
+							<p className="text-neutral-600 text-sm md:text-base">
+								{current.name}, {current.age} anos
+							</p>
+						</div>
+						<div className="mt-6">
+							<PrimaryButton
+								size="lg"
+								className="w-full md:w-auto px-8"
+								icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+							>
+								Quero no meu salão
+							</PrimaryButton>
+						</div>
+					</div>
+				</div>
+			</Container>
+		</section>
+	);
 }

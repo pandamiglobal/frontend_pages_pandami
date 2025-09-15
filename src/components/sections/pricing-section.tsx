@@ -195,7 +195,7 @@ export function PricingSection() {
 			<Container>
 				<div className="flex flex-col items-center mb-12">
 					<h2 className="text-3xl md:text-4xl lg:text-5xl text-center mb-8 text-neutral-800 dark:text-neutral-100">
-						Planos e preços
+						Planos profissionais
 					</h2>
 
 					{/* Tabs no padrão da seção About Visagism */}
