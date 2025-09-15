@@ -8,7 +8,7 @@ export function WhyVisagismSection() {
 		{
 			title: "47 pontos de medição facial",
 			description:
-				"No visagismo levamos em conta todas as suas preferências, realidade e expectativas, e buscamos traduzir isso numa imagem com uma estética e harmonia que são 100% suas",
+				"Formato do rosto, proporções entre testa/olhos/maxilar, tom e subtom da pele, textura do cabelo, estrutura óssea. Tudo que determina se um corte vai valorizar ou não.",
 			image: "/lp/images/bentogrid/BentoGrid-1_Sintonia-Humana.png",
 		},
 		{
@@ -46,8 +46,8 @@ export function WhyVisagismSection() {
 				{/* Primeira linha de cards */}
 				<div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-6 lg:mb-8">
 					{/* Card 1 - Card maior */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[58%] pt-8 pl-8 gap-8">
-						<div className="w-full lg:w-[380px]">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[56%] pt-8 pl-8 gap-8">
+						<div className="w-full lg:w-[420px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[0].title}
 							</h3>
@@ -67,8 +67,8 @@ export function WhyVisagismSection() {
 					</div>
 
 					{/* Card 2 - Card menor */}
-					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[52%] pt-8 pl-8 justify-between gap-8">
-						<div className="w-full lg:w-[320px]">
+					<div className="bg-white border border-gray-200 rounded-2xl shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col lg:flex-row min-h-[300px] max-h-[700px] lg:h-64 lg:w-[44%] pt-8 pl-8 justify-between gap-8">
+						<div className="w-full lg:w-[360px]">
 							<h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
 								{features[1].title}
 							</h3>
