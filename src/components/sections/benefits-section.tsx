@@ -13,6 +13,7 @@ import {
   ArrowRight
 } from "lucide-react"
 import type { ComponentType, SVGProps } from "react"
+import Link from "next/link"
 
 interface BenefitItemData {
   icon: ComponentType<SVGProps<SVGSVGElement>>
@@ -138,13 +139,15 @@ export function BenefitsSection() {
 								<BenefitItem key={b.title} {...b} />
 							))}
 						</ul>
-						<PrimaryButton
-							className="mt-5 w-full sm:w-auto lg:w-fit"
-							size="lg"
-							icon={<ArrowRight className="h-4 w-4" />}
-						>
-							Transformar o meu salão
-						</PrimaryButton>
+						<Link href="https://app.pandami.com.br/auth/sign-in/">
+							<PrimaryButton
+								icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+								size="lg"
+								className="px-4 mt-3"
+							>
+								COMEÇAR TESTE DE 7 DIAS
+							</PrimaryButton>
+						</Link>
 					</div>
 					<div className="flex flex-col gap-6 items-center w-full sm:w-auto">
 						<div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">
@@ -185,13 +188,15 @@ export function BenefitsSection() {
 								<BenefitItem key={b.title} {...b} />
 							))}
 						</ul>
-						<PrimaryButton
-							className="mt-5 w-full sm:w-auto lg:w-fit"
-							size="lg"
-							icon={<ArrowRight className="h-4 w-4" />}
-						>
-							Descobrir meu visual
-						</PrimaryButton>
+						<Link href="https://app.pandami.com.br/auth/sign-in/">
+							<PrimaryButton
+								icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+								size="lg"
+								className="px-4 mt-3"
+							>
+								COMEÇAR TESTE DE 7 DIAS
+							</PrimaryButton>
+						</Link>
 					</div>
 					<div className="flex flex-col gap-6 items-center w-full sm:w-auto">
 						<div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">

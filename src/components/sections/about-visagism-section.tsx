@@ -204,10 +204,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
 						size="lg"
 						icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 					>
-						Comece grátis
-					</PrimaryButton>
-					<PrimaryButton size="lg" variant="outline">
-						Quero no meu salão
+						COMEÇAR TESTE DE 7 DIAS
 					</PrimaryButton>
 				</div>
 			</div>

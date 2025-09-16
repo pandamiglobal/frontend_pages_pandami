@@ -37,24 +37,21 @@ export function HeroSection() {
 
 							<p className="text-gray-600 max-w-[320px] lg:max-w-[450px] text-sm sm:text-base md:text-lg mx-auto lg:mx-0">
 								Nossa inteligência artificial analisa matematicamente cada rosto
-								em 30 segundos e sugere exatamente qual corte e cor vão valorizar. 94% das clientes aprovam na primeira tentativa.
+								em 30 segundos e sugere exatamente qual corte e cor vão
+								valorizar. 94% das clientes aprovam na primeira tentativa.
 							</p>
 
 							<div className="flex gap-3 items-center justify-center lg:justify-start mt-2">
-								<Link href="/#">
+								<Link href="https://app.pandami.com.br/auth/sign-in/">
 									<PrimaryButton
 										icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 										size="lg"
 										className="px-4"
 									>
-										Comece grátis
+										COMEÇAR TESTE DE 7 DIAS
 									</PrimaryButton>
 								</Link>
-								<Link href="/#pricing">
-									<PrimaryButton variant="outline" size="lg" className="px-4">
-										Ver planos
-									</PrimaryButton>
-								</Link>
+							
 							</div>
 						</div>
 
