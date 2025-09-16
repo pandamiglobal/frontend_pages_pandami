@@ -139,7 +139,7 @@ export function BenefitsSection() {
 								<BenefitItem key={b.title} {...b} />
 							))}
 						</ul>
-						<Link href="https://app.pandami.com.br/auth/sign-in/">
+						<Link href="https://app.pandami.com.br/auth/sign-up/">
 							<PrimaryButton
 								icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 								size="lg"
@@ -188,7 +188,7 @@ export function BenefitsSection() {
 								<BenefitItem key={b.title} {...b} />
 							))}
 						</ul>
-						<Link href="https://app.pandami.com.br/auth/sign-in/">
+						<Link href="https://app.pandami.com.br/auth/sign-up/">
 							<PrimaryButton
 								icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 								size="lg"

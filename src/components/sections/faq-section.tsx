@@ -75,7 +75,10 @@ export default function FAQSection({ faq }: { faq: FAQ[] }) {
 									</p>
 								</div>
 								<div className="flex justify-center lg:justify-start">
-									<Link href="/#" className="w-full">
+									<Link
+										href="/https://app.pandami.com.br/auth/sign-up"
+										className="w-full"
+									>
 										<PrimaryButton
 											size="lg"
 											icon={<ArrowRight className="h-4 w-4" />}
