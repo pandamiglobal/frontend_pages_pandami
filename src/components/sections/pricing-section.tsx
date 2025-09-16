@@ -45,15 +45,12 @@ function PricingCard({
 		monthly: `O teste dá direito a ${credits} créditos. Após o período de 7 dias, será cobrada a mensalidade de R$${monthlyPrice
 			.toFixed(2)
 			.replace(".", ",")}.`,
-		semiannual: `O teste dá direito a ${credits} créditos. Após o período de 7 dias, será cobrada a mensalidade de R$${monthlyPrice
+		semiannual: `O teste dá direito a ${credits} créditos. Após o período de 7 dias, será cobrado o valor total de R$${(monthlyPrice * 6)
 			.toFixed(2)
-			.replace(
-				".",
-				","
-			)} (semestral com ${discount}% de desconto).`,
-		annual: `O teste dá direito a ${credits} créditos. Após o período de 7 dias, será cobrada a mensalidade de R$${monthlyPrice
+			.replace(".", ",")} a cada 6 meses (semestral com ${discount}% de desconto).`,
+		annual: `O teste dá direito a ${credits} créditos. Após o período de 7 dias, será cobrado o valor total de R$${(monthlyPrice * 12)
 			.toFixed(2)
-			.replace(".", ",")} (anual com ${discount}% de desconto).`,
+			.replace(".", ",")} a cada 12 meses (anual com ${discount}% de desconto).`,
 	};
 
 	// Construir a URL de inscrição com o parâmetro do plano
