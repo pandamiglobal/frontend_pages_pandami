@@ -18,14 +18,14 @@ interface BeforeAfterPair {
 interface MarqueeRowProps {
 	readonly items: readonly BeforeAfterPair[];
 	readonly reverse?: boolean;
-	readonly speed?: number;
+	readonly speed?: number; // Velocidade: valores menores = mais rápido, maiores = mais lento
 }
 
 // Constantes para melhor manutenção e performance
 const ANIMATION_CONFIG = {
-	MIN_DURATION: 1,
-	MAX_DURATION: 10,
-	SPEED_MULTIPLIER: 0.15,
+	MIN_DURATION: 10, // Duração mínima (mais rápido)
+	MAX_DURATION: 120, // Duração máxima (mais lento)
+	BASE_SPEED: 50, // Velocidade base para cálculos
 	RESIZE_THROTTLE: 200,
 	INTERSECTION_THRESHOLD: 0.1,
 	GAP_BETWEEN_ITEMS: 6,
@@ -69,7 +69,7 @@ const menPairs = [
  * @param reverse - Se verdadeiro, a direção da animação é invertida
  * @param speed - Velocidade da animação (maior = mais lento)
  */
-function MarqueeRow({ items, reverse = false, speed = 20 }: MarqueeRowProps) {
+function MarqueeRow({ items, reverse = false, speed = 50 }: MarqueeRowProps) {
 	// Referências otimizadas com tipos específicos
 	const containerRef = useRef<HTMLDivElement>(null);
 	const trackRef = useRef<HTMLDivElement>(null);
@@ -78,18 +78,20 @@ function MarqueeRow({ items, reverse = false, speed = 20 }: MarqueeRowProps) {
 	const animationRef = useRef<gsap.core.Timeline | null>(null);
 	const resizeTimerRef = useRef<number | null>(null);
 
-	// Memoização da duração da animação para evitar recálculos
-	const animationDuration = useMemo(
-		() =>
-			Math.max(
-				ANIMATION_CONFIG.MIN_DURATION,
-				Math.min(
-					ANIMATION_CONFIG.MAX_DURATION,
-					speed * ANIMATION_CONFIG.SPEED_MULTIPLIER
-				)
-			),
-		[speed]
-	);
+	// Cálculo corrigido da duração da animação baseado na velocidade
+	const animationDuration = useMemo(() => {
+		// Inversão da lógica: speed menor = animação mais rápida
+		const baseSpeed = speed || ANIMATION_CONFIG.BASE_SPEED;
+
+		// Cálculo inverso: valores menores de speed resultam em menor duração
+		const calculatedDuration = ANIMATION_CONFIG.BASE_SPEED / baseSpeed * 30;
+
+		// Limitação dentro dos valores mínimos e máximos
+		return Math.max(
+			ANIMATION_CONFIG.MIN_DURATION,
+			Math.min(ANIMATION_CONFIG.MAX_DURATION, calculatedDuration)
+		);
+	}, [speed]);
 
 	// Função otimizada para configurar o marquee
 	const setupMarquee = useCallback(() => {
@@ -134,7 +136,7 @@ function MarqueeRow({ items, reverse = false, speed = 20 }: MarqueeRowProps) {
 				repeat: -1,
 				defaults: {
 					ease: "linear",
-					duration: animationDuration,
+					duration: animationDuration, // Duração agora é inversamente proporcional à velocidade
 				},
 			});
 
@@ -306,7 +308,7 @@ export default function CarouselSection() {
 			<div className="bg-neutral-800">
 				<section
 					id="carousel"
-					className="w-full pt-20 pb-40 bg-neutral-50  overflow-hidden relative flex flex-col justify-center items-center   rounded-bl-[32px] rounded-br-[32px]"
+					className="w-full pt-20 pb-40 bg-neutral-50 overflow-hidden relative flex flex-col justify-center items-center rounded-bl-[32px] rounded-br-[32px]"
 				>
 					<Container>
 						{/* Cabeçalho da seção otimizado */}
@@ -328,9 +330,9 @@ export default function CarouselSection() {
 
 						{/* Carousel de imagens otimizado */}
 						<div className="flex flex-col justify-start items-center gap-14">
-							{/* Linha superior - Mulheres */}
+							{/* Linha superior - Mulheres - Speed menor para movimento mais rápido */}
 							<section className="w-full" aria-label="Transformações femininas">
-								<MarqueeRow items={womenPairs} speed={1198} />
+								<MarqueeRow items={womenPairs} speed={30} />
 							</section>
 
 							{/* Linha inferior - Homens (direção invertida) */}
@@ -338,7 +340,7 @@ export default function CarouselSection() {
 								className="w-full"
 								aria-label="Transformações masculinas"
 							>
-								<MarqueeRow items={menPairs} reverse speed={1198} />
+								<MarqueeRow items={menPairs} reverse speed={40} />
 							</section>
 						</div>
 					</Container>
