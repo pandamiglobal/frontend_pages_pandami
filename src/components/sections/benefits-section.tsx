@@ -30,40 +30,41 @@ interface PopoverData {
 }
 
 const salonBenefits: BenefitItemData[] = [
-  {
-    icon: Target,
-    title: "Consultas mais assertivas",
-    description: "Mostre visualmente o resultado antes de começar, eliminando incertezas"
-  },
-  {
-    icon: Crown,
-    title: "Clientes mais confiantes",
-    description: "Decidem com mais segurança, sabendo exatamente o que esperar do resultado."
-  },
-  {
-    icon: Trophy,
-    title: "Diferencial competitivo",
-    description: "Tecnologia que seus concorrentes ainda não têm"
-  }
-]
+	{
+		icon: Target,
+		title: "Consultas precisas",
+		description: "Elimine incertezas. Mostre o resultado antes de começar.",
+	},
+	{
+		icon: Crown,
+		title: "Ticket médio maior",
+		description:
+			"Clientes confiam mais, aceitam mais serviços. +47% comprovado.",
+	},
+	{
+		icon: Trophy,
+		title: "Diferencial competitivo",
+		description: "Tecnologia que seus concorrentes ainda não têm",
+	},
+];
 
 const clientBenefits: BenefitItemData[] = [
-  {
-    icon: UserCheck,
-    title: "Zero arrependimentos",
-    description: "Veja como ficará antes de cortar ou pintar o cabelo"
-  },
-  {
-    icon: Sparkles,
-    title: "Sugestões personalizadas",
-    description: "Baseadas nas características únicas, rosto e preferências do cliente"
-  },
-  {
-    icon: Heart,
-    title: "Confiança total",
-    description: "Seu cliente sai do salão exatamente como sonhava"
-  }
-]
+	{
+		icon: UserCheck,
+		title: "Zero arrependimentos",
+		description: "Veem exatamente como ficará antes do corte.",
+	},
+	{
+		icon: Sparkles,
+		title: "Sugestões personalizadas",
+		description: '"Este corte valoriza seu rosto porque..." - lógica clara.',
+	},
+	{
+		icon: Heart,
+		title: "Confiança total",
+		description: "Saem do salão postando no Instagram na mesma hora.",
+	},
+];
 
 function BenefitItem({ icon: Icon, title, description }: BenefitItemData) {
   return (
@@ -117,100 +118,109 @@ function Popover({ icon: Icon, value, label, bgColor, iconColor, position }: Pop
 
 export function BenefitsSection() {
   return (
-    <section id="benefits" className="w-full bg-neutral-800 pt-4 pb-12 sm:pt-2 sm:pb-16 md:pt-2 md:pb-20">
-      <Container className="px-4 sm:px-6">
-        <h3 className="text-white font-semibold mb-6 md:mb-12 text-center text-xl sm:text-2xl md:text-3xl">Uma Ferramenta, Dois Mundos de Possibilidades</h3>
+		<section
+			id="benefits"
+			className="w-full bg-neutral-800 pt-4 pb-12 sm:pt-2 sm:pb-16 md:pt-2 md:pb-20"
+		>
+			<Container className="px-4 sm:px-6">
+				<h3 className="text-white font-semibold mb-6 md:mb-12 text-center text-xl sm:text-2xl md:text-3xl">
+					Dois lados da mesma transformação
+				</h3>
 
-        {/* Salon Benefits */}
-        <div className="flex flex-col-reverse lg:flex-row gap-6 sm:gap-8 lg:gap-16 justify-between items-center">
-          <div className="flex-1 flex flex-col gap-2 max-w-xl w-full">
-            <h4 className="text-white font-medium mb-2 text-lg sm:text-xl md:text-2xl">Seu Salão no Mais Alto Nível</h4>
-            <ul className="flex flex-col gap-2 sm:gap-3 md:gap-4 w-full">
-              {salonBenefits.map(b => (
-                <BenefitItem key={b.title} {...b} />
-              ))}
-            </ul>
-            <PrimaryButton
-              className="mt-5 w-full sm:w-auto lg:w-fit"
-              size="lg"
-              icon={<ArrowRight className="h-4 w-4" />}
-            >
-              Transformar o meu salão
-            </PrimaryButton>
-          </div>
-          <div className="flex flex-col gap-6 items-center w-full sm:w-auto">
-            <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="/lp/images/benefits/benefits-section-image-1.png"
-                alt="Ambiente de salão"
-                className="w-full h-full object-contain p-2"
-                loading="lazy"
-              />
-              <Popover
-                icon={TrendingUp}
-                value="+47%"
-                label="faturamento médio dos parceiros"
-                bgColor="emerald-100"
-                iconColor="emerald-600"
-                position="top-right"
-              />
-              <Popover
-                icon={Star}
-                value="+78%"
-                label="Clientes satisfeitos"
-                bgColor="amber-100"
-                iconColor="amber-400"
-                position="bottom-left"
-              />
-            </div>
-          </div>
-        </div>
+				{/* Salon Benefits */}
+				<div className="flex flex-col-reverse lg:flex-row gap-6 sm:gap-8 lg:gap-16 justify-between items-center">
+					<div className="flex-1 flex flex-col gap-2 max-w-xl w-full">
+						<h4 className="text-white font-medium mb-2 text-lg sm:text-xl md:text-2xl">
+							Seu Salão no Mais Alto Nível
+						</h4>
+						<ul className="flex flex-col gap-2 sm:gap-3 md:gap-4 w-full">
+							{salonBenefits.map((b) => (
+								<BenefitItem key={b.title} {...b} />
+							))}
+						</ul>
+						<PrimaryButton
+							className="mt-5 w-full sm:w-auto lg:w-fit"
+							size="lg"
+							icon={<ArrowRight className="h-4 w-4" />}
+						>
+							Transformar o meu salão
+						</PrimaryButton>
+					</div>
+					<div className="flex flex-col gap-6 items-center w-full sm:w-auto">
+						<div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">
+							<img
+								src="/lp/images/benefits/benefits-section-image-1.png"
+								alt="Ambiente de salão"
+								className="w-full h-full object-contain p-2"
+								loading="lazy"
+							/>
+							<Popover
+								icon={TrendingUp}
+								value="+47%"
+								label="faturamento médio dos parceiros"
+								bgColor="emerald-100"
+								iconColor="emerald-600"
+								position="top-right"
+							/>
+							<Popover
+								icon={Star}
+								value="+78%"
+								label="Clientes satisfeitos"
+								bgColor="amber-100"
+								iconColor="amber-400"
+								position="bottom-left"
+							/>
+						</div>
+					</div>
+				</div>
 
-        {/* Client Benefits */}
-        <div className="flex flex-col-reverse lg:flex-row-reverse gap-6 sm:gap-8 lg:gap-16 justify-between items-center mt-10 sm:mt-12 md:mt-20">
-          <div className="flex-1 flex flex-col gap-2 max-w-xl w-full">
-            <h4 className="text-white font-medium mb-2 text-lg sm:text-xl md:text-2xl">Seu Cliente Sempre Satisfeito</h4>
-            <ul className="flex flex-col gap-2 sm:gap-3 md:gap-4 w-full">
-              {clientBenefits.map(b => (
-                <BenefitItem key={b.title} {...b} />
-              ))}
-            </ul>
-            <PrimaryButton
-              className="mt-5 w-full sm:w-auto lg:w-fit"
-              size="lg"
-              icon={<ArrowRight className="h-4 w-4" />}
-            >
-              Descobrir meu visual
-            </PrimaryButton>
-          </div>
-          <div className="flex flex-col gap-6 items-center w-full sm:w-auto">
-            <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="/lp/images/benefits/benefits-section-image-2.png"
-                alt="Atendimento ao cliente"
-                className="w-full h-full object-contain p-2"
-                loading="lazy"
-              />
-              <Popover
-                icon={CircleCheck}
-                value="+94%"
-                label="aprovação das transformações"
-                bgColor="blue-100"
-                iconColor="blue-600"
-                position="top-left"
-              />
-              <Popover
-                icon={Crown}
-                value="9 em 10"
-                label="mulheres se sentem mais confiantes"
-                bgColor="pink-100"
-                iconColor="pink-600"
-                position="bottom-right"
-              />
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
-  )
+				{/* Client Benefits */}
+				<div className="flex flex-col-reverse lg:flex-row-reverse gap-6 sm:gap-8 lg:gap-16 justify-between items-center mt-10 sm:mt-12 md:mt-20">
+					<div className="flex-1 flex flex-col gap-2 max-w-xl w-full">
+						<h4 className="text-white font-medium mb-2 text-lg sm:text-xl md:text-2xl">
+							Seus clientes sempre satisfeitos
+						</h4>
+						<ul className="flex flex-col gap-2 sm:gap-3 md:gap-4 w-full">
+							{clientBenefits.map((b) => (
+								<BenefitItem key={b.title} {...b} />
+							))}
+						</ul>
+						<PrimaryButton
+							className="mt-5 w-full sm:w-auto lg:w-fit"
+							size="lg"
+							icon={<ArrowRight className="h-4 w-4" />}
+						>
+							Descobrir meu visual
+						</PrimaryButton>
+					</div>
+					<div className="flex flex-col gap-6 items-center w-full sm:w-auto">
+						<div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">
+							<img
+								src="/lp/images/benefits/benefits-section-image-2.png"
+								alt="Atendimento ao cliente"
+								className="w-full h-full object-contain p-2"
+								loading="lazy"
+							/>
+							<Popover
+								icon={CircleCheck}
+								value="+94%"
+								label="aprovação das transformações"
+								bgColor="blue-100"
+								iconColor="blue-600"
+								position="top-left"
+							/>
+							<Popover
+								icon={Crown}
+								value="9 em 10"
+								label="mulheres se sentem mais confiantes"
+								bgColor="pink-100"
+								iconColor="pink-600"
+								position="bottom-right"
+							/>
+						</div>
+					</div>
+				</div>
+			</Container>
+		</section>
+	);
 }
