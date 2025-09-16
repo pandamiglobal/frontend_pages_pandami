@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container";
 import { PrimaryButton } from "@/components/ui/primary-button";
 import { UserRound, ScanFace, ChartPie, FileEdit, History } from "lucide-react";
 import { cn } from "@/common/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 
@@ -148,7 +148,14 @@ function PricingCard({
 }
 
 export function PricingSection() {
+	// Definir "annual" como valor inicial e garantir que seja usado na primeira renderização
 	const [activePeriod, setActivePeriod] = useState<PricingPeriod>("annual");
+
+	// Garantir que "annual" seja o período selecionado após a montagem do componente
+	useEffect(() => {
+		// Força a seleção do tab anual após a renderização inicial
+		setActivePeriod("annual");
+	}, []);
 
 	// Configurações de desconto por período
 	const periodDiscounts = {
@@ -253,9 +260,9 @@ export function PricingSection() {
 	];
 
 	const periodButtons: Array<{ id: PricingPeriod; label: string }> = [
-		{ id: "monthly", label: "Mensal" },
-		{ id: "semiannual", label: "Semestral" },
 		{ id: "annual", label: "Anual" },
+		{ id: "semiannual", label: "Semestral" },
+		{ id: "monthly", label: "Mensal" },
 	];
 
 	return (
@@ -266,8 +273,9 @@ export function PricingSection() {
 						Planos profissionais
 					</h2>
 
-					{/* Tabs no padrão da seção About Visagism */}
+					{/* Tabs com defaultValue e value explicitamente definidos como "annual" */}
 					<Tabs
+						defaultValue="annual" // Adicionar defaultValue para garantir seleção inicial
 						value={activePeriod}
 						onValueChange={(v) => setActivePeriod(v as PricingPeriod)}
 						className="flex flex-col items-center"
