@@ -8,6 +8,7 @@ import { AboutVisagismComparisonSlider } from "@/components/sections/about-visag
 import { PrimaryButton } from "@/components/ui/primary-button";
 import { ArrowLeft, ArrowRight, XCircle, CheckCircle } from "lucide-react";
 import { cn } from "@/common/lib/utils";
+import Link from "next/link";
 
 interface Testimonial {
   id: string;
@@ -233,7 +234,7 @@ export function SocialProofSection() {
           <button
             onClick={prev}
             aria-label="Anterior"
-            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0"
+            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0 cursor-pointer"
           >
             <ArrowLeft className="size-4 sm:size-5" />
           </button>
@@ -255,7 +256,7 @@ export function SocialProofSection() {
                     aria-label={`Ver depoimento de ${t.name}`}
                     onClick={() => setIndex(i)}
                     className={cn(
-                      "relative size-12 rounded-full border overflow-hidden transition",
+                      "relative size-12 rounded-full border overflow-hidden transition cursor-pointer",
                       i === index
                         ? "border-orange-400 ring-2 ring-orange-200"
                         : "border-white/70 opacity-70 hover:opacity-100"
@@ -278,7 +279,7 @@ export function SocialProofSection() {
           <button
             onClick={next}
             aria-label="Próximo"
-            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0"
+            className="p-2 rounded-full bg-orange-50 border border-orange-200 text-stone-900 hover:bg-orange-100 transition shrink-0 cursor-pointer"
           >
             <ArrowRight className="size-5" />
           </button>
@@ -343,13 +344,15 @@ export function SocialProofSection() {
             </div>
             
             <div className="mt-6">
-              <PrimaryButton
-                size="lg"
-                className="w-full md:w-auto px-8"
-                icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
-              >
-                Quero no meu salão
-              </PrimaryButton>
+              <Link href="https://app.pandami.com.br/auth/sign-up">
+                <PrimaryButton
+                  size="lg"
+                  className="w-full md:w-auto px-8 cursor-pointer"
+                  icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+                >
+                  Quero no meu salão
+                </PrimaryButton>
+              </Link>
             </div>
           </div>
         </div>

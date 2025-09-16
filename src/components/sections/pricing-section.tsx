@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 
-type PricingPeriod = "monthly" | "quarterly" | "annual";
+type PricingPeriod = "monthly" | "semiannual" | "annual";
 
 interface PlanProps {
 	title: string;
@@ -37,7 +37,7 @@ function PricingCard({
 }: PlanProps) {
 	const periodSuffix = {
 		monthly: "mês",
-		quarterly: "mês",
+		semiannual: "mês",
 		annual: "mês",
 	};
 
@@ -45,12 +45,15 @@ function PricingCard({
 		monthly: `O teste dá direito a ${credits} créditos. Após o período de 7 dias, será cobrada a mensalidade de R$${monthlyPrice
 			.toFixed(2)
 			.replace(".", ",")}.`,
-		quarterly: `O teste dá direito a ${credits} créditos. Após o período de 7 dias, será cobrada a mensalidade de R$${monthlyPrice
+		semiannual: `O teste dá direito a ${credits} créditos. Após o período de 7 dias, será cobrada a mensalidade de R$${monthlyPrice
 			.toFixed(2)
-			.replace(".", ",")} (trimestral com 15% de desconto).`,
+			.replace(
+				".",
+				","
+			)} (semestral com ${discount}% de desconto).`,
 		annual: `O teste dá direito a ${credits} créditos. Após o período de 7 dias, será cobrada a mensalidade de R$${monthlyPrice
 			.toFixed(2)
-			.replace(".", ",")} (anual com 30% de desconto).`,
+			.replace(".", ",")} (anual com ${discount}% de desconto).`,
 	};
 
 	// Construir a URL de inscrição com o parâmetro do plano
@@ -153,8 +156,8 @@ export function PricingSection() {
 	// Configurações de desconto por período
 	const periodDiscounts = {
 		monthly: 0, // Sem desconto no mensal
-		quarterly: 15, // 15% de desconto no trimestral
-		annual: 30, // 30% de desconto no anual
+		semiannual: 10, // 10% de desconto no semestral
+		annual: 20, // 20% de desconto no anual
 	};
 
 	// Preços base mensais (sem desconto)
@@ -254,7 +257,7 @@ export function PricingSection() {
 
 	const periodButtons: Array<{ id: PricingPeriod; label: string }> = [
 		{ id: "monthly", label: "Mensal" },
-		{ id: "quarterly", label: "Trimestral" },
+		{ id: "semiannual", label: "Semestral" },
 		{ id: "annual", label: "Anual" },
 	];
 

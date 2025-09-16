@@ -48,7 +48,8 @@ const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryButtonProps>(
           BASE_CLASSES,
           VARIANT_CLASSES[variant],
           SIZE_CLASSES[size],
-          className
+          className,
+          "cursor-pointer" // Adicionando a classe cursor-pointer aqui
         )}
         {...props}
       >

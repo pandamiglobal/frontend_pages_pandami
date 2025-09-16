@@ -132,7 +132,7 @@ export function BenefitsSection() {
 				<div className="flex flex-col-reverse lg:flex-row gap-6 sm:gap-8 lg:gap-16 justify-between items-center">
 					<div className="flex-1 flex flex-col gap-2 max-w-xl w-full">
 						<h4 className="text-white font-medium mb-2 text-lg sm:text-xl md:text-2xl">
-							Seu Salão no Mais Alto Nível
+							Seu salão no mais alto nível
 						</h4>
 						<ul className="flex flex-col gap-2 sm:gap-3 md:gap-4 w-full">
 							{salonBenefits.map((b) => (
