@@ -50,7 +50,7 @@ export function HeroSection() {
 										Comece grátis
 									</PrimaryButton>
 								</Link>
-								<Link href="/#plans">
+								<Link href="/#pricing">
 									<PrimaryButton variant="outline" size="lg" className="px-4">
 										Ver planos
 									</PrimaryButton>

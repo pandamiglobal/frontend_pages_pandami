@@ -17,13 +17,12 @@ export const CtaSection: React.FC = () => {
 						<div className="w-full md:w-1/2 lg:max-w-[560px] flex flex-col gap-6 z-10">
 							<div className="flex flex-col gap-3">
 								<h3 className="text-neutral-800 text-2xl md:text-3xl font-bold">
-									Cada beleza é única e merece um visual perfeito, o Visagismo
-									Pandami torna isso possível para todos
+									Transforme incerteza em precisão científica
 								</h3>
 								<p className="text-neutral-600 text-base font-normal leading-relaxed">
-									Nossa análise personalizada com IA de Visagismo entende o
-									formato do rosto e encontra exatamente o que realça a beleza
-									natural do seu cliente!
+									Seja o primeiro profissional da sua região com análise de IA.
+									Enquanto concorrentes ainda "chutam" no visagismo, você
+									oferece resultados baseados em ciência.
 								</p>
 							</div>
 							<Link href="/#">
@@ -32,7 +31,7 @@ export const CtaSection: React.FC = () => {
 									icon={<ArrowRight className="h-4 w-4" />}
 									className="w-full md:max-w-72 px-4"
 								>
-									Comece grátis
+									COMEÇAR TESTE DE 7 DIAS
 								</PrimaryButton>
 							</Link>
 						</div>

@@ -134,7 +134,7 @@ export function Header() {
                 <Globe className="h-5 w-5" />
               </button>
 
-              <Link href="/#plans" onClick={handleLinkClick}>
+              <Link href="/#pricing" onClick={handleLinkClick}>
                 <PrimaryButton variant="outline">Ver planos</PrimaryButton>
               </Link>
 
@@ -212,7 +212,7 @@ export function Header() {
               <div className="space-y-4 mt-10">
                
 
-                <Link href="/#plans" onClick={handleLinkClick} className="block">
+                <Link href="/#pricing" onClick={handleLinkClick} className="block">
                   <PrimaryButton className="w-full" variant="outline" size="lg">Ver planos</PrimaryButton>
                 </Link>
 

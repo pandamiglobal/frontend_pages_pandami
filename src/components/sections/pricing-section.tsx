@@ -193,8 +193,8 @@ export function PricingSection() {
   return (
 		<section id="pricing" className="py-16 bg-neutral-50 dark:bg-neutral-900">
 			<Container>
-				<div className="flex flex-col items-center mb-12">
-					<h2 className="text-3xl md:text-4xl lg:text-5xl text-center mb-8 text-neutral-800 dark:text-neutral-100">
+				<div className="flex flex-col items-center mb-3">
+					<h2 className="text-2xl lg:text-3xl font-semibold text-center mb-4 text-stone-900">
 						Planos profissionais
 					</h2>
 
@@ -204,7 +204,7 @@ export function PricingSection() {
 						onValueChange={(v) => setActivePeriod(v as PricingPeriod)}
 						className="flex flex-col items-center"
 					>
-						<TabsList className="mb-2 bg-neutral-100 dark:bg-neutral-800 rounded-full p-1 h-auto">
+						<TabsList className="mb-3 bg-neutral-100 dark:bg-neutral-800 rounded-full p-1 h-auto">
 							{periodButtons.map((p) => (
 								<TabsTrigger
 									key={p.id}

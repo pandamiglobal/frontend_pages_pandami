@@ -219,6 +219,7 @@ export function SocialProofSection() {
         <h2 className="text-2xl lg:text-3xl font-semibold text-center mb-2 text-stone-900">
           Clientes reais, transformações reais com análise PandaMi
         </h2>
+        
         <p className="text-center text-gray-600 max-w-3xl mx-auto mb-12 lg:mb-8 px-4 lg:px-0">
           Veja o que acontece quando profissionais usam nossa IA para escolher o
           corte perfeito. Deslize nas fotos para ver o antes e depois.
@@ -299,33 +300,37 @@ export function SocialProofSection() {
             key={current.id + "-right"}
             className="lg:w-1/2 bg-white rounded-[32px] border border-gray-200 p-6 md:p-8 flex flex-col justify-between"
           >
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-6">
               {/* Título do depoimento */}
               <h3 className="text-stone-900 text-xl md:text-2xl font-medium leading-tight">
                 {current.title}
               </h3>
 
               {/* Comparativo Antes vs Depois */}
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-red-50">
-                  <XCircle className="shrink-0 text-red-500 size-5" aria-hidden="true" />
-                  <p className="flex gap-1.5">
-                    <span className="font-medium text-red-700">ANTES:</span>
-                    <span className="text-neutral-700">{current.before.text}</span>
-                  </p>
+              <div className="flex flex-col gap-3">
+                <div className="flex rounded-lg bg-red-50 overflow-hidden">
+                  <div className="bg-red-100 flex items-center justify-center px-3 py-3">
+                    <XCircle className="text-red-500 size-5" aria-hidden="true" />
+                  </div>
+                  <div className="flex flex-col p-3">
+                    <div className="font-medium text-red-700 mb-0.5">ANTES:</div>
+                    <div className="text-neutral-700">{current.before.text}</div>
+                  </div>
                 </div>
                 
-                <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-emerald-50">
-                  <CheckCircle className="shrink-0 text-emerald-500 size-5" aria-hidden="true" />
-                  <p className="flex gap-1.5">
-                    <span className="font-medium text-emerald-700">COM IA PANDAMI:</span>
-                    <span className="text-neutral-700">{current.after.text}</span>
-                  </p>
+                <div className="flex rounded-lg bg-emerald-50 overflow-hidden">
+                  <div className="bg-emerald-100 flex items-center justify-center px-3 py-3">
+                    <CheckCircle className="text-emerald-500 size-5" aria-hidden="true" />
+                  </div>
+                  <div className="flex flex-col p-3">
+                    <div className="font-medium text-emerald-700 mb-0.5">COM IA PANDAMI:</div>
+                    <div className="text-neutral-700">{current.after.text}</div>
+                  </div>
                 </div>
               </div>
 
               {/* Citação */}
-              <blockquote className="border-l-4 border-orange-300 pl-4 py-1">
+              <blockquote className="border-l-4 border-orange-300 pl-4 py-2">
                 <p className="text-stone-900 text-lg leading-relaxed italic">
                   "{current.quote}"
                 </p>
