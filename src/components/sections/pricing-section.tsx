@@ -53,8 +53,8 @@ function PricingCard({
 			.replace(".", ",")} a cada 12 meses (anual com ${discount}% de desconto).`,
 	};
 
-	// Construir a URL de inscrição com o parâmetro do plano
-	const signUpUrl = `https://app.pandami.com.br/auth/sign-up?plan=${encodeURIComponent(title.toLowerCase())}`;
+	// Construir a URL de inscrição com o parâmetro do plano e período
+	const signUpUrl = `https://app.pandami.com.br/auth/sign-up?plan=${encodeURIComponent(title.toLowerCase())}&period=${encodeURIComponent(period)}`;
 
 	return (
 		<div
