@@ -12,6 +12,7 @@ interface AnimationRefs {
   personFinal: React.RefObject<HTMLDivElement | null>;
   scanner: React.RefObject<HTMLDivElement | null>;
   scannerBox: React.RefObject<HTMLDivElement | null>;
+  scannerCheck: React.RefObject<HTMLDivElement | null>;
   variantCardsBox: React.RefObject<HTMLDivElement | null>;
   angleCardsBox: React.RefObject<HTMLDivElement | null>;
   variantCards: React.RefObject<Array<HTMLDivElement | null>>;
@@ -143,7 +144,7 @@ class HeroAnimationController {
     
     tl.call(() => this.callbacks.onKeyframeChange(2))
     .add(this.animateScanner())
-    .add(this.animateVariantCardsEntry(), "-=1.2")
+    .add(this.animateVariantCardsEntry(), "-=2.5") // Ajustado para compensar o delay do check
     .to({}, { duration: this.waitTime })
     .add(this.animateCardSelection())
     .to({}, { duration: this.waitTime })
@@ -157,14 +158,6 @@ class HeroAnimationController {
     const { durations, easings } = ANIMATION_CONFIGS;
     
     tl.call(() => this.callbacks.onKeyframeChange(3))
-    .call(() => {
-      // Fazer fade out do scannerbox e scanner
-      gsap.to([this.refs.scannerBox.current, this.refs.scanner.current], {
-        opacity: 0,
-        duration: 0.4,
-        ease: easings.smoothEntry
-      });
-    })
     .add(this.animatePersonTransition())
     .add(this.animateAngleCardsEntry(), "-=0.6")
     .to({}, { duration: this.waitTime })
@@ -201,6 +194,11 @@ class HeroAnimationController {
     gsap.set(this.refs.scanner.current, {
       opacity: 0,
       top: 0
+    });
+    
+    gsap.set(this.refs.scannerCheck.current, {
+      opacity: 0,
+      scale: 0.5
     });
     
     gsap.set(this.refs.variantCards.current?.filter(Boolean), {
@@ -250,6 +248,27 @@ class HeroAnimationController {
       ease: easings.scannerMove,
       repeat: 4, // 4 ciclos completos (ida e volta) = 1.6s total
       yoyo: true
+    })
+    // Delay de 1.5s antes do check aparecer
+    .to({}, { duration: 1.5 })
+    // Mostrar o check
+    .call(() => {
+      gsap.set(this.refs.scannerCheck.current, {
+        opacity: 1,
+        scale: 0.5
+      });
+    })
+    .to(this.refs.scannerCheck.current, {
+      scale: 1,
+      duration: 0.3,
+      ease: easings.popEntry
+    })
+    // Aguardar um pouco e depois fazer fade out
+    .to({}, { duration: 0.8 })
+    .to([this.refs.scannerBox.current, this.refs.scanner.current, this.refs.scannerCheck.current], {
+      opacity: 0,
+      duration: 0.4,
+      ease: easings.smoothExit
     });
 
     return tl;
@@ -453,6 +472,16 @@ class HeroAnimationController {
         rotationX: 0
       });
 
+      // Reset do scanner e check
+      gsap.set([this.refs.scannerBox.current, this.refs.scanner.current, this.refs.scannerCheck.current], {
+        opacity: 0,
+        scale: 1
+      });
+      
+      gsap.set(this.refs.scannerCheck.current, {
+        scale: 0.5
+      });
+
       // Reset dos callbacks
       this.callbacks.onKeyframeChange(0);
       this.callbacks.onCardSelection(null);
@@ -480,6 +509,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
   // Referências para os elementos que serão animados com GSAP
   const scannerRef = useRef<HTMLDivElement | null>(null);
   const scannerBoxRef = useRef<HTMLDivElement | null>(null);
+  const scannerCheckRef = useRef<HTMLDivElement | null>(null);
   const variantCardsRef = useRef<HTMLDivElement | null>(null);
   const angleCardsRef = useRef<HTMLDivElement | null>(null);
   const person1ImgRef = useRef<HTMLDivElement | null>(null);
@@ -499,6 +529,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
           personFinal: personFinalImgRef,
           scanner: scannerRef,
           scannerBox: scannerBoxRef,
+          scannerCheck: scannerCheckRef,
           variantCardsBox: variantCardsRef,
           angleCardsBox: angleCardsRef,
           variantCards: variantItemRefs,
@@ -616,6 +647,28 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 								ref={scannerRef}
 								className="absolute w-full h-2 bg-gradient-to-b from-white/60 via-white/40 to-transparent top-0 shadow-lg"
 							></div>
+							{/* Ícone de check */}
+							<div
+								ref={scannerCheckRef}
+								className="absolute inset-0 flex items-center justify-center opacity-0"
+							>
+								<div className="w-16 h-16 bg-green-300 rounded-full flex items-center justify-center shadow-lg">
+									<svg
+										className="w-8 h-8 text-neutral-800"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={3}
+											d="M5 13l4 4L19 7"
+										/>
+									</svg>
+								</div>
+							</div>
 						</div>
 					</div>
 
