@@ -25,90 +25,54 @@ export function HeroAnimatedImage() {
   const scannerBoxRef = useRef<HTMLDivElement | null>(null);
   const variantCardsRef = useRef<HTMLDivElement | null>(null);
   const angleCardsRef = useRef<HTMLDivElement | null>(null);
+  const person1ImgRef = useRef<HTMLDivElement | null>(null);
+  const personFinalImgRef = useRef<HTMLDivElement | null>(null);
+  const variantItemRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const angleItemRefs = useRef<Array<HTMLDivElement | null>>([]);
   
   // Configuração das animações GSAP
   useEffect(() => {
-    // Configuração inicial
-    // Nada a esconder ainda; usaremos crossfade via classes abaixo
-    
-    // Timeline para controle das animações
-    const masterTimeline = gsap.timeline({
-      repeat: -1,
-      onUpdate: () => {
-        // Atualizamos o estado com base na posição da timeline
-        const progress = masterTimeline.progress();
-        if (progress < 0.33) {
-          setCurrentKeyframe(1);
-        } else if (progress < 0.66) {
-          setCurrentKeyframe(2);
-        } else {
-          setCurrentKeyframe(3);
+    const tl = gsap.timeline({ repeat: -1 });
+
+    // KF1 hold + fade in base image
+    tl.call(() => setCurrentKeyframe(1))
+      .fromTo(person1ImgRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
+      .to({}, { duration: 2.4 });
+
+    // KF2 enter: crossfade base image remains person1
+    tl.call(() => setCurrentKeyframe(2))
+      .fromTo(scannerRef.current, { top: 0 }, { top: "100%", duration: 2, ease: "power1.inOut", repeat: 1, yoyo: true })
+      // pop-in variants sequentially
+      .fromTo(variantItemRefs.current.filter(Boolean),
+        { opacity: 0, scale: 0.9, y: 12 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.35, stagger: 0.15, ease: "back.out(1.4)" }, "-=1.2")
+      .to({}, { duration: 1.0 })
+      // destaque de seleção em um card antes de ir ao KF3
+      .call(() => {
+        const pick = variantItemRefs.current.filter(Boolean)[1] as HTMLDivElement | undefined;
+        if (pick) {
+          pick.classList.add('outline', 'outline-2', 'outline-primary');
         }
-      }
-    });
-    
-    // Keyframe 1 - Pessoa original
-    masterTimeline.to({}, { duration: 4 }); // Pausa no keyframe 1
-    
-    // Transição para Keyframe 2 - Scanner (garante que a imagem nunca desapareça)
-    masterTimeline.to({}, { duration: 0.8, onStart: () => setCurrentKeyframe(2) });
-    
-    // Animação do scanner
-    if (scannerRef.current) {
-      masterTimeline.fromTo(scannerRef.current, 
-        { top: 0 },
-        { 
-          top: "100%", 
-          duration: 2, 
-          ease: "power1.inOut",
-          repeat: 1,
-          yoyo: true
+      })
+      .to({}, { duration: 0.6 })
+      .call(() => {
+        const pick = variantItemRefs.current.filter(Boolean)[1] as HTMLDivElement | undefined;
+        if (pick) {
+          pick.classList.remove('outline', 'outline-2', 'outline-primary');
         }
-      );
-    }
-    
-    // Aparecimento dos cards de variantes
-    if (variantCardsRef.current) {
-      masterTimeline.fromTo((variantCardsRef.current?.children as unknown as Element[]) || [],
-        { opacity: 0, y: 20 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.5,
-          stagger: 0.2,
-          ease: "back.out(1.7)"
-        }
-      );
-    }
-    
-    masterTimeline.to({}, { duration: 3 }); // Pausa no keyframe 2
-    
-    // Transição para Keyframe 3 - Ângulos (fade-in antes do fade-out)
-    masterTimeline.to({}, { duration: 0.8, onStart: () => setCurrentKeyframe(3) });
-    
-    // Animação dos cards de ângulos
-    if (angleCardsRef.current) {
-      masterTimeline.fromTo((angleCardsRef.current?.children as unknown as Element[]) || [],
-        { opacity: 0, scale: 0.8 },
-        { 
-          opacity: 1, 
-          scale: 1, 
-          duration: 0.5,
-          stagger: 0.2,
-          ease: "back.out(1.7)"
-        }
-      );
-    }
-    
-    masterTimeline.to({}, { duration: 3 }); // Pausa no keyframe 3
-    
-    // Transição de volta para o Keyframe 1 (fade-in antes do fade-out)
-    masterTimeline.to({}, { duration: 0.8, onStart: () => setCurrentKeyframe(1) });
-    
-    return () => {
-      // Limpeza da animação quando o componente for desmontado
-      masterTimeline.kill();
-    };
+      });
+
+    // KF3 enter: crossfade final image + pop-in angle cards
+    tl.call(() => setCurrentKeyframe(3))
+      .fromTo(personFinalImgRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
+      .fromTo(angleItemRefs.current.filter(Boolean),
+        { opacity: 0, scale: 0.9, y: 12 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.35, stagger: 0.15, ease: "back.out(1.4)" })
+      .to({}, { duration: 2.0 })
+      // voltar para KF1
+      .to(personFinalImgRef.current, { opacity: 0, duration: 0.5 });
+
+    return () => { tl.kill(); };
   }, []);
 
   // Reanima o scanner toda vez que entramos no keyframe 2
@@ -131,7 +95,7 @@ export function HeroAnimatedImage() {
       { name: 'value', value: clamped },
       { name: 'rest', value: 100 - clamped },
     ];
-    const GREEN = '#22c55e';
+    const GREEN = '#bbf7d0'; // Tailwind green-200
     const TRACK = '#e5e7eb';
 
     return (
@@ -145,7 +109,9 @@ export function HeroAnimatedImage() {
             innerRadius={20}
             outerRadius={30}
             strokeWidth={0}
-            isAnimationActive={false}
+            isAnimationActive
+            animationDuration={600}
+            cornerRadius={9999}
           >
             {data.map((entry, index) => (
               <Cell key={index} fill={index === 0 ? GREEN : TRACK} />
@@ -187,7 +153,7 @@ export function HeroAnimatedImage() {
 			</div>
 
 			{/* Unified Keyframe Layer */}
-			<div className="absolute inset-0 flex items-end justify-center">
+						<div className="absolute inset-0 flex items-end justify-center">
 				<div className="w-full h-full relative overflow-hidden">
 					<Image
 						src={currentImageSrc}
@@ -224,7 +190,7 @@ export function HeroAnimatedImage() {
 									<div className="hidden md:block" />
 
 									{/* topo direito */}
-									<div className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] outline-white/50 backdrop-blur-xl flex items-center gap-3">
+									<div ref={(el) => { variantItemRefs.current[0] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] outline-white/50 backdrop-blur-xl flex items-center gap-3">
 								<Image
 									src={keyframeImages.variantA}
 									alt="Opção A"
@@ -245,7 +211,7 @@ export function HeroAnimatedImage() {
 									</div>
 
 									{/* base esquerda */}
-									<div className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] outline-white/50 backdrop-blur-xl flex items-center gap-3">
+									<div ref={(el) => { variantItemRefs.current[1] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] outline-white/50 backdrop-blur-xl flex items-center gap-3">
 								<Image
 									src={keyframeImages.variantB}
 									alt="Opção B"
@@ -266,7 +232,7 @@ export function HeroAnimatedImage() {
 									</div>
 
 									{/* base direita */}
-									<div className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] outline-white/50 backdrop-blur-xl flex items-center gap-3">
+									<div ref={(el) => { variantItemRefs.current[2] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] outline-white/50 backdrop-blur-xl flex items-center gap-3">
 								<Image
 									src={keyframeImages.variantC}
 									alt="Opção C"
@@ -294,7 +260,7 @@ export function HeroAnimatedImage() {
 							ref={angleCardsRef}
 							className="absolute left-1/2 -translate-x-1/2 bottom-2 md:bottom-4 flex flex-row justify-center items-center gap-4 px-2 w-[480px]"
 						>
-							<div className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-row justify-center items-center gap-3">
+									<div ref={(el) => { angleItemRefs.current[0] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-row justify-center items-center gap-3">
 								<div className="flex flex-col justify-center items-center gap-2">
 									<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
 										Ângulo A
@@ -309,7 +275,7 @@ export function HeroAnimatedImage() {
 									/>
 								</div>
 							</div>
-							<div className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-row justify-center items-center gap-3">
+									<div ref={(el) => { angleItemRefs.current[1] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-row justify-center items-center gap-3">
 								<div className="flex flex-col justify-center items-center gap-2">
 									<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
 										Ângulo B
@@ -324,7 +290,7 @@ export function HeroAnimatedImage() {
 									/>
 								</div>
 							</div>
-							<div className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-row justify-center items-center gap-3">
+									<div ref={(el) => { angleItemRefs.current[2] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-row justify-center items-center gap-3">
 								<div className="flex flex-col justify-center items-center gap-2">
 									<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
 										Ângulo C
