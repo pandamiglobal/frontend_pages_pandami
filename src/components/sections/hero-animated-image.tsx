@@ -154,9 +154,17 @@ class HeroAnimationController {
 
   private createKeyframe3(): gsap.core.Timeline {
     const tl = gsap.timeline();
+    const { durations, easings } = ANIMATION_CONFIGS;
     
     tl.call(() => this.callbacks.onKeyframeChange(3))
-    .add(this.stopScanner())
+    .call(() => {
+      // Fazer fade out do scannerbox e scanner
+      gsap.to([this.refs.scannerBox.current, this.refs.scanner.current], {
+        opacity: 0,
+        duration: 0.4,
+        ease: easings.smoothEntry
+      });
+    })
     .add(this.animatePersonTransition())
     .add(this.animateAngleCardsEntry(), "-=0.6")
     .to({}, { duration: this.waitTime })
@@ -227,7 +235,7 @@ class HeroAnimationController {
 
   private animateScanner(): gsap.core.Timeline {
     const tl = gsap.timeline();
-    const { durations, easings } = ANIMATION_CONFIGS;
+    const { easings } = ANIMATION_CONFIGS;
 
     tl.set(this.refs.scannerBox.current, {
       opacity: 1
@@ -238,9 +246,9 @@ class HeroAnimationController {
     })
     .to(this.refs.scanner.current, {
       top: "calc(100% - 8px)", // 8px = altura do scanner (h-2 = 8px)
-      duration: durations.scannerCycle,
+      duration: 0.4, // Duração de cada ciclo (ida e volta)
       ease: easings.scannerMove,
-      repeat: 1,
+      repeat: 4, // 4 ciclos completos (ida e volta) = 1.6s total
       yoyo: true
     });
 
@@ -363,21 +371,6 @@ class HeroAnimationController {
     return tl;
   }
 
-  private stopScanner(): gsap.core.Timeline {
-    const tl = gsap.timeline();
-    const { durations, easings } = ANIMATION_CONFIGS;
-
-    tl.call(() => {
-      gsap.killTweensOf(this.refs.scanner.current);
-      gsap.to([this.refs.scannerBox.current, this.refs.scanner.current], {
-        opacity: 0,
-        duration: 0.4,
-        ease: easings.smoothEntry
-      });
-    });
-
-    return tl;
-  }
 
   private animateAngleCardsEntry(): gsap.core.Timeline {
     const tl = gsap.timeline();
