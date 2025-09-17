@@ -1,4 +1,5 @@
 @import '../../styles/globals.css';
+@import '../../styles/hero-animation.css';
 
 header:has(+ [data-no-header]) {
     display: none;

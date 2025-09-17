@@ -2,26 +2,22 @@
 
 import { Container } from "@/components/ui/container"
 import Link from "next/link"
-import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { PrimaryButton } from "@/components/ui/primary-button"
-import { HeroIcon } from "@/components/svg/hero-icon"
-
-
-const heroPersonImage = "/lp/images/hero/heroPersonImage_Female1.png"
+import { HeroAnimatedImage } from "@/components/sections/hero-animated-image"
 
 
 export function HeroSection() {
   return (
 		<section
 			id="home"
-			className="relative bg-[#f7f7f7] overflow-hidden min-h-screen md:min-h-[92vh] flex flex-col"
+			className="relative bg-[#f7f7f7] overflow-hidden h-[100svh] md:h-auto md:min-h-[560px] lg:min-h-[640px] xl:min-h-[700px] flex flex-col"
 		>
 			{/* Background Grid Pattern */}
 			<div className="absolute inset-0 bg-grid-pattern opacity-70"></div>
 
 			<Container className="flex-1 flex flex-col">
-				<div className="relative pt-24 lg:pt-20 pb-0 flex flex-col items-center flex-1">
+				<div className="relative pt-24 lg:pt-16 pb-0 flex flex-col items-center flex-1">
 					{/* Content */}
 					<div className="z-10 flex flex-col lg:flex-row items-center justify-between w-full h-full">
 						<div className="w-full max-w-[800px] flex flex-col gap-4 md:gap-6 px-0 text-center lg:text-left mb-4 lg:mb-0">
@@ -55,27 +51,9 @@ export function HeroSection() {
 							</div>
 						</div>
 
-						{/* Hero Images */}
-						<div className="relative flex items-end justify-center lg:justify-start h-full w-full max-w-[280px] mx-auto lg:mx-0 lg:max-w-[480px] self-end mt-8 lg:mt-0">
-							<div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 z-0">
-								<div
-									data-svg-wrapper
-									data-layer="heroIconImage"
-									className="Heroiconimage opacity-40 lg:opacity-100"
-								>
-									<HeroIcon className="w-96 h-64 lg:w-full lg:h-full object-contain" />
-								</div>
-							</div>
-							<div className="relative w-full h-auto aspect-3/4 lg:w-[486px] lg:h-[659px]">
-								<Image
-									src={heroPersonImage}
-									alt="Hero Person"
-									width={486}
-									height={659}
-									className="w-full h-auto object-cover"
-									priority
-								/>
-							</div>
+						{/* Hero Images - Animated */}
+						<div className="relative flex items-end justify-center w-full max-w-[480px] aspect-3/4">
+							<HeroAnimatedImage />
 						</div>
 					</div>
 				</div>
