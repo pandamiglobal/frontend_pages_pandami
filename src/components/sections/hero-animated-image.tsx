@@ -6,6 +6,469 @@ import { HeroIcon } from '@/components/svg/hero-icon';
 import { gsap } from 'gsap';
 import { PieChart, Pie, Label, Cell } from 'recharts';
 
+// Tipos para o sistema de animação
+interface AnimationRefs {
+  person1: React.RefObject<HTMLDivElement | null>;
+  personFinal: React.RefObject<HTMLDivElement | null>;
+  scanner: React.RefObject<HTMLDivElement | null>;
+  scannerBox: React.RefObject<HTMLDivElement | null>;
+  variantCardsBox: React.RefObject<HTMLDivElement | null>;
+  angleCardsBox: React.RefObject<HTMLDivElement | null>;
+  variantCards: React.RefObject<Array<HTMLDivElement | null>>;
+  angleCards: React.RefObject<Array<HTMLDivElement | null>>;
+}
+
+interface AnimationCallbacks {
+  onKeyframeChange: (keyframe: number) => void;
+  onCardSelection: (index: number | null) => void;
+}
+
+interface AnimationConfig {
+  refs: AnimationRefs;
+  callbacks: AnimationCallbacks;
+  waitTime?: number;
+}
+
+interface HeroAnimatedImageProps {
+  waitTime?: number;
+}
+
+// Configurações de animação centralizadas
+const ANIMATION_CONFIGS = {
+  durations: {
+    keyframe0Hold: 0.2,
+    keyframe1Hold: 0.8,
+    keyframe2Hold: 0.4,
+    keyframe3Hold: 0.6,
+    fadeTransition: 0.4,
+    popAnimation: 0.3,
+    scannerCycle: 0.8,
+    cardSelection: 0.2
+  },
+  easings: {
+    smoothEntry: "power2.out",
+    smoothExit: "power2.in",
+    smoothTransition: "power2.inOut",
+    popEntry: "back.out(2.5)",
+    popExit: "back.in(2)",
+    elasticEntry: "elastic.out(1.2, 0.8)",
+    elasticExit: "back.in(2.5)",
+    scannerMove: "power1.inOut"
+  },
+  transforms: {
+    initialPersonScale: 0.85,
+    personFadeY: 30,
+    personRotation: -3,
+    blurAmount: "8px",
+    cardPopScale: 0.1,
+    cardEntryY: 50,
+    cardExitY: -30
+  },
+  staggers: {
+    cardEntry: 0.2,
+    cardExit: 0.1,
+    angleEntry: 0.15
+  }
+} as const;
+
+// Controlador principal das animações - VERSÃO LIMPA
+class HeroAnimationController {
+  private timeline: gsap.core.Timeline | null = null;
+  private refs: AnimationRefs;
+  private callbacks: AnimationCallbacks;
+  private waitTime: number;
+  private isDestroyed = false;
+
+  constructor(config: AnimationConfig) {
+    this.refs = config.refs;
+    this.callbacks = config.callbacks;
+    this.waitTime = config.waitTime || 2; // Default 2 segundos
+    this.setupInitialStates();
+  }
+
+  public start(): void {
+    if (this.isDestroyed) return;
+    
+    this.timeline = gsap.timeline({ 
+      repeat: -1,
+      repeatDelay: 0,
+      immediateRender: false
+    });
+    this.buildAnimationSequence();
+  }
+
+  public destroy(): void {
+    this.isDestroyed = true;
+    this.timeline?.kill();
+    this.timeline = null;
+  }
+
+  private buildAnimationSequence(): void {
+    if (!this.timeline) return;
+
+    this.timeline
+      .add(this.createKeyframe0())
+      .add(this.createKeyframe1())
+      .add(this.createKeyframe2())
+      .add(this.createKeyframe3());
+  }
+
+  private createKeyframe0(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    
+    tl.call(() => {
+      this.callbacks.onKeyframeChange(0);
+      this.callbacks.onCardSelection(null);
+    })
+    .to({}, { duration: this.waitTime });
+
+    return tl;
+  }
+
+  private createKeyframe1(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    
+    tl.call(() => {
+      this.callbacks.onKeyframeChange(1);
+      this.callbacks.onCardSelection(null);
+    })
+    .add(this.animatePersonEntry())
+    .to({}, { duration: this.waitTime });
+
+    return tl;
+  }
+
+  private createKeyframe2(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    
+    tl.call(() => this.callbacks.onKeyframeChange(2))
+    .add(this.animateScanner())
+    .add(this.animateVariantCardsEntry(), "-=1.2")
+    .to({}, { duration: this.waitTime })
+    .add(this.animateCardSelection())
+    .to({}, { duration: this.waitTime })
+    .add(this.animateVariantCardsExit());
+
+    return tl;
+  }
+
+  private createKeyframe3(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    
+    tl.call(() => this.callbacks.onKeyframeChange(3))
+    .add(this.stopScanner())
+    .add(this.animatePersonTransition())
+    .add(this.animateAngleCardsEntry(), "-=0.6")
+    .to({}, { duration: this.waitTime })
+    .add(this.animateAngleCardsExit())
+    .add(this.animateFinalExit())
+    .add(this.resetAllStates());
+
+    return tl;
+  }
+
+  private setupInitialStates(): void {
+    const { transforms } = ANIMATION_CONFIGS;
+
+    // Configurar estado inicial de todos os elementos
+    gsap.set([this.refs.person1.current, this.refs.personFinal.current], {
+      opacity: 0,
+      scale: 1,
+      y: 0,
+      rotationZ: 0,
+      filter: "blur(0px)"
+    });
+    
+    gsap.set(this.refs.person1.current, {
+      scale: transforms.initialPersonScale,
+      y: transforms.personFadeY,
+      rotationZ: transforms.personRotation,
+      filter: `blur(${transforms.blurAmount})`
+    });
+    
+    gsap.set(this.refs.scannerBox.current, {
+      opacity: 0
+    });
+    
+    gsap.set(this.refs.scanner.current, {
+      opacity: 0,
+      top: 0
+    });
+    
+    gsap.set(this.refs.variantCards.current?.filter(Boolean), {
+      opacity: 0,
+      scale: 0.3,
+      y: 40
+    });
+    
+    gsap.set(this.refs.angleCards.current?.filter(Boolean), {
+      opacity: 0,
+      scale: 0.2,
+      y: 60
+    });
+  }
+
+  private animatePersonEntry(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings } = ANIMATION_CONFIGS;
+
+    tl.to(this.refs.person1.current, {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      rotationZ: 0,
+      filter: "blur(0px)",
+      duration: durations.fadeTransition + 0.2,
+      ease: easings.smoothEntry
+    });
+
+    return tl;
+  }
+
+  private animateScanner(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings } = ANIMATION_CONFIGS;
+
+    tl.set(this.refs.scannerBox.current, {
+      opacity: 1
+    })
+    .set(this.refs.scanner.current, {
+      opacity: 1,
+      top: 0
+    })
+    .to(this.refs.scanner.current, {
+      top: "calc(100% - 8px)", // 8px = altura do scanner (h-2 = 8px)
+      duration: durations.scannerCycle,
+      ease: easings.scannerMove,
+      repeat: 1,
+      yoyo: true
+    });
+
+    return tl;
+  }
+
+  private animateVariantCardsEntry(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings, transforms, staggers } = ANIMATION_CONFIGS;
+
+    tl.fromTo(this.refs.variantCards.current?.filter(Boolean),
+      {
+        opacity: 0,
+        scale: transforms.cardPopScale,
+        y: transforms.cardEntryY,
+        rotationZ: -20,
+        rotationY: 60,
+        transformOrigin: "center bottom"
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        rotationZ: 0,
+        rotationY: 0,
+        duration: durations.popAnimation,
+        stagger: staggers.cardEntry,
+        ease: easings.popEntry
+      }
+    );
+
+    return tl;
+  }
+
+  private animateVariantCardsExit(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings, staggers } = ANIMATION_CONFIGS;
+
+    tl.to(this.refs.variantCards.current?.filter(Boolean), {
+      opacity: 0,
+      duration: 0.5,
+      stagger: staggers.cardExit,
+      ease: easings.smoothExit
+    });
+
+    return tl;
+  }
+
+  private animateCardSelection(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings } = ANIMATION_CONFIGS;
+    
+    tl.call(() => {
+      const selectedIndex = 1;
+      this.callbacks.onCardSelection(selectedIndex);
+      
+      this.refs.variantCards.current?.forEach((card, index) => {
+        if (card) {
+          gsap.to(card, {
+            opacity: index === selectedIndex ? 1 : 0.5,
+            duration: durations.cardSelection,
+            ease: easings.smoothEntry
+          });
+        }
+      });
+    });
+
+    return tl;
+  }
+
+  private resetCardSelection(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings } = ANIMATION_CONFIGS;
+    
+    tl.call(() => {
+      this.callbacks.onCardSelection(null);
+      this.refs.variantCards.current?.forEach((card) => {
+        if (card) {
+          card.classList.remove('outline', 'outline-2', 'outline-primary');
+          gsap.to(card, {
+            opacity: 1,
+            duration: durations.cardSelection,
+            ease: easings.smoothEntry
+          });
+        }
+      });
+    });
+
+    return tl;
+  }
+
+  private animatePersonTransition(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings, transforms } = ANIMATION_CONFIGS;
+
+    tl.to(this.refs.person1.current, {
+      opacity: 0,
+      scale: 0.95,
+      rotationZ: 2,
+      duration: durations.fadeTransition - 0.1,
+      ease: easings.smoothTransition
+    })
+    .fromTo(this.refs.personFinal.current,
+      {
+        opacity: 0,
+        scale: 0.9,
+        rotationZ: -2,
+        filter: "blur(4px)"
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        rotationZ: 0,
+        filter: "blur(0px)",
+        duration: durations.fadeTransition,
+        ease: easings.smoothEntry
+      }, "-=0.6"
+    );
+
+    return tl;
+  }
+
+  private stopScanner(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings } = ANIMATION_CONFIGS;
+
+    tl.call(() => {
+      gsap.killTweensOf(this.refs.scanner.current);
+      gsap.to([this.refs.scannerBox.current, this.refs.scanner.current], {
+        opacity: 0,
+        duration: 0.4,
+        ease: easings.smoothEntry
+      });
+    });
+
+    return tl;
+  }
+
+  private animateAngleCardsEntry(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings, staggers } = ANIMATION_CONFIGS;
+
+    tl.fromTo(this.refs.angleCards.current?.filter(Boolean),
+      {
+        opacity: 0,
+        scale: 0.2,
+        y: 60,
+        rotationZ: -20,
+        rotationX: 45,
+        transformOrigin: "center center"
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        rotationZ: 0,
+        rotationX: 0,
+        duration: 0.5,
+        stagger: staggers.angleEntry,
+        ease: easings.elasticEntry
+      }
+    );
+
+    return tl;
+  }
+
+  private animateAngleCardsExit(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { staggers, easings } = ANIMATION_CONFIGS;
+
+    tl.to(this.refs.angleCards.current?.filter(Boolean), {
+      opacity: 0,
+      duration: 0.6,
+      stagger: staggers.cardExit,
+      ease: easings.smoothExit
+    });
+
+    return tl;
+  }
+
+  private animateFinalExit(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+    const { durations, easings } = ANIMATION_CONFIGS;
+
+    tl.to(this.refs.personFinal.current, {
+      opacity: 0,
+      scale: 0.95,
+      rotationZ: 2,
+      duration: durations.fadeTransition,
+      ease: easings.smoothExit
+    });
+
+    return tl;
+  }
+
+  private resetAllStates(): gsap.core.Timeline {
+    const tl = gsap.timeline();
+
+    tl.call(() => {
+      // Garantir que variant cards fiquem ocultos (não aparecem no keyframe 3)
+      gsap.set(this.refs.variantCards.current?.filter(Boolean), {
+        opacity: 0,
+        scale: 0.3,
+        y: 40,
+        rotationZ: 0,
+        rotationY: 0,
+        rotationX: 0
+      });
+
+      // Garantir que angle cards fiquem ocultos (não aparecem no keyframe 0, 1, 2)
+      gsap.set(this.refs.angleCards.current?.filter(Boolean), {
+        opacity: 0,
+        scale: 0.2,
+        y: 60,
+        rotationZ: 0,
+        rotationY: 0,
+        rotationX: 0
+      });
+
+      // Reset dos callbacks
+      this.callbacks.onKeyframeChange(0);
+      this.callbacks.onCardSelection(null);
+    });
+
+    return tl;
+  }
+}
+
 const keyframeImages = {
   person1: '/lp/images/hero/heroPersonImage_Female1.png',
   personFinal: '/lp/images/hero/heroPersonImage_Female-Final.png',
@@ -17,8 +480,9 @@ const keyframeImages = {
   angleC: '/lp/images/hero/heroPersonImageCard_Female-angle-C.png',
 };
 
-export function HeroAnimatedImage() {
-  const [currentKeyframe, setCurrentKeyframe] = useState(1);
+export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
+  const [currentKeyframe, setCurrentKeyframe] = useState(0);
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
   
   // Referências para os elementos que serão animados com GSAP
   const scannerRef = useRef<HTMLDivElement | null>(null);
@@ -29,65 +493,38 @@ export function HeroAnimatedImage() {
   const personFinalImgRef = useRef<HTMLDivElement | null>(null);
   const variantItemRefs = useRef<Array<HTMLDivElement | null>>([]);
   const angleItemRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const heroContainerRef = useRef<HTMLDivElement | null>(null);
   
-  // Configuração das animações GSAP
+  // Sistema de controle de animações
+  const animationController = useRef<HeroAnimationController | null>(null);
+
   useEffect(() => {
-    const tl = gsap.timeline({ repeat: -1 });
-
-    // KF1 hold + fade in base image
-    tl.call(() => setCurrentKeyframe(1))
-      .fromTo(person1ImgRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
-      .to({}, { duration: 2.4 });
-
-    // KF2 enter: crossfade base image remains person1
-    tl.call(() => setCurrentKeyframe(2))
-      .fromTo(scannerRef.current, { top: 0 }, { top: "100%", duration: 2, ease: "power1.inOut", repeat: 1, yoyo: true })
-      // pop-in variants sequentially
-      .fromTo(variantItemRefs.current.filter(Boolean),
-        { opacity: 0, scale: 0.9, y: 12 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.35, stagger: 0.15, ease: "back.out(1.4)" }, "-=1.2")
-      .to({}, { duration: 1.0 })
-      // destaque de seleção em um card antes de ir ao KF3
-      .call(() => {
-        const pick = variantItemRefs.current.filter(Boolean)[1] as HTMLDivElement | undefined;
-        if (pick) {
-          pick.classList.add('outline', 'outline-2', 'outline-primary');
-        }
-      })
-      .to({}, { duration: 0.6 })
-      .call(() => {
-        const pick = variantItemRefs.current.filter(Boolean)[1] as HTMLDivElement | undefined;
-        if (pick) {
-          pick.classList.remove('outline', 'outline-2', 'outline-primary');
-        }
-      });
-
-    // KF3 enter: crossfade final image + pop-in angle cards
-    tl.call(() => setCurrentKeyframe(3))
-      .fromTo(personFinalImgRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
-      .fromTo(angleItemRefs.current.filter(Boolean),
-        { opacity: 0, scale: 0.9, y: 12 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.35, stagger: 0.15, ease: "back.out(1.4)" })
-      .to({}, { duration: 2.0 })
-      // voltar para KF1
-      .to(personFinalImgRef.current, { opacity: 0, duration: 0.5 });
-
-    return () => { tl.kill(); };
-  }, []);
-
-  // Reanima o scanner toda vez que entramos no keyframe 2
-  useEffect(() => {
-    if (currentKeyframe === 2 && scannerRef.current) {
-      gsap.set(scannerRef.current, { top: 0 });
-      gsap.to(scannerRef.current, {
-        top: "100%",
-        duration: 2,
-        ease: "power1.inOut",
-        repeat: 1,
-        yoyo: true,
+    if (!animationController.current) {
+      animationController.current = new HeroAnimationController({
+        refs: {
+          person1: person1ImgRef,
+          personFinal: personFinalImgRef,
+          scanner: scannerRef,
+          scannerBox: scannerBoxRef,
+          variantCardsBox: variantCardsRef,
+          angleCardsBox: angleCardsRef,
+          variantCards: variantItemRefs,
+          angleCards: angleItemRefs
+        },
+        callbacks: {
+          onKeyframeChange: setCurrentKeyframe,
+          onCardSelection: setSelectedCardIndex
+        },
+        waitTime: waitTime
       });
     }
-  }, [currentKeyframe]);
+
+    animationController.current.start();
+
+    return () => {
+      animationController.current?.destroy();
+    };
+  }, []);
 
   function DonutPercent({ percent }: { percent: number }) {
     const clamped = Math.max(0, Math.min(100, percent));
@@ -135,11 +572,6 @@ export function HeroAnimatedImage() {
     );
   }
 
-  const currentImageSrc = currentKeyframe === 3 ? keyframeImages.personFinal : keyframeImages.person1;
-  const showScanner = currentKeyframe === 2;
-  const showVariants = currentKeyframe === 2;
-  const showAngles = currentKeyframe === 3;
-
   return (
 		<div className="relative flex items-end justify-center lg:justify-start h-full w-full max-w-[320px] md:max-w-[400px] lg:max-w-[480px] mx-auto lg:mx-0 self-end">
 			<div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 z-0">
@@ -153,160 +585,179 @@ export function HeroAnimatedImage() {
 			</div>
 
 			{/* Unified Keyframe Layer */}
-						<div className="absolute inset-0 flex items-end justify-center">
+			<div className="absolute inset-0 flex items-end justify-center" ref={heroContainerRef}>
 				<div className="w-full h-full relative overflow-hidden">
-					<Image
-						src={currentImageSrc}
-						alt="Hero Person"
-						width={486}
-						height={659}
-						className="w-full h-auto object-contain"
-						unoptimized
-						priority
-					/>
+					{/* Imagem person1 */}
+					<div ref={person1ImgRef} className="absolute inset-0 opacity-0">
+						<Image
+							src={keyframeImages.person1}
+							alt="Hero Person 1"
+							width={486}
+							height={659}
+							className="w-full h-auto object-contain"
+							unoptimized
+							priority
+						/>
+					</div>
+					
+					{/* Imagem personFinal */}
+					<div ref={personFinalImgRef} className="absolute inset-0 opacity-0">
+						<Image
+							src={keyframeImages.personFinal}
+							alt="Hero Person Final"
+							width={486}
+							height={659}
+							className="w-full h-auto object-contain"
+							unoptimized
+							priority
+						/>
+					</div>
 
-					{/* Scanner (only on KF2) */}
-					{showScanner && (
-						<div
-							ref={scannerBoxRef}
-							className="absolute left-1/2 -translate-x-1/2 top-[16%] w-1/2 max-w-[220px] h-[300px] max-h-[320px] bg-black/0 rounded-2xl outline outline-offset-[-1px] outline-gray-400 overflow-hidden"
-						>
-							<div className="w-full h-full relative overflow-hidden">
-								<div
-									ref={scannerRef}
-									className="absolute w-full h-2 bg-gradient-to-b from-white/40 to-transparent"
-								></div>
+					{/* Scanner */}
+					<div
+						ref={scannerBoxRef}
+						className="absolute left-1/2 -translate-x-1/2 top-[80px] w-1/2 max-w-[220px] h-[300px] max-h-[320px] bg-black/0 rounded-2xl outline outline-offset-[-1px] outline-gray-400 overflow-hidden opacity-0"
+					>
+						<div className="w-full h-full relative overflow-hidden">
+							<div
+								ref={scannerRef}
+								className="absolute w-full h-2 bg-gradient-to-b from-white/60 via-white/40 to-transparent top-0 shadow-lg"
+							></div>
+						</div>
+					</div>
+
+					{/* Variant cards */}
+					<div
+						ref={variantCardsRef}
+						className="absolute bottom-0 right-0 md:bottom-2 md:right-4 grid grid-cols-2 grid-rows-2 gap-3 p-1 md:p-2 w-max"
+					>
+						{/* célula 1 vazia para formar o L invertido */}
+						<div className="hidden md:block" />
+
+						{/* topo direito - Opção A */}
+						<div 
+							ref={(el) => { variantItemRefs.current[0] = el; }} 
+							className={`p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] ${
+								selectedCardIndex === 0 ? 'outline-primary outline-2 shadow-lg shadow-primary/20' : 'outline-white/50'
+							} backdrop-blur-xl flex items-center gap-3 transition-all duration-300 opacity-0`}>
+							<Image
+								src={keyframeImages.variantA}
+								alt="Opção A"
+								width={106}
+								height={106}
+								className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
+								unoptimized
+							/>
+							<div className="flex flex-col items-center gap-1.5">
+								<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
+									Opção A
+								</div>
+								<div className="text-neutral-800 text-[8px] font-normal font-['Ubuntu']">
+									Harmonia
+								</div>
+								<DonutPercent percent={94} />
 							</div>
 						</div>
-					)}
 
-					{/* Variant cards (KF2) */}
-							{showVariants && (
-								<div
-									ref={variantCardsRef}
-									className="absolute right-3 md:right-6 bottom-2 md:bottom-4 grid grid-cols-2 grid-rows-2 gap-3 px-2 w-full max-w-[480px]"
-								>
-									{/* célula 1 vazia para formar o L invertido */}
-									<div className="hidden md:block" />
-
-									{/* topo direito */}
-									<div ref={(el) => { variantItemRefs.current[0] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] outline-white/50 backdrop-blur-xl flex items-center gap-3">
-								<Image
-									src={keyframeImages.variantA}
-									alt="Opção A"
-									width={106}
-									height={106}
-									className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
-									unoptimized
-								/>
-								<div className="flex flex-col items-center gap-1.5">
-									<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-										Opção A
-									</div>
-									<div className="text-neutral-800 text-[8px] font-normal font-['Ubuntu']">
-										Harmonia
-									</div>
-									<DonutPercent percent={94} />
+						{/* base esquerda - Opção B */}
+						<div 
+							ref={(el) => { variantItemRefs.current[1] = el; }} 
+							className={`p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] ${
+								selectedCardIndex === 1 ? 'outline-primary outline-2 shadow-lg shadow-primary/20' : 'outline-white/50'
+							} backdrop-blur-xl flex items-center gap-3 transition-all duration-300 opacity-0`}>
+							<Image
+								src={keyframeImages.variantB}
+								alt="Opção B"
+								width={106}
+								height={106}
+								className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
+								unoptimized
+							/>
+							<div className="flex flex-col items-center gap-1.5">
+								<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
+									Opção B
 								</div>
-									</div>
-
-									{/* base esquerda */}
-									<div ref={(el) => { variantItemRefs.current[1] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] outline-white/50 backdrop-blur-xl flex items-center gap-3">
-								<Image
-									src={keyframeImages.variantB}
-									alt="Opção B"
-									width={106}
-									height={106}
-									className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
-									unoptimized
-								/>
-								<div className="flex flex-col items-center gap-1.5">
-									<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-										Opção B
-									</div>
-									<div className="text-neutral-800 text-[8px] font-normal font-['Ubuntu']">
-										Harmonia
-									</div>
-									<DonutPercent percent={96} />
+								<div className="text-neutral-800 text-[8px] font-normal font-['Ubuntu']">
+									Harmonia
 								</div>
-									</div>
-
-									{/* base direita */}
-									<div ref={(el) => { variantItemRefs.current[2] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] outline-white/50 backdrop-blur-xl flex items-center gap-3">
-								<Image
-									src={keyframeImages.variantC}
-									alt="Opção C"
-									width={106}
-									height={106}
-									className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
-									unoptimized
-								/>
-								<div className="flex flex-col items-center gap-1.5">
-									<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-										Opção C
-									</div>
-									<div className="text-neutral-800 text-[8px] font-normal font-['Ubuntu']">
-										Harmonia
-									</div>
-									<DonutPercent percent={98} />
-								</div>
+								<DonutPercent percent={96} />
 							</div>
 						</div>
-					)}
 
-					{/* Angle cards (KF3) */}
-					{showAngles && (
-						<div
-							ref={angleCardsRef}
-							className="absolute left-1/2 -translate-x-1/2 bottom-2 md:bottom-4 flex flex-row justify-center items-center gap-4 px-2 w-[480px]"
-						>
-									<div ref={(el) => { angleItemRefs.current[0] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-row justify-center items-center gap-3">
-								<div className="flex flex-col justify-center items-center gap-2">
-									<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-										Ângulo A
-									</div>
-									<Image
-										src={keyframeImages.angleA}
-										alt="Ângulo A"
-										width={112}
-										height={112}
-										className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
-										unoptimized
-									/>
+						{/* base direita - Opção C */}
+						<div 
+							ref={(el) => { variantItemRefs.current[2] = el; }} 
+							className={`p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] ${
+								selectedCardIndex === 2 ? 'outline-primary outline-2 shadow-lg shadow-primary/20' : 'outline-white/50'
+							} backdrop-blur-xl flex items-center gap-3 transition-all duration-300 opacity-0`}>
+							<Image
+								src={keyframeImages.variantC}
+								alt="Opção C"
+								width={106}
+								height={106}
+								className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
+								unoptimized
+							/>
+							<div className="flex flex-col items-center gap-1.5">
+								<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
+									Opção C
 								</div>
-							</div>
-									<div ref={(el) => { angleItemRefs.current[1] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-row justify-center items-center gap-3">
-								<div className="flex flex-col justify-center items-center gap-2">
-									<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-										Ângulo B
-									</div>
-									<Image
-										src={keyframeImages.angleB}
-										alt="Ângulo B"
-										width={112}
-										height={112}
-										className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
-										unoptimized
-									/>
+								<div className="text-neutral-800 text-[8px] font-normal font-['Ubuntu']">
+									Harmonia
 								</div>
-							</div>
-									<div ref={(el) => { angleItemRefs.current[2] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-row justify-center items-center gap-3">
-								<div className="flex flex-col justify-center items-center gap-2">
-									<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-										Ângulo C
-									</div>
-									<Image
-										src={keyframeImages.angleC}
-										alt="Ângulo C"
-										width={112}
-										height={112}
-										className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
-										unoptimized
-									/>
-								</div>
+								<DonutPercent percent={98} />
 							</div>
 						</div>
-					)}
+					</div>
+
+					{/* Angle cards */}
+					<div
+						ref={angleCardsRef}
+						className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-row justify-center items-end gap-4 p-1 md:p-2 w-max"
+					>
+						{/* Ângulo A */}
+						<div ref={(el) => { angleItemRefs.current[0] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-col justify-center items-center gap-2 opacity-0">
+							<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
+								Ângulo A
+							</div>
+							<Image
+								src={keyframeImages.angleA}
+								alt="Ângulo A"
+								width={112}
+								height={112}
+								className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
+								unoptimized
+							/>
+						</div>
+						{/* Ângulo B */}
+						<div ref={(el) => { angleItemRefs.current[1] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-col justify-center items-center gap-2 opacity-0">
+							<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
+								Ângulo B
+							</div>
+							<Image
+								src={keyframeImages.angleB}
+								alt="Ângulo B"
+								width={112}
+								height={112}
+								className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
+								unoptimized
+							/>
+						</div>
+						{/* Ângulo C */}
+						<div ref={(el) => { angleItemRefs.current[2] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-col justify-center items-center gap-2 opacity-0">
+							<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
+								Ângulo C
+							</div>
+							<Image
+								src={keyframeImages.angleC}
+								alt="Ângulo C"
+								width={112}
+								height={112}
+								className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
+								unoptimized
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
