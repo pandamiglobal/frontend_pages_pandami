@@ -1,10 +1,12 @@
 "use client"
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import Image from 'next/image';
 import { HeroIcon } from '@/components/svg/hero-icon';
 import { gsap } from 'gsap';
-import { PieChart, Pie, Label, Cell } from 'recharts';
+import { DonutPercent } from './donut-percent';
+import { VariantCard } from './variant-card';
+import { AngleCard } from './angle-card';
 
 // Tipos para o sistema de animação
 interface AnimationRefs {
@@ -491,15 +493,20 @@ class HeroAnimationController {
   }
 }
 
-const keyframeImages = {
+// Imagens organizadas para facilitar mapeamento
+const KEYFRAME_IMAGES = {
   person1: '/lp/images/hero/heroPersonImage_Female1.png',
   personFinal: '/lp/images/hero/heroPersonImage_Female-Final.png',
-  variantA: '/lp/images/hero/heroPersonImageCard_Female-Variant-A.png',
-  variantB: '/lp/images/hero/heroPersonImageCard_Female-Variant-B.png',
-  variantC: '/lp/images/hero/heroPersonImageCard_Female-Variant-C.png',
-  angleA: '/lp/images/hero/heroPersonImageCard_Female-angle-A.png',
-  angleB: '/lp/images/hero/heroPersonImageCard_Female-angle-B.png',
-  angleC: '/lp/images/hero/heroPersonImageCard_Female-angle-C.png',
+  variants: [
+    '/lp/images/hero/heroPersonImageCard_Female-Variant-A.png',
+    '/lp/images/hero/heroPersonImageCard_Female-Variant-B.png',
+    '/lp/images/hero/heroPersonImageCard_Female-Variant-C.png',
+  ],
+  angles: [
+    '/lp/images/hero/heroPersonImageCard_Female-angle-A.png',
+    '/lp/images/hero/heroPersonImageCard_Female-angle-B.png',
+    '/lp/images/hero/heroPersonImageCard_Female-angle-C.png',
+  ]
 };
 
 export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
@@ -521,7 +528,24 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
   // Sistema de controle de animações
   const animationController = useRef<HeroAnimationController | null>(null);
 
+  // Dados de variantes para evitar repetição
+  const variantData = [
+    { title: 'Opção A', subtitle: 'Harmonia', percent: 94 },
+    { title: 'Opção B', subtitle: 'Harmonia', percent: 96 },
+    { title: 'Opção C', subtitle: 'Harmonia', percent: 98 },
+  ];
+
+  // Dados de ângulos para evitar repetição
+  const angleData = [
+    { title: 'Ângulo A' },
+    { title: 'Ângulo B' },
+    { title: 'Ângulo C' },
+  ];
+
   useEffect(() => {
+    // Preferência do usuário para redução de movimento
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     if (!animationController.current) {
       animationController.current = new HeroAnimationController({
         refs: {
@@ -539,65 +563,28 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
           onKeyframeChange: setCurrentKeyframe,
           onCardSelection: setSelectedCardIndex
         },
-        waitTime: waitTime
+        waitTime: prefersReducedMotion ? 0 : waitTime
       });
     }
 
-    animationController.current.start();
+    if (!prefersReducedMotion) {
+      animationController.current.start();
+    } else {
+      // Em caso de preferência por redução de movimento, apenas mostramos o estado final
+      setCurrentKeyframe(3);
+    }
 
     return () => {
       animationController.current?.destroy();
     };
-  }, []);
+  }, [waitTime]);
 
-  function DonutPercent({ percent }: { percent: number }) {
-    const clamped = Math.max(0, Math.min(100, percent));
-    const data = [
-      { name: 'value', value: clamped },
-      { name: 'rest', value: 100 - clamped },
-    ];
-    const GREEN = '#bbf7d0'; // Tailwind green-200
-    const TRACK = '#e5e7eb';
-
-    return (
-      <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-        <PieChart width={64} height={64}>
-          <Pie
-            data={data}
-            dataKey="value"
-            startAngle={90}
-            endAngle={-270}
-            innerRadius={20}
-            outerRadius={30}
-            strokeWidth={0}
-            isAnimationActive
-            animationDuration={600}
-            cornerRadius={9999}
-          >
-            {data.map((entry, index) => (
-              <Cell key={index} fill={index === 0 ? GREEN : TRACK} />
-            ))}
-            <Label
-              content={({ viewBox }) => {
-                if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
-                  return (
-                    <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
-                      <tspan className="fill-neutral-800 text-xs font-medium">{clamped}</tspan>
-                      <tspan className="fill-neutral-800 text-[9.6px] font-medium">%</tspan>
-                    </text>
-                  );
-                }
-                return null;
-              }}
-            />
-          </Pie>
-        </PieChart>
-      </div>
-    );
-  }
+// DonutPercent foi movido para um componente separado
 
   return (
-		<div className="relative flex items-end justify-center lg:justify-start h-full w-full max-w-[320px] md:max-w-[400px] lg:max-w-[480px] mx-auto lg:mx-0 self-end">
+		<div 
+      className="relative flex items-end justify-center lg:justify-start h-full w-full max-w-[320px] md:max-w-[400px] lg:max-w-[480px] mx-auto lg:mx-0 self-end"
+      aria-label="Demonstração animada de análise de visagismo">
 			<div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 z-0">
 				<div
 					data-svg-wrapper
@@ -614,12 +601,11 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 					{/* Imagem person1 */}
 					<div ref={person1ImgRef} className="absolute inset-0 opacity-0">
 						<Image
-							src={keyframeImages.person1}
-							alt="Hero Person 1"
+							src={KEYFRAME_IMAGES.person1}
+							alt="Pessoa para análise de visagismo - etapa inicial"
 							width={486}
 							height={659}
 							className="w-full h-auto object-contain"
-							unoptimized
 							priority
 						/>
 					</div>
@@ -627,12 +613,11 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 					{/* Imagem personFinal */}
 					<div ref={personFinalImgRef} className="absolute inset-0 opacity-0">
 						<Image
-							src={keyframeImages.personFinal}
-							alt="Hero Person Final"
+							src={KEYFRAME_IMAGES.personFinal}
+							alt="Pessoa após análise de visagismo - resultado final"
 							width={486}
 							height={659}
 							className="w-full h-auto object-contain"
-							unoptimized
 							priority
 						/>
 					</div>
@@ -641,6 +626,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 					<div
 						ref={scannerBoxRef}
 						className="absolute left-1/2 -translate-x-1/2 top-[80px] w-1/2 max-w-[220px] h-[300px] max-h-[320px] bg-black/0 rounded-2xl outline outline-offset-[-1px] outline-gray-400 overflow-hidden opacity-0"
+            aria-hidden="true"
 					>
 						<div className="w-full h-full relative overflow-hidden">
 							<div
@@ -659,6 +645,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 										stroke="currentColor"
 										viewBox="0 0 24 24"
 										xmlns="http://www.w3.org/2000/svg"
+                    aria-label="Verificação concluída"
 									>
 										<path
 											strokeLinecap="round"
@@ -676,136 +663,47 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 					<div
 						ref={variantCardsRef}
 						className="absolute bottom-0 right-0 md:bottom-2 md:right-4 grid grid-cols-2 grid-rows-2 gap-3 p-1 md:p-2 w-max"
+            aria-label="Opções de variantes de visagismo"
 					>
 						{/* célula 1 vazia para formar o L invertido */}
 						<div className="hidden md:block" />
 
-						{/* topo direito - Opção A */}
-						<div 
-							ref={(el) => { variantItemRefs.current[0] = el; }} 
-							className={`p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] ${
-								selectedCardIndex === 0 ? 'outline-primary outline-2 shadow-lg shadow-primary/20' : 'outline-white/50'
-							} backdrop-blur-xl flex items-center gap-3 transition-all duration-300 opacity-0`}>
-							<Image
-								src={keyframeImages.variantA}
-								alt="Opção A"
-								width={106}
-								height={106}
-								className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
-								unoptimized
-							/>
-							<div className="flex flex-col items-center gap-1.5">
-								<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-									Opção A
-								</div>
-								<div className="text-neutral-800 text-[8px] font-normal font-['Ubuntu']">
-									Harmonia
-								</div>
-								<DonutPercent percent={94} />
-							</div>
-						</div>
-
-						{/* base esquerda - Opção B */}
-						<div 
-							ref={(el) => { variantItemRefs.current[1] = el; }} 
-							className={`p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] ${
-								selectedCardIndex === 1 ? 'outline-primary outline-2 shadow-lg shadow-primary/20' : 'outline-white/50'
-							} backdrop-blur-xl flex items-center gap-3 transition-all duration-300 opacity-0`}>
-							<Image
-								src={keyframeImages.variantB}
-								alt="Opção B"
-								width={106}
-								height={106}
-								className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
-								unoptimized
-							/>
-							<div className="flex flex-col items-center gap-1.5">
-								<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-									Opção B
-								</div>
-								<div className="text-neutral-800 text-[8px] font-normal font-['Ubuntu']">
-									Harmonia
-								</div>
-								<DonutPercent percent={96} />
-							</div>
-						</div>
-
-						{/* base direita - Opção C */}
-						<div 
-							ref={(el) => { variantItemRefs.current[2] = el; }} 
-							className={`p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] ${
-								selectedCardIndex === 2 ? 'outline-primary outline-2 shadow-lg shadow-primary/20' : 'outline-white/50'
-							} backdrop-blur-xl flex items-center gap-3 transition-all duration-300 opacity-0`}>
-							<Image
-								src={keyframeImages.variantC}
-								alt="Opção C"
-								width={106}
-								height={106}
-								className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
-								unoptimized
-							/>
-							<div className="flex flex-col items-center gap-1.5">
-								<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-									Opção C
-								</div>
-								<div className="text-neutral-800 text-[8px] font-normal font-['Ubuntu']">
-									Harmonia
-								</div>
-								<DonutPercent percent={98} />
-							</div>
-						</div>
+						{/* Renderização dos cartões de variantes usando mapeamento */}
+						{variantData.map((variant, index) => (
+              <VariantCard
+                key={`variant-${index}`}
+                index={index}
+                ref={(el) => { variantItemRefs.current[index] = el; }}
+                imageSrc={KEYFRAME_IMAGES.variants[index]}
+                title={variant.title}
+                subtitle={variant.subtitle}
+                percent={variant.percent}
+                isSelected={selectedCardIndex === index}
+              />
+            ))}
 					</div>
 
 					{/* Angle cards */}
 					<div
 						ref={angleCardsRef}
 						className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-row justify-center items-end gap-4 p-1 md:p-2 w-max"
+            aria-label="Opções de ângulos de visualização"
 					>
-						{/* Ângulo A */}
-						<div ref={(el) => { angleItemRefs.current[0] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-col justify-center items-center gap-2 opacity-0">
-							<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-								Ângulo A
-							</div>
-							<Image
-								src={keyframeImages.angleA}
-								alt="Ângulo A"
-								width={112}
-								height={112}
-								className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
-								unoptimized
-							/>
-						</div>
-						{/* Ângulo B */}
-						<div ref={(el) => { angleItemRefs.current[1] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-col justify-center items-center gap-2 opacity-0">
-							<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-								Ângulo B
-							</div>
-							<Image
-								src={keyframeImages.angleB}
-								alt="Ângulo B"
-								width={112}
-								height={112}
-								className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
-								unoptimized
-							/>
-						</div>
-						{/* Ângulo C */}
-						<div ref={(el) => { angleItemRefs.current[2] = el; }} className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-col justify-center items-center gap-2 opacity-0">
-							<div className="text-neutral-800 text-sm font-bold font-['Ubuntu']">
-								Ângulo C
-							</div>
-							<Image
-								src={keyframeImages.angleC}
-								alt="Ângulo C"
-								width={112}
-								height={112}
-								className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
-								unoptimized
-							/>
-						</div>
+						{/* Renderização dos cartões de ângulos usando mapeamento */}
+            {angleData.map((angle, index) => (
+              <AngleCard
+                key={`angle-${index}`}
+                index={index}
+                ref={(el) => { angleItemRefs.current[index] = el; }}
+                imageSrc={KEYFRAME_IMAGES.angles[index]}
+                title={angle.title}
+              />
+            ))}
 					</div>
 				</div>
 			</div>
 		</div>
 	);
 }
+
+export default memo(HeroAnimatedImage);
