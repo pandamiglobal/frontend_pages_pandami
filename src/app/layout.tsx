@@ -49,26 +49,35 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning className={`${ubuntu.variable} ${fahkwang.variable}`}>
-      <head>
-        <Script id="microsoft-clarity">
-          {`
+		<html
+			lang="pt-BR"
+			suppressHydrationWarning
+			className={`${ubuntu.variable} ${fahkwang.variable}`}
+		>
+			<head>
+				<Script id="microsoft-clarity">
+					{`
             (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
               y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "q5o6qhr6ia");
+            })(window, document, "clarity", "script", "tctj766hfq");
           `}
-        </Script>
-      </head>
-      <body className={`font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <Header />
-          {children}
-          <Footer />
-          <Modal />
-        </ThemeProvider>
-      </body>
-    </html>
-  )
+				</Script>
+			</head>
+			<body className={`font-sans`}>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="light"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<Header />
+					{children}
+					<Footer />
+					<Modal />
+				</ThemeProvider>
+			</body>
+		</html>
+	);
 }
