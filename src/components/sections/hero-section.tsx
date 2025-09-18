@@ -11,7 +11,7 @@ export function HeroSection() {
   return (
 		<section
 			id="home"
-			className="relative bg-[#f7f7f7] overflow-hidden h-[100svh] md:h-auto md:min-h-[560px] lg:min-h-[640px] xl:min-h-[700px] flex flex-col"
+			className="relative bg-[#f7f7f7] overflow-hidden h-screen md:h-auto lg:min-h-[640px] xl:min-h-[700px] flex flex-col"
 		>
 			{/* Background Grid Pattern */}
 			<div className="absolute inset-0 bg-grid-pattern opacity-70"></div>
