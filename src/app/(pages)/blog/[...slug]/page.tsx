@@ -20,12 +20,12 @@ function getPostSlug(slug: string | string[]): string {
 }
 
 export async function generateMetadata(
-  { params }: { params: { slug: string | string[] } }
+  { params }: SlugPageProps
 ): Promise<Metadata> {
   try {
     // Aguarde a resolução do params antes de acessar suas propriedades
     const resolvedParams = await params;
-    const slugParam = await resolvedParams.slug;
+    const slugParam = resolvedParams.slug;
     
     // Agora podemos acessar o slug com segurança
     const postSlug = getPostSlug(slugParam);
@@ -75,10 +75,10 @@ export async function generateMetadata(
   }
 }
 
-export default async function BlogPost({ params }: { params: { slug: string | string[] } }) {
+export default async function BlogPost({ params }: SlugPageProps) {
   // Aguarde a resolução do params antes de acessar suas propriedades
   const resolvedParams = await params;
-  const slugParam = await resolvedParams.slug;
+  const slugParam = resolvedParams.slug;
   const postSlug = getPostSlug(slugParam);
   
   const sidebar = (

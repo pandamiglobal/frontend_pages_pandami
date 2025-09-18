@@ -10,10 +10,10 @@ export interface DynamicPageProps {
   searchParams?: SearchParams;
 }
 
-// Uso específico para rota catch-all [...slug]
+// Uso específico para rota catch-all [...slug] - Compatível com Next.js 15
 export interface SlugPageProps {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
-  searchParams?: SearchParams;
+  }>;
+  searchParams?: Promise<SearchParams>;
 }
