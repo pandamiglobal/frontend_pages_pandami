@@ -616,7 +616,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 
   return (
 		<div
-			className="relative flex items-end justify-center lg:justify-start h-full w-full max-w-[320px] md:max-w-[400px] lg:max-w-[480px] mx-auto lg:mx-0 self-end mb-2"
+			className="relative flex flex-col justify-end h-full w-full max-w-[320px] md:max-w-[400px] lg:max-w-[480px] mx-auto lg:mx-0"
 			aria-label="Demonstração animada de análise de visagismo"
 		>
 			<div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 z-0">
@@ -631,30 +631,30 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 
 			{/* Unified Keyframe Layer */}
 			<div
-				className="absolute inset-0 flex items-end justify-center"
+				className="relative w-full h-full flex flex-col justify-end"
 				ref={heroContainerRef}
 			>
-				<div className="w-full h-full relative overflow-hidden">
+				<div className="w-full relative">
 					{/* Imagem person1 */}
-					<div ref={person1ImgRef} className="absolute inset-0 opacity-0">
+					<div ref={person1ImgRef} className="absolute inset-x-0 bottom-0 opacity-0">
 						<Image
 							src={KEYFRAME_IMAGES.person1}
 							alt="Pessoa para análise de visagismo - etapa inicial"
 							width={486}
 							height={659}
-							className="w-full h-auto object-contain"
+							className="w-full h-auto object-contain object-bottom"
 							priority
 						/>
 					</div>
 
 					{/* Imagem personFinal */}
-					<div ref={personFinalImgRef} className="absolute inset-0 opacity-0">
+					<div ref={personFinalImgRef} className="absolute inset-x-0 bottom-0 opacity-0">
 						<Image
 							src={KEYFRAME_IMAGES.personFinal}
 							alt="Pessoa após análise de visagismo - resultado final"
 							width={486}
 							height={659}
-							className="w-full h-auto object-contain"
+							className="w-full h-auto object-contain object-bottom"
 							priority
 						/>
 					</div>
@@ -699,7 +699,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 					{/* Variant cards */}
 					<div
 						ref={variantCardsRef}
-						className="absolute bottom-0 left-2 md:left-0 md:bottom-2 md:right-4 grid grid-cols-2 grid-rows-2 gap-3 p-1 md:p-2 w-max scale-50 md:scale-100 lg:mb-0"
+						className="absolute bottom-0 md:bottom-2 left-2 md:left-0 md:right-4 grid grid-cols-2 grid-rows-2 gap-3 p-1 md:p-2 w-max scale-50 md:scale-100 lg:mb-0"
 						aria-label="Opções de variantes de visagismo"
 					>
 						{/* célula 1 vazia para formar o L invertido */}
@@ -725,7 +725,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 					{/* Angle cards */}
 					<div
 						ref={angleCardsRef}
-						className="absolute bottom-4 md:bottom-0 left-1/2 -translate-x-1/2 flex flex-row justify-center items-end gap-4 p-1 md:p-2 w-max scale-50 md:scale-100"
+						className="absolute bottom-0 md:bottom-2 left-1/2 -translate-x-1/2 flex flex-row justify-center items-end gap-4 p-1 md:p-2 w-max scale-50 md:scale-100"
 						aria-label="Opções de ângulos de visualização"
 					>
 						{/* Renderização dos cartões de ângulos usando mapeamento */}
