@@ -39,8 +39,8 @@ interface HeroAnimatedImageProps {
 // Configurações de animação centralizadas
 const ANIMATION_CONFIGS = {
   durations: {
-    keyframe0Hold: 0.2,
-    keyframe1Hold: 0.8,
+    keyframe0Hold: 0.0,
+    keyframe1Hold: 0.2,
     keyframe2Hold: 1.2,
     keyframe3Hold: 0.6,
     fadeTransition: 0.8,
@@ -85,7 +85,7 @@ class HeroAnimationController {
   constructor(config: AnimationConfig) {
     this.refs = config.refs;
     this.callbacks = config.callbacks;
-    this.waitTime = config.waitTime || 3; // Default 2 segundos
+    this.waitTime = config.waitTime || 2; // Default 2 segundos
     this.setupInitialStates();
   }
 
