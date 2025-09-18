@@ -94,7 +94,7 @@ export function Header() {
 							>
 								<Image
 									src="/logo.svg"
-									alt="PPPI Logo"
+									alt="Pandami Logo"
 									width={160}
 									height={24}
 									className="h-6 lg:h-8 w-auto"
@@ -196,7 +196,7 @@ export function Header() {
 							>
 								<Image
 									src="/logo.svg"
-									alt="PPPI Logo"
+									alt="Pandami Logo"
 									width={160}
 									height={24}
 									className="h-6 lg:h-8 w-auto"

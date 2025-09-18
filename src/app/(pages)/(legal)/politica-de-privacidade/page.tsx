@@ -5,7 +5,7 @@ export default function Page() {
         <Container>
             <div className="container flex flex-col gap-3 p-4">
                 <h3 className="wp-block-heading"><strong>1. Introdução</strong></h3>
-                <p>A PPPI Serviços Administrativos LTDA (CNPJ: 41.491.976/0001-91), doravante denominada "PPPI", respeita a privacidade dos seus usuários e está comprometida com a proteção dos dados pessoais que são compartilhados conosco. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos, compartilhamos e protegemos as informações pessoais dos usuários de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD).</p>
+                <p>A Pandami Serviços Administrativos LTDA (CNPJ: 41.491.976/0001-91), doravante denominada "Pandami", respeita a privacidade dos seus usuários e está comprometida com a proteção dos dados pessoais que são compartilhados conosco. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos, compartilhamos e protegemos as informações pessoais dos usuários de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD).</p>
                 <h3 className="wp-block-heading"><strong>2. Definições</strong></h3>
                 <p>Para os fins desta Política de Privacidade, considera-se:</p>
                 <ul className="wp-block-list">
@@ -18,7 +18,7 @@ export default function Page() {
                 </ul>
                 <h3 className="wp-block-heading"><strong>3. Coleta de Dados Pessoais</strong></h3>
                 <h4 className="wp-block-heading"><strong>3.1. Dados Coletados</strong></h4>
-                <p>De acordo com a nossa política de privacidade, a PPPI pode coletar os seguintes dados pessoais dos usuários:</p>
+                <p>De acordo com a nossa política de privacidade, a Pandami pode coletar os seguintes dados pessoais dos usuários:</p>
                 <ul className="wp-block-list">
                     <li><strong>Dados de Identificação:</strong> Nome, CPF, RG, data de nascimento, estado civil.</li>
                     <li><strong>Dados de Contato:</strong> Endereço, e-mail, número de telefone.</li>
@@ -26,13 +26,13 @@ export default function Page() {
                     <li><strong>Dados de Pagamento:</strong> Informações financeiras necessárias para a realização de transações comerciais, como número de cartão de crédito, instituição financeira.</li>
                 </ul>
                 <h4 className="wp-block-heading"><strong>3.2. Forma de Coleta</strong></h4>
-                <p>Os dados pessoais podem ser coletados pela PPPI das seguintes maneiras:</p>
+                <p>Os dados pessoais podem ser coletados pela Pandami das seguintes maneiras:</p>
                 <ul className="wp-block-list">
                     <li><strong>Diretamente do Usuário:</strong> Quando o usuário preenche formulários no site, realiza cadastro, solicita serviços ou entra em contato conosco.</li>
                     <li><strong>Automaticamente:</strong> Quando o usuário navega pelo site, através do uso de cookies e outras tecnologias de rastreamento.</li>
                 </ul>
                 <h3 className="wp-block-heading"><strong>4. Uso dos Dados Pessoais</strong></h3>
-                <p>A PPPI utiliza os dados pessoais dos usuários para as seguintes finalidades:</p>
+                <p>A Pandami utiliza os dados pessoais dos usuários para as seguintes finalidades:</p>
                 <ul className="wp-block-list">
                     <li><strong>Prestação de Serviços:</strong> Processamento de solicitações e fornecimento dos serviços contratados.</li>
                     <li><strong>Comunicação:</strong> Envio de notificações, newsletters, materiais promocionais e outras informações que possam ser de interesse do usuário.</li>
@@ -44,14 +44,14 @@ export default function Page() {
                     <li></li>
                 </ul>
                 <h3 className="wp-block-heading"><strong>5. Compartilhamento de Dados Pessoais</strong></h3>
-                <p>A PPPI pode compartilhar os dados pessoais dos usuários nas seguintes circunstâncias:</p>
+                <p>A Pandami pode compartilhar os dados pessoais dos usuários nas seguintes circunstâncias:</p>
                 <ul className="wp-block-list">
                     <li><strong>Com Parceiros e Prestadores de Serviços:</strong> Para a execução de atividades relacionadas aos serviços oferecidos, sempre observando a confidencialidade e a segurança dos dados.</li>
                     <li><strong>Por Obrigação Legal:</strong> Quando necessário para cumprir determinações legais, regulatórias ou ordens judiciais.</li>
                     <li><strong>Com Consentimento do Usuário:</strong> Em outras situações, mediante o consentimento explícito do usuário.</li>
                 </ul>
                 <h3 className="wp-block-heading"><strong>6. Segurança dos Dados Pessoais</strong></h3>
-                <p>A PPPI adota medidas técnicas e administrativas adequadas para proteger os dados pessoais dos usuários contra acesso não autorizado, perda, alteração, ou qualquer forma de tratamento inadequado ou ilícito. Entre as medidas de segurança estão:</p>
+                <p>A Pandami adota medidas técnicas e administrativas adequadas para proteger os dados pessoais dos usuários contra acesso não autorizado, perda, alteração, ou qualquer forma de tratamento inadequado ou ilícito. Entre as medidas de segurança estão:</p>
                 <ul className="wp-block-list">
                     <li><strong>Criptografia:</strong> Utilização de protocolos seguros de criptografia para transmissão de dados.</li>
                     <li><strong>Controle de Acesso:</strong> Limitação do acesso aos dados pessoais apenas a funcionários e prestadores de serviços autorizados.</li>
@@ -88,7 +88,7 @@ export default function Page() {
 
 
 
-                <p>Para exercer seus direitos, o titular dos dados deve entrar em contato com o Encarregado de Proteção de Dados (DPO) da PPPI, através do e-mail lgpd@pppi.com.br. A PPPI se compromete a responder às solicitações dos titulares em conformidade com os prazos e condições estabelecidos pela LGPD.</p>
+                <p>Para exercer seus direitos, o titular dos dados deve entrar em contato com o Encarregado de Proteção de Dados (DPO) da Pandami, através do e-mail lgpd@Pandami.com.br. A Pandami se compromete a responder às solicitações dos titulares em conformidade com os prazos e condições estabelecidos pela LGPD.</p>
 
 
 
@@ -100,7 +100,7 @@ export default function Page() {
 
 
 
-                <p>A PPPI reterá os dados pessoais dos usuários apenas pelo tempo necessário para cumprir as finalidades para as quais foram coletados, incluindo para fins de cumprimento de quaisquer obrigações legais, contratuais, prestação de contas ou requisição de autoridades competentes. Os critérios usados para determinar nossos períodos de retenção incluem:</p>
+                <p>A Pandami reterá os dados pessoais dos usuários apenas pelo tempo necessário para cumprir as finalidades para as quais foram coletados, incluindo para fins de cumprimento de quaisquer obrigações legais, contratuais, prestação de contas ou requisição de autoridades competentes. Os critérios usados para determinar nossos períodos de retenção incluem:</p>
 
 
 
@@ -130,7 +130,7 @@ export default function Page() {
 
 
 
-                <p>A PPPI poderá transferir dados pessoais coletados no Brasil para outros países, inclusive para prestadores de serviços localizados no exterior, sempre em conformidade com as disposições da LGPD. Nessas situações, adotaremos medidas apropriadas para garantir a proteção dos dados pessoais transferidos, como a celebração de cláusulas contratuais padrão ou a adoção de outras salvaguardas adequadas.</p>
+                <p>A Pandami poderá transferir dados pessoais coletados no Brasil para outros países, inclusive para prestadores de serviços localizados no exterior, sempre em conformidade com as disposições da LGPD. Nessas situações, adotaremos medidas apropriadas para garantir a proteção dos dados pessoais transferidos, como a celebração de cláusulas contratuais padrão ou a adoção de outras salvaguardas adequadas.</p>
 
 
 
@@ -188,7 +188,7 @@ export default function Page() {
 
 
 
-                <p>A PPPI se reserva o direito de modificar esta Política de Privacidade a qualquer momento, publicando uma versão atualizada no site. Recomendamos que os usuários revisem periodicamente esta política para se manterem informados sobre como estamos protegendo suas informações.</p>
+                <p>A Pandami se reserva o direito de modificar esta Política de Privacidade a qualquer momento, publicando uma versão atualizada no site. Recomendamos que os usuários revisem periodicamente esta política para se manterem informados sobre como estamos protegendo suas informações.</p>
 
 
 
@@ -216,12 +216,12 @@ export default function Page() {
 
 
 
-                <p>Para dúvidas, sugestões, reclamações ou para exercer os direitos relativos aos seus dados pessoais, o titular pode entrar em contato com o Encarregado de Proteção de Dados (DPO) da PPPI através dos seguintes meios:</p>
+                <p>Para dúvidas, sugestões, reclamações ou para exercer os direitos relativos aos seus dados pessoais, o titular pode entrar em contato com o Encarregado de Proteção de Dados (DPO) da Pandami através dos seguintes meios:</p>
 
 
 
                 <ul className="wp-block-list">
-                    <li><strong>E-mail:</strong> <a href="mailto:lgpd@pppi.com.br">lgpd@pppi.com.br</a></li>
+                    <li><strong>E-mail:</strong> <a href="mailto:lgpd@Pandami.com.br">lgpd@Pandami.com.br</a></li>
                 </ul>
 
 
@@ -234,7 +234,7 @@ export default function Page() {
 
 
 
-                <p>Esta Política de Privacidade foi atualizada pela última vez em 26 de julho de 2024. A PPPI se compromete a manter esta política sempre atualizada, de acordo com as mudanças legislativas e as boas práticas de mercado.</p>
+                <p>Esta Política de Privacidade foi atualizada pela última vez em 26 de julho de 2024. A Pandami se compromete a manter esta política sempre atualizada, de acordo com as mudanças legislativas e as boas práticas de mercado.</p>
 
 
 

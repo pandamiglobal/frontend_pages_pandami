@@ -4,15 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
-import { Button } from "../ui/button";
+import { PrimaryButton } from "@/components/ui/primary-button";
 import { useState } from "react";
-import { BrandCheckModal } from "./brand-check-modal";
 import useCreateLead from "@/common/hooks/use-create-lead";
 import { EOriginLead } from "@/@types/@lead";
 
 const formSchema = z.object({
     brand: z.string({
-        required_error: 'Nome da sua marca é obrigatório'
+        required_error: 'Nome do seu salão é obrigatório'
     }).min(1, "Tamanho mínimo de 1 caractere"),
     phone: z.string({
         message: 'Telefone é obrigatório'
@@ -24,7 +23,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>
 
-export function BrandCheckForm({ articleUri }: { articleUri: string }) {
+export function LeadFormBlog({ articleUri }: { articleUri: string }) {
     const { execCreateLead } = useCreateLead();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,9 +45,9 @@ export function BrandCheckForm({ articleUri }: { articleUri: string }) {
                 brand: data.brand,
                 name: 'Nome não informado',
                 phone_number: data.phone,
-                description: `Lead coletado no modal de verificação de marca no artigo ${articleUri}`,
+                description: `Lead interessado em soluções de visagismo por IA para salão de beleza. Artigo: ${articleUri}`,
                 origin: EOriginLead.seo_archive,
-                origin_font: 'brand-check-form'
+                origin_font: 'visagismo-form'
             }
         });
 
@@ -62,17 +61,18 @@ export function BrandCheckForm({ articleUri }: { articleUri: string }) {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-3xl p-6 border border-[#E5E7EB] border-solid flex flex-col gap-4">
-                <h2 className="title-5 text-center">Sua marca pode estar correndo perigo!!</h2>
+            <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-3xl p-6 border border-[#E5E7EB] border-solid flex flex-col gap-4 mt-10">
+                <h2 className="title-5 text-center">Transforme seu salão com visagismo por IA</h2>
+                <p className="text-center text-sm text-neutral-600 mb-2">Democratize o visagismo e aumente suas vendas com nossa tecnologia</p>
 
                 <div>
                     <label htmlFor="brand" className="block text-sm font-medium text-[#374151] mb-2">
-                        Nome da sua marca
+                        Nome do seu salão
                     </label>
                     <Input
                         id="brand"
                         name="brand"
-                        placeholder="Digite o nome da sua marca"
+                        placeholder="Digite o nome do seu salão"
                         register={register}
                         className={errors.brand ? "border-red-500" : ""}
                     />
@@ -83,7 +83,7 @@ export function BrandCheckForm({ articleUri }: { articleUri: string }) {
 
                 <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-[#374151] mb-2">
-                        Seu número de telefone
+                        Telefone do salão
                     </label>
                     <Input
                         id="phone"
@@ -99,15 +99,15 @@ export function BrandCheckForm({ articleUri }: { articleUri: string }) {
                     )}
                 </div>
 
-                <Button
+                <PrimaryButton
                     type="submit"
                     disabled={isSubmitting}
-                    size="lg"
-                    className="bg-[#0047ff] text-white font-bold py-4 px-8 rounded-full hover:bg-[#0047ff]/90 transition-colors max-md:w-full"
+                    size="default"
+                    className="w-full py-4"
                 >
-                    Verificar se minha marca foi roubada
-                </Button>
+                    Quero Pandami no meu salão
+                </PrimaryButton>
             </form>
         </>
     )
-} 
+}

@@ -25,7 +25,7 @@ export default function TabsSection() {
                                     <div className="flex flex-col gap-4">
                                         <h2 className="title-3 text-[#111827]">Nossa Jornada</h2>
                                         <p className="text-[#374151]">
-                                            A PPPI nasceu em 2010 com uma missão clara: simplificar o processo de registro de marcas no Brasil.
+                                            A Pandami nasceu em 2010 com uma missão clara: simplificar o processo de registro de marcas no Brasil.
                                             Fundada por especialistas em propriedade intelectual, nossa empresa rapidamente se destacou pela
                                             abordagem inovadora e centrada no cliente.
                                         </p>

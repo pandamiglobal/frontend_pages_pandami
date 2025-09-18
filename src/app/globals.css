@@ -1,5 +1,7 @@
 @import '../../styles/globals.css';
 @import '../../styles/hero-animation.css';
+@import '../../styles/blog.css';
+@import '../../styles/article.css';
 
 header:has(+ [data-no-header]) {
     display: none;
