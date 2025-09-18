@@ -41,12 +41,12 @@ const ANIMATION_CONFIGS = {
   durations: {
     keyframe0Hold: 0.2,
     keyframe1Hold: 0.8,
-    keyframe2Hold: 0.4,
+    keyframe2Hold: 1.2,
     keyframe3Hold: 0.6,
-    fadeTransition: 0.4,
+    fadeTransition: 0.8,
     popAnimation: 0.3,
     scannerCycle: 0.8,
-    cardSelection: 0.2
+    cardSelection: 0.4
   },
   easings: {
     smoothEntry: "power2.out",
@@ -85,7 +85,7 @@ class HeroAnimationController {
   constructor(config: AnimationConfig) {
     this.refs = config.refs;
     this.callbacks = config.callbacks;
-    this.waitTime = config.waitTime || 2; // Default 2 segundos
+    this.waitTime = config.waitTime || 3; // Default 2 segundos
     this.setupInitialStates();
   }
 
@@ -160,6 +160,7 @@ class HeroAnimationController {
     const { durations, easings } = ANIMATION_CONFIGS;
     
     tl.call(() => this.callbacks.onKeyframeChange(3))
+    .to({}, { duration: 0.8 })
     .add(this.animatePersonTransition())
     .add(this.animateAngleCardsEntry(), "-=0.6")
     .to({}, { duration: this.waitTime })
@@ -235,39 +236,60 @@ class HeroAnimationController {
 
   private animateScanner(): gsap.core.Timeline {
     const tl = gsap.timeline();
-    const { easings } = ANIMATION_CONFIGS;
+    const { easings, durations } = ANIMATION_CONFIGS;
 
-    tl.set(this.refs.scannerBox.current, {
-      opacity: 1
-    })
+    tl
+    // Animação de entrada da caixa do scanner
+    .fromTo(this.refs.scannerBox.current,
+      {
+        opacity: 0,
+        scale: 0.95
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        ease: easings.smoothEntry
+      }
+    )
+    // Configurar a barra do scanner para começar visível
     .set(this.refs.scanner.current, {
       opacity: 1,
       top: 0
     })
+    // Garantir que o check começa invisível
+    .set(this.refs.scannerCheck.current, {
+      opacity: 0,
+      scale: 0.5
+    })
+    // Animar a barra do scanner
     .to(this.refs.scanner.current, {
       top: "calc(100% - 8px)", // 8px = altura do scanner (h-2 = 8px)
       duration: 0.4, // Duração de cada ciclo (ida e volta)
       ease: easings.scannerMove,
       repeat: 4, // 4 ciclos completos (ida e volta) = 1.6s total
-      yoyo: true
+      yoyo: true,
+      onComplete: () => {
+        // Esconder a barra imediatamente após completar os ciclos
+        gsap.to(this.refs.scanner.current, {
+          opacity: 0,
+          duration: 0.2,
+          ease: easings.smoothExit
+        });
+      }
     })
-    // Delay de 1.5s antes do check aparecer
-    .to({}, { duration: 1.5 })
-    // Mostrar o check
-    .call(() => {
-      gsap.set(this.refs.scannerCheck.current, {
-        opacity: 1,
-        scale: 0.5
-      });
-    })
+    // Delay antes do check aparecer (tempo para a barra desaparecer + pausa adicional)
+    .to({}, { duration: 1.7 })
+    // Mostrar o check com animação
     .to(this.refs.scannerCheck.current, {
+      opacity: 1,
       scale: 1,
       duration: 0.3,
       ease: easings.popEntry
     })
-    // Aguardar um pouco e depois fazer fade out
+    // Aguardar um pouco e depois fazer fade out de tudo
     .to({}, { duration: 0.8 })
-    .to([this.refs.scannerBox.current, this.refs.scanner.current, this.refs.scannerCheck.current], {
+    .to([this.refs.scannerBox.current, this.refs.scannerCheck.current], {
       opacity: 0,
       duration: 0.4,
       ease: easings.smoothExit
@@ -450,9 +472,10 @@ class HeroAnimationController {
     return tl;
   }
 
+  
   private resetAllStates(): gsap.core.Timeline {
     const tl = gsap.timeline();
-
+  
     tl.call(() => {
       // Garantir que variant cards fiquem ocultos (não aparecem no keyframe 3)
       gsap.set(this.refs.variantCards.current?.filter(Boolean), {
@@ -463,7 +486,7 @@ class HeroAnimationController {
         rotationY: 0,
         rotationX: 0
       });
-
+  
       // Garantir que angle cards fiquem ocultos (não aparecem no keyframe 0, 1, 2)
       gsap.set(this.refs.angleCards.current?.filter(Boolean), {
         opacity: 0,
@@ -473,24 +496,34 @@ class HeroAnimationController {
         rotationY: 0,
         rotationX: 0
       });
-
-      // Reset do scanner e check
-      gsap.set([this.refs.scannerBox.current, this.refs.scanner.current, this.refs.scannerCheck.current], {
+  
+      // Reset completo do scanner e check
+      gsap.set(this.refs.scannerBox.current, {
         opacity: 0,
         scale: 1
       });
       
-      gsap.set(this.refs.scannerCheck.current, {
-        scale: 0.5
+      gsap.set(this.refs.scanner.current, {
+        opacity: 0,
+        top: 0,
+        clearProps: "all" // Limpar todas as propriedades
       });
-
+      
+      // Reset explícito do check
+      gsap.set(this.refs.scannerCheck.current, {
+        opacity: 0,
+        scale: 0.5,
+        clearProps: "all" // Garantir que todas as propriedades sejam limpas
+      });
+  
       // Reset dos callbacks
       this.callbacks.onKeyframeChange(0);
       this.callbacks.onCardSelection(null);
     });
-
+  
     return tl;
   }
+  
 }
 
 // Imagens organizadas para facilitar mapeamento
@@ -582,9 +615,10 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 // DonutPercent foi movido para um componente separado
 
   return (
-		<div 
-      className="relative flex items-end justify-center lg:justify-start h-full w-full max-w-[320px] md:max-w-[400px] lg:max-w-[480px] mx-auto lg:mx-0 self-end"
-      aria-label="Demonstração animada de análise de visagismo">
+		<div
+			className="relative flex items-end justify-center lg:justify-start h-full w-full max-w-[320px] md:max-w-[400px] lg:max-w-[480px] mx-auto lg:mx-0 self-end mb-2"
+			aria-label="Demonstração animada de análise de visagismo"
+		>
 			<div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 z-0">
 				<div
 					data-svg-wrapper
@@ -596,7 +630,10 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 			</div>
 
 			{/* Unified Keyframe Layer */}
-			<div className="absolute inset-0 flex items-end justify-center" ref={heroContainerRef}>
+			<div
+				className="absolute inset-0 flex items-end justify-center"
+				ref={heroContainerRef}
+			>
 				<div className="w-full h-full relative overflow-hidden">
 					{/* Imagem person1 */}
 					<div ref={person1ImgRef} className="absolute inset-0 opacity-0">
@@ -609,7 +646,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 							priority
 						/>
 					</div>
-					
+
 					{/* Imagem personFinal */}
 					<div ref={personFinalImgRef} className="absolute inset-0 opacity-0">
 						<Image
@@ -625,8 +662,8 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 					{/* Scanner */}
 					<div
 						ref={scannerBoxRef}
-						className="absolute left-1/2 -translate-x-1/2 top-[80px] w-1/2 max-w-[220px] h-[300px] max-h-[320px] bg-black/0 rounded-2xl outline outline-offset-[-1px] outline-gray-400 overflow-hidden opacity-0"
-            aria-hidden="true"
+						className="absolute left-1/2 -translate-x-1/2 top-[80px] w-1/2 max-w-[220px] h-[200px] md:h-[300px] max-h-[320px] bg-black/0 rounded-2xl outline outline-offset-[-1px] outline-gray-400 overflow-hidden opacity-0"
+						aria-hidden="true"
 					>
 						<div className="w-full h-full relative overflow-hidden">
 							<div
@@ -645,7 +682,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 										stroke="currentColor"
 										viewBox="0 0 24 24"
 										xmlns="http://www.w3.org/2000/svg"
-                    aria-label="Verificação concluída"
+										aria-label="Verificação concluída"
 									>
 										<path
 											strokeLinecap="round"
@@ -662,43 +699,47 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 					{/* Variant cards */}
 					<div
 						ref={variantCardsRef}
-						className="absolute bottom-0 right-0 md:bottom-2 md:right-4 grid grid-cols-2 grid-rows-2 gap-3 p-1 md:p-2 w-max"
-            aria-label="Opções de variantes de visagismo"
+						className="absolute bottom-0 left-2 md:left-0 md:bottom-2 md:right-4 grid grid-cols-2 grid-rows-2 gap-3 p-1 md:p-2 w-max scale-50 md:scale-100 lg:mb-0"
+						aria-label="Opções de variantes de visagismo"
 					>
 						{/* célula 1 vazia para formar o L invertido */}
-						<div className="hidden md:block" />
+						<div className="block" />
 
 						{/* Renderização dos cartões de variantes usando mapeamento */}
 						{variantData.map((variant, index) => (
-              <VariantCard
-                key={`variant-${index}`}
-                index={index}
-                ref={(el) => { variantItemRefs.current[index] = el; }}
-                imageSrc={KEYFRAME_IMAGES.variants[index]}
-                title={variant.title}
-                subtitle={variant.subtitle}
-                percent={variant.percent}
-                isSelected={selectedCardIndex === index}
-              />
-            ))}
+							<VariantCard
+								key={`variant-${index}`}
+								index={index}
+								ref={(el) => {
+									variantItemRefs.current[index] = el;
+								}}
+								imageSrc={KEYFRAME_IMAGES.variants[index]}
+								title={variant.title}
+								subtitle={variant.subtitle}
+								percent={variant.percent}
+								isSelected={selectedCardIndex === index}
+							/>
+						))}
 					</div>
 
 					{/* Angle cards */}
 					<div
 						ref={angleCardsRef}
-						className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-row justify-center items-end gap-4 p-1 md:p-2 w-max"
-            aria-label="Opções de ângulos de visualização"
+						className="absolute bottom-4 md:bottom-0 left-1/2 -translate-x-1/2 flex flex-row justify-center items-end gap-4 p-1 md:p-2 w-max scale-50 md:scale-100"
+						aria-label="Opções de ângulos de visualização"
 					>
 						{/* Renderização dos cartões de ângulos usando mapeamento */}
-            {angleData.map((angle, index) => (
-              <AngleCard
-                key={`angle-${index}`}
-                index={index}
-                ref={(el) => { angleItemRefs.current[index] = el; }}
-                imageSrc={KEYFRAME_IMAGES.angles[index]}
-                title={angle.title}
-              />
-            ))}
+						{angleData.map((angle, index) => (
+							<AngleCard
+								key={`angle-${index}`}
+								index={index}
+								ref={(el) => {
+									angleItemRefs.current[index] = el;
+								}}
+								imageSrc={KEYFRAME_IMAGES.angles[index]}
+								title={angle.title}
+							/>
+						))}
 					</div>
 				</div>
 			</div>
