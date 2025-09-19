@@ -8,7 +8,7 @@ export async function createLead(lead: ICreateLead) {
         })
         return true;
     } catch (error: any) {
-        console.log(error.response.data)
+        console.error('Error creating lead:', error.response?.data || error.message);
         return null;
     }
 }

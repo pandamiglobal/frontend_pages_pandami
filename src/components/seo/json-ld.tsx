@@ -3,13 +3,14 @@
 import Script from "next/script";
 
 interface JsonLdProps {
-  data: Record<string, any>;
+  data: Record<string, unknown>;
+  id?: string;
 }
 
-export const JsonLd = ({ data }: JsonLdProps) => {
+export const JsonLd = ({ data, id = "json-ld" }: JsonLdProps) => {
   return (
     <Script
-      id="json-ld"
+      id={id}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
@@ -18,13 +19,18 @@ export const JsonLd = ({ data }: JsonLdProps) => {
 
 // Componente específico para FAQ
 interface FAQJsonLdProps {
-  faq: Array<{
+  faq: ReadonlyArray<{
     question: string;
     answer: string;
   }>;
 }
 
 export const FAQJsonLd = ({ faq }: FAQJsonLdProps) => {
+  // Validação: só renderiza se houver FAQs
+  if (!faq || faq.length === 0) {
+    return null;
+  }
+
   const faqStructuredData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -38,7 +44,7 @@ export const FAQJsonLd = ({ faq }: FAQJsonLdProps) => {
     }))
   };
 
-  return <JsonLd data={faqStructuredData} />;
+  return <JsonLd data={faqStructuredData} id="faq-json-ld" />;
 };
 
 // Componente para dados da organização
@@ -66,7 +72,7 @@ export const OrganizationJsonLd = () => {
     }
   };
 
-  return <JsonLd data={organizationData} />;
+  return <JsonLd data={organizationData} id="organization-json-ld" />;
 };
 
 // Componente para produto/serviço
@@ -103,7 +109,7 @@ export const ProductJsonLd = () => {
 		],
 	};
 
-  return <JsonLd data={productData} />;
+  return <JsonLd data={productData} id="product-json-ld" />;
 };
 
 // Componente para breadcrumbs
@@ -119,7 +125,7 @@ export const BreadcrumbJsonLd = ({ items }: { items: Array<{ name: string; url: 
     }))
   };
 
-  return <JsonLd data={breadcrumbData} />;
+  return <JsonLd data={breadcrumbData} id="breadcrumb-json-ld" />;
 };
 
 // Componente para reviews/testimonials
@@ -165,5 +171,5 @@ export const ReviewJsonLd = () => {
     ]
   };
 
-  return <JsonLd data={reviewData} />;
+  return <JsonLd data={reviewData} id="review-json-ld" />;
 };

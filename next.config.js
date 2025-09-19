@@ -4,10 +4,25 @@ const nextConfig = {
   // Evita inferência incorreta do root quando existem múltiplos lockfiles no usuário
   outputFileTracingRoot: __dirname,
   images: {
-    domains: [
-      'cms.pandami.com.br',
-      'pandami.com.br',
-      'images.pexels.com'
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cms.pandami.com.br',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pandami.com.br',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   }
 };

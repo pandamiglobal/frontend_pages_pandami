@@ -6,22 +6,34 @@ import { useModal } from './use-modal';
 import { CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react';
 import { Button } from '../button';
 
+const iconMap = {
+  success: CheckCircle,
+  error: AlertCircle,
+  warning: AlertTriangle,
+  info: Info,
+} as const;
+
+const iconColors = {
+  success: 'text-green-500',
+  error: 'text-red-500',
+  warning: 'text-yellow-500',
+  info: 'text-blue-500',
+} as const;
+
 export const Modal = () => {
   const { modal, closeModal } = useModal();
 
-  const icons = {
-    success: <CheckCircle className="h-6 w-6 text-green-500" />,
-    error: <AlertCircle className="h-6 w-6 text-red-500" />,
-    warning: <AlertTriangle className="h-6 w-6 text-yellow-500" />,
-    info: <Info className="h-6 w-6 text-blue-500" />
-  };
+  if (!modal.isOpen) return null;
+
+  const IconComponent = iconMap[modal.type];
+  const iconColor = iconColors[modal.type];
 
   return (
     <Dialog open={modal.isOpen} onOpenChange={closeModal}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <div className="flex items-center justify-center gap-3">
-            {/* {icons[modal.type]} */}
+            <IconComponent className={`h-6 w-6 ${iconColor}`} />
             <DialogTitle className="title-4 text-center">{modal.title}</DialogTitle>
           </div>
           <DialogDescription className="text-4">{modal.description}</DialogDescription>

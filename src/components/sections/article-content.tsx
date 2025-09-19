@@ -1,5 +1,6 @@
 "use server";
 
+import { useMemo } from "react";
 import { getPostBySlug } from "@/common/services/posts/get-post-by-slug";
 import { Container } from "../ui/container";
 import { notFound } from "next/navigation";
@@ -30,29 +31,34 @@ export default async function ArticleContent({
 		notFound();
 	}
 
-	const transformedContent = post.content.rendered
-		.replace(/class=/g, "className=")
-		.replace(/fetchpriority=/g, "fetchPriority=")
-		.replace(/<(br)([^>]*)(?!\/)>/g, "<$1$2 />")
-		.replace(/style="([^"]*)"/g, (match: string, styles: string) => {
-			const styleObject = styles
-				.split(";")
-				.filter(Boolean)
-				.reduce((acc: Record<string, string>, style: string) => {
-					const [property, value] = style.split(":").map((s) => s.trim());
-					const camelProperty = property.replace(/-([a-z])/g, (g) =>
-						g[1].toUpperCase()
-					);
-					acc[camelProperty] = value;
-					return acc;
-				}, {});
-			return `style={${JSON.stringify(styleObject)}}`;
-		})
-		.replace(/for=/g, "htmlFor=")
-		.replace(/tabindex=/g, "tabIndex=")
-		.replace(/readonly=/g, "readOnly=")
-		.replace(/maxlength=/g, "maxLength=")
-		.replace(/contenteditable=/g, "contentEditable=");
+	// Memoize content transformation for better performance
+	const transformedContent = useMemo(() => {
+		return post.content.rendered
+			.replace(/class=/g, "className=")
+			.replace(/fetchpriority=/g, "fetchPriority=")
+			.replace(/<(br)([^>]*)(?!\/)>/g, "<$1$2 />")
+			.replace(/style="([^"]*)"/g, (match: string, styles: string) => {
+				const styleObject = styles
+					.split(";")
+					.filter(Boolean)
+					.reduce((acc: Record<string, string>, style: string) => {
+						const [property, value] = style.split(":").map((s) => s.trim());
+						if (property && value) {
+							const camelProperty = property.replace(/-([a-z])/g, (g) =>
+								g[1].toUpperCase()
+							);
+							acc[camelProperty] = value;
+						}
+						return acc;
+					}, {});
+				return `style={${JSON.stringify(styleObject)}}`;
+			})
+			.replace(/for=/g, "htmlFor=")
+			.replace(/tabindex=/g, "tabIndex=")
+			.replace(/readonly=/g, "readOnly=")
+			.replace(/maxlength=/g, "maxLength=")
+			.replace(/contenteditable=/g, "contentEditable=");
+	}, [post.content.rendered]);
 
 	return (
 		<section id="article" className="w-full bg-background py-8 md:py-12 mt-10">

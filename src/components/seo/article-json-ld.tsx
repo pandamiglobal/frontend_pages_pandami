@@ -45,7 +45,7 @@ export const ArticleJsonLd = () => {
     "inLanguage": "pt-BR"
   };
 
-  return <JsonLd data={articleData} />;
+  return <JsonLd data={articleData} id="article-json-ld" />;
 };
 
 // Componente para dados estruturados de serviço local
@@ -98,14 +98,14 @@ export const LocalBusinessJsonLd = () => {
 		},
 	};
 
-  return <JsonLd data={localBusinessData} />;
+  return <JsonLd data={localBusinessData} id="local-business-json-ld" />;
 };
 
 // Componente para dados estruturados de WebSite
 export const WebSiteJsonLd = () => {
   const webSiteData = {
 		"@context": "https://schema.org",
-		"@type": "WebSite",
+		"@type": "Website",
 		name: "PandaMi",
 		alternateName: "PandaMi Visagismo",
 		url: process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br",
@@ -139,5 +139,5 @@ export const WebSiteJsonLd = () => {
 		},
 	};
 
-  return <JsonLd data={webSiteData} />;
+  return <JsonLd data={webSiteData} id="website-json-ld" />;
 };

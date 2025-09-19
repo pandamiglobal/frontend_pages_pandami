@@ -242,8 +242,7 @@ class HeroAnimationController {
     tl
     // Debug: verificar se o elemento existe
     .call(() => {
-      console.log('Scanner box element:', this.refs.scannerBox.current);
-      console.log('Scanner element:', this.refs.scanner.current);
+      // Scanner elements initialized
     })
     // Garantir que o scanner box está visível
     .set(this.refs.scannerBox.current, {

@@ -148,14 +148,8 @@ function PricingCard({
 }
 
 export function PricingSection() {
-	// Definir "annual" como valor inicial e garantir que seja usado na primeira renderização
+	// Definir "annual" como valor inicial diretamente
 	const [activePeriod, setActivePeriod] = useState<PricingPeriod>("annual");
-
-	// Garantir que "annual" seja o período selecionado após a montagem do componente
-	useEffect(() => {
-		// Força a seleção do tab anual após a renderização inicial
-		setActivePeriod("annual");
-	}, []);
 
 	// Configurações de desconto por período
 	const periodDiscounts = {

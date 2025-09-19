@@ -17,6 +17,8 @@ export interface FAQ {
   answer: string;
 }
 
+export type FAQArray = readonly FAQ[];
+
 const testimonialAvatars = [
   {
     src: "/testimonials/home/ana-paula.jpg",
@@ -40,7 +42,7 @@ const testimonialAvatars = [
   },
 ];
 
-export default function FAQSection({ faq }: { faq: FAQ[] }) {
+export default function FAQSection({ faq }: { faq: FAQArray }) {
   return (
 		<section id="faq" className="w-full py-10 md:py-16 bg-white" itemScope itemType="https://schema.org/FAQPage">
 			<Container className="px-4 md:px-6">
