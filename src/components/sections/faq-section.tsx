@@ -42,18 +42,17 @@ const testimonialAvatars = [
 
 export default function FAQSection({ faq }: { faq: FAQ[] }) {
   return (
-		<section className="w-full py-10 md:py-16 bg-white">
+		<section id="faq" className="w-full py-10 md:py-16 bg-white" itemScope itemType="https://schema.org/FAQPage">
 			<Container className="px-4 md:px-6">
 				<div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
 					{/* Left column: Title, description, testimonials, CTA */}
 					<div className="w-full lg:w-5/12 xl:w-4/12 order-1 lg:order-1">
 						<div className="lg:sticky lg:top-20">
 							<h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">
-								Perguntas frequentes
+								Perguntas frequentes sobre visagismo com IA
 							</h2>
 							<p className="text-gray-700 mb-6 md:mb-8 ">
-								Tudo que você precisa saber sobre a Pandami, desde a compra à
-								usabilidade.
+								Tudo que você precisa saber sobre a PandaMi, desde como funciona nossa IA de visagismo até a usabilidade da plataforma.
 							</p>
 
 							{/* Testimonials and CTA - positioned after description on mobile, sticky on desktop */}
@@ -100,14 +99,28 @@ export default function FAQSection({ faq }: { faq: FAQ[] }) {
 									key={`faq-${index}`}
 									value={`faq-${index}`}
 									className="border-b border-gray-200 overflow-hidden"
+									itemScope
+									itemProp="mainEntity"
+									itemType="https://schema.org/Question"
 								>
 									<AccordionTrigger className="px-2 py-4 hover:no-underline text-left">
-										<span className="text-left font-medium text-sm md:text-base font-sans">
+										<span 
+											className="text-left font-medium text-sm md:text-base font-sans"
+											itemProp="name"
+										>
 											{item.question}
 										</span>
 									</AccordionTrigger>
-									<AccordionContent className="px-2 pb-4 pt-0">
-										<p className="text-gray-600 text-sm md:text-base">
+									<AccordionContent 
+										className="px-2 pb-4 pt-0"
+										itemScope
+										itemProp="acceptedAnswer"
+										itemType="https://schema.org/Answer"
+									>
+										<p 
+											className="text-gray-600 text-sm md:text-base"
+											itemProp="text"
+										>
 											{item.answer}
 										</p>
 									</AccordionContent>

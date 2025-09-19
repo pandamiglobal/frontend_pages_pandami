@@ -7,6 +7,18 @@ import CarouselSection from "@/components/sections/carousel-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
 import { PricingSection } from "@/components/sections/pricing-section";
+import { 
+	FAQJsonLd, 
+	OrganizationJsonLd, 
+	ProductJsonLd, 
+	BreadcrumbJsonLd, 
+	ReviewJsonLd 
+} from "@/components/seo/json-ld";
+import { 
+	ArticleJsonLd, 
+	LocalBusinessJsonLd, 
+	WebSiteJsonLd 
+} from "@/components/seo/article-json-ld";
 
 // Removidos imports específicos da seção de benefícios (agora componentizada)
 
@@ -44,17 +56,34 @@ export default function Home() {
 		},
 	];
 
+	const breadcrumbItems = [
+		{ name: "Início", url: process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br" },
+		{ name: "Visagismo com IA", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"}/#visagismo` }
+	];
+
 	return (
-		<main>
-			<HeroSection />
-			<WhyVisagismSection />
-			<CarouselSection />
-			<BenefitsSection />
-			<AboutVisagismSection />
-			<SocialProofSection />
-			<PricingSection />
-			<FAQSection faq={faq} />
-			<CtaSection />
-		</main>
+		<>
+			{/* JSON-LD Structured Data */}
+			<WebSiteJsonLd />
+			<OrganizationJsonLd />
+			<LocalBusinessJsonLd />
+			<ProductJsonLd />
+			<ArticleJsonLd />
+			<FAQJsonLd faq={faq} />
+			<BreadcrumbJsonLd items={breadcrumbItems} />
+			<ReviewJsonLd />
+			
+			<main>
+				<HeroSection />
+				<WhyVisagismSection />
+				<CarouselSection />
+				<BenefitsSection />
+				<AboutVisagismSection />
+				<SocialProofSection />
+				<PricingSection />
+				<FAQSection faq={faq} />
+				<CtaSection />
+			</main>
+		</>
 	);
 }

@@ -33,14 +33,32 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: defaultSeo.title,
   description: defaultSeo.description,
+  keywords: defaultSeo.keywords,
   robots: {
-    follow: true,
     index: true,
-    'max-snippet': -1,
-    'max-video-preview': -1,
-    'max-image-preview': 'large'
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large' as const,
+      'max-snippet': -1,
+    },
   },
-  openGraph: defaultSeo.openGraph
+  openGraph: defaultSeo.openGraph,
+  twitter: defaultSeo.twitter,
+  alternates: defaultSeo.alternates,
+  authors: [{ name: 'PandaMi' }],
+  creator: 'PandaMi',
+  publisher: 'PandaMi',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 export default function RootLayout({
