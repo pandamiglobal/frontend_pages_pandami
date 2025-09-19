@@ -15,31 +15,34 @@ export function SwipeHandAffordance({
 }: SwipeHandAffordanceProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Sem sizeMap: tamanhos fixos por padrão; personalize via className externo se necessário
-
   useEffect(() => {
-    // Referência para limpeza
     const container = containerRef.current
-    
     if (!container) return
-    
-    // Resetar qualquer transformação existente
-    gsap.set(container, { rotation: -20 })
-    
-    // Animação do conjunto (mão + seta) com rotação de -8° a 8° (mais sutil)
-    const containerTween = gsap.to(container, {
-      rotation: 20, // Rotação máxima
-      duration: 0.8, // Duração mais lenta para suavidade
-      yoyo: true,
-      repeat: -1, // Repetição infinita
-      ease: "sine.inOut", // Easing mais suave
-      transformOrigin: "center center", // Override do transform origin
+
+    // Respeita usuários com redução de movimento
+    if (
+      typeof window !== "undefined" &&
+      "matchMedia" in window &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      gsap.set(container, { rotation: 0, transformOrigin: "center bottom" })
+      return
+    }
+
+    // Timeline contínua e suave: 0° -> +15° -> -15° -> 0° (loop)
+    const timeline = gsap.timeline({
+      repeat: -1,
+      defaults: { ease: "sine.inOut" },
     })
-    
-    // Limpeza da animação quando o componente desmonta
+
+    timeline
+      .set(container, { rotation: 0, transformOrigin: "center bottom", willChange: "transform" })
+      .to(container, { rotation: 15, duration: 0.3 })
+      .to(container, { rotation: -15, duration: 0.3 })
+      .to(container, { rotation: 0, duration: 0.3 })
+
     return () => {
-      containerTween.kill()
-      gsap.set(container, { rotation: 0 }) // Reset na limpeza
+      timeline.kill()
     }
   }, [])
 
@@ -50,9 +53,6 @@ export function SwipeHandAffordance({
 				"relative flex flex-col items-center justify-center gap-[0px] mb-1",
 				className
 			)}
-			style={{
-				transformOrigin: "center bottom",
-			}}
 			{...props}
 		>
 			{/* Container da Mão */}
@@ -62,10 +62,7 @@ export function SwipeHandAffordance({
 					alt="Deslize para ver"
 					fill
 					sizes="100%"
-					style={{
-						filter: `brightness(0) saturate(100%)`,
-					}}
-					className="opacity-100"
+					className="opacity-inherit"
 				/>
 			</div>
 
@@ -76,10 +73,7 @@ export function SwipeHandAffordance({
 					alt="Deslize para ver"
 					fill
 					sizes="100%"
-					style={{
-						filter: `brightness(0) saturate(100%)`,
-					}}
-					className="opacity-100"
+					className="opacity-inherit"
 				/>
 			</div>
 		</div>

@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { cn } from "@/common/lib/utils";
 import { SwipeHandAffordance } from "../svg/swipe-hand-affordance";
+import gsap from "gsap";
 
 interface AboutVisagismComparisonSliderProps {
   before: string;
@@ -22,10 +23,14 @@ export function AboutVisagismComparisonSlider({
   className,
 }: AboutVisagismComparisonSliderProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const handleRef = useRef<HTMLButtonElement | null>(null);
   const [position, setPosition] = useState(50); // porcentagem
+  const [isHovered, setIsHovered] = useState(false); // estado para controlar opacidade do affordance no hover
+  const [hasSeenAffordance, setHasSeenAffordance] = useState<boolean>(false); // não persiste entre reloads
   const isDraggingRef = useRef(false);
   const isFinePointer = useRef<boolean>(true);
   const rafMoveRef = useRef<number | null>(null);
+  const scaleAnimationRef = useRef<gsap.core.Tween | null>(null);
 
   const updatePositionFromClientX = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -41,6 +46,49 @@ export function AboutVisagismComparisonSlider({
     }
   }, []);
 
+  // Animação de escala do handle (pulse)
+  useEffect(() => {
+    const handle = handleRef.current;
+    if (!handle) return;
+
+    const stopScaleAnimation = () => {
+      if (scaleAnimationRef.current) {
+        scaleAnimationRef.current.kill();
+        scaleAnimationRef.current = null;
+      }
+      gsap.set(handle, { scale: 1 });
+    };
+
+    const startScaleAnimation = () => {
+      if (scaleAnimationRef.current) return; // evita múltiplas animações
+      scaleAnimationRef.current = gsap.to(handle, {
+        scale: 1.3,
+        duration: 0.3,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+      });
+    };
+
+    // Se o usuário já viu o affordance, nunca pulse novamente
+    if (hasSeenAffordance) {
+      stopScaleAnimation();
+      return;
+    }
+
+    // Inicia o pulse por padrão
+    startScaleAnimation();
+
+    // Para o pulse durante hover (quando o usuário já está interagindo)
+    if (isHovered) {
+      stopScaleAnimation();
+    }
+
+    return () => {
+      stopScaleAnimation();
+    };
+  }, [hasSeenAffordance, isHovered]);
+
   useEffect(() => {
     const handleMove = (e: MouseEvent | TouchEvent) => {
       if (!isDraggingRef.current) return;
@@ -49,7 +97,9 @@ export function AboutVisagismComparisonSlider({
         : (e as MouseEvent).clientX;
       updatePositionFromClientX(clientX);
     };
-    const stop = () => (isDraggingRef.current = false);
+    const stop = () => {
+      isDraggingRef.current = false;
+    };
     window.addEventListener("mousemove", handleMove);
     window.addEventListener("mouseup", stop);
     window.addEventListener("touchmove", handleMove);
@@ -79,6 +129,11 @@ export function AboutVisagismComparisonSlider({
 				isDraggingRef.current = true;
 				updatePositionFromClientX(e.touches[0].clientX);
 			}}
+			onMouseEnter={() => {
+				setIsHovered(true);
+				if (!hasSeenAffordance) setHasSeenAffordance(true);
+			}}
+			onMouseLeave={() => setIsHovered(false)}
 			// Move conforme mouse em desktop (sem necessidade de clicar)
 			onMouseMove={(e) => {
 				if (!isFinePointer.current) return; // evita em touch devices híbridos
@@ -109,15 +164,16 @@ export function AboutVisagismComparisonSlider({
 					priority={false}
 				/>
 			</div>
-
-			{/* Divider */}
-			<div
-				className="absolute top-0 bottom-0 w-px bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.15)]"
-				style={{ left: `${position}%` }}
-			/>
+			<div>
+				{/* Divider */}
+				<div
+					className="absolute top-0 bottom-0 w-px bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.15)]"
+					style={{ left: `${position}%` }}
+				/>
 
 			{/* Handle */}
 			<button
+				ref={handleRef}
 				type="button"
 				aria-label="Arraste para comparar"
 				className="absolute top-1/2 -translate-y-1/2 -ml-4 flex flex-col items-center gap-2"
@@ -131,10 +187,18 @@ export function AboutVisagismComparisonSlider({
 					isDraggingRef.current = true;
 				}}
 			>
-				<span className="h-14 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
-					<SwipeHandAffordance />
-				</span>
-			</button>
+					<span className="h-14 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
+					{!hasSeenAffordance && (
+					<SwipeHandAffordance
+							className={cn(
+								"transition-opacity duration-200",
+								isHovered && "opacity-0"
+							)}
+					/>
+					)}
+					</span>
+				</button>
+			</div>
 
 			{/* Labels */}
 			<span
