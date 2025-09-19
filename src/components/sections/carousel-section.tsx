@@ -313,7 +313,7 @@ export default function CarouselSection() {
 					<Container>
 						{/* Cabeçalho da seção otimizado */}
 						<div className="max-w-3xl mx-auto text-center mb-12">
-							<h2 className="text-stone-900 text-4xl font-semibold mb-2">
+							<h2 className="font-semibold text-center mb-2   text-neutral-900">
 								Transformações reais de{" "}
 								<span className="text-gradient bg-clip-text text-transparent bg-linear-to-r from-primary to-[#C16C3F]">
 									visagismo
@@ -321,7 +321,7 @@ export default function CarouselSection() {
 								feito por nossa IA
 							</h2>
 
-							<p className="text-center text-gray-600 max-w-4xl mx-auto mb-12 lg:mb-8 px-4 lg:px-0">
+							<p className="text-center text-neutral-600 max-w-4xl mx-auto mb-12 lg:mb-8 px-4 lg:px-0">
 								Cada resultado seguiu exatamente as recomendações da nossa
 								análise matemática. Veja como diferentes formatos de rosto foram
 								valorizados cientificamente.

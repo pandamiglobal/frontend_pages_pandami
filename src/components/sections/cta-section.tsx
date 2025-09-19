@@ -12,7 +12,7 @@ export const CtaSection: React.FC = () => {
 			<Container>
 				{" "}
 				<div className="relative">
-					<div className="px-6 md:px-16 py-8 mt-48 md:mt-0 bg-orange-50 rounded-2xl flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-8 md:gap-10 overflow-hidden ">
+					<div className="px-6 md:px-16 py-8 mt-48 md:mt-0  lg:mt-28 bg-orange-50 rounded-2xl flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-8 md:gap-10 overflow-hidden ">
 						{/* Textos e botão */}
 						<div className="w-full md:w-1/2 lg:max-w-[560px] flex flex-col gap-6 z-10">
 							<div className="flex flex-col gap-3">
@@ -43,7 +43,7 @@ export const CtaSection: React.FC = () => {
 								<HeroIcon className="w-full h-full" />
 							</div>
 						</div>
-						<div className="absolute -top-[200px] md:-top-[140px] md:left-24 z-20">
+						<div className="absolute -top-[200px] md:bottom-[120px] md:left-24 z-20">
 							<Image
 								src="/lp/images/ctasection/ctaSection_womanImage.png"
 								alt="Mulher usando o visagismo Pandami"

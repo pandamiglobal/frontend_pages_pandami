@@ -197,11 +197,11 @@
   }
 
   h2 {
-    @apply font-fahkwang text-[24px] sm:text-[28px] md:text-[36px] lg:text-[48px] font-bold text-gray-900;
+    @apply font-fahkwang text-[20px] sm:text-[24px] md:text-[32px] lg:text-[36px] font-bold text-gray-900;
   }
 
   h3 {
-    @apply font-fahkwang text-[20px] sm:text-[24px] md:text-[28px] lg:text-[36px] font-bold text-gray-900;
+    @apply font-fahkwang text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] font-bold text-gray-900;
   }
 
   h4 {

@@ -66,46 +66,54 @@ export function AboutVisagismSection() {
   );
 
   return (
-    <section id="aboutvisagism" className="py-20 bg-white">
-      <Container>
-        <h2 className="text-3xl md:text-4xl font-semibold text-center mb-8 text-stone-900">
-          Conheça o Visagismo PandaMi
-        </h2>
+		<section id="aboutvisagism" className="py-20 bg-white">
+			<Container>
+				<h2 className="font-semibold text-center mb-8 text-neutral-900">
+					Conheça o Visagismo PandaMi
+				</h2>
 
-        <Tabs
-          value={gender}
-          onValueChange={(v) => setGender(v as any)}
-          className="flex flex-col items-center"
-        >
-          <TabsList className="mb-10 bg-neutral-100 rounded-full p-1 h-auto">
-            <TabsTrigger
-              value="woman"
-              className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
-            >
-              Feminino
-            </TabsTrigger>
-            <TabsTrigger
-              value="man"
-              className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
-            >
-              Masculino
-            </TabsTrigger>
-          </TabsList>
+				<Tabs
+					value={gender}
+					onValueChange={(v) => setGender(v as any)}
+					className="flex flex-col items-center"
+				>
+					<TabsList className="mb-10 bg-neutral-100 rounded-full p-1 h-auto">
+						<TabsTrigger
+							value="woman"
+							className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
+						>
+							Feminino
+						</TabsTrigger>
+						<TabsTrigger
+							value="man"
+							className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
+						>
+							Masculino
+						</TabsTrigger>
+					</TabsList>
 
-          <TabsContent value="woman" className="w-full">
-            {gender === "woman" && (
-              <GenderContent key={gender} data={woman} direction={directionRef.current} />
-            )}
-          </TabsContent>
-          <TabsContent value="man" className="w-full">
-            {gender === "man" && (
-              <GenderContent key={gender} data={man} direction={directionRef.current} />
-            )}
-          </TabsContent>
-        </Tabs>
-      </Container>
-    </section>
-  );
+					<TabsContent value="woman" className="w-full">
+						{gender === "woman" && (
+							<GenderContent
+								key={gender}
+								data={woman}
+								direction={directionRef.current}
+							/>
+						)}
+					</TabsContent>
+					<TabsContent value="man" className="w-full">
+						{gender === "man" && (
+							<GenderContent
+								key={gender}
+								data={man}
+								direction={directionRef.current}
+							/>
+						)}
+					</TabsContent>
+				</Tabs>
+			</Container>
+		</section>
+	);
 }
 
 interface GenderContentProps { data: VariantSet; direction: 1 | -1 }

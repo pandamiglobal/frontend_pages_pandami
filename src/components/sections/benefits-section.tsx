@@ -124,9 +124,9 @@ export function BenefitsSection() {
 			className="w-full bg-neutral-800 pt-4 pb-12 sm:pt-2 sm:pb-16 md:pt-2 md:pb-20"
 		>
 			<Container className="px-4 sm:px-6">
-				<h3 className="text-white font-semibold mb-6 md:mb-12 text-center text-xl sm:text-2xl md:text-3xl">
+				<h2 className="text-white font-semibold mb-6 md:mb-12 text-center">
 					Dois lados da mesma transformação
-				</h3>
+				</h2>
 
 				{/* Salon Benefits */}
 				<div className="flex flex-col-reverse lg:flex-row gap-6 sm:gap-8 lg:gap-16 justify-between items-center">
