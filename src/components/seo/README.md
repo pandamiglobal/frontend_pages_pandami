@@ -48,10 +48,11 @@ Este documento descreve as otimizações semânticas e de SEO implementadas na p
 ## Otimizações Semânticas
 
 ### FAQ Section
-- Adicionado `itemScope` e `itemType` para Schema.org
-- Cada pergunta marcada como `Question`
-- Cada resposta marcada como `Answer`
-- ID semântico `#faq` para navegação
+- **JSON-LD único**: Apenas um componente FAQJsonLd (sem microdata duplicado)
+- **Validação robusta**: Filtra FAQs vazios ou inválidos
+- **Estrutura limpa**: Cada pergunta marcada como `Question` com `acceptedAnswer`
+- **ID semântico**: `#faq` para navegação
+- **Sem duplicação**: Removido microdata para evitar conflitos
 
 ### Metadados Otimizados
 - Título otimizado com palavras-chave

@@ -44,7 +44,7 @@ const testimonialAvatars = [
 
 export default function FAQSection({ faq }: { faq: FAQArray }) {
   return (
-		<section id="faq" className="w-full py-10 md:py-16 bg-white" itemScope itemType="https://schema.org/FAQPage">
+		<section id="faq" className="w-full py-10 md:py-16 bg-white">
 			<Container className="px-4 md:px-6">
 				<div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
 					{/* Left column: Title, description, testimonials, CTA */}
@@ -101,28 +101,14 @@ export default function FAQSection({ faq }: { faq: FAQArray }) {
 									key={`faq-${index}`}
 									value={`faq-${index}`}
 									className="border-b border-gray-200 overflow-hidden"
-									itemScope
-									itemProp="mainEntity"
-									itemType="https://schema.org/Question"
 								>
 									<AccordionTrigger className="px-2 py-4 hover:no-underline text-left">
-										<span 
-											className="text-left font-medium text-sm md:text-base font-sans"
-											itemProp="name"
-										>
+										<span className="text-left font-medium text-sm md:text-base font-sans">
 											{item.question}
 										</span>
 									</AccordionTrigger>
-									<AccordionContent 
-										className="px-2 pb-4 pt-0"
-										itemScope
-										itemProp="acceptedAnswer"
-										itemType="https://schema.org/Answer"
-									>
-										<p 
-											className="text-gray-600 text-sm md:text-base"
-											itemProp="text"
-										>
+									<AccordionContent className="px-2 pb-4 pt-0">
+										<p className="text-gray-600 text-sm md:text-base">
 											{item.answer}
 										</p>
 									</AccordionContent>

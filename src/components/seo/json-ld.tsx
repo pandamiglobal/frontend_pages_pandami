@@ -31,15 +31,27 @@ export const FAQJsonLd = ({ faq }: FAQJsonLdProps) => {
     return null;
   }
 
+  // Validação adicional: verificar se todos os itens têm question e answer
+  const validFaq = faq.filter(item => 
+    item.question && 
+    item.answer && 
+    item.question.trim() !== '' && 
+    item.answer.trim() !== ''
+  );
+
+  if (validFaq.length === 0) {
+    return null;
+  }
+
   const faqStructuredData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faq.map((item) => ({
+    "mainEntity": validFaq.map((item) => ({
       "@type": "Question",
-      "name": item.question,
+      "name": item.question.trim(),
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": item.answer
+        "text": item.answer.trim()
       }
     }))
   };
