@@ -20,12 +20,14 @@ export default function Footer() {
 							/>
 						</div>
 						<p className="text-sm text-gray-600 mb-6 max-w-sm">
-							Nutracêuticos premium para cabelos radiantes. Fórmulas exclusivas
-							desenvolvidas para realçar sua beleza natural com ingredientes de
-							alta qualidade.
+							Primeiro surgiu a tesoura, depois nasceu o secador de cabelo e a
+							máquina de corte e agora, mais de 2 décadas depois, temos o
+							próximo grande salto tecnológico para os salões. Nós somos a
+							Pandami!
 						</p>
 						<p className="text-xs text-gray-500">
-							© 2025 Pandami - Todos os direitos reservados.
+							© {new Date().getFullYear()} Pandami - Todos os direitos
+							reservados.
 						</p>
 					</div>
 
@@ -36,29 +38,24 @@ export default function Footer() {
 						</h3>
 						<ul className="space-y-2 text-sm text-gray-600">
 							<li>
-								<Link href="/" className="hover:text-primary transition-colors">
-									Home
-								</Link>
-							</li>
-							<li>
 								<Link
-									href="/sobre-nos"
+									href="/#home"
 									className="hover:text-primary transition-colors"
 								>
-									Sobre nós
+									Início
 								</Link>
 							</li>
 							<li>
 								<Link
-									href="/planos-e-precos"
+									href="/#why"
 									className="hover:text-primary transition-colors"
 								>
-									Planos e preços
+									Por que Visagismo
 								</Link>
 							</li>
 							<li>
 								<Link
-									href="/beneficios"
+									href="/#benefits"
 									className="hover:text-primary transition-colors"
 								>
 									Benefícios
@@ -66,10 +63,28 @@ export default function Footer() {
 							</li>
 							<li>
 								<Link
-									href="/seja-um-parceiro"
+									href="#pricing"
 									className="hover:text-primary transition-colors"
 								>
-									Seja um parceiro
+									Planos profissionais
+								</Link>
+							</li>
+
+							<li>
+								<Link
+									href="https://app.pandami.com.br/auth/sign-up"
+									className="hover:text-primary transition-colors"
+								>
+									Quero me cadastrar
+								</Link>
+							</li>
+
+							<li>
+								<Link
+									href="https://app.pandami.com.br/auth/sign-in"
+									className="hover:text-primary transition-colors"
+								>
+									Acessar painel
 								</Link>
 							</li>
 						</ul>

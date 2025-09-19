@@ -23,6 +23,8 @@
 /* Estilos específicos para figuras e legendas */
 .post-content figure {
   margin: 2rem 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .post-content figcaption {
@@ -30,6 +32,41 @@
   color: hsl(var(--muted-foreground));
   text-align: center;
   padding-top: 0.5rem;
+}
+
+/* Garantir que imagens não ultrapassem o container */
+.post-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  width: 100% !important;
+  object-fit: cover;
+}
+
+/* Garantir que tabelas sejam responsivas */
+.post-content table {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+}
+
+.post-content table tbody {
+  display: table;
+  width: 100%;
+}
+
+/* Garantir que vídeos sejam responsivos */
+.post-content iframe,
+.post-content video {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Garantir que elementos não ultrapassem o container */
+.post-content * {
+  max-width: 100% !important;
+  box-sizing: border-box;
 }
 
 /* Melhorando a aparência das listas */

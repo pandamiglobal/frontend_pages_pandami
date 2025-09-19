@@ -1,282 +1,431 @@
-import { Container } from "@/components/ui/container";
+import LegalLayout from "@/common/layouts/legal-layout";
+import { useLegalMetadata } from "@/common/hooks/use-legal-metadata";
+import { legalPagesConfig } from "@/common/config/legal-pages";
+
+export const metadata = useLegalMetadata(legalPagesConfig["termos-de-uso"].metadata);
 
 export default function Page() {
     return (
-        <Container>
-            <div className="container flex flex-col gap-3 p-4">
-                <h3 className="wp-block-heading"><strong>1. Introdução</strong></h3>
+        <LegalLayout
+            config={legalPagesConfig["termos-de-uso"]}
+            currentPath="/termos-de-uso"
+        >
+            {/* Índice de navegação */}
+            <div className="bg-muted/50 rounded-lg p-6 mb-8">
+                <h2 className="text-lg font-semibold mb-4">Índice</h2>
+                <nav className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                    <a href="#aceitacao" className="text-primary hover:underline">1. Aceitação dos Termos</a>
+                    <a href="#descricao" className="text-primary hover:underline">2. Descrição do Serviço</a>
+                    <a href="#cadastro" className="text-primary hover:underline">3. Cadastro e Conta</a>
+                    <a href="#assinatura" className="text-primary hover:underline">4. Assinatura e Pagamento</a>
+                    <a href="#uso-permitido" className="text-primary hover:underline">5. Uso Permitido</a>
+                    <a href="#propriedade" className="text-primary hover:underline">6. Propriedade Intelectual</a>
+                    <a href="#ia" className="text-primary hover:underline">7. Inteligência Artificial</a>
+                    <a href="#responsabilidades" className="text-primary hover:underline">8. Responsabilidades</a>
+                    <a href="#limitação" className="text-primary hover:underline">9. Limitação de Responsabilidade</a>
+                    <a href="#indenizacao" className="text-primary hover:underline">10. Indenização</a>
+                    <a href="#privacidade" className="text-primary hover:underline">11. Privacidade e Proteção de Dados</a>
+                    <a href="#modificacoes" className="text-primary hover:underline">12. Modificações do Serviço</a>
+                    <a href="#rescisao" className="text-primary hover:underline">13. Rescisão</a>
+                    <a href="#disponibilidade" className="text-primary hover:underline">14. Disponibilidade do Serviço</a>
+                    <a href="#comunicacoes" className="text-primary hover:underline">15. Comunicações</a>
+                    <a href="#disposicoes" className="text-primary hover:underline">16. Disposições Gerais</a>
+                    <a href="#definicoes" className="text-primary hover:underline">17. Definições</a>
+                    <a href="#contato" className="text-primary hover:underline">18. Suporte e Contato</a>
+                    <a href="#beta" className="text-primary hover:underline">19. Programa Beta e Funcionalidades Experimentais</a>
+                    <a href="#vigencia" className="text-primary hover:underline">20. Aceitação e Vigência</a>
+                </nav>
+            </div>
 
-                <h4 className="wp-block-heading"><strong>1.1. Aceitação dos Termos</strong></h4>
-                <p>
-                    Bem-vindo ao site <a href="http://www.pandami.com.br">www.pandami.com.br</a>, de titularidade da Pandami Serviços Administrativos LTDA (CNPJ: 41.491.976/0001-91).
-                    Ao acessar e utilizar este site, você concorda com os termos e condições aqui estabelecidos. Caso não concorde com algum dos termos, por favor, não utilize o site.
-                    A Pandami se reserva o direito de alterar estes termos a qualquer momento, sendo responsabilidade do usuário revisá-los periodicamente para estar ciente de quaisquer modificações.
+            <section id="aceitacao">
+                <h2 className="text-2xl font-semibold mb-4">1. Aceitação dos Termos</h2>
+                <p className="mb-4 leading-relaxed">
+                    Ao acessar e usar a <strong>Pandami</strong> ("Plataforma", "Serviço" ou "App"), operado pela <strong>Pandami Serviços Administrativos LTDA</strong> ("nós", "nosso" ou "Empresa"), você concorda em cumprir e estar vinculado aos seguintes Termos de Uso.
+                </p>
+                <p className="mb-6 leading-relaxed">
+                    Se você não concordar com qualquer parte destes termos, não deve usar nossa Plataforma.
+                </p>
+            </section>
+
+            <section id="descricao">
+                <h2 className="text-2xl font-semibold mb-4">2. Descrição do Serviço</h2>
+
+                <h3 className="text-xl font-medium mb-3">2.1 O que oferecemos</h3>
+                <p className="mb-3">Nossa Plataforma oferece:</p>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Sistema de gestão de clientes para barbearias</li>
+                    <li>Análise de visagismo assistida por Inteligência Artificial</li>
+                    <li>Geração de simulações de cortes através de manipulação de imagem com IA</li>
+                    <li>Armazenamento de histórico de atendimentos</li>
+                    <li>Relatórios personalizados de cortes</li>
+                    <li>Comunicação facilitada entre barbeiros e clientes</li>
+                </ul>
+                <p className="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+                    <strong>Nota:</strong> O Serviço encontra-se em fase Beta/MVP, sujeito a melhorias e ajustes contínuos.
                 </p>
 
-                <h4 className="wp-block-heading"><strong>1.2. Definições</strong></h4>
-                <p>Para fins destes Termos de Uso, considera-se:</p>
-                <ul className="wp-block-list">
-                    <li><strong>Pandami</strong>: Pandami Serviços Administrativos LTDA.</li>
-                    <li><strong>Usuário</strong>: Toda pessoa que acessar ou utilizar o site <a href="http://www.Pandami.com.br">www.Pandami.com.br</a>.</li>
-                    <li><strong>Site</strong>: O conjunto de páginas e funcionalidades acessíveis pelo domínio <a href="http://www.Pandami.com.br">www.Pandami.com.br</a>.</li>
+                <h3 className="text-xl font-medium mb-3">2.2 Modalidades de Uso</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li><strong>Formulário de Visagismo Completo:</strong> Análise detalhada com múltiplas perguntas</li>
+                    <li><strong>Modo Simplificado:</strong> Descrição direta do corte desejado sem formulário</li>
+                </ul>
+            </section>
+
+            <section id="cadastro">
+                <h2 className="text-2xl font-semibold mb-4">3. Cadastro e Conta</h2>
+
+                <h3 className="text-xl font-medium mb-3">3.1 Requisitos</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Você deve ter pelo menos 18 anos ou ser maior de idade em sua jurisdição</li>
+                    <li>Fornecer informações verdadeiras, precisas e completas</li>
+                    <li>Manter a segurança de sua senha e conta</li>
+                    <li>Notificar imediatamente sobre qualquer uso não autorizado</li>
                 </ul>
 
-                <h3 className="wp-block-heading"><strong>2. Acesso ao Site</strong></h3>
+                <h3 className="text-xl font-medium mb-3">3.2 Tipos de Usuário</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li><strong>Estabelecimento:</strong> Barbearia que contrata o serviço</li>
+                    <li><strong>Profissional:</strong> Barbeiro autorizado pelo estabelecimento</li>
+                    <li><strong>Cliente Final:</strong> Pessoa que recebe os serviços da barbearia</li>
+                </ul>
+            </section>
 
-                <h4 className="wp-block-heading"><strong>2.1. Elegibilidade</strong></h4>
-                <p>
-                    Para utilizar o site, o Usuário deve ter pelo menos 18 anos de idade ou ser emancipado, e possuir plena capacidade para aceitar e cumprir estes Termos de Uso.
-                    Menores de idade devem obter permissão dos pais ou responsáveis legais para utilizar o site.
-                </p>
+            <section id="assinatura">
+                <h2 className="text-2xl font-semibold mb-4">4. Assinatura e Pagamento</h2>
 
-                <h4 className="wp-block-heading"><strong>2.2. Requisitos de Registro</strong></h4>
-                <p>
-                    Algumas funcionalidades do site podem exigir que o Usuário se registre, fornecendo informações pessoais completas e precisas.
-                    O Usuário é responsável por manter a confidencialidade das informações de acesso e por todas as atividades que ocorrerem sob sua conta.
-                </p>
-
-                <h3 className="wp-block-heading"><strong>3. Uso do Site</strong></h3>
-
-                <h4 className="wp-block-heading"><strong>3.1. Regras de Conduta</strong></h4>
-                <p>
-                    O Usuário compromete-se a utilizar o site de forma ética e responsável, respeitando todas as normas legais aplicáveis,
-                    os direitos de terceiros e os princípios de boa-fé. Especificamente, o Usuário se obriga a:
-                </p>
-                <ul className="wp-block-list">
-                    <li>Não utilizar o site para fins ilegais ou não autorizados;</li>
-                    <li>Não difundir conteúdo que viole direitos de propriedade intelectual, privacidade, ou outros direitos de terceiros;</li>
-                    <li>Não praticar atos que comprometam a segurança do site ou que possam causar prejuízos à Pandami ou a terceiros;</li>
-                    <li>Não utilizar qualquer dispositivo, software ou outro recurso que possa interferir nas atividades e operações do site ou que vise a acessar informações ou dados de outros usuários.</li>
+                <h3 className="text-xl font-medium mb-3">4.1 Modelo de Assinatura</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>O Serviço funciona mediante assinatura mensal/anual</li>
+                    <li>Planos disponíveis: Básico/Profissional/Premium</li>
+                    <li>Valores e funcionalidades conforme tabela vigente no site</li>
                 </ul>
 
-                <h4 className="wp-block-heading"><strong>3.2. Responsabilidades do Usuário</strong></h4>
-                <p>
-                    O Usuário é o único responsável pelo uso do site e deve cumprir rigorosamente todas as disposições destes Termos de Uso,
-                    bem como da legislação aplicável. O Usuário declara ser maior de idade e possuir capacidade jurídica para aceitar estes
-                    Termos de Uso e utilizar o site.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>3.3. Direitos da Pandami</strong></h4>
-                <p>A Pandami reserva-se o direito de, a qualquer momento e sem aviso prévio:</p>
-                <ul className="wp-block-list">
-                    <li>Modificar ou descontinuar, temporária ou permanentemente, o acesso ao site ou a qualquer parte dele;</li>
-                    <li>Restringir, suspender ou encerrar o acesso do Usuário ao site, no todo ou em parte, em caso de violação destes Termos de Uso ou da legislação aplicável;</li>
-                    <li>Adotar as medidas legais cabíveis para proteger seus direitos e interesses, incluindo a comunicação com as autoridades competentes e a colaboração com investigações oficiais.</li>
+                <h3 className="text-xl font-medium mb-3">4.2 Cobrança</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Pagamento antecipado via cartão de crédito, boleto ou PIX</li>
+                    <li>Renovação automática ao final do período</li>
+                    <li>Reajuste anual conforme IPCA ou índice acordado</li>
                 </ul>
 
-                <hr className="wp-block-separator has-alpha-channel-opacity" />
+                <h3 className="text-xl font-medium mb-3">4.3 Cancelamento</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Cancelamento a qualquer momento</li>
+                    <li>Acesso mantido até o final do período pago</li>
+                    <li>Sem multas ou taxas de cancelamento</li>
+                    <li>Dados mantidos por 60 dias após cancelamento para reativação</li>
+                </ul>
+            </section>
 
-                <h3 className="wp-block-heading"><strong>4. Conteúdo do Site</strong></h3>
+            <section id="uso-permitido">
+                <h2 className="text-2xl font-semibold mb-4">5. Uso Permitido</h2>
 
-                <h4 className="wp-block-heading"><strong>4.1. Propriedade Intelectual</strong></h4>
-                <p>
-                    Todo o conteúdo disponibilizado no site, incluindo, mas não se limitando a, textos, imagens, gráficos, vídeos, logotipos,
-                    ícones, software e quaisquer outras informações, é de propriedade exclusiva da Pandami ou de seus licenciadores, estando
-                    protegido por leis de propriedade intelectual. É vedada a reprodução, modificação, distribuição, transmissão, publicação
-                    ou qualquer outra forma de utilização do conteúdo sem a prévia e expressa autorização por escrito da Pandami.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>4.2. Uso Autorizado do Conteúdo</strong></h4>
-                <p>
-                    O Usuário poderá acessar e visualizar o conteúdo do site para uso pessoal e não comercial, desde que mantenha intactos
-                    todos os avisos de direitos autorais e de propriedade. Qualquer uso do conteúdo para fins comerciais ou que não esteja
-                    expressamente permitido por estes Termos de Uso é proibido e pode resultar em sanções civis e criminais.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>4.3. Conteúdo Gerado pelo Usuário</strong></h4>
-                <p>
-                    Caso o site permita a submissão de conteúdo por parte dos Usuários, como comentários, avaliações ou uploads, o Usuário
-                    declara que detém todos os direitos necessários sobre o conteúdo submetido e concede à Pandami uma licença irrevogável,
-                    mundial, não exclusiva, livre de royalties e transferível para utilizar, reproduzir, modificar, adaptar, publicar,
-                    traduzir, criar obras derivadas, distribuir e exibir tal conteúdo em qualquer mídia.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>4.4. Conteúdo de Terceiros</strong></h4>
-                <p>
-                    O site pode conter links para sites de terceiros que não são operados ou controlados pela Pandami. A Pandami não se
-                    responsabiliza pelo conteúdo, política de privacidade ou práticas de sites de terceiros. A inclusão de tais links no
-                    site não implica qualquer endosso ou associação com esses sites. O acesso e uso de sites de terceiros são de
-                    responsabilidade exclusiva do Usuário.
-                </p>
-
-                <h3 className="wp-block-heading"><strong>5. Privacidade e Proteção de Dados</strong></h3>
-
-                <h4 className="wp-block-heading"><strong>5.1. Coleta e Uso de Informações</strong></h4>
-                <p>
-                    A Pandami coleta e utiliza informações pessoais dos Usuários conforme descrito na nossa Política de Privacidade.
-                    Ao utilizar o site, o Usuário concorda com a coleta, uso e compartilhamento de suas informações pessoais nos termos
-                    da referida Política de Privacidade.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>5.2. Uso de Cookies</strong></h4>
-                <p>
-                    O site utiliza cookies e tecnologias similares para melhorar a experiência do Usuário. Ao continuar navegando no site,
-                    o Usuário concorda com o uso de cookies conforme descrito na nossa Política de Privacidade. Cookies são pequenos
-                    arquivos de texto armazenados no dispositivo do Usuário que ajudam a melhorar a funcionalidade do site e a personalizar
-                    a experiência do Usuário.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>5.3. Direitos do Usuário</strong></h4>
-                <p>
-                    Os Usuários têm o direito de acessar, corrigir, atualizar ou excluir suas informações pessoais. Para exercer esses
-                    direitos, o Usuário deve entrar em contato com a Pandami através do e-mail lgpd@Pandami.com.br. A Pandami se compromete a
-                    responder a tais solicitações em conformidade com a legislação aplicável.
-                </p>
-
-                <hr className="wp-block-separator has-alpha-channel-opacity" />
-
-                <h2 className="wp-block-heading"><strong>Termos de Uso</strong></h2>
-
-                <h3 className="wp-block-heading"><strong>6. Limitação de Responsabilidade</strong></h3>
-
-                <h4 className="wp-block-heading"><strong>6.1. Isenção de Garantias</strong></h4>
-                <p>
-                    O site e seu conteúdo são fornecidos "no estado em que se encontram" e "conforme disponibilidade", sem qualquer tipo
-                    de garantia, expressa ou implícita. A Pandami não garante que o site estará disponível de forma ininterrupta ou livre de
-                    erros, nem que eventuais defeitos serão corrigidos. A Pandami não garante que o site ou seu conteúdo atendam às
-                    necessidades ou expectativas do Usuário.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>6.2. Limitação de Danos</strong></h4>
-                <p>
-                    Em nenhuma hipótese a Pandami será responsável por quaisquer danos diretos, indiretos, incidentais, especiais,
-                    consequenciais ou punitivos, incluindo, mas não se limitando a, perda de lucros, perda de dados, ou outros prejuízos
-                    resultantes do uso ou da impossibilidade de uso do site, mesmo que a Pandami tenha sido previamente avisada da
-                    possibilidade de tais danos. A responsabilidade da Pandami por quaisquer danos decorrentes ou relacionados a este site
-                    será sempre limitada ao valor eventualmente pago pelo Usuário para a utilização dos serviços oferecidos no site.
-                </p>
-
-                <h3 className="wp-block-heading"><strong>7. Modificações nos Termos de Uso</strong></h3>
-                <p>
-                    A Pandami reserva-se o direito de modificar, alterar ou atualizar estes Termos de Uso a qualquer momento, sem aviso
-                    prévio. As alterações entrarão em vigor imediatamente após a sua publicação no site. É responsabilidade do Usuário
-                    revisar periodicamente estes Termos de Uso para estar ciente de quaisquer modificações. O uso continuado do site após
-                    a publicação das alterações constituirá aceitação dos novos termos.
-                </p>
-
-                <h3 className="wp-block-heading"><strong>8. Disposições Gerais</strong></h3>
-
-                <h4 className="wp-block-heading"><strong>8.1. Legislação Aplicável e Foro</strong></h4>
-                <p>
-                    Estes Termos de Uso são regidos e interpretados de acordo com as leis da República Federativa do Brasil. Qualquer
-                    disputa ou controvérsia decorrente da utilização do site será submetida ao foro da Comarca de São Paulo, Estado de
-                    São Paulo, Brasil, com exclusão de qualquer outro, por mais privilegiado que seja.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>8.2. Informações de Contato do DPO</strong></h4>
-                <p>Para questões relacionadas à proteção de dados pessoais, o contato deve ser feito através do e-mail lgpd@Pandami.com.br.</p>
-
-                <h3 className="wp-block-heading"><strong>9. Contato</strong></h3>
-                <p>
-                    Em caso de dúvidas, sugestões ou reclamações relativas a estes Termos de Uso ou ao site, entre em contato conosco
-                    através do e-mail contato@Pandami.com.br.
-                </p>
-
-                <h3 className="wp-block-heading"><strong>10. Serviços Prestados</strong></h3>
-
-                <h4 className="wp-block-heading"><strong>10.1. Descrição dos Serviços</strong></h4>
-                <p>
-                    A Pandami oferece serviços de consultoria administrativa, registro de marcas e patentes, e outros serviços relacionados à
-                    propriedade intelectual(Saas e I.A). A descrição detalhada dos serviços oferecidos pode ser encontrada nas páginas
-                    específicas do site. A Pandami reserva-se o direito de modificar, suspender ou descontinuar qualquer um dos serviços
-                    oferecidos, a qualquer momento e sem aviso prévio, sem que isso implique qualquer responsabilidade para a Pandami.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>10.2. Condições de Pagamento</strong></h4>
-                <p>
-                    Os serviços prestados pela Pandami podem estar sujeitos a taxas e pagamentos específicos, conforme detalhado nas páginas
-                    relevantes do site ou em contratos específicos firmados entre a Pandami e o Usuário. O Usuário concorda em pagar todas
-                    as taxas aplicáveis pelos serviços contratados, de acordo com as condições de pagamento estabelecidas pela Pandami.
-                </p>
-
-                <h3 className="wp-block-heading"><strong>11. Disposições Específicas</strong></h3>
-
-                <h4 className="wp-block-heading"><strong>11.1. Publicidade e Promoções</strong></h4>
-                <p>
-                    A Pandami pode, ocasionalmente, enviar mensagens promocionais ou de publicidade para os Usuários cadastrados. Os Usuários
-                    podem optar por não receber tais mensagens, seguindo as instruções de cancelamento de assinatura incluídas nas
-                    comunicações.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>11.2. Feedback e Sugestões</strong></h4>
-                <p>
-                    Qualquer feedback ou sugestão fornecida pelo Usuário à Pandami será considerado não-confidencial e não-proprietário.
-                    A Pandami terá o direito de usar tais feedbacks e sugestões sem restrições, para quaisquer fins, incluindo, mas não se
-                    limitando a, melhorias e modificações nos serviços oferecidos.
-                </p>
-
-                <h3 className="wp-block-heading"><strong>12. Disposições Finais</strong></h3>
-
-                <h4 className="wp-block-heading"><strong>12.1. Integralidade do Acordo</strong></h4>
-                <p>
-                    Estes Termos de Uso constituem o acordo integral entre o Usuário e a Pandami em relação ao uso do site e dos serviços
-                    oferecidos. Qualquer modificação ou alteração destes Termos de Uso deverá ser feita por escrito e assinada por um
-                    representante autorizado da Pandami.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>12.2. Renúncia</strong></h4>
-                <p>
-                    A falha da Pandami em exigir o cumprimento de qualquer disposição destes Termos de Uso não constituirá uma renúncia ao
-                    direito de exigir tal cumprimento em qualquer momento futuro. A renúncia a qualquer disposição destes Termos de Uso
-                    só será efetiva se for feita por escrito e assinada por um representante autorizado da Pandami.
-                </p>
-
-                <h4 className="wp-block-heading"><strong>12.3. Divisibilidade</strong></h4>
-                <p>
-                    Se qualquer disposição destes Termos de Uso for considerada inválida ou inexequível por um tribunal competente, as
-                    demais disposições permanecerão em pleno vigor e efeito. A disposição inválida ou inexequível será substituída por
-                    uma disposição válida e exequível que mais se aproxime da intenção original das partes.
-                </p>
-
-                <h3 className="wp-block-heading"><strong>13. Informações de Contato</strong></h3>
-                <p>
-                    Para questões relacionadas a estes Termos de Uso, políticas de privacidade, ou para exercer qualquer direito em
-                    relação aos seus dados pessoais, o Usuário pode entrar em contato com a Pandami através dos seguintes meios:
-                </p>
-                <ul className="wp-block-list">
-                    <li><strong>E-mail:</strong> contato@Pandami.com.br</li>
+                <h3 className="text-xl font-medium mb-3">5.1 Você pode:</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Acessar e usar o Serviço para fins comerciais legítimos</li>
+                    <li>Armazenar dados de clientes com consentimento</li>
+                    <li>Gerar relatórios e simulações para uso profissional</li>
+                    <li>Compartilhar resultados com clientes mediante autorização</li>
                 </ul>
 
-                <h3 className="wp-block-heading"><strong>14. Política de Reembolsos e Cancelamentos</strong></h3>
+                <h3 className="text-xl font-medium mb-3">5.2 Você NÃO pode:</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Usar o Serviço para fins ilegais ou não autorizados</li>
+                    <li>Violar direitos de privacidade ou propriedade intelectual</li>
+                    <li>Transmitir vírus ou código malicioso</li>
+                    <li>Fazer engenharia reversa ou copiar o Serviço</li>
+                    <li>Revender ou sublicenciar o acesso</li>
+                    <li>Usar para criar produto concorrente</li>
+                    <li>Manipular imagens para fins não relacionados a cortes de cabelo</li>
+                </ul>
+            </section>
 
-                <h4 className="wp-block-heading"><strong>14.1. Condições de Reembolso</strong></h4>
-                <p>
-                    Os reembolsos serão processados conforme descrito nos contratos específicos de cada serviço. O Usuário tem direito ao
-                    reembolso total ou parcial conforme as condições acordadas no momento da contratação do serviço. Todos os pedidos de
-                    reembolso devem ser feitos por escrito e enviados para contato@Pandami.com.br.
+            <section id="propriedade">
+                <h2 className="text-2xl font-semibold mb-4">6. Propriedade Intelectual</h2>
+
+                <h3 className="text-xl font-medium mb-3">6.1 Nossa Propriedade</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Software, algoritmos, interface e marca são propriedade da Empresa</li>
+                    <li>Modelos de IA e tecnologia de processamento são proprietários</li>
+                    <li>Conteúdo gerado pelo sistema permanece licenciado para uso</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">6.2 Sua Propriedade</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Você mantém direitos sobre dados inseridos</li>
+                    <li>Fotografias dos clientes permanecem propriedade dos mesmos</li>
+                    <li>Notas e observações criadas por você</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">6.3 Licença de Uso</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Concedemos licença limitada, não exclusiva e intransferível</li>
+                    <li>Você nos concede licença para processar seus dados conforme necessário</li>
+                    <li>Direito de usar dados anonimizados para melhorar o serviço</li>
+                </ul>
+            </section>
+
+            <section id="ia">
+                <h2 className="text-2xl font-semibold mb-4">7. Inteligência Artificial</h2>
+
+                <h3 className="text-xl font-medium mb-3">7.1 Funcionamento</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Utilizamos IA para análise facial e recomendações</li>
+                    <li>Processamento via Azure e tecnologias proprietárias</li>
+                    <li>Resultados são sugestões, não garantias</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">7.2 Limitações</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>IA pode gerar resultados imprecisos</li>
+                    <li>Simulações são aproximações visuais</li>
+                    <li>Decisão final sempre do profissional e cliente</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">7.3 Melhoria Contínua</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Dados anonimizados podem treinar modelos</li>
+                    <li>Feedback usado para aprimoramento</li>
+                    <li>Atualizações periódicas dos algoritmos</li>
+                </ul>
+            </section>
+
+            <section id="responsabilidades">
+                <h2 className="text-2xl font-semibold mb-4">8. Responsabilidades</h2>
+
+                <h3 className="text-xl font-medium mb-3">8.1 Nossas Responsabilidades</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Envidar melhores esforços para manter a Plataforma operacional</li>
+                    <li>Proteger dados conforme padrões de segurança</li>
+                    <li>Fornecer suporte técnico em horário comercial</li>
+                    <li>Atualizar e melhorar o serviço regularmente</li>
+                    <li>Notificar sobre manutenções programadas com antecedência</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">8.2 Suas Responsabilidades</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Obter consentimento dos clientes para fotos e dados</li>
+                    <li>Usar o serviço de forma ética e legal</li>
+                    <li>Manter confidencialidade de dados de terceiros</li>
+                    <li>Garantir veracidade das informações inseridas</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">8.3 Isenção de Responsabilidade</h3>
+                <p className="mb-3">NÃO nos responsabilizamos por:</p>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Resultados estéticos dos cortes realizados</li>
+                    <li>Satisfação dos clientes finais</li>
+                    <li>Perdas comerciais indiretas</li>
+                    <li>Interpretação incorreta das sugestões de IA</li>
+                    <li>Uso indevido das ferramentas</li>
+                    <li>Interrupções decorrentes da fase Beta/MVP</li>
+                    <li>Bugs ou erros durante o desenvolvimento</li>
+                </ul>
+            </section>
+
+            <section id="limitação">
+                <h2 className="text-2xl font-semibold mb-4">9. Limitação de Responsabilidade</h2>
+                <p className="mb-4 leading-relaxed">
+                    Em nenhuma circunstância a Empresa será responsável por danos indiretos, incidentais, especiais, consequenciais ou punitivos, incluindo perda de lucros, dados, uso, boa vontade ou outras perdas intangíveis.
                 </p>
-
-                <h4 className="wp-block-heading"><strong>14.2. Cancelamento de Serviços</strong></h4>
-                <p>
-                    O Usuário pode solicitar o cancelamento de serviços contratados a qualquer momento, observando os prazos e condições
-                    descritos nos contratos específicos. A Pandami se reserva o direito de cobrar taxas de cancelamento conforme especificado
-                    nos contratos de serviço.
+                <p className="mb-6 leading-relaxed">
+                    Nossa responsabilidade total não excederá o valor pago por você nos últimos 12 meses.
                 </p>
+            </section>
 
-                <h3 className="wp-block-heading"><strong>15. Política de Resolução de Conflitos</strong></h3>
+            <section id="indenizacao">
+                <h2 className="text-2xl font-semibold mb-4">10. Indenização</h2>
+                <p className="mb-3">Você concorda em defender, indenizar e isentar a Empresa de qualquer reclamação, dano, obrigação, perda, responsabilidade, custo ou dívida, e despesas decorrentes de:</p>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Seu uso do Serviço</li>
+                    <li>Violação destes Termos</li>
+                    <li>Violação de direitos de terceiros</li>
+                    <li>Uso inadequado de dados de clientes</li>
+                </ul>
+            </section>
 
-                <h4 className="wp-block-heading"><strong>15.1. Negociação</strong></h4>
-                <p>
-                    Em caso de qualquer disputa ou controvérsia decorrente do uso do site ou dos serviços oferecidos, o Usuário concorda
-                    em tentar resolver a questão amigavelmente, através de negociação direta com a Pandami.
-                </p>
+            <section id="privacidade">
+                <h2 className="text-2xl font-semibold mb-4">11. Privacidade e Proteção de Dados</h2>
 
-                <h3 className="wp-block-heading"><strong>16. Termos Adicionais</strong></h3>
+                <h3 className="text-xl font-medium mb-3">11.1 Conformidade Legal</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Operamos conforme LGPD (Brasil) e GDPR (UE)</li>
+                    <li>Política de Privacidade integra estes Termos</li>
+                    <li>Processamento mediante bases legais adequadas</li>
+                </ul>
 
-                <h4 className="wp-block-heading"><strong>16.1. Atualizações dos Termos</strong></h4>
-                <p>
-                    A Pandami se reserva o direito de atualizar estes Termos de Uso periodicamente, para refletir mudanças nos serviços, nas
-                    práticas comerciais ou na legislação aplicável. Tais atualizações serão publicadas no site e entrarão em vigor
-                    imediatamente após a publicação.
-                </p>
+                <h3 className="text-xl font-medium mb-3">11.2 Segurança</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Criptografia de ponta a ponta</li>
+                    <li>Servidores seguros na nuvem</li>
+                    <li>Auditorias regulares de segurança</li>
+                </ul>
+            </section>
 
-                <h4 className="wp-block-heading"><strong>16.2. Acordo Completo</strong></h4>
-                <p>
-                    Estes Termos de Uso, juntamente com a Política de Privacidade e quaisquer outros termos fornecidos pela Pandami em
-                    relação a serviços específicos, constituem o acordo completo entre o Usuário e a Pandami em relação ao uso do site e dos
-                    serviços oferecidos.
+            <section id="modificacoes">
+                <h2 className="text-2xl font-semibold mb-4">12. Modificações do Serviço</h2>
+                <p className="mb-3">Reservamos o direito de:</p>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Modificar ou descontinuar funcionalidades</li>
+                    <li>Alterar preços com 30 dias de aviso</li>
+                    <li>Atualizar requisitos técnicos</li>
+                    <li>Implementar novos recursos</li>
+                </ul>
+            </section>
+
+            <section id="rescisao">
+                <h2 className="text-2xl font-semibold mb-4">13. Rescisão</h2>
+
+                <h3 className="text-xl font-medium mb-3">13.1 Por Você</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Cancelamento a qualquer momento</li>
+                    <li>Solicitação via painel ou email</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">13.2 Por Nós</h3>
+                <p className="mb-3">Podemos suspender ou encerrar seu acesso por:</p>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Violação dos Termos</li>
+                    <li>Atividade fraudulenta</li>
+                    <li>Inadimplência</li>
+                    <li>Ordem judicial</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">13.3 Efeitos da Rescisão</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Acesso encerrado imediatamente</li>
+                    <li>Dados disponíveis para download por 30 dias</li>
+                    <li>Sem direito a reembolso proporcional</li>
+                </ul>
+            </section>
+
+            <section id="disponibilidade">
+                <h2 className="text-2xl font-semibold mb-4">14. Disponibilidade do Serviço</h2>
+
+                <h3 className="text-xl font-medium mb-3">14.1 Nível de Serviço</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>A Empresa envidará melhores esforços comercialmente razoáveis para manter o Serviço disponível</li>
+                    <li>Manutenções programadas: notificadas com 48h de antecedência</li>
+                    <li>Suporte técnico: dias úteis, horário comercial (9h às 18h BRT)</li>
+                    <li>Fase Beta/MVP: Sem garantias específicas de disponibilidade</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">14.2 Força Maior</h3>
+                <p className="mb-3">Não somos responsáveis por indisponibilidade causada por:</p>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Desastres naturais</li>
+                    <li>Atos governamentais</li>
+                    <li>Falhas de terceiros (internet, energia)</li>
+                    <li>Ataques cibernéticos</li>
+                </ul>
+            </section>
+
+            <section id="comunicacoes">
+                <h2 className="text-2xl font-semibold mb-4">15. Comunicações</h2>
+
+                <h3 className="text-xl font-medium mb-3">15.1 Notificações para Você</h3>
+                <p className="mb-4">Via email cadastrado ou notificação no App</p>
+
+                <h3 className="text-xl font-medium mb-3">15.2 Notificações para Nós</h3>
+                <p className="mb-6">Email: <a href="mailto:juridico@pandami.com.br" className="text-primary hover:underline">juridico@pandami.com.br</a><br />
+                Endereço: São Paulo, São Paulo, Brasil</p>
+            </section>
+
+            <section id="disposicoes">
+                <h2 className="text-2xl font-semibold mb-4">16. Disposições Gerais</h2>
+
+                <h3 className="text-xl font-medium mb-3">16.1 Lei Aplicável</h3>
+                <p className="mb-4">Estes Termos são regidos pelas leis do Brasil</p>
+
+                <h3 className="text-xl font-medium mb-3">16.2 Foro</h3>
+                <p className="mb-4">Fica eleito o foro da comarca de São Paulo, São Paulo, para dirimir questões</p>
+
+                <h3 className="text-xl font-medium mb-3">16.3 Acordo Integral</h3>
+                <p className="mb-4">Estes Termos constituem o acordo completo entre as partes</p>
+
+                <h3 className="text-xl font-medium mb-3">16.4 Cessão</h3>
+                <p className="mb-4">Você não pode ceder ou transferir estes Termos</p>
+
+                <h3 className="text-xl font-medium mb-3">16.5 Salvaguarda</h3>
+                <p className="mb-4">Se qualquer disposição for inválida, as demais permanecem em vigor</p>
+
+                <h3 className="text-xl font-medium mb-3">16.6 Renúncia</h3>
+                <p className="mb-6">Nenhuma renúncia será válida sem acordo escrito</p>
+            </section>
+
+            <section id="definicoes">
+                <h2 className="text-2xl font-semibold mb-4">17. Definições</h2>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li><strong>"IA"</strong>: Inteligência Artificial</li>
+                    <li><strong>"Visagismo"</strong>: Técnica de análise facial para harmonização estética</li>
+                    <li><strong>"Dados Biométricos"</strong>: Características físicas únicas (face)</li>
+                    <li><strong>"Plataforma"</strong>: Conjunto de software e serviços oferecidos</li>
+                    <li><strong>"Usuário"</strong>: Qualquer pessoa que acessa o Serviço</li>
+                </ul>
+            </section>
+
+            <section id="contato">
+                <h2 className="text-2xl font-semibold mb-4">18. Suporte e Contato</h2>
+
+                <h3 className="text-xl font-medium mb-3">Suporte Técnico</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Email: <a href="mailto:suporte@pandami.com.br" className="text-primary hover:underline">suporte@pandami.com.br</a></li>
+                    <li>Chat no App: Horário comercial</li>
+                    <li>Base de conhecimento: help.pandami.com</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">Questões Comerciais</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Email: <a href="mailto:comercial@pandami.com.br" className="text-primary hover:underline">comercial@pandami.com.br</a></li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">Questões Jurídicas</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Email: <a href="mailto:juridico@pandami.com.br" className="text-primary hover:underline">juridico@pandami.com.br</a></li>
+                </ul>
+            </section>
+
+            <section id="beta">
+                <h2 className="text-2xl font-semibold mb-4">19. Programa Beta e Funcionalidades Experimentais</h2>
+
+                <h3 className="text-xl font-medium mb-3">19.1 Fase MVP/Beta</h3>
+                <p className="mb-3">O Serviço está atualmente em fase MVP (Produto Mínimo Viável):</p>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Funcionalidades em desenvolvimento e aperfeiçoamento contínuo</li>
+                    <li>Possíveis interrupções para melhorias</li>
+                    <li>Feedback dos usuários é essencial para evolução</li>
+                    <li>Sem garantias específicas de performance ou disponibilidade</li>
+                </ul>
+
+                <h3 className="text-xl font-medium mb-3">19.2 Funcionalidades Experimentais</h3>
+                <p className="mb-3">Podemos oferecer acesso a funcionalidades em teste:</p>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Uso por conta e risco</li>
+                    <li>Sem garantias de funcionamento</li>
+                    <li>Feedback incentivado</li>
+                    <li>Podem ser modificadas ou descontinuadas</li>
+                </ul>
+            </section>
+
+            <section id="vigencia">
+                <h2 className="text-2xl font-semibold mb-4">20. Aceitação e Vigência</h2>
+                <p className="mb-3">Ao clicar em "Aceito", criar uma conta ou usar o Serviço, você confirma que:</p>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Leu e compreendeu estes Termos</li>
+                    <li>Tem capacidade legal para contratar</li>
+                    <li>Concorda com todas as disposições</li>
+                </ul>
+                <p className="mb-6"><strong>Data de Vigência:</strong> 19 de setembro de 2024</p>
+            </section>
+
+            <div className="mt-8 p-6 bg-muted/50 rounded-lg">
+                <h3 className="text-lg font-semibold mb-3">Informações da Empresa</h3>
+                <p className="mb-2"><strong>Pandami Serviços Administrativos LTDA</strong></p>
+                <p className="mb-2">CNPJ: 41.491.976/0001-91</p>
+                <p className="mb-2">Endereço: São Paulo, São Paulo, Brasil</p>
+                <p className="text-sm text-muted-foreground">
+                    Estes Termos de Uso foram elaborados em conformidade com o Código Civil Brasileiro, Código de Defesa do Consumidor, Marco Civil da Internet, LGPD e demais legislações aplicáveis.
                 </p>
             </div>
-        </Container>
+        </LegalLayout>
     );
 }

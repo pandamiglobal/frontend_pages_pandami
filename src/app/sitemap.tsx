@@ -103,6 +103,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
       // images: ['https://seusite.com/image-sobre.jpg'],
     },
+    {
+      url: `${siteBase}/termos-de-uso`,
+      lastModified: new Date('2024-07-26'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${siteBase}/politica-de-privacidade`,
+      lastModified: new Date('2024-07-26'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ]
 
   const wpEntries: MetadataRoute.Sitemap[number][] = wpUrls.map(item => {

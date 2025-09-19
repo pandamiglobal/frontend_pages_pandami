@@ -288,39 +288,60 @@
 }
 
 .post-content {
+  /* Garantir que o conteúdo não ultrapasse o container */
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+
   p {
     @apply text-gray-700 text-base sm:text-lg md:text-xl leading-[140%] font-normal;
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
 
   * + p {
     @apply mb-[15px] sm:mb-[20px] md:mb-[25px];
   }
 
-
-
   h1 {
     @apply text-gray-900 text-2xl sm:text-3xl md:text-5xl font-bold mb-[15px] sm:mb-[20px] md:mb-[25px];
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   h2 {
     @apply text-gray-900 text-2xl sm:text-3xl md:text-4xl font-bold mb-[15px] sm:mb-[20px] md:mb-[25px];
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   h3 {
     @apply text-gray-900 text-xl sm:text-2xl md:text-3xl font-bold mb-[15px] sm:mb-[20px] md:mb-[25px];
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   h4 {
     @apply text-gray-900 text-lg sm:text-xl md:text-2xl font-bold mb-[15px] sm:mb-[20px] md:mb-[25px];
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   img {
     @apply rounded-lg w-full mb-[15px] sm:mb-[20px] md:mb-[25px] max-h-[250px] md:max-h-[500px] h-full object-cover;
+    max-width: 100% !important;
+    height: auto !important;
   }
 
   ul,
   ol {
     @apply list-disc list-inside mb-[15px] sm:mb-[20px] md:mb-[25px] relative md:pl-4 md:before:content-['_'];
+    max-width: 100%;
   }
 
   ul::before,
@@ -340,6 +361,8 @@
 
   li {
     @apply text-gray-700 text-base sm:text-lg md:text-xl leading-[140%] font-normal mb-[8px] sm:mb-[10px];
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
 
   li * {
@@ -348,9 +371,44 @@
 
   a {
     @apply text-blue-600 hover:text-blue-700 text-base sm:text-lg md:text-xl leading-[140%] font-normal mb-[15px] sm:mb-[20px] md:mb-[25px] underline transition-colors duration-300;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-all;
   }
 
   hr {
     @apply mb-[15px] sm:mb-[20px] md:mb-[25px] border-gray-200;
+    max-width: 100%;
+  }
+
+  /* Garantir que todos os elementos não ultrapassem o container */
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Estilos específicos para elementos que podem causar overflow */
+  pre, code {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  blockquote {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  table {
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+  }
+
+  table tbody {
+    display: table;
+    width: 100%;
   }
 }
