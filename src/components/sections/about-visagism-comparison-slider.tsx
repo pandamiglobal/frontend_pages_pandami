@@ -62,8 +62,8 @@ export function AboutVisagismComparisonSlider({
     const startScaleAnimation = () => {
       if (scaleAnimationRef.current) return; // evita múltiplas animações
       scaleAnimationRef.current = gsap.to(handle, {
-        scale: 1.3,
-        duration: 0.3,
+        scale: 1.2,
+        duration: 0.9,
         yoyo: true,
         repeat: -1,
         ease: "sine.inOut",
@@ -96,6 +96,7 @@ export function AboutVisagismComparisonSlider({
         ? (e as TouchEvent).touches[0].clientX
         : (e as MouseEvent).clientX;
       updatePositionFromClientX(clientX);
+      if (!hasSeenAffordance) setHasSeenAffordance(true);
     };
     const stop = () => {
       isDraggingRef.current = false;
@@ -111,7 +112,7 @@ export function AboutVisagismComparisonSlider({
       window.removeEventListener("touchend", stop);
       if (rafMoveRef.current) cancelAnimationFrame(rafMoveRef.current);
     };
-  }, [updatePositionFromClientX]);
+  }, [updatePositionFromClientX, hasSeenAffordance]);
 
   return (
 		<div
@@ -124,10 +125,12 @@ export function AboutVisagismComparisonSlider({
 			onMouseDown={(e) => {
 				isDraggingRef.current = true;
 				updatePositionFromClientX(e.clientX);
+				if (!hasSeenAffordance) setHasSeenAffordance(true);
 			}}
 			onTouchStart={(e) => {
 				isDraggingRef.current = true;
 				updatePositionFromClientX(e.touches[0].clientX);
+				if (!hasSeenAffordance) setHasSeenAffordance(true);
 			}}
 			onMouseEnter={() => {
 				setIsHovered(true);
@@ -181,10 +184,12 @@ export function AboutVisagismComparisonSlider({
 				onMouseDown={(e) => {
 					e.preventDefault();
 					isDraggingRef.current = true;
+					if (!hasSeenAffordance) setHasSeenAffordance(true);
 				}}
 				onTouchStart={(e) => {
 					e.preventDefault();
 					isDraggingRef.current = true;
+					if (!hasSeenAffordance) setHasSeenAffordance(true);
 				}}
 			>
 					<span className="h-14 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
