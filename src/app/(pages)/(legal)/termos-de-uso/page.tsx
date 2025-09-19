@@ -40,7 +40,7 @@ export default function Page() {
             <section id="aceitacao">
                 <h2 className="text-2xl font-semibold mb-4">1. Aceitação dos Termos</h2>
                 <p className="mb-4 leading-relaxed">
-                    Ao acessar e usar a <strong>Pandami</strong> ("Plataforma", "Serviço" ou "App"), operado pela <strong>Pandami Serviços Administrativos LTDA</strong> ("nós", "nosso" ou "Empresa"), você concorda em cumprir e estar vinculado aos seguintes Termos de Uso.
+                    Ao acessar e usar o <strong>Pandami</strong> ("Plataforma", "Serviço" ou "App"), operado pela <strong>PandaHan</strong> ("nós", "nosso" ou "Empresa"), você concorda em cumprir e estar vinculado aos seguintes Termos de Uso.
                 </p>
                 <p className="mb-6 leading-relaxed">
                     Se você não concordar com qualquer parte destes termos, não deve usar nossa Plataforma.
@@ -327,7 +327,7 @@ export default function Page() {
 
                 <h3 className="text-xl font-medium mb-3">15.2 Notificações para Nós</h3>
                 <p className="mb-6">Email: <a href="mailto:juridico@pandami.com.br" className="text-primary hover:underline">juridico@pandami.com.br</a><br />
-                Endereço: São Paulo, São Paulo, Brasil</p>
+                Endereço: Florianópolis, Santa Catarina, Brasil</p>
             </section>
 
             <section id="disposicoes">
@@ -337,7 +337,7 @@ export default function Page() {
                 <p className="mb-4">Estes Termos são regidos pelas leis do Brasil</p>
 
                 <h3 className="text-xl font-medium mb-3">16.2 Foro</h3>
-                <p className="mb-4">Fica eleito o foro da comarca de São Paulo, São Paulo, para dirimir questões</p>
+                <p className="mb-4">Fica eleito o foro da comarca de Florianópolis, Santa Catarina, para dirimir questões</p>
 
                 <h3 className="text-xl font-medium mb-3">16.3 Acordo Integral</h3>
                 <p className="mb-4">Estes Termos constituem o acordo completo entre as partes</p>
@@ -419,9 +419,9 @@ export default function Page() {
 
             <div className="mt-8 p-6 bg-muted/50 rounded-lg">
                 <h3 className="text-lg font-semibold mb-3">Informações da Empresa</h3>
-                <p className="mb-2"><strong>Pandami Serviços Administrativos LTDA</strong></p>
-                <p className="mb-2">CNPJ: 41.491.976/0001-91</p>
-                <p className="mb-2">Endereço: São Paulo, São Paulo, Brasil</p>
+                <p className="mb-2"><strong>PandaHan</strong></p>
+                <p className="mb-2">CNPJ: 60.348.853/0001-40</p>
+                <p className="mb-2">Endereço: Florianópolis, Santa Catarina, Brasil</p>
                 <p className="text-sm text-muted-foreground">
                     Estes Termos de Uso foram elaborados em conformidade com o Código Civil Brasileiro, Código de Defesa do Consumidor, Marco Civil da Internet, LGPD e demais legislações aplicáveis.
                 </p>
