@@ -312,7 +312,7 @@ export default function Page() {
                 <p className="mb-2"><strong>Via App:</strong></p>
                 <p className="mb-2">Menu &gt; Configurações &gt; Privacidade &gt; Meus Dados</p>
                 <p className="mb-2"><strong>Por Email:</strong></p>
-                <p className="mb-2">privacidade@pandahan.com.br</p>
+                <p className="mb-2">privacidade@pandami.com.br</p>
                 <p className="mb-2"><strong>Resposta em até:</strong></p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
                     <li>15 dias (LGPD)</li>
@@ -464,7 +464,7 @@ export default function Page() {
             <section id="encarregado-de-protecao-de-dados">
                 <h2 className="text-2xl font-bold mb-4">15. ENCARREGADO DE PROTEÇÃO DE DADOS (DPO)</h2>
                 <p className="mb-2"><strong>Nome:</strong> Encarregado de Proteção de Dados</p>
-                <p className="mb-2"><strong>Email:</strong> dpo@pandahan.com.br</p>
+                <p className="mb-2"><strong>Email:</strong> dpo@pandami.com.br</p>
                 <p className="mb-2"><strong>Telefone:</strong> (48) 99999-9999</p>
                 <p className="mb-6"><strong>Horário:</strong> Segunda a Sexta, 9h às 18h (Horário de Brasília)</p>
             </section>
@@ -505,7 +505,7 @@ export default function Page() {
                 </ul>
 
                 <h3 className="text-xl font-semibold mb-3">17.3 Histórico de Versões</h3>
-                <p className="mb-6">Disponível em: pandahan.com.br/privacidade/historico</p>
+                <p className="mb-6">Disponível em: pandami.com.br/privacidade/historico</p>
             </section>
 
             <section id="lei-aplicavel-e-foro">
@@ -533,10 +533,10 @@ export default function Page() {
 
                 <p className="mb-2"><strong>Canais de Atendimento:</strong></p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Privacidade</strong>: privacidade@pandahan.com.br</li>
-                    <li><strong>Suporte</strong>: suporte@pandahan.com.br</li>
-                    <li><strong>Comercial</strong>: comercial@pandahan.com.br</li>
-                    <li><strong>WhatsApp</strong>: (48) 99999-9999</li>
+                    <li><strong>Privacidade</strong>: privacidade@pandami.com.br</li>
+                    <li><strong>Suporte</strong>: suporte@pandami.com.br</li>
+                    <li><strong>Comercial</strong>: comercial@pandami.com.br</li>
+                    <li><strong>WhatsApp</strong>: (48) 98879-3250</li>
                 </ul>
 
                 <hr className="my-8" />

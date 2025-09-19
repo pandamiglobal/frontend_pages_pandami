@@ -105,13 +105,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${siteBase}/termos-de-uso`,
-      lastModified: new Date('2024-07-26'),
+      lastModified: new Date('2025-09-19'),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${siteBase}/politica-de-privacidade`,
-      lastModified: new Date('2024-07-26'),
+      lastModified: new Date('2025-09-19'),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
