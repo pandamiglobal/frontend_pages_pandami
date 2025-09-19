@@ -83,27 +83,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // images: ['https://seusite.com/image-sobre.jpg'],
     },
     {
-      url: `${siteBase}/consulta-inpi`,
-      lastModified: new Date().toISOString(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-      // images: ['https://seusite.com/image-sobre.jpg'],
-    },
-    {
-      url: `${siteBase}/registro-de-marca`,
-      lastModified: new Date().toISOString(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-      // images: ['https://seusite.com/image-sobre.jpg'],
-    },
-    {
-      url: `${siteBase}/sobre-nos`,
-      lastModified: new Date().toISOString(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-      // images: ['https://seusite.com/image-sobre.jpg'],
-    },
-    {
       url: `${siteBase}/termos-de-uso`,
       lastModified: new Date('2025-09-19'),
       changeFrequency: 'monthly',
