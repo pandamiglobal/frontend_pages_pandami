@@ -123,7 +123,7 @@ class HeroAnimationController {
       this.callbacks.onKeyframeChange(0);
       this.callbacks.onCardSelection(null);
     })
-    .to({}, { duration: this.waitTime });
+    .to({}, { duration: 0.5 }); // Reduzido de waitTime para 0.5s
 
     return tl;
   }
@@ -136,7 +136,7 @@ class HeroAnimationController {
       this.callbacks.onCardSelection(null);
     })
     .add(this.animatePersonEntry())
-    .to({}, { duration: this.waitTime });
+    .to({}, { duration: 0.8 }); // Reduzido de waitTime para 0.8s
 
     return tl;
   }
@@ -191,7 +191,8 @@ class HeroAnimationController {
     });
     
     gsap.set(this.refs.scannerBox.current, {
-      opacity: 0
+      opacity: 0,
+      scale: 1
     });
     
     gsap.set(this.refs.scanner.current, {
@@ -239,6 +240,17 @@ class HeroAnimationController {
     const { easings, durations } = ANIMATION_CONFIGS;
 
     tl
+    // Debug: verificar se o elemento existe
+    .call(() => {
+      console.log('Scanner box element:', this.refs.scannerBox.current);
+      console.log('Scanner element:', this.refs.scanner.current);
+    })
+    // Garantir que o scanner box está visível
+    .set(this.refs.scannerBox.current, {
+      opacity: 1,
+      scale: 1,
+      display: 'block'
+    })
     // Animação de entrada da caixa do scanner
     .fromTo(this.refs.scannerBox.current,
       {
@@ -662,18 +674,19 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 					{/* Scanner */}
 					<div
 						ref={scannerBoxRef}
-						className="absolute left-1/2 -translate-x-1/2 top-[80px] w-1/2 max-w-[220px] h-[200px] md:h-[300px] max-h-[320px] bg-black/0 rounded-2xl outline outline-offset-[-1px] outline-gray-400 overflow-hidden opacity-0"
+						className="absolute left-1/2 -translate-x-1/2  bottom-[160px] md:bottom-[180px] lg:bottom-[240px] w-1/2 max-w-[220px] h-[200px] md:h-[300px] max-h-[320px] bg-black/20 rounded-2xl outline outline-offset-[-1px] outline-gray-400 overflow-hidden opacity-0"
+            aria-label="ScannerBox"
 						aria-hidden="true"
 					>
 						<div className="w-full h-full relative overflow-hidden">
 							<div
 								ref={scannerRef}
-								className="absolute w-full h-2 bg-gradient-to-b from-white/60 via-white/40 to-transparent top-0 shadow-lg"
+								className="absolute w-full h-2 bg-gradient-to-b from-white/80 via-white/60 to-white/40 top-0 shadow-lg"
 							></div>
 							{/* Ícone de check */}
 							<div
 								ref={scannerCheckRef}
-								className="absolute inset-0 flex items-center justify-center opacity-0"
+								className="absolute inset-0 flex items-center justify-center opacity-0 z-30"
 							>
 								<div className="w-16 h-16 bg-green-300 rounded-full flex items-center justify-center shadow-lg">
 									<svg
