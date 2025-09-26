@@ -165,7 +165,7 @@ export function BarberTestimonialsSection() {
 						<TextCard
 							profileImageSrc="/lp/images/barber-testimonials-section/NEXTJS/image-pfp-1-col-3.png"
 							message={
-								"Depois de 20 anos cortando cabelo, achava que já sabia tudo. Mas sempre tinha aquela inseguranca com alguns tipos de rosto. Minha filha, que trabalha com marketing digital, me falou sobre uma ferramenta de inteligência artificial pro visagismo. Confesso que torci o nariz no começo. Mas resolvi dar uma chance. E que bom que dei <br/><br/>Ontem mesmo veio uma moça aqui, recém separada, querendo mudar totalmente o visual.<br/>Ela me disse que queria 'começar uma nova fase' sabe<br/><br/><br/>Usei a analise do PandaMi, mostrei pra ela as opções que apareceram. Uma delas era perfeita pro que ela queria: algo que deixasse ela mais confiante e moderna. O corte com a coloração deixou ela MARAVILHOSAAA"
+								"Depois de 20 anos cortando cabelo, achava que já sabia tudo. Mas sempre tinha aquela inseguranca com alguns tipos de rosto. Minha filha, que trabalha com marketing digital, me falou sobre uma ferramenta de inteligência artificial pro visagismo. Confesso que torci o nariz no começo. Mas resolvi dar uma chance. E que bom que dei <br/><br/>Ontem mesmo veio uma moça aqui, recém separada, querendo mudar totalmente o visual.<br/>Ela me disse que queria começar uma nova fase sabe<br/><br/><br/>Usei a analise do PandaMi, mostrei pra ela as opções que apareceram. Uma delas era perfeita pro que ela queria: algo que deixasse ela mais confiante e moderna. O corte com a coloração deixou ela MARAVILHOSAAA"
 							}
 						/>
 						<ImageCard
