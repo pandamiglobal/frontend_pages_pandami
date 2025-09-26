@@ -9,6 +9,7 @@ import { AboutVisagismComparisonSlider } from "@/components/sections/about-visag
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { PrimaryButton } from "@/components/ui/primary-button";
+import Link from "next/link";
 
 interface VariantSet {
   mainBefore: string;
@@ -208,12 +209,14 @@ function GenderContent({ data, direction }: GenderContentProps) {
 				</div>
 
 				<div className="flex flex-col md:flex-row gap-4 mt-2">
-					<PrimaryButton
-						size="lg"
-						icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
-					>
-						COMEÇAR TESTE DE 7 DIAS
-					</PrimaryButton>
+					<Link href="https://app.pandami.com.br/auth/sign-up/">
+						<PrimaryButton
+							size="lg"
+							icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+						>
+							COMEÇAR TESTE DE 7 DIAS
+						</PrimaryButton>
+					</Link>
 				</div>
 			</div>
 

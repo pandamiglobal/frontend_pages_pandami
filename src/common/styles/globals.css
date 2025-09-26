@@ -287,6 +287,8 @@
   @apply text-gray-600 text-xs md:text-sm leading-[140%] font-normal;
 }
 
+/* Estilos globais para o conteúdo de posts/artigos */
+
 .post-content {
   /* Garantir que o conteúdo não ultrapasse o container */
   max-width: 100%;

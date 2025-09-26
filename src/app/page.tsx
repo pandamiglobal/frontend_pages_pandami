@@ -7,6 +7,7 @@ import CarouselSection from "@/components/sections/carousel-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
 import { PricingSection } from "@/components/sections/pricing-section";
+import { BarberTestimonialsSection } from "@/components/sections/barber-testimonials-section";
 import { 
 	FAQJsonLd, 
 	OrganizationJsonLd, 
@@ -48,6 +49,7 @@ export default function Home() {
 				<BenefitsSection />
 				<AboutVisagismSection />
 				<SocialProofSection />
+				<BarberTestimonialsSection />
 				<PricingSection />
 				<FAQSection faq={FAQ_DATA} />
 				<CtaSection />
