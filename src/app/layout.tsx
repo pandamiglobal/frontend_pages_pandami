@@ -8,6 +8,7 @@ import Script from "next/script"
 import { Metadata } from "next"
 import defaultSeo from "@/common/config/default-seo"
 import { Modal } from "@/components/ui/modal/modal"
+import { CookiesModal } from "@/components/cookies-modal"
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -73,13 +74,38 @@ export default function RootLayout({
 			className={`${ubuntu.variable} ${fahkwang.variable}`}
 		>
 			<head>
-				<Script id="microsoft-clarity">
+          <Script id="ga-consent-default" strategy="beforeInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              // Padrão: negar até o usuário escolher
+              gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'analytics_storage': 'denied'
+              });
+            `}
+          </Script>
+          <Script id="microsoft-clarity">
+            {`
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "tguv2si59b");
+            `}
+          </Script>
+          	<Script
+					src="https://www.googletagmanager.com/gtag/js?id=G-94JR6SBGNE"
+					strategy="afterInteractive"
+				/>
+				<Script id="google-analytics" strategy="afterInteractive">
 					{`
-            (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "tctj766hfq");
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-94JR6SBGNE');
           `}
 				</Script>
 			</head>
@@ -94,6 +120,7 @@ export default function RootLayout({
 					{children}
 					<Footer />
 					<Modal />
+            <CookiesModal />
 				</ThemeProvider>
 			</body>
 		</html>
