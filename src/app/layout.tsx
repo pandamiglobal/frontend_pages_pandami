@@ -75,8 +75,8 @@ export default function RootLayout({
 			className={`${ubuntu.variable} ${fahkwang.variable}`}
 		>
 			<head>
-          <Script id="ga-consent-default" strategy="beforeInteractive">
-            {`
+				<Script id="ga-consent-default" strategy="beforeInteractive">
+					{`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               // Padrão: negar até o usuário escolher
@@ -90,22 +90,22 @@ export default function RootLayout({
               gtag('set', 'url_passthrough', true);
               gtag('set', 'ads_data_redaction', true);
             `}
-          </Script>
-          {/* GA sempre carregado para pings essenciais (consent negado por padrão) */}
-          <Script
-            src="https://www.googletagmanager.com/gtag/js?id=G-94JR6SBGNE"
-            strategy="afterInteractive"
-          />
-          <Script id="ga-init" strategy="afterInteractive">
-            {`
+				</Script>
+				{/* GA sempre carregado para pings essenciais (consent negado por padrão) */}
+				<Script
+					src="https://www.googletagmanager.com/gtag/js?id=G-FPJQ0WXH4J"
+					strategy="afterInteractive"
+				/>
+				<Script id="ga-init" strategy="afterInteractive">
+					{`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);} 
               gtag('js', new Date());
-              gtag('config', 'G-94JR6SBGNE');
+              gtag('config', 'G-FPJQ0WXH4J');
             `}
-          </Script>
-          {/* Scripts dependentes de consentimento */}
-          <ConsentScripts />
+				</Script>
+				{/* Scripts dependentes de consentimento */}
+				<ConsentScripts />
 			</head>
 			<body className={`font-sans`}>
 				<ThemeProvider
@@ -118,7 +118,7 @@ export default function RootLayout({
 					{children}
 					<Footer />
 					<Modal />
-            <CookiesModal />
+					<CookiesModal />
 				</ThemeProvider>
 			</body>
 		</html>
