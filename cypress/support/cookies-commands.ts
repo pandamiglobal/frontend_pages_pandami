@@ -31,10 +31,10 @@ Cypress.Commands.add('expectConsent', (choice: 'accepted' | 'essentials_only' | 
 });
 
 Cypress.Commands.add('waitForConsentEvent', () => {
-  return new Cypress.Promise((resolve) => {
-    cy.window().then((win) => {
-      win.addEventListener('pdmi:consent', (event: CustomEvent) => {
-        resolve(event);
+  cy.window().then((win) => {
+    return new Cypress.Promise((resolve) => {
+      win.addEventListener('pdmi:consent', (event: Event) => {
+        resolve(event as CustomEvent);
       });
     });
   });
