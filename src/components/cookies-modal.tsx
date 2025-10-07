@@ -1,68 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
 import { cn } from "@/common/lib/utils";
 import { PrimaryButton } from "@/components/ui/primary-button";
-
-type ConsentChoice = "accepted" | "denied";
-
-const CONSENT_STORAGE_KEY = "pdmi_consent_choice_v2";
+import { useConsent } from "@/common/hooks/use-consent";
+import { useConsentAnalytics } from "@/common/hooks/use-consent-analytics";
+import { ConsentChoice } from "@/common/types/consent";
 
 export function CookiesModal() {
-  const [decision, setDecision] = useState<ConsentChoice | null>(null);
+  const { shouldShowModal, setConsent } = useConsent();
+  const { applyConsent } = useConsentAnalytics();
 
-  // Ler decisão previamente salva (persistente até o usuário mudar manualmente via UI futura)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    try {
-      const saved = window.localStorage.getItem(CONSENT_STORAGE_KEY);
-      if (saved === "accepted" || saved === "denied") {
-        setDecision(saved);
-      }
-    } catch {}
-  }, []);
+  const handleChoice = useCallback((choice: ConsentChoice) => {
+    setConsent(choice);
+    applyConsent(choice);
+  }, [setConsent, applyConsent]);
 
-  // Aplica consentimento ao GA4
-  const applyGoogleConsent = (choice: ConsentChoice) => {
-    const granted = choice === "accepted" ? "granted" : "denied";
-    try {
-      // Define/atualiza consent mode (GA4)
-      // gtag é definido no layout
-      // @ts-ignore
-      window.gtag && window.gtag("consent", "update", {
-        ad_storage: granted,
-        ad_user_data: granted,
-        ad_personalization: granted,
-        analytics_storage: granted,
-      });
-    } catch {}
-  };
-
-  // Aplica consentimento ao Clarity
-  const applyClarityConsent = (choice: ConsentChoice) => {
-    try {
-      const allow = choice === "accepted";
-      // API de consentimento do Clarity
-      // Alguns projetos usam clarity('consent', boolean)
-      // @ts-ignore
-      if (typeof window !== "undefined" && window.clarity) {
-        // @ts-ignore
-        window.clarity("consent", allow);
-      }
-    } catch {}
-  };
-
-  const handleChoice = (choice: ConsentChoice) => {
-    setDecision(choice);
-    try {
-      window.localStorage.setItem(CONSENT_STORAGE_KEY, choice);
-    } catch {}
-    applyGoogleConsent(choice);
-    applyClarityConsent(choice);
-  };
-
-  // Oculta se já há decisão
-  if (decision) return null;
+  // Renderiza apenas se deve mostrar
+  if (!shouldShowModal) return null;
 
   return (
     <div
@@ -71,7 +26,7 @@ export function CookiesModal() {
       aria-labelledby="cookies-title"
       className={cn(
         "fixed left-4 bottom-4 z-[60] w-[min(92vw,520px)]",
-        "rounded-xl border border-neutral-200 bg-white shadow-lg",
+        "rounded-xl border border-neutral-200 bg-white shadow-lg dark:bg-neutral-900 dark:border-neutral-800",
         "p-4 md:p-5"
       )}
     >
@@ -80,19 +35,31 @@ export function CookiesModal() {
           Preferências de cookies
         </p>
         <p className="text-sm text-neutral-700 leading-relaxed">
-           Ao selecionar "Aceitar", autoriza a Pandami a usar cookies, píxeis, tags e tecnologias semelhantes para medir audiência e personalizar sua experiência. Saiba mais sobre como utilizamos seus dados e cookies em nossa nossa
+          A Pandami usa cookies, píxeis, tags e tecnologias semelhantes para medir audiência e personalizar sua experiência. Saiba mais sobre como utilizamos seus dados e cookies em nossa{" "}
+          <a 
+            href="/politica-de-privacidade" 
+            className="text-primary underline hover:text-primary/80 transition-colors"
+          >
+            Política de Privacidade
+          </a>.
           {" "}
-          <a href="/politica-de-privacidade" className="text-primary underline">Política de Privacidade</a>.
-          {" "}
-          Clique em <strong>Aceitar</strong> para permitir todos os cookies não essenciais ou em <strong>Não aceitar</strong> para usar apenas os estritamente necessários.
+          Clique em <strong>Aceitar todos</strong> para permitir todos os cookies, <strong>Apenas essenciais</strong> para limitar ao necessário para o funcionamento do site, ou <strong>Recusar todos</strong> para usar o mínimo possível.
         </p>
-        <div className="flex items-center gap-3 pt-1">
+        <div className="flex flex-wrap items-center gap-3 pt-1">
           <PrimaryButton
             type="button"
             onClick={() => handleChoice("accepted")}
             aria-label="Aceitar todos os cookies"
           >
-            Aceitar
+            Aceitar todos
+          </PrimaryButton>
+          <PrimaryButton
+            type="button"
+            onClick={() => handleChoice("essentials_only")}
+            aria-label="Aceitar apenas cookies essenciais"
+            variant="white"
+          >
+            Apenas essenciais
           </PrimaryButton>
           <PrimaryButton
             type="button"
@@ -100,7 +67,7 @@ export function CookiesModal() {
             onClick={() => handleChoice("denied")}
             aria-label="Não aceitar cookies"
           >
-            Não aceitar
+            Recusar todos
           </PrimaryButton>
         </div>
         <p className="text-xs text-neutral-500">
@@ -110,5 +77,3 @@ export function CookiesModal() {
     </div>
   );
 }
-
-

@@ -72,6 +72,9 @@ export const SEO_CONFIG = {
   locale: 'pt_BR',
 } as const;
 
+// Consent & privacy
+export const CONSENT_STORAGE_KEY = 'pdmi_consent_choice_v2' as const;
+
 // Animation configurations
 export const ANIMATION_CONFIG = {
   durations: {

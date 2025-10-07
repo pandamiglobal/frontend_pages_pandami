@@ -9,6 +9,7 @@ import { Metadata } from "next"
 import defaultSeo from "@/common/config/default-seo"
 import { Modal } from "@/components/ui/modal/modal"
 import { CookiesModal } from "@/components/cookies-modal"
+import { ConsentScripts } from "@/components/consent-scripts"
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -85,29 +86,26 @@ export default function RootLayout({
                 'ad_personalization': 'denied',
                 'analytics_storage': 'denied'
               });
+              // Sinais essenciais sem cookies
+              gtag('set', 'url_passthrough', true);
+              gtag('set', 'ads_data_redaction', true);
             `}
           </Script>
-          <Script id="microsoft-clarity">
+          {/* GA sempre carregado para pings essenciais (consent negado por padrão) */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-94JR6SBGNE"
+            strategy="afterInteractive"
+          />
+          <Script id="ga-init" strategy="afterInteractive">
             {`
-              (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "tguv2si59b");
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);} 
+              gtag('js', new Date());
+              gtag('config', 'G-94JR6SBGNE');
             `}
           </Script>
-          	<Script
-					src="https://www.googletagmanager.com/gtag/js?id=G-94JR6SBGNE"
-					strategy="afterInteractive"
-				/>
-				<Script id="google-analytics" strategy="afterInteractive">
-					{`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-94JR6SBGNE');
-          `}
-				</Script>
+          {/* Scripts dependentes de consentimento */}
+          <ConsentScripts />
 			</head>
 			<body className={`font-sans`}>
 				<ThemeProvider
