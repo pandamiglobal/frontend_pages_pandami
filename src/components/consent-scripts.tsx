@@ -37,23 +37,23 @@ const ConsentScripts = memo(() => {
   if (!isAllowed) return null;
 
   return (
-    <>
-      {/* Microsoft Clarity: carrega somente quando o usuário escolher "Aceitar todos" */}
-      <Script id="microsoft-clarity" strategy="afterInteractive">
-        {`
+		<>
+			{/* Microsoft Clarity: carrega somente quando o usuário escolher "Aceitar todos" */}
+			<Script id="microsoft-clarity" strategy="afterInteractive">
+				{`
           (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             // Define o consentimento como verdadeiro já que este script só é carregado com consentimento explícito
             c[a]("consent", true);
-          })(window, document, "clarity", "script", "tguv2si59b");
+          })(window, document, "clarity", "script", "tctj766hfq");
         `}
-      </Script>
+			</Script>
 
-      {/* Atualiza consent do GA após aceitar */}
-      <Script id="ga-consent-accept" strategy="afterInteractive">
-        {`
+			{/* Atualiza consent do GA após aceitar */}
+			<Script id="ga-consent-accept" strategy="afterInteractive">
+				{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);} 
           gtag('consent', 'update', {
@@ -63,9 +63,9 @@ const ConsentScripts = memo(() => {
             'analytics_storage': 'granted'
           });
         `}
-      </Script>
-    </>
-  );
+			</Script>
+		</>
+	);
 });
 
 ConsentScripts.displayName = "ConsentScripts";
