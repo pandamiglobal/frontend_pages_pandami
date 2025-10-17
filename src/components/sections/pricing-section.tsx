@@ -165,9 +165,15 @@ export function PricingSection() {
 		MAX: 189.9,
 	};
 
-	// Preços promocionais para o teste de 7 dias (atualizados para os valores exatos)
-	const testPrices = {
-		STARTER: 4.90,
+	// Preços promocionais para o teste de 7 dias do plano STARTER por período
+	const starterTestPrices = {
+		monthly: 5.90,
+		semiannual: 4.90,
+		annual: 3.90,
+	};
+
+	// Preços base para teste de 7 dias (sem desconto) para PRO e MAX
+	const baseTestPrices = {
 		PRO: 9.90,
 		MAX: 19.90,
 	};
@@ -204,7 +210,7 @@ export function PricingSection() {
 				);
 			},
 			get displayPrice() {
-				return testPrices.STARTER;
+				return starterTestPrices[activePeriod];
 			},
 			get discount() {
 				return periodDiscounts[activePeriod];
@@ -225,7 +231,10 @@ export function PricingSection() {
 				);
 			},
 			get displayPrice() {
-				return testPrices.PRO;
+				return calculateDiscountedPrice(
+					baseTestPrices.PRO,
+					periodDiscounts[activePeriod]
+				);
 			},
 			get discount() {
 				return periodDiscounts[activePeriod];
@@ -245,7 +254,10 @@ export function PricingSection() {
 				);
 			},
 			get displayPrice() {
-				return testPrices.MAX;
+				return calculateDiscountedPrice(
+					baseTestPrices.MAX,
+					periodDiscounts[activePeriod]
+				);
 			},
 			get discount() {
 				return periodDiscounts[activePeriod];
