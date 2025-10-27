@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/pandamibrasil',
   tiktok: 'https://www.tiktok.com/@pandamibrasil',
-  linkedin: 'https://www.linkedin.com/company/pandamibrasil',
+  linkedin: 'https://www.linkedin.com/company/pandami',
   whatsapp: 'https://wa.me/',
 } as const;
 
