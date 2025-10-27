@@ -57,13 +57,13 @@ export function CookiesModal() {
             type="button"
             onClick={() => handleChoice("essentials_only")}
             aria-label="Aceitar apenas cookies essenciais"
-            variant="white"
+            variant="outline"
           >
             Apenas essenciais
           </PrimaryButton>
           <PrimaryButton
             type="button"
-            variant="outline"
+            variant="white"
             onClick={() => handleChoice("denied")}
             aria-label="Não aceitar cookies"
           >
