@@ -1,8 +1,8 @@
-import { Mail, Phone, Clock, Facebook, Instagram, Linkedin } from "lucide-react"
+import { Mail, Phone, Clock } from "lucide-react"
 import { Container } from "./ui/container"
 import Link from "next/link"
 import Image from "next/image"
-import { SOCIAL_LINKS, PARTNERS } from "@/common/constants";
+import { SOCIAL_LINKS, PARTNERS, SOCIAL_MEDIA } from "@/common/constants";
 
 export default function Footer() {
   return (
@@ -148,33 +148,25 @@ export default function Footer() {
 							<div className="mt-4">
 							<h4 className="text-sm mb-3 text-gray-700">Siga-nos</h4>
 							<div className="flex gap-3 justify-center md:justify-start">
-								<a
-									href={SOCIAL_LINKS.instagram}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors"
-									aria-label="Siga-nos no Instagram"
-								>
-									<Instagram className="h-4 w-4" />
-								</a>
-								<a
-									href={SOCIAL_LINKS.facebook}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors"
-									aria-label="Siga-nos no Facebook"
-								>
-									<Facebook className="h-4 w-4" />
-								</a>
-								<a
-									href={SOCIAL_LINKS.linkedin}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors"
-									aria-label="Siga-nos no LinkedIn"
-								>
-									<Linkedin className="h-4 w-4" />
-								</a>
+								{SOCIAL_MEDIA.map((s) => (
+									<a
+										key={s.id}
+										href={s.href}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-white hover:text-white rounded-full transition-colors overflow-hidden"
+										aria-label={`Siga-nos no ${s.name}`}
+									>
+										<Image
+											src={s.src}
+											alt={s.alt}
+											width={24}
+											height={24}
+											className="w-5 h-5 object-contain"
+											loading="lazy"
+										/>
+									</a>
+								))}
 							</div>
 						</div>
 					</div>

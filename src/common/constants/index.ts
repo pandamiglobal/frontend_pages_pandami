@@ -12,9 +12,10 @@ export const SITE_CONFIG = {
 
 // Social media links
 export const SOCIAL_LINKS = {
-  instagram: 'https://www.instagram.com/pandami',
-  facebook: 'https://www.facebook.com/pandami',
-  linkedin: 'https://www.linkedin.com/company/pandami',
+  instagram: 'https://www.instagram.com/pandamibrasil',
+  tiktok: 'https://www.tiktok.com/@pandamibrasil',
+  linkedin: 'https://www.linkedin.com/company/pandamibrasil',
+  whatsapp: 'https://wa.me/',
 } as const;
 
 // FAQ data
@@ -96,4 +97,12 @@ export const PARTNERS = [
   { id: 'google', name: 'Google', src: '/partners/google.svg', alt: 'Parceiro - Google' },
   { id: 'microsoft', name: 'Microsoft', src: '/partners/microsoft.svg', alt: 'Parceiro - Microsoft' },
   { id: 'pppi', name: 'PPPI', src: '/partners/pppi.svg', alt: 'Parceiro - PPPI' },
+] as const;
+
+// Social media icons (SVGs in public/social-media)
+export const SOCIAL_MEDIA = [
+  { id: 'instagram', name: 'Instagram', href: SOCIAL_LINKS.instagram, src: '/social-media/social-media-instagram.svg', alt: 'Instagram' },
+  { id: 'linkedin', name: 'LinkedIn', href: SOCIAL_LINKS.linkedin, src: '/social-media/social-media-linkedin.svg', alt: 'LinkedIn' },
+  { id: 'tiktok', name: 'TikTok', href: SOCIAL_LINKS.tiktok, src: '/social-media/social-media-tiktok.svg', alt: 'TikTok' },
+  { id: 'whatsapp', name: 'WhatsApp', href: SOCIAL_LINKS.whatsapp, src: '/social-media/social-media-whatsapp.svg', alt: 'WhatsApp' },
 ] as const;
