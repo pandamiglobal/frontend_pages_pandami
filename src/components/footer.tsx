@@ -1,7 +1,8 @@
-import { Mail, Phone, Clock } from "lucide-react"
+import { Mail, Phone, Clock, Facebook, Instagram, Linkedin } from "lucide-react"
 import { Container } from "./ui/container"
 import Link from "next/link"
 import Image from "next/image"
+import { SOCIAL_LINKS, PARTNERS } from "@/common/constants";
 
 export default function Footer() {
   return (
@@ -144,8 +145,67 @@ export default function Footer() {
 								<span>Seg-Sex: 8h às 18h</span>
 							</li>
 						</ul>
+							<div className="mt-4">
+							<h4 className="text-sm mb-3 text-gray-700">Siga-nos</h4>
+							<div className="flex gap-3 justify-center md:justify-start">
+								<a
+									href={SOCIAL_LINKS.instagram}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors"
+									aria-label="Siga-nos no Instagram"
+								>
+									<Instagram className="h-4 w-4" />
+								</a>
+								<a
+									href={SOCIAL_LINKS.facebook}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors"
+									aria-label="Siga-nos no Facebook"
+								>
+									<Facebook className="h-4 w-4" />
+								</a>
+								<a
+									href={SOCIAL_LINKS.linkedin}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors"
+									aria-label="Siga-nos no LinkedIn"
+								>
+									<Linkedin className="h-4 w-4" />
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
+				{/* Parceiros e certificações (consome PARTNERS do constants) */}
+				<div className="mt-16">
+					<h3 className="mb-4 text-left font-quicksand text-lg font-semibold text-gray-800">Parceiros e certificações</h3>
+					<div
+						className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:justify-between"
+						role="list"
+						aria-label="Parceiros e certificações"
+					>
+						{PARTNERS.map((p) => (
+							<div
+								key={p.id}
+								role="listitem"
+								className="flex h-16 w-40 items-center justify-center rounded-lg bg-gray-50 p-3 opacity-70 hover:opacity-100 transition-opacity "
+							>
+								<Image
+									src={p.src}
+									alt={p.alt}
+									width={120}
+									height={32}
+									className="h-auto w-full object-contain hover:scale-110 transition-transform"
+									loading="lazy"
+								/>
+							</div>
+						))}
+					</div>
+				</div>
+				<hr className="my-12 border-gray-200" />
 				{/* logo title */}
 				<div className="mt-16 text-center">
 					<Image

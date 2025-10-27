@@ -88,3 +88,12 @@ export const ANIMATION_CONFIG = {
     easeInOut: 'power2.inOut',
   },
 } as const;
+
+// Partners (static files in public/partners)
+export const PARTNERS = [
+  { id: 'acate', name: 'ACATE', src: '/partners/acate.svg', alt: 'Parceiro - ACATE' },
+  { id: 'amazon', name: 'Amazon', src: '/partners/amazon.svg', alt: 'Parceiro - Amazon' },
+  { id: 'google', name: 'Google', src: '/partners/google.svg', alt: 'Parceiro - Google' },
+  { id: 'microsoft', name: 'Microsoft', src: '/partners/microsoft.svg', alt: 'Parceiro - Microsoft' },
+  { id: 'pppi', name: 'PPPI', src: '/partners/pppi.svg', alt: 'Parceiro - PPPI' },
+] as const;
