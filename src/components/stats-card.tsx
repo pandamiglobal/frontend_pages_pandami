@@ -1,4 +1,4 @@
-import { cn } from "@/common/lib/utils"
+import { cn } from "@/lib/utils"
 
 interface StatsCardProps {
   className?: string

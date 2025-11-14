@@ -1,6 +1,6 @@
 "use client"
 
-import { cn } from "@/common/lib/utils"
+import { cn } from "@/lib/utils"
 import { useState, useEffect } from "react"
 
 interface StatsCardProps {

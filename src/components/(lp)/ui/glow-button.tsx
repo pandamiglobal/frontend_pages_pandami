@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { cn } from "@/common/lib/utils"
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import type { ButtonProps } from "@/components/ui/button"
 

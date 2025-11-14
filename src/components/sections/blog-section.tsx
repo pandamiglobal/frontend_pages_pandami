@@ -1,6 +1,6 @@
 import getLatestPostsAction from "@/common/actions/get-latest-posts-action"
 import useGetLatestPosts from "@/common/hooks/use-get-latest-posts"
-import { removeHtmlTags } from "@/common/lib/utils"
+import { removeHtmlTags } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import Image from "next/image"
 import Link from "next/link"

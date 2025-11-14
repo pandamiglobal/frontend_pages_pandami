@@ -1,4 +1,4 @@
-import { cn } from "@/common/lib/utils"
+import { cn } from "@/lib/utils"
 import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from "react"
 
 export interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

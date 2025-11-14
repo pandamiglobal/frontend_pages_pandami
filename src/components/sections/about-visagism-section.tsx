@@ -3,7 +3,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { Container } from "@/components/ui/container";
-import { cn } from "@/common/lib/utils";
+import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AboutVisagismComparisonSlider } from "@/components/sections/about-visagism-comparison-slider";
 import Image from "next/image";

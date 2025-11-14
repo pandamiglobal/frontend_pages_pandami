@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
-import { cn } from '@/common/lib/utils'
+import { cn } from '@/lib/utils'
 import gsap from 'gsap'
 import Image from 'next/image'
 

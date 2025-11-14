@@ -1,4 +1,4 @@
-import { cn } from "@/common/lib/utils"
+import { cn } from "@/lib/utils"
 import * as React from "react"
 
 const Progress = React.forwardRef<

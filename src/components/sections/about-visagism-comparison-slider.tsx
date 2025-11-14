@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { cn } from "@/common/lib/utils";
+import { cn } from "@/lib/utils";
 import { SwipeHandAffordance } from "../svg/swipe-hand-affordance";
 import gsap from "gsap";
 

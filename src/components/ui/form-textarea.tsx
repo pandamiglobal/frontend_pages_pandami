@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { cn } from "@/common/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface FormTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string;

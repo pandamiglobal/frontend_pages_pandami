@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { cn } from "@/common/lib/utils";
+import { cn } from "@/lib/utils";
 import { PrimaryButton } from "@/components/ui/primary-button";
 import { useConsent } from "@/common/hooks/use-consent";
 import { useConsentAnalytics } from "@/common/hooks/use-consent-analytics";
@@ -9,7 +9,7 @@ import { ConsentChoice } from "@/common/types/consent";
 
 export function CookiesModal() {
   const { shouldShowModal, setConsent } = useConsent();
-  const { applyConsent } = useConsentAnalytics();
+  const { applyConsent } = useConsentAnalytics(); 
 
   const handleChoice = useCallback((choice: ConsentChoice) => {
     setConsent(choice);

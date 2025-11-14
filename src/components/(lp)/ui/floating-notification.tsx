@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, Bell } from "lucide-react"
-import { cn } from "@/common/lib/utils"
+import { cn } from "@/lib/utils"
 
 interface FloatingNotificationProps {
   messages: string[]

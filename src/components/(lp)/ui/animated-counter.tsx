@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useInView } from "framer-motion"
-import { cn } from "@/common/lib/utils"
+import { cn } from "@/lib/utils"
 
 interface AnimatedCounterProps {
   value: number

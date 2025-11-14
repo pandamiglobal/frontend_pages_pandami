@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useEffect, useRef, useState } from "react"
-import { cn } from "@/common/lib/utils"
+import { cn } from "@/lib/utils"
 import Link from "next/link"
 
 interface RotatingBadgeProps {

@@ -1,5 +1,5 @@
 import type React from "react"
-import { cn } from "@/common/lib/utils"
+import { cn } from "@/lib/utils"
 
 interface ContainerProps {
   children: React.ReactNode
