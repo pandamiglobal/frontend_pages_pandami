@@ -1,4 +1,4 @@
-import { RadioGroupItem } from "@/components/ui/radio-group"
+import { QuizRadio } from "./quiz-radio"
 import { type QuizOption } from "./quiz-questions"
 import { useEffect, useRef, memo } from "react"
 import gsap from "gsap"
@@ -16,7 +16,7 @@ export const QuizOptionButton = memo(function QuizOptionButton({ option, index, 
   const glowRef = useRef<HTMLDivElement>(null)
   
   // Extract color for radio fill (convert text-green-600 to fill-green-600)
-  const fillColor = option.color.replace('text-', 'fill-')
+  const fillColor = option.color.includes('text-') ? option.color.replace('text-', 'fill-') : `fill-${option.color}`
   
   // Animação de confirmação quando selecionado
   useEffect(() => {
@@ -49,25 +49,53 @@ export const QuizOptionButton = memo(function QuizOptionButton({ option, index, 
     }
   }, [isSelected])
   
+  // Helper functions for color handling
+  const getBorderClass = () => {
+    if (!isSelected) return "border-gray-200"
+    if (option.color.includes('green')) return "border-green-600"
+    if (option.color.includes('blue')) return "border-blue-600"
+    if (option.color.includes('amber')) return "border-amber-600"
+    if (option.color.includes('red')) return "border-red-600"
+    if (option.color.includes('gray')) return "border-gray-600"
+    return "border-gray-200"
+  }
+  
+  const getBackgroundColorWithOpacity = (color: string): string => {
+    if (color.includes('green')) return 'rgba(34, 197, 94, 0.1)' // green-500 with opacity
+    if (color.includes('blue')) return 'rgba(59, 130, 246, 0.1)' // blue-500 with opacity
+    if (color.includes('amber')) return 'rgba(245, 158, 11, 0.1)' // amber-500 with opacity
+    if (color.includes('red')) return 'rgba(239, 68, 68, 0.1)' // red-500 with opacity
+    if (color.includes('gray')) return 'rgba(107, 114, 128, 0.1)' // gray-500 with opacity
+    return 'rgba(34, 197, 94, 0.1)' // Default green
+  }
+  
+  const getShadowColor = (color: string): string => {
+    if (color.includes('green')) return 'rgba(34, 197, 94, 0.4)' // green-500 with opacity
+    if (color.includes('blue')) return 'rgba(59, 130, 246, 0.4)' // blue-500 with opacity
+    if (color.includes('amber')) return 'rgba(245, 158, 11, 0.4)' // amber-500 with opacity
+    if (color.includes('red')) return 'rgba(239, 68, 68, 0.4)' // red-500 with opacity
+    if (color.includes('gray')) return 'rgba(107, 114, 128, 0.4)' // gray-500 with opacity
+    return 'rgba(34, 197, 94, 0.4)' // Default green
+  }
+  
   return (
     <div
       ref={buttonRef}
       onClick={() => onSelect(index)}
       className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer relative overflow-hidden group ${
         isSelected
-          ? `border-${option.color.replace('text-', '')} ${option.bgColor} shadow-lg`
-          : "border-gray-200 hover:border-gray-300 hover:shadow-md hover:scale-[1.02] text-gray-700 hover:bg-gray-50"
+          ? `${getBorderClass()} ${option.bgColor} shadow-lg`
+          : "hover:border-gray-300 hover:shadow-md hover:scale-[1.02] text-gray-700 hover:bg-gray-50"
       }`}
     >
       {/* Glow effect para animação de confirmação */}
       <div
         ref={glowRef}
-        className={`absolute inset-0 rounded-xl opacity-0 pointer-events-none ${
-          isSelected ? `bg-${option.color.replace('text-', '')}/10` : 'bg-green-500/10'
-        }`}
+        className="absolute inset-0 rounded-xl opacity-0 pointer-events-none"
         style={{
+          backgroundColor: isSelected ? getBackgroundColorWithOpacity(option.color) : 'rgba(34, 197, 94, 0.1)',
           boxShadow: isSelected 
-            ? `0 0 30px ${option.color.includes('green') ? '#22c55e' : '#3b82f6'}40`
+            ? `0 0 30px ${getShadowColor(option.color)}`
             : '0 0 30px rgba(34, 197, 94, 0.25)'
         }}
       />
@@ -76,14 +104,12 @@ export const QuizOptionButton = memo(function QuizOptionButton({ option, index, 
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
       
       <div className="flex items-center relative z-10">
-        <RadioGroupItem
+        <QuizRadio
           value={buttonId}
+          checked={isSelected}
+          onChange={() => onSelect(index)}
           fillColor={fillColor}
-          className={`mr-4 size-5 transition-all duration-300 ${
-            isSelected 
-              ? `border-${option.color.replace('text-', '')} data-[state=checked]:bg-${option.color.replace('text-', '')} data-[state=checked]:border-${option.color.replace('text-', '')} shadow-sm` 
-              : "border-gray-300 group-hover:border-gray-400"
-          }`}
+          className="mr-4 size-5 transition-all duration-300 shadow-sm"
         />
         <div className="flex items-center">
           <div className={`mr-3 transition-all duration-300 ${

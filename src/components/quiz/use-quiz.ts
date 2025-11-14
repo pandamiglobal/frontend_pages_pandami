@@ -28,6 +28,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
   const searchParams = useSearchParams()
   const [answers, setAnswers] = useState<Record<number, number>>({})
   const [selectedOption, setSelectedOption] = useState<number | null>(null)
+  const [selectedOptionColor, setSelectedOptionColor] = useState<'green' | 'blue' | 'amber' | 'red' | 'gray'>('green')
   const [isAnimating, setIsAnimating] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
   
@@ -103,8 +104,21 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
 
   const handleOptionSelect = useCallback((optionIndex: number) => {
     setSelectedOption(optionIndex)
+    
+    // Extract color from the selected option
+    if (currentQuestionData && optionIndex !== null) {
+      const option = currentQuestionData.options[optionIndex]
+      if (option) {
+        // Convert text-green-600 to green, text-blue-600 to blue, etc.
+        const colorMatch = option.color.match(/text-(\w+)-/)
+        if (colorMatch && colorMatch[1]) {
+          setSelectedOptionColor(colorMatch[1] as 'green' | 'blue' | 'amber' | 'red' | 'gray')
+        }
+      }
+    }
+    
     animateOptionSelection(optionIndex)
-  }, [animateOptionSelection])
+  }, [animateOptionSelection, currentQuestionData])
 
   const handleRadioChange = useCallback((value: string) => {
     const optionIndex = parseInt(value.replace('option-', ''))
@@ -214,6 +228,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
   return {
     // State
     selectedOption,
+    selectedOptionColor,
     isAnimating,
     showConfirmation,
     currentQuestion,

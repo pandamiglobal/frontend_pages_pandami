@@ -10,11 +10,9 @@ interface QuizResultsProps {
   onRestart: () => void
 }
 
-export function QuizResults({ answers, onRestart }: QuizResultsProps) {
+export function QuizResults({ answers }: QuizResultsProps) {
   // Error boundary fallback for production
-  if (!onRestart) {
-    console.error('QuizResults: onRestart prop is required')
-  }
+
 
   return (
     <section className="relative bg-[#f7f7f7] min-h-screen flex flex-col">
@@ -32,7 +30,7 @@ export function QuizResults({ answers, onRestart }: QuizResultsProps) {
               </div>
               
               <h1 className="font-semibold text-3xl md:text-4xl text-black leading-tight mb-4">
-                🔎 Seu salão tem um grande potencial de faturamento escondido.
+                Seu salão tem um grande potencial de faturamento escondido.
               </h1>
             </div>
 
@@ -59,7 +57,7 @@ export function QuizResults({ answers, onRestart }: QuizResultsProps) {
             </div>
 
             {/* Benefits Grid */}
-            <div className="grid md:grid-cols-2 gap-6 mb-10">
+            <div className="grid md:grid-cols-2 gap-2 mb-10">
               <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl">
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -67,9 +65,9 @@ export function QuizResults({ answers, onRestart }: QuizResultsProps) {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">
-                    👉 Mostrar o resultado ideal antes do corte
-                  </h3>
+                  <p className="font-semibold text-gray-900 mb-1">
+                    Mostrar resultado ideal antes do corte
+                  </p>
                 </div>
               </div>
 
@@ -80,9 +78,9 @@ export function QuizResults({ answers, onRestart }: QuizResultsProps) {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">
-                    👉 Aumentar a confiança do cliente
-                  </h3>
+                  <p className="font-semibold text-gray-900 mb-1">
+                    Aumentar a confiança do cliente
+                  </p>
                 </div>
               </div>
 
@@ -93,9 +91,9 @@ export function QuizResults({ answers, onRestart }: QuizResultsProps) {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">
-                    👉 Reduzir retrabalho
-                  </h3>
+                  <p className="font-semibold text-gray-900 mb-1">
+                    Reduzir retrabalho
+                  </p>
                 </div>
               </div>
 
@@ -106,9 +104,9 @@ export function QuizResults({ answers, onRestart }: QuizResultsProps) {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">
-                    👉 Aumentar ticket médio
-                  </h3>
+                  <p className="font-semibold text-gray-900 mb-1">
+                    Aumentar ticket médio
+                  </p>
                 </div>
               </div>
             </div>

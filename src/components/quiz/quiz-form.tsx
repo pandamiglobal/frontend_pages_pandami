@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/container"
 import { PrimaryButton } from "@/components/ui/primary-button"
 import { Confetti, type ConfettiRef } from "@/components/ui/confetti"
 import { ArrowRight } from "lucide-react"
-import { RadioGroup } from "@/components/ui/radio-group"
+import { QuizRadioGroup } from "./quiz-radio"
 import { QuizOptionButton } from "./quiz-option-button"
 import { QuizProgress } from "./quiz-progress"
 import { QuizConfirmation } from "./quiz-confirmation"
@@ -22,6 +22,7 @@ export function QuizForm({ onComplete }: QuizFormProps) {
   
   const {
     selectedOption,
+    selectedOptionColor,
     isAnimating,
     currentQuestion,
     currentQuestionData,
@@ -71,7 +72,7 @@ export function QuizForm({ onComplete }: QuizFormProps) {
               </h2>
             </div>
 
-            <RadioGroup 
+            <QuizRadioGroup 
               value={selectedOption !== null ? `option-${selectedOption}` : undefined}
               onValueChange={handleRadioChange}
               className="space-y-4 mb-8" 
@@ -86,7 +87,7 @@ export function QuizForm({ onComplete }: QuizFormProps) {
                   onSelect={handleOptionSelect}
                 />
               ))}
-            </RadioGroup>
+            </QuizRadioGroup>
 
             <div className="flex justify-end items-center w-full">
               <PrimaryButton

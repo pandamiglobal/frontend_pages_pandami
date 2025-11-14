@@ -7,9 +7,43 @@ import gsap from "gsap"
 interface QuizConfirmationProps {
   isVisible: boolean
   onComplete?: () => void
+  color?: 'green' | 'blue' | 'amber' | 'red' | 'gray'
 }
 
-export function QuizConfirmation({ isVisible, onComplete }: QuizConfirmationProps) {
+// Helper functions for color mapping
+function getGradientClass(color: string): string {
+  switch (color) {
+    case 'blue':
+      return 'from-blue-400 to-blue-600'
+    case 'amber':
+      return 'from-amber-400 to-amber-600'
+    case 'red':
+      return 'from-red-400 to-red-600'
+    case 'gray':
+      return 'from-gray-400 to-gray-600'
+    case 'green':
+    default:
+      return 'from-green-400 to-green-600'
+  }
+}
+
+function getShadowColor(color: string): string {
+  switch (color) {
+    case 'blue':
+      return 'rgba(59, 130, 246, 0.3)' // blue-500 with opacity
+    case 'amber':
+      return 'rgba(245, 158, 11, 0.3)' // amber-500 with opacity
+    case 'red':
+      return 'rgba(239, 68, 68, 0.3)' // red-500 with opacity
+    case 'gray':
+      return 'rgba(107, 114, 128, 0.3)' // gray-500 with opacity
+    case 'green':
+    default:
+      return 'rgba(34, 197, 94, 0.3)' // green-500 with opacity
+  }
+}
+
+export function QuizConfirmation({ isVisible, onComplete, color = 'green' }: QuizConfirmationProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const iconRef = useRef<HTMLDivElement>(null)
 
@@ -67,9 +101,9 @@ export function QuizConfirmation({ isVisible, onComplete }: QuizConfirmationProp
         {/* Ícone único centralizado */}
         <div
           ref={iconRef}
-          className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white"
+          className={`w-20 h-20 bg-gradient-to-br rounded-full flex items-center justify-center shadow-2xl border-4 border-white ${getGradientClass(color)}`}
           style={{
-            filter: 'drop-shadow(0 10px 20px rgba(34, 197, 94, 0.3))'
+            filter: `drop-shadow(0 10px 20px ${getShadowColor(color)})`
           }}
         >
           <CheckCircle className="w-10 h-10 text-white" />

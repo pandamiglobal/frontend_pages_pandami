@@ -108,7 +108,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       GREEN_OPTION("Com certeza", <Sparkles className="h-5 w-5" />),
       BLUE_OPTION("Sim, tenho curiosidade", <Lightbulb className="h-5 w-5" />),
       AMBER_OPTION("Talvez", <HelpCircle className="h-5 w-5" />),
-      GRAY_OPTION("Não sei", <Info className="h-5 w-5" />)
+      RED_OPTION("Não sei", <Info className="h-5 w-5" />)
     ]
   }
 ]
