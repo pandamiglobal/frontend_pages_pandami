@@ -1,4 +1,4 @@
-import { IPost } from "@/@types/@post"
+import { IPost } from "@/common/types/@post"
 import Image from "next/image"
 import Link from "next/link"
 

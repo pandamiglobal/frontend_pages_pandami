@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { LegalPageMetadata } from "@/@types/legal-metadata";
+import { LegalPageMetadata } from "@/common/types/legal-metadata";
 
 export const useLegalMetadata = (config: LegalPageMetadata): Metadata => {
   return {

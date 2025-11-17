@@ -8,7 +8,7 @@ import Link from "next/link";
 import { LeadFormBlog } from "@/components/forms/lead-form-blog";
 import { ScrollSyncWrapper } from "@/components/sections/scroll-sync-wrapper";
 import { Scissors, Camera, AppWindow, Users } from "lucide-react";
-import { SlugPageProps } from "@/@types/next-page";
+import { SlugPageProps } from "@/common/types/next-page";
 
 // Função auxiliar para extrair o slug final
 function getPostSlug(slug: string | string[]): string {

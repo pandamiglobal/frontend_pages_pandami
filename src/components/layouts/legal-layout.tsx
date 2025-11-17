@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ReactNode } from "react";
-import { LegalPageConfig } from "@/@types/legal-metadata";
+import { LegalPageConfig } from "@/common/types/legal-metadata";
 import { FileText, Shield } from "lucide-react";
 
 const getIcon = (iconName: string) => {

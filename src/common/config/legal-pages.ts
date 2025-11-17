@@ -1,5 +1,5 @@
 import { FileText, Shield } from "lucide-react";
-import { LegalPageConfig } from "@/@types/legal-metadata";
+import { LegalPageConfig } from "@/common/types/legal-metadata";
 
 // Constantes compartilhadas
 const LAST_UPDATED = "19 de setembro de 2025";

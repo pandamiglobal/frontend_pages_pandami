@@ -1,4 +1,4 @@
-import { IPagination, IPost } from "@/@types/@post"
+import { IPagination, IPost } from "@/common/types/@post"
 import api from "@/common/config/api"
 
 export async function getPosts(page: number = 1, limit: number = 9) {

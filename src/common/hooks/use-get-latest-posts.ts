@@ -1,4 +1,4 @@
-import { IPost } from "@/@types/@post";
+import { IPost } from "@/common/types/@post";
 import getLatestPostsAction from "../actions/get-latest-posts-action";
 
 export default function useGetLatestPosts() {

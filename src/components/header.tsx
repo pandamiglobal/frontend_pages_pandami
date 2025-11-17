@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
 import { PrimaryButton } from "@/components/ui/primary-button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import type { INavItem } from "@/@types/@header"
+import type { INavItem } from "@/common/types/@header"
 import { useState, useEffect, useRef } from "react"
 
 const navItems: INavItem[] = [

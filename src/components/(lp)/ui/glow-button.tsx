@@ -5,9 +5,9 @@ import type React from "react"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import type { ButtonProps } from "@/components/ui/button"
+import type { ComponentProps } from "react"
 
-interface GlowButtonProps extends ButtonProps {
+interface GlowButtonProps extends ComponentProps<typeof Button> {
   glowColor?: string
   hoverScale?: number
 }
