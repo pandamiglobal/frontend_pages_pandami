@@ -2,7 +2,7 @@
 
 import { QuizResults } from "@/components/quiz/quiz-results"
 
-export default function ResultadosPage() {
+export default function ResultadoPage() {
   const handleRestart = () => {
     window.location.href = '/ferramenta-que-aumenta-o-faturamento-dos-saloes'
   }

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   robots: "noindex, nofollow"
 }
 
-export default function ResultadosLayout({
+export default function ResultadoLayout({
   children,
 }: {
   children: React.ReactNode
