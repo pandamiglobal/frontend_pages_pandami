@@ -29,9 +29,9 @@ Goal: Allow users to view core professional profile information (name, bio, serv
 - [X] T015 [US1] Adapt profile header wrapper `profile-header-wrapper.tsx` in `src/app/_components/pages/public-profile/public-profile-page/wrappers/` to consume public profile model (no edit handlers)
 - [X] T016 [US1] Adapt services section wrapper `services-section-wrapper.tsx` to display services list in read-only mode (no add/edit/delete buttons) in `.../public-profile-page/wrappers/services-section-wrapper.tsx`
 - [X] T017 [US1] Adapt information wrapper `information-section-wrapper.tsx` to display location, phone, and business hours in read-only mode (no edit buttons) in `.../public-profile-page/wrappers/information-section-wrapper.tsx`
-- [ ] T018 [P] [US1] Implement reusable profile header component for public view in `src/app/_components/pages/public-profile/components/profile-header/profile-header.tsx` mapped from SaaS `MySiteProfileHeader` but with `isEditable` hardcoded to false
-- [ ] T019 [P] [US1] Implement services list component in `src/app/_components/pages/public-profile/components/services-list/services-list.tsx` based on SaaS SectionCard service variant, without management actions
-- [ ] T020 [P] [US1] Implement business hours list component in `src/app/_components/pages/public-profile/components/business-hours/business-hours.tsx` reusing SaaS layout
+- [X] T018 [P] [US1] Implement reusable profile header component for public view in `src/app/_components/pages/public-profile/components/profile-header/profile-header.tsx` mapped from SaaS `MySiteProfileHeader` but with `isEditable` hardcoded to false
+- [X] T019 [P] [US1] Implement services list component in `src/app/_components/pages/public-profile/components/services-list/services-list.tsx` based on SaaS SectionCard service variant, without management actions
+- [X] T020 [P] [US1] Implement business hours list component in `src/app/_components/pages/public-profile/components/business-hours/business-hours.tsx` reusing SaaS layout
 - [X] T021 [US1] Wire conditional rendering for empty states (no services, no business hours) in public-profile view per spec edge cases
 - [X] T022 [US1] Ensure respect of visibility flags for phone/address at model level (`show_phone`, `show_address`) and that hidden data is not rendered in DOM
 

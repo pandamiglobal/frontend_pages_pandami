@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { GetPublicProfileBySlugAction } from '@/server/actions/get-public-profile.action'
-import { PublicProfilePageView } from '@/app/_components/pages/public-profile/public-profile-page'
+import { PublicProfilePageView } from '@/app/_components/pages/public-profile-page/public-profile-page.view'
 
 interface PublicProfilePageProps {
   params: {

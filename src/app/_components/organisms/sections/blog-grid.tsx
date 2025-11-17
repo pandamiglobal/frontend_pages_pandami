@@ -1,7 +1,7 @@
 import { getPosts } from "@/server/services/posts/get-posts";
 import { IPagination, IPost } from "@/common/types/@post";
 import ClientPagination from "../../molecules/client-pagination";
-import BlogCard from "../../atoms/ui/blog-card";
+import BlogCard from "../../molecules/blog-card";
 import { Container } from "../../atoms/ui/container";
 
 export default async function BlogGrid({ searchParams }: { searchParams?: any }) {

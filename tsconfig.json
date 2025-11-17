@@ -22,7 +22,7 @@
       "@/*": ["./src/*"],
       "@/components/sections/*": ["./src/app/_components/organisms/sections/*"],
       "@/components/ui/*": ["./src/app/_components/atoms/ui/*"],
-      "@/components/quiz/*": ["./src/app/_components/pages/quiz/*"],
+      "@/components/quiz/*": ["src/app/_components/organisms/quiz/*"],
       "@/components/seo/*": ["./src/app/_components/templates/seo/*"]
     }
   },

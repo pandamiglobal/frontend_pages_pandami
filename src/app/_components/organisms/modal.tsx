@@ -1,10 +1,10 @@
 'use client'
 
 import React from 'react';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useModal } from './use-modal';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/app/_components/atoms/ui/dialog';
+import { useModal } from '@/common/hooks/use-modal';
 import { CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react';
-import { Button } from '../button';
+import { Button } from '@/app/_components/atoms/ui/button';
 
 const iconMap = {
   success: CheckCircle,

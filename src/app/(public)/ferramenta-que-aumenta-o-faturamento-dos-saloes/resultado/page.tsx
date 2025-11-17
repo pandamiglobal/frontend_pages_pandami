@@ -1,6 +1,7 @@
 "use client"
 
-import { QuizResults } from "@/components/quiz/quiz-results"
+import { QuizResults } from "@/app/_components/organisms/quiz/quiz-results"
+import PageLayout from "@/app/_components/templates/page-layout"
 
 export default function ResultadoPage() {
   const handleRestart = () => {
@@ -8,11 +9,11 @@ export default function ResultadoPage() {
   }
 
   return (
-    <div data-no-header data-no-footer>
+   <PageLayout>
       <QuizResults 
         answers={{}} 
         onRestart={handleRestart} 
       />
-    </div>
+    </PageLayout>
   )
 }

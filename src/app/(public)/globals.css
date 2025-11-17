@@ -1,7 +1,7 @@
-@import '../common/styles/globals.css';
-@import '../common/styles/hero-animation.css';
-@import '../common/styles/blog.css';
-@import '../common/styles/article.css';
+@import '../../common/styles/globals.css';
+@import '../../common/styles/hero-animation.css';
+@import '../../common/styles/blog.css';
+@import '../../common/styles/article.css';
 
 header:has(+ [data-no-header]) {
     display: none;

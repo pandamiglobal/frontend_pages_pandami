@@ -1,4 +1,4 @@
-import { QuizSkeleton } from "@/components/quiz/quiz-skeleton"
+import { QuizSkeleton } from "@/app/_components/organisms/quiz/quiz-skeleton"
 import { Container } from "@/components/ui/container"
 
 export default function Loading() {

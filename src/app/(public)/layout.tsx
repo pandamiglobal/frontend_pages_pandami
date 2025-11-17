@@ -1,15 +1,13 @@
 import type React from "react";
 import "./globals.css";
 import { Ubuntu, Fahkwang } from "next/font/google";
-import { ThemeProvider } from "@/app/(public)/providers";
-import { Footer } from "@/app/_components/organisms/footer";
-import { Header } from "@/app/_components/organisms/header";
+
 import Script from "next/script";
 import { Metadata } from "next";
 import defaultSeo from "@/common/config/default-seo";
-import { Modal } from "@/app/_components/atoms/ui/modal/modal";
-import { CookiesModal } from "@/app/_components/organisms/cookies-modal";
+
 import { ConsentScripts } from "@/app/_components/organisms/consent-scripts";
+
 
 const ubuntu = Ubuntu({
 	subsets: ["latin"],
@@ -108,18 +106,9 @@ export default function RootLayout({
 				<ConsentScripts />
 			</head>
 			<body className={`font-sans`}>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="light"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<Header />
+			
 					{children}
-					<Footer />
-					<Modal />
-					<CookiesModal />
-				</ThemeProvider>
+
 			</body>
 		</html>
 	);

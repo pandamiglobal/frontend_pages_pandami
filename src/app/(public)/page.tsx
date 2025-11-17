@@ -21,7 +21,7 @@ import {
 	WebSiteJsonLd 
 } from "@/components/seo/article-json-ld";
 import { FAQ_DATA, SITE_CONFIG } from "@/common/constants";
-
+import PageLayout from "@/app/_components/templates/page-layout";
 // Removidos imports específicos da seção de benefícios (agora componentizada)
 
 export default function Home() {
@@ -41,19 +41,20 @@ export default function Home() {
 			<FAQJsonLd faq={FAQ_DATA} />
 			<BreadcrumbJsonLd items={breadcrumbItems} />
 			<ReviewJsonLd />
-			
-			<main>
-				<HeroSection />
-				<WhyVisagismSection />
-				<CarouselSection />
-				<BenefitsSection />
-				<AboutVisagismSection />
-				<SocialProofSection />
-				<BarberTestimonialsSection />
-				<PricingSection />
-				<FAQSection faq={FAQ_DATA} />
-				<CtaSection />
-			</main>
+			<PageLayout>
+				<main>
+					<HeroSection />
+					<WhyVisagismSection />
+					<CarouselSection />
+					<BenefitsSection />
+					<AboutVisagismSection />
+					<SocialProofSection />
+					<BarberTestimonialsSection />
+					<PricingSection />
+					<FAQSection faq={FAQ_DATA} />
+					<CtaSection />
+				</main>
+			</PageLayout>
 		</>
 	);
 }
