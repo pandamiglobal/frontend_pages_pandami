@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 import React from "react";
-import { Container } from "@/components/ui/container";
+import { Container } from "@/app/_components/atoms/ui/container";
 import { Metadata } from "next";
 import { getMetadataPostBySlug } from "@/server/services/posts/get-metadata-post-by-slug";
-import ArticleContent from "@/components/sections/article-content";
+import ArticleContent from "@/app/_components/organisms/sections/article-content";
 import Link from "next/link";
-import { LeadFormBlog } from "@/components/forms/lead-form-blog";
-import { ScrollSyncWrapper } from "@/components/sections/scroll-sync-wrapper";
+import { LeadFormBlog } from "@/app/_components/organisms/forms/lead-form-blog";
+import { ScrollSyncWrapper } from "@/app/_components/organisms/sections/scroll-sync-wrapper";
 import { Scissors, Camera, AppWindow, Users } from "lucide-react";
 import { SlugPageProps } from "@/common/types/next-page";
 

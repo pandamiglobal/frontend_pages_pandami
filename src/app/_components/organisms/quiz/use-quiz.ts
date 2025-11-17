@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import gsap from "gsap"
 import { QUIZ_QUESTIONS } from "./quiz-questions"
-import type { ConfettiRef } from "@/components/ui/confetti"
+import type { ConfettiRef } from "@/app/_components/atoms/ui/confetti"
 
 const ANIMATION_DURATION = {
   FAST: 0.2,

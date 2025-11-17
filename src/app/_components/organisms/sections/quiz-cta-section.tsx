@@ -1,6 +1,6 @@
 "use client"
 
-import { Container } from "@/components/ui/container"
+import { Container } from "@/app/_components/atoms/ui/container"
 import { PrimaryButton } from "@/app/_components/molecules/primary-button"
 import { ArrowRight, HelpCircle } from "lucide-react"
 import Link from "next/link"

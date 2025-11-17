@@ -1,12 +1,12 @@
 "use client"
 
-import { Container } from "@/components/ui/container"
+import { Container } from "@/app/_components/atoms/ui/container"
 import { PrimaryButton } from "@/app/_components/molecules/primary-button"
 import { ArrowRight, Search, TrendingUp, Users, DollarSign, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { AnimatedCounter } from "@/components/(lp)/ui/animated-counter"
+import { AnimatedCounter } from "@/app/_components/molecules/animated-counter"
 
 interface QuizResultsProps {
   answers: Record<number, number>
