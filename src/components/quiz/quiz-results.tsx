@@ -2,8 +2,11 @@
 
 import { Container } from "@/components/ui/container"
 import { PrimaryButton } from "@/components/ui/primary-button"
-import { ArrowRight, Search, TrendingUp, Users, DollarSign } from "lucide-react"
+import { ArrowRight, Search, TrendingUp, Users, DollarSign, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+import { AnimatedCounter } from "@/components/(lp)/ui/animated-counter"
 
 interface QuizResultsProps {
   answers: Record<number, number>
@@ -11,8 +14,15 @@ interface QuizResultsProps {
 }
 
 export function QuizResults({ answers }: QuizResultsProps) {
-  // Error boundary fallback for production
-
+  const cardRef = useRef(null)
+  const benefitsRef = useRef(null)
+  const ctaRef = useRef(null)
+  const socialProofRef = useRef(null)
+  
+  const cardInView = useInView(cardRef, { once: true, margin: "-50px" })
+  const benefitsInView = useInView(benefitsRef, { once: true, margin: "-50px" })
+  const ctaInView = useInView(ctaRef, { once: true, margin: "-50px" })
+  const socialProofInView = useInView(socialProofRef, { once: true, amount: 0.5 })
 
   return (
     <section className="relative bg-[#f7f7f7] min-h-screen flex flex-col">
@@ -22,7 +32,26 @@ export function QuizResults({ answers }: QuizResultsProps) {
       <Container className="flex-1 flex flex-col justify-center">
         <div className="relative py-16 max-w-4xl mx-auto w-full">
           {/* Results Card */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+          <motion.div
+            ref={cardRef}
+            initial={{ opacity: 0, y: 30 }}
+            animate={cardInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="bg-white rounded-2xl shadow-lg p-8 md:p-12"
+          >
+            {/* Badge Quiz Completo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={cardInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
+              className="flex justify-center mb-4"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium">
+                <CheckCircle2 className="h-4 w-4" />
+                <span>Quiz Completo</span>
+              </div>
+            </motion.div>
+
             {/* Icon and Title */}
             <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[hsl(var(--primary-gradient-from))] to-[hsl(var(--primary-gradient-to))] rounded-full mb-6">
@@ -36,7 +65,7 @@ export function QuizResults({ answers }: QuizResultsProps) {
 
             {/* Main Result Text */}
             <div className="mb-8">
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">
+              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
                 Pelas suas respostas, existe um ponto em comum: seus clientes poderiam 
                 <span className="font-semibold text-primary"> confiar mais</span>, 
                 <span className="font-semibold text-primary"> indicar mais</span> e 
@@ -44,21 +73,47 @@ export function QuizResults({ answers }: QuizResultsProps) {
                 se tivessem mais clareza antes do atendimento.
               </p>
 
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-8">
+              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
                 Hoje, muitos profissionais perdem faturamento não por falta de talento, 
                 mas por falta de <span className="font-semibold">previsibilidade</span>, 
                 <span className="font-semibold"> diferenciação</span> e 
                 <span className="font-semibold"> comunicação visual clara</span>.
               </p>
 
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-8">
+              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
                 E é exatamente isso que a tecnologia certa consegue resolver.
               </p>
             </div>
 
+            {/* Prova Social */}
+            <motion.div
+              ref={socialProofRef}
+              initial={{ opacity: 0, y: 20 }}
+              animate={socialProofInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="mb-8 text-center"
+            >
+              <p className="text-gray-600 text-base md:text-lg">
+                <span className="font-semibold text-primary">
+                  <AnimatedCounter value={250} duration={2} suffix="+ salões" />
+                </span>{" "}
+                já estão melhorando seu faturamento com a PandaMi
+              </p>
+            </motion.div>
+
             {/* Benefits Grid */}
-            <div className="grid md:grid-cols-2 gap-2 mb-10">
-              <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl">
+            <motion.div
+              ref={benefitsRef}
+              initial={{ opacity: 0, y: 20 }}
+              animate={benefitsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="grid md:grid-cols-2 gap-4 mb-10"
+            >
+              <motion.div
+                whileHover={{ scale: 1.02, y: -2 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
+              >
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <Search className="h-5 w-5 text-primary" />
@@ -69,9 +124,13 @@ export function QuizResults({ answers }: QuizResultsProps) {
                     Mostrar resultado ideal antes do corte
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl">
+              <motion.div
+                whileHover={{ scale: 1.02, y: -2 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
+              >
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <TrendingUp className="h-5 w-5 text-primary" />
@@ -82,9 +141,13 @@ export function QuizResults({ answers }: QuizResultsProps) {
                     Aumentar a confiança do cliente
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl">
+              <motion.div
+                whileHover={{ scale: 1.02, y: -2 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
+              >
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <Users className="h-5 w-5 text-primary" />
@@ -95,9 +158,13 @@ export function QuizResults({ answers }: QuizResultsProps) {
                     Reduzir retrabalho
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl">
+              <motion.div
+                whileHover={{ scale: 1.02, y: -2 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
+              >
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <DollarSign className="h-5 w-5 text-primary" />
@@ -108,26 +175,47 @@ export function QuizResults({ answers }: QuizResultsProps) {
                     Aumentar ticket médio
                   </p>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* CTA Section */}
-            <div className="text-center border-t border-gray-200 pt-8">
+            <motion.div
+              ref={ctaRef}
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              className="text-center border-t border-gray-200 pt-8"
+            >
               <div className="mb-6">
-                <Link href="/">
-                  <PrimaryButton
-                    icon={<ArrowRight className="h-5 w-5" />}
-                    size="lg"
-                    className="px-8 py-4 text-lg w-full"
+                <Link href="/" className="block">
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.03, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                    }}
+                    className="w-full"
                   >
-                    Quero ver a ferramenta que aumenta o faturamento dos salões
-                  </PrimaryButton>
+                    <PrimaryButton
+                      icon={<ArrowRight className="h-5 w-5" />}
+                      size="lg"
+                      className="px-8 py-4 text-lg w-full"
+                    >
+                      Quero ver a ferramenta que aumenta o faturamento dos salões
+                    </PrimaryButton>
+                  </motion.div>
                 </Link>
               </div>
 
              
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </Container>
     </section>
