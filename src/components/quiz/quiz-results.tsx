@@ -37,7 +37,7 @@ export function QuizResults({ answers }: QuizResultsProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={cardInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="bg-white rounded-2xl shadow-lg p-8 md:p-12"
+            className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-12"
           >
             {/* Badge Quiz Completo */}
             <motion.div
@@ -58,14 +58,14 @@ export function QuizResults({ answers }: QuizResultsProps) {
                 <Search className="h-8 w-8 text-white" />
               </div>
               
-              <h1 className="font-semibold text-3xl md:text-4xl text-black leading-tight mb-4">
+              <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl text-black leading-tight mb-4 px-2 sm:px-0">
                 Seu salão tem um grande potencial de faturamento escondido.
               </h1>
             </div>
 
             {/* Main Result Text */}
             <div className="mb-8">
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+              <p className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed mb-4">
                 Pelas suas respostas, existe um ponto em comum: seus clientes poderiam 
                 <span className="font-semibold text-primary"> confiar mais</span>, 
                 <span className="font-semibold text-primary"> indicar mais</span> e 
@@ -73,14 +73,14 @@ export function QuizResults({ answers }: QuizResultsProps) {
                 se tivessem mais clareza antes do atendimento.
               </p>
 
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+              <p className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed mb-4">
                 Hoje, muitos profissionais perdem faturamento não por falta de talento, 
                 mas por falta de <span className="font-semibold">previsibilidade</span>, 
                 <span className="font-semibold"> diferenciação</span> e 
                 <span className="font-semibold"> comunicação visual clara</span>.
               </p>
 
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+              <p className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed mb-4">
                 E é exatamente isso que a tecnologia certa consegue resolver.
               </p>
             </div>
@@ -111,16 +111,17 @@ export function QuizResults({ answers }: QuizResultsProps) {
             >
               <motion.div
                 whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
+                className="flex items-start space-x-3 md:space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md active:shadow-md"
               >
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <Search className="h-5 w-5 text-primary" />
                   </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
                     Mostrar resultado ideal antes do corte
                   </p>
                 </div>
@@ -128,16 +129,17 @@ export function QuizResults({ answers }: QuizResultsProps) {
 
               <motion.div
                 whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
+                className="flex items-start space-x-3 md:space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md active:shadow-md"
               >
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <TrendingUp className="h-5 w-5 text-primary" />
                   </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
                     Aumentar a confiança do cliente
                   </p>
                 </div>
@@ -145,16 +147,17 @@ export function QuizResults({ answers }: QuizResultsProps) {
 
               <motion.div
                 whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
+                className="flex items-start space-x-3 md:space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md active:shadow-md"
               >
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <Users className="h-5 w-5 text-primary" />
                   </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
                     Reduzir retrabalho
                   </p>
                 </div>
@@ -162,16 +165,17 @@ export function QuizResults({ answers }: QuizResultsProps) {
 
               <motion.div
                 whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
+                className="flex items-start space-x-3 md:space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md active:shadow-md"
               >
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <DollarSign className="h-5 w-5 text-primary" />
                   </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
                     Aumentar ticket médio
                   </p>
                 </div>
@@ -186,8 +190,8 @@ export function QuizResults({ answers }: QuizResultsProps) {
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
               className="text-center border-t border-gray-200 pt-8"
             >
-              <div className="mb-6">
-                <Link href="/" className="block">
+              <div className="mb-6 px-2 sm:px-0">
+                <Link href="/" className="block w-full">
                   <motion.div
                     animate={{
                       scale: [1, 1.03, 1],
@@ -203,11 +207,11 @@ export function QuizResults({ answers }: QuizResultsProps) {
                     className="w-full"
                   >
                     <PrimaryButton
-                      icon={<ArrowRight className="h-5 w-5" />}
+                      icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />}
                       size="lg"
-                      className="px-8 py-4 text-lg w-full"
+                      className="px-4 py-4 md:px-10 md:py-5 text-sm sm:text-base md:text-lg w-full min-h-[64px] sm:min-h-[68px] md:min-h-[72px] !flex-wrap justify-center gap-2 md:gap-2 leading-snug"
                     >
-                      Quero ver a ferramenta que aumenta o faturamento dos salões
+                      <span className="text-center block max-w-[90%] mx-auto">Quero ver a ferramenta que aumenta o faturamento dos salões</span>
                     </PrimaryButton>
                   </motion.div>
                 </Link>
