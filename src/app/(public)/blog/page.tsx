@@ -1,6 +1,5 @@
 import defaultSeo from "@/common/config/default-seo";
-import BlogGrid from "@/components/sections/blog-grid";
-import { Container } from "@/components/ui/container";
+import BlogGrid from "@/app/_components/organisms/sections/blog-grid";
 import { Metadata } from "next";
 import PageLayout from "@/app/_components/templates/page-layout";
 

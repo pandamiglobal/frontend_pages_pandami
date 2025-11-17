@@ -19,7 +19,7 @@ export async function getPublicProfileBySlug(slug: string): Promise<IPublicProfi
 
   try {
     const response = await axios.get<IPublicProfileFullResponse>(
-      `${PANDAMI_API_URL}public-profile/${slug}`,
+      `${PANDAMI_API_URL}public-profile/public/${slug}`,
       {
         timeout: 10000, // 10 second timeout
         headers: {

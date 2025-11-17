@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/_components/atoms/ui/button";
 import Link from "next/link";
 import { ReactNode } from "react";
 import { LegalPageConfig } from "@/common/types/legal-metadata";

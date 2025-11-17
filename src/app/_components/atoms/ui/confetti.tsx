@@ -17,7 +17,7 @@ import type {
 } from "canvas-confetti"
 import confetti from "canvas-confetti"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/app/_components/atoms/ui/button"
 
 type Api = {
   fire: (options?: ConfettiOptions) => void

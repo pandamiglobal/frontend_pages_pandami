@@ -1,11 +1,11 @@
 "use client";
 
-import { Container } from "@/components/ui/container";
+import { Container } from "@/app/_components/atoms/ui/container";
 import { PrimaryButton } from "@/app/_components/molecules/primary-button";
 import { UserRound, ScanFace, ChartPie, FileEdit, History } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/app/_components/atoms/ui/tabs";
 import Link from "next/link";
 
 type PricingPeriod = "monthly" | "semiannual" | "annual";

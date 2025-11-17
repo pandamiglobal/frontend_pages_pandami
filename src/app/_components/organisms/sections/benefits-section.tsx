@@ -1,33 +1,33 @@
-import { Container } from "@/components/ui/container"
-import { PrimaryButton } from "@/app/_components/molecules/primary-button"
+import { Container } from "@/app/_components/atoms/ui/container";
+import { PrimaryButton } from "@/app/_components/molecules/primary-button";
 import {
-  Target,
-  Crown,
-  Trophy,
-  TrendingUp,
-  Star,
-  UserCheck,
-  Sparkles,
-  Heart,
-  CircleCheck,
-  ArrowRight
-} from "lucide-react"
-import type { ComponentType, SVGProps } from "react"
-import Link from "next/link"
+	Target,
+	Crown,
+	Trophy,
+	TrendingUp,
+	Star,
+	UserCheck,
+	Sparkles,
+	Heart,
+	CircleCheck,
+	ArrowRight,
+} from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import Link from "next/link";
 
 interface BenefitItemData {
-  icon: ComponentType<SVGProps<SVGSVGElement>>
-  title: string
-  description: string
+	icon: ComponentType<SVGProps<SVGSVGElement>>;
+	title: string;
+	description: string;
 }
 
 interface PopoverData {
-  icon: ComponentType<SVGProps<SVGSVGElement>>
-  value: string
-  label: string
-  bgColor: string
-  iconColor: string
-  position: "top-left" | "top-right" | "bottom-left" | "bottom-right"
+	icon: ComponentType<SVGProps<SVGSVGElement>>;
+	value: string;
+	label: string;
+	bgColor: string;
+	iconColor: string;
+	position: "top-left" | "top-right" | "bottom-left" | "bottom-right";
 }
 
 const salonBenefits: BenefitItemData[] = [
@@ -68,57 +68,82 @@ const clientBenefits: BenefitItemData[] = [
 ];
 
 function BenefitItem({ icon: Icon, title, description }: BenefitItemData) {
-  return (
-    <li className="p-3 sm:p-4 rounded-xl bg-neutral-700/60 outline-solid outline-1 outline-white/50 flex gap-3 sm:gap-4 items-start shadow-md transition-all hover:bg-neutral-700/80">
-      <div className="min-w-10 w-10 h-10 sm:w-12 sm:h-12 bg-neutral-700 rounded-lg flex items-center justify-center shrink-0">
-        <Icon className="text-white w-5 h-5 sm:w-6 sm:h-6" />
-      </div>
-      <div className="flex-1">
-        <div className="text-white text-base sm:text-lg md:text-xl font-medium">{title}</div>
-        <div className="text-neutral-400 text-xs sm:text-sm md:text-base leading-tight mt-1">{description}</div>
-      </div>
-    </li>
-  )
+	return (
+		<li className="p-3 sm:p-4 rounded-xl bg-neutral-700/60 outline-solid outline-1 outline-white/50 flex gap-3 sm:gap-4 items-start shadow-md transition-all hover:bg-neutral-700/80">
+			<div className="min-w-10 w-10 h-10 sm:w-12 sm:h-12 bg-neutral-700 rounded-lg flex items-center justify-center shrink-0">
+				<Icon className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+			</div>
+			<div className="flex-1">
+				<div className="text-white text-base sm:text-lg md:text-xl font-medium">
+					{title}
+				</div>
+				<div className="text-neutral-400 text-xs sm:text-sm md:text-base leading-tight mt-1">
+					{description}
+				</div>
+			</div>
+		</li>
+	);
 }
 
-function Popover({ icon: Icon, value, label, bgColor, iconColor, position }: PopoverData) {
-  const positionClasses = {
-    "top-left": "top-2 sm:top-4 left-2 sm:left-4",
-    "top-right": "top-2 sm:top-4 right-2 sm:right-0",
-    "bottom-left": "bottom-2 sm:bottom-4 left-2 sm:left-4",
-    "bottom-right": "bottom-2 sm:bottom-4 right-2 sm:right-4"
-  }
+function Popover({
+	icon: Icon,
+	value,
+	label,
+	bgColor,
+	iconColor,
+	position,
+}: PopoverData) {
+	const positionClasses = {
+		"top-left": "top-2 sm:top-4 left-2 sm:left-4",
+		"top-right": "top-2 sm:top-4 right-2 sm:right-0",
+		"bottom-left": "bottom-2 sm:bottom-4 left-2 sm:left-4",
+		"bottom-right": "bottom-2 sm:bottom-4 right-2 sm:right-4",
+	};
 
-  // Usando o padrão de objetos de classes para o Tailwind aplicar corretamente as cores
-  const bgColorClass = {
-    "emerald-100": "bg-emerald-100",
-    "amber-100": "bg-amber-100",
-    "blue-100": "bg-blue-100",
-    "pink-100": "bg-pink-100"
-  };
+	// Usando o padrão de objetos de classes para o Tailwind aplicar corretamente as cores
+	const bgColorClass = {
+		"emerald-100": "bg-emerald-100",
+		"amber-100": "bg-amber-100",
+		"blue-100": "bg-blue-100",
+		"pink-100": "bg-pink-100",
+	};
 
-  const iconColorClass = {
-    "emerald-600": "text-emerald-600",
-    "amber-400": "text-amber-400",
-    "blue-600": "text-blue-600",
-    "pink-600": "text-pink-600"
-  };
+	const iconColorClass = {
+		"emerald-600": "text-emerald-600",
+		"amber-400": "text-amber-400",
+		"blue-600": "text-blue-600",
+		"pink-600": "text-pink-600",
+	};
 
-  return (
-    <div className={`absolute ${positionClasses[position]} bg-white/80 backdrop-blur-xs rounded-lg flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 shadow-sm outline-solid outline-1 outline-white/50 max-w-[48%] sm:max-w-none z-10`}>
-      <div className={`min-w-6 w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 ${bgColorClass[bgColor as keyof typeof bgColorClass]} rounded flex items-center justify-center shrink-0`}>
-        <Icon className={`${iconColorClass[iconColor as keyof typeof iconColorClass]} w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6`} />
-      </div>
-      <div>
-        <div className="text-neutral-800 text-sm sm:text-base md:text-xl font-normal">{value}</div>
-        <div className="text-neutral-600 text-[8px] sm:text-[10px] md:text-xs leading-tight">{label}</div>
-      </div>
-    </div>
-  )
+	return (
+		<div
+			className={`absolute ${positionClasses[position]} bg-white/80 backdrop-blur-xs rounded-lg flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 shadow-sm outline-solid outline-1 outline-white/50 max-w-[48%] sm:max-w-none z-10`}
+		>
+			<div
+				className={`min-w-6 w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 ${
+					bgColorClass[bgColor as keyof typeof bgColorClass]
+				} rounded flex items-center justify-center shrink-0`}
+			>
+				<Icon
+					className={`${
+						iconColorClass[iconColor as keyof typeof iconColorClass]
+					} w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6`}
+				/>
+			</div>
+			<div>
+				<div className="text-neutral-800 text-sm sm:text-base md:text-xl font-normal">
+					{value}
+				</div>
+				<div className="text-neutral-600 text-[8px] sm:text-[10px] md:text-xs leading-tight">
+					{label}
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export function BenefitsSection() {
-  return (
+	return (
 		<section
 			id="benefits"
 			className="w-full bg-neutral-800 pt-4 pb-12 sm:pt-2 sm:pb-16 md:pt-2 md:pb-20"

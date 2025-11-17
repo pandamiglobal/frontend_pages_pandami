@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { PrimaryButton } from "@/app/_components/molecules/primary-button";
-import { HeroIcon } from "@/components/svg/hero-icon";
+import { HeroIcon } from "@/app/_components/atoms/svg/hero-icon";
 
 export const CtaSectionBlog: React.FC = () => {
 	return (

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, memo } from 'react';
 import Image from 'next/image';
-import { HeroIcon } from '@/components/svg/hero-icon';
+import { HeroIcon } from '@/app/_components/atoms/svg/hero-icon';
 import { gsap } from 'gsap';
 import { DonutPercent } from './donut-percent';
 import { VariantCard } from './variant-card';

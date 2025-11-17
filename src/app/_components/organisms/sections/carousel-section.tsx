@@ -1,7 +1,7 @@
 "use client";
 
-import { Container } from "@/components/ui/container";
-import { BadgeIcon } from "@/components/svg/badge-icon";
+import { Container } from "@/app/_components/atoms/ui/container";
+import { BadgeIcon } from "@/app/_components/atoms/svg/badge-icon";
 import { ImageComparisonSlider } from "./image-comparison-slider";
 import { useRef, useEffect, useCallback, useMemo } from "react";
 import gsap from "gsap";

@@ -3,9 +3,9 @@ import { GetPublicProfileBySlugAction } from '@/server/actions/get-public-profil
 import { PublicProfilePageView } from '@/app/_components/pages/public-profile-page/public-profile-page.view'
 
 interface PublicProfilePageProps {
-  params: {
+  params: Promise<{
     'public-profile': string
-  }
+  }>
 }
 
 /**
@@ -13,7 +13,7 @@ interface PublicProfilePageProps {
  * Resolves slug, calls server action, and passes data to client view component
  */
 export default async function PublicProfilePage({ params }: PublicProfilePageProps) {
-  const { 'public-profile': slug } = params
+  const { 'public-profile': slug } = await params
 
   try {
     // Validate slug format
@@ -48,7 +48,7 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
  * Generate metadata for SEO (optional enhancement)
  */
 export async function generateMetadata({ params }: PublicProfilePageProps) {
-  const slug = params['public-profile']
+  const { 'public-profile': slug } = await params
 
   try {
     const profileData = await GetPublicProfileBySlugAction(slug)

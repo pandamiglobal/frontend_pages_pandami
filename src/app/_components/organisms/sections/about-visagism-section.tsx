@@ -2,10 +2,10 @@
 
 import { useState, useMemo, useRef, useEffect } from "react";
 import gsap from "gsap";
-import { Container } from "@/components/ui/container";
+import { Container } from "@/app/_components/atoms/ui/container";
 import { cn } from "@/lib/utils";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { AboutVisagismComparisonSlider } from "@/components/sections/about-visagism-comparison-slider";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/app/_components/atoms/ui/tabs";
+import { AboutVisagismComparisonSlider } from "@/app/_components/organisms/sections/about-visagism-comparison-slider";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { PrimaryButton } from "@/app/_components/molecules/primary-button";

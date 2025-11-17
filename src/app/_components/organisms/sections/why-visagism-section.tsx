@@ -1,6 +1,6 @@
 "use client";
 
-import { Container } from "@/components/ui/container";
+import { Container } from "@/app/_components/atoms/ui/container";
 import Image from "next/image";
 
 export function WhyVisagismSection() {

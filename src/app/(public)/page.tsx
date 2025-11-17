@@ -1,25 +1,25 @@
-import { HeroSection } from "@/components/sections/hero-section";
-import { WhyVisagismSection } from "@/components/sections/why-visagism-section";
-import { AboutVisagismSection } from "@/components/sections/about-visagism-section";
-import { SocialProofSection } from "@/components/sections/social-proof-section";
-import FAQSection from "@/components/sections/faq-section";
-import CarouselSection from "@/components/sections/carousel-section";
-import { CtaSection } from "@/components/sections/cta-section";
-import { BenefitsSection } from "@/components/sections/benefits-section";
-import { PricingSection } from "@/components/sections/pricing-section";
-import { BarberTestimonialsSection } from "@/components/sections/barber-testimonials-section";
+import { HeroSection } from "@/app/_components/organisms/sections/hero-section";
+import { WhyVisagismSection } from "@/app/_components/organisms/sections/why-visagism-section";
+import { AboutVisagismSection } from "@/app/_components/organisms/sections/about-visagism-section";
+import { SocialProofSection } from "@/app/_components/organisms/sections/social-proof-section";
+import FAQSection from "@/app/_components/organisms/sections/faq-section";
+import CarouselSection from "@/app/_components/organisms/sections/carousel-section";
+import { CtaSection } from "@/app/_components/organisms/sections/cta-section";
+import { BenefitsSection } from "@/app/_components/organisms/sections/benefits-section";
+import { PricingSection } from "@/app/_components/organisms/sections/pricing-section";
+import { BarberTestimonialsSection } from "@/app/_components/organisms/sections/barber-testimonials-section";
 import { 
 	FAQJsonLd, 
 	OrganizationJsonLd, 
 	ProductJsonLd, 
 	BreadcrumbJsonLd, 
 	ReviewJsonLd 
-} from "@/components/seo/json-ld";
+} from "@/app/_components/templates/seo/json-ld";
 import { 
 	ArticleJsonLd, 
 	LocalBusinessJsonLd, 
 	WebSiteJsonLd 
-} from "@/components/seo/article-json-ld";
+} from "@/app/_components/templates/seo/article-json-ld";
 import { FAQ_DATA, SITE_CONFIG } from "@/common/constants";
 import PageLayout from "@/app/_components/templates/page-layout";
 // Removidos imports específicos da seção de benefícios (agora componentizada)

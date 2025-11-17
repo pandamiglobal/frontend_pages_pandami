@@ -1,10 +1,10 @@
 "use client"
 
-import { Container } from "@/components/ui/container"
+import { Container } from "@/app/_components/atoms/ui/container"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { PrimaryButton } from "@/app/_components/molecules/primary-button"
-import { HeroAnimatedImage } from "@/components/sections/hero-animated-image"
+import { HeroAnimatedImage } from "@/app/_components/organisms/sections/hero-animated-image"
 
 
 export function HeroSection() {

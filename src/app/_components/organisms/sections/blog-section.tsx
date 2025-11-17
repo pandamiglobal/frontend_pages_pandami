@@ -1,7 +1,6 @@
-import getLatestPostsAction from "@/common/actions/get-latest-posts-action"
 import useGetLatestPosts from "@/common/hooks/use-get-latest-posts"
 import { removeHtmlTags } from "@/lib/utils"
-import { Container } from "@/components/ui/container"
+import { Container } from "@/app/_components/atoms/ui/container"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -9,7 +8,7 @@ interface BlogPost {
   id: number
   title: { rendered: string }
   excerpt: { rendered: string }
-  date: string
+  date: string  
   image: string
   slug: string
 }
