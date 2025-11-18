@@ -8,7 +8,7 @@ import {
   PublicProfileErrorType,
   UsePublicProfileConfig,
   UsePublicProfileReturn
-} from '@/common/types/types/IPublicProfile'
+} from '@/common/types/IPublicProfile'
 
 /**
  * Default SWR configuration for public profile fetching
@@ -89,7 +89,7 @@ export function usePublicProfile(
     isValidating,
     mutate
   } = useSWR<IPublicProfileFullResponse, PublicProfileApiError>(
-    slug ? `/public-profile/${slug}` : null,
+    slug ? `/public-profile/public/${slug}` : null,
     () => fetchPublicProfile(slug),
     mergedConfig
   )

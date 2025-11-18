@@ -6,7 +6,7 @@ import { Globe, Menu, ChevronDown, ArrowRight, X } from "lucide-react"
 import { Container } from "@/app/_components/atoms/ui/container"
 import { PrimaryButton } from "@/app/_components/molecules/primary-button"
 import { ThemeToggle } from "@/app/_components/molecules/theme-toggle"
-import type { INavItem } from "@/common/types/@header"
+import type { INavItem } from "@/common/types/IHeader"
 import { useState, useEffect, useRef } from "react"
 
 const navItems: INavItem[] = [

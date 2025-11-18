@@ -1,6 +1,6 @@
 'use server'
 
-import { IPost } from "@/common/types/@post"
+import { IPost } from "@/common/types/IBlogArticlePost"
 import getLatestPostsAction from "@/server/actions/get-latest-posts-action"
 
 export default function useGetLatestPosts() {

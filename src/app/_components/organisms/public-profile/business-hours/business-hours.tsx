@@ -1,6 +1,6 @@
 'use client'
 
-import { IPublicProfileOpeningHour, Weekday } from '@/common/types/types/IPublicProfile'
+import { IPublicProfileOpeningHour, Weekday } from '@/common/types/IPublicProfile'
 import { Clock } from 'lucide-react'
 
 interface BusinessHoursProps {

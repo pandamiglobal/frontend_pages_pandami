@@ -1,6 +1,6 @@
 'use client'
 
-import { IPublicProfileFullResponse } from '@/common/types/types/IPublicProfile'
+import { IPublicProfileFullResponse } from '@/common/types/IPublicProfile'
 import { BusinessHours } from '../business-hours/business-hours'
 import { SocialLinks } from '../social-links/social-links'
 import { CustomLinks } from '../custom-links/custom-links'

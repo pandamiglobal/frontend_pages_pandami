@@ -1,4 +1,4 @@
-import { IPost } from "@/common/types/@post";
+import { IPost } from "@/common/types/IBlogArticlePost";
 import api from "@/common/config/api";
 
 export async function getPostBySlug(slug: string) {

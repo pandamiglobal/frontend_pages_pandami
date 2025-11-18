@@ -1,6 +1,6 @@
 'use client'
 
-import { ICustomLink } from '@/common/types/types/IPublicProfile'
+import { ICustomLink } from '@/common/types/IPublicProfile'
 import { ExternalLink } from 'lucide-react'
 
 interface CustomLinksProps {

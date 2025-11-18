@@ -7,7 +7,7 @@ import { Input } from "@/app/_components/atoms/ui/input";
 import { PrimaryButton } from "@/app/_components/molecules/primary-button";
 import { useState } from "react";
 import useCreateLead from "@/common/hooks/use-create-lead";
-import { EOriginLead } from "@/common/types/@lead";
+import { EOriginLead } from "@/common/types/ILead";
 
 // Função para formatar telefone brasileiro
 const formatPhoneNumber = (value: string): string => {

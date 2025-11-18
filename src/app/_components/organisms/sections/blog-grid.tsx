@@ -1,5 +1,5 @@
 import { getPosts } from "@/server/services/posts/get-posts";
-import { IPagination, IPost } from "@/common/types/@post";
+import { IPagination, IPost } from "@/common/types/IBlogArticlePost";
 import ClientPagination from "../../molecules/client-pagination";
 import BlogCard from "../../molecules/blog-card";
 import { Container } from "../../atoms/ui/container";

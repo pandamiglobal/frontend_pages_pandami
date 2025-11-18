@@ -31,7 +31,7 @@ export async function generateMetadata({
 		const post = await getMetadataPostBySlug(postSlug);
 
 		// Construct the current URL
-		const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://pppi.com.br";
+		const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pppi.com.br";
 		const slugPath = Array.isArray(slugParam) ? slugParam.join("/") : slugParam;
 		const currentPath = `/blog/${slugPath}`;
 		const fullUrl = `${baseUrl}${currentPath}`;

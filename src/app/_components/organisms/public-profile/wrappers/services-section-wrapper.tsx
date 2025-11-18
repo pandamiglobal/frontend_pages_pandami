@@ -1,6 +1,6 @@
 'use client'
 
-import { IPublicProfileFullResponse } from '@/common/types/types/IPublicProfile'
+import { IPublicProfileFullResponse } from '@/common/types/IPublicProfile'
 import { ServicesList } from '../services-list/services-list'
 
 interface ServicesSectionWrapperProps {

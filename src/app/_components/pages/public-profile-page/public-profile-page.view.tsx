@@ -1,6 +1,6 @@
 'use client'
 
-import { IPublicProfileFullResponse } from '@/common/types/types/IPublicProfile'
+import { IPublicProfileFullResponse } from '@/common/types/IPublicProfile'
 import { usePublicProfileViewModel } from '@/common/hooks/use-public-profile'
 import { ProfileHeaderWrapper } from '../../organisms/public-profile/wrappers/profile-header-wrapper'
 import { ServicesSectionWrapper } from '../../organisms/public-profile/wrappers/services-section-wrapper'

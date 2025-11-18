@@ -1,7 +1,7 @@
 import { Button } from "@/app/_components/atoms/ui/button";
 import Link from "next/link";
 import { ReactNode } from "react";
-import { LegalPageConfig } from "@/common/types/legal-metadata";
+import { LegalPageConfig } from "@/common/types/ILegalMetadata";
 import { FileText, Shield } from "lucide-react";
 
 const getIcon = (iconName: string) => {

@@ -1,6 +1,6 @@
 'use client'
 
-import { IPublicProfileService } from '@/common/types/types/IPublicProfile'
+import { IPublicProfileService } from '@/common/types/IPublicProfile'
 import { Clock, DollarSign } from 'lucide-react'
 
 interface ServicesListProps {

@@ -1,4 +1,4 @@
-import { ICreateLead } from "@/common/types/@lead"
+import { ICreateLead } from "@/common/types/ILead"
 import { useState } from "react";
 import toast from "react-hot-toast";
 import createLeadAction from "@/server/actions/create-lead-action";

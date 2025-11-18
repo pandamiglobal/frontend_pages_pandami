@@ -1,4 +1,4 @@
-import { ICreateLead } from "@/common/types/@lead";
+import { ICreateLead } from "@/common/types/ILead";
 import api from "@/common/config/api";
 
 export async function createLead(lead: ICreateLead) {

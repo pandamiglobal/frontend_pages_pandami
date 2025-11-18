@@ -1,14 +1,12 @@
 'use client'
 
-import { IPublicProfileFullResponse } from '@/common/types/types/IPublicProfile'
+import { IPublicProfileFullResponse } from '@/common/types/IPublicProfile'
 import { MapPin, Phone, Briefcase } from 'lucide-react'
 import Image from 'next/image'
 
 interface ProfileHeaderProps {
   profile: IPublicProfileFullResponse
   formattedPhone: string
-  formattedAddress: string
-  isEditable: boolean
 }
 
 /**
@@ -16,10 +14,10 @@ interface ProfileHeaderProps {
  * Mapped from SaaS MySiteProfileHeader but with isEditable hardcoded to false
  * Displays profile image, name, bio, and basic info
  */
-export function ProfileHeader({ profile, formattedPhone, formattedAddress, isEditable }: ProfileHeaderProps) {
+export function ProfileHeader({ profile, formattedPhone }: ProfileHeaderProps) {
   // Construct profile image URL
   const profileImageUrl = profile.public_profile_image?.file_name
-    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${profile.public_profile_image.file_name}`
+    ? `${process.env.NEXT_SAAS_API_URL}/storage/${profile.public_profile_image.file_name}`
     : '/images/default-profile.png'
 
   return (

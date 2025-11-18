@@ -1,6 +1,6 @@
 'use client'
 
-import { IPublicProfilePaymentMethod, PaymentMethodType } from '@/common/types/types/IPublicProfile'
+import { IPublicProfilePaymentMethod, PaymentMethodType } from '@/common/types/IPublicProfile'
 import { Banknote, CreditCard, Smartphone, Building2, DollarSign } from 'lucide-react'
 
 interface PaymentMethodsProps {
