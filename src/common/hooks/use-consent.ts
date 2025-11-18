@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { CONSENT_STORAGE_KEY } from "@/common/constants";
-import { ConsentChoice } from "@/common/types/consent";
+import { ConsentChoice } from "@/common/types/IConsentCookies";
 
 interface ConsentState {
   choice: ConsentChoice | null;
@@ -51,7 +51,7 @@ export const useConsent = () => {
   }, []);
 
   const shouldShowModal = !state.isLoading && !state.hasResponded;
-
+  
   return {
     ...state,
     setConsent,

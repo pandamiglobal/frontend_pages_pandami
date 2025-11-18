@@ -1,13 +1,14 @@
-import { ICreateLead } from "@/common/types/@lead"
+import { ICreateLead } from "@/common/types/ILead"
 import { useState } from "react";
 import toast from "react-hot-toast";
-import createLeadAction from "../actions/create-lead-action";
+import createLeadAction from "@/server/actions/create-lead-action";
 
 // Add this import for modal state management
-import { useModal } from "@/components/ui/modal/use-modal";
+import { useModal } from "@/common/hooks/use-modal";
 
 export default function useCreateLead() {
     const [loading, setLoading] = useState(false);
+    
     // Add modal state management
     const { openModal } = useModal();
 

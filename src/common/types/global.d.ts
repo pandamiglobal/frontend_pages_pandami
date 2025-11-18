@@ -1,4 +1,4 @@
-import { WindowWithGtag } from "@/common/types/consent";
+import { WindowWithGtag } from "@/common/types/IConsentCookies";
 
 declare global {
   // Estende o tipo Window com as definições de WindowWithGtag
