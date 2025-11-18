@@ -144,6 +144,37 @@ export function PublicProfilePageView({
 							viewModel={viewModel}
 						/>
 					)}
+
+					{/* Branding Footer */}
+					<div className="pt-8 pb-4 flex flex-col items-center justify-center text-center space-y-4">
+						<div className="flex flex-col items-center gap-2">
+							<span className="text-sm text-neutral-500">feito com</span>
+							<Link href="/" className="hover:opacity-80 transition-opacity">
+								<Image
+									src="/logo.svg"
+									alt="Pandami"
+									width={120}
+									height={32}
+									className="h-8 w-auto text-neutral-900"
+								/>
+							</Link>
+						</div>
+
+						<div className="w-full max-w-sm space-y-4 pt-2">
+							<Link href="/" className="block w-full">
+								<PrimaryButton className="w-full justify-center bg-neutral-900 hover:bg-neutral-800 text-white h-12 text-base">
+									Descobrir cortes de cabelo agora
+								</PrimaryButton>
+							</Link>
+
+							<Link 
+								href="/ferramenta-que-aumenta-o-faturamento-dos-saloes"
+								className="block text-sm font-medium text-neutral-600 hover:text-neutral-900 underline underline-offset-4 transition-colors"
+							>
+								Torne-se um profissional Pandami
+							</Link>
+						</div>
+					</div>
 				</div>
 			</main>
 

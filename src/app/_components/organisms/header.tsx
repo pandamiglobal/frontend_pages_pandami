@@ -28,7 +28,11 @@ const navItems: INavItem[] = [
   },
 ]
 
-export function Header() {
+interface HeaderProps {
+  variant?: 'default' | 'logo-only' | 'hidden'
+}
+
+export function Header({ variant = 'default' }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -70,6 +74,36 @@ export function Header() {
   const handleDropdownToggle = (dropdown: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
+  }
+
+  if (variant === 'hidden') {
+    return null;
+  }
+
+  if (variant === 'logo-only') {
+    return (
+      <header
+        className={`w-screen border-b py-4 fixed top-0 left-0 right-0 z-50 ${
+          isScrolled
+            ? "bg-background/80 backdrop-blur-md"
+            : "bg-background/60 backdrop-blur-xs"
+        }`}
+      >
+        <Container>
+          <div className="flex items-center justify-center w-full">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo.svg"
+                alt="Pandami Logo"
+                width={160}
+                height={24}
+                className="h-6 lg:h-8 w-auto"
+              />
+            </Link>
+          </div>
+        </Container>
+      </header>
+    )
   }
 
   return (

@@ -83,22 +83,40 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
   const animateOutTransition = useCallback(() => {
     const timeline = gsap.timeline()
     
-    // Simplificado - sem animações que podem causar problemas
-    timeline.to({}, {
-      duration: 0.1
-    })
+    if (questionRef.current && optionsRef.current) {
+      timeline
+        .to([questionRef.current, optionsRef.current], {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          stagger: 0.1,
+          ease: "power2.in"
+        })
+    } else {
+      // Fallback if refs are missing
+      timeline.to({}, { duration: 0.1 })
+    }
     
     return timeline
   }, [])
 
-  const animateInTransition = useCallback((currentProgress: number) => {
-    // Simplificado - apenas animar progress bar
-    if (progressRef.current) {
-      gsap.to(progressRef.current, {
-        width: `${currentProgress}%`,
-        duration: 0.5,
-        ease: "power2.out"
-      })
+  const animateInTransition = useCallback(() => {
+    if (questionRef.current && optionsRef.current) {
+      gsap.fromTo(
+        [questionRef.current, optionsRef.current],
+        { 
+          opacity: 0, 
+          y: 20 
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: "power2.out",
+          delay: 0.1
+        }
+      )
     }
   }, [])
 
@@ -116,9 +134,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
         }
       }
     }
-    
-    animateOptionSelection(optionIndex)
-  }, [animateOptionSelection, currentQuestionData])
+  }, [currentQuestionData])
 
   const handleRadioChange = useCallback((value: string) => {
     const optionIndex = parseInt(value.replace('option-', ''))
@@ -176,7 +192,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
         try {
           if (isLastQuestion) {
             // Navigate to results page
-            router.push('/resultados')
+            router.push('/ferramenta-que-aumenta-o-faturamento-dos-saloes/resultado')
             onComplete(newAnswers)
             setIsAnimating(false)
           } else {
@@ -187,7 +203,8 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
           console.error('Error during navigation:', error)
           // Fallback navigation
           if (isLastQuestion) {
-            window.location.href = '/resultados'
+            window.location.href =
+							"/ferramenta-que-aumenta-o-faturamento-dos-saloes/resultado";
           } else {
             const nextStep = currentQuestion + 1
             window.location.href = `/ferramenta-que-aumenta-o-faturamento-dos-saloes?stepIndex=${nextStep}`
@@ -211,6 +228,9 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
     setIsAnimating(false)
     setShowConfirmation(false)
     
+    // Animar entrada dos novos elementos
+    animateInTransition()
+    
     // Animar apenas a progress bar
     if (progressRef.current) {
       gsap.to(progressRef.current, {
@@ -223,7 +243,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
     return () => {
       clearAllTimeouts()
     }
-  }, [currentQuestion, answers, currentQuestionData?.id, progress, clearAllTimeouts])
+  }, [currentQuestion, answers, currentQuestionData?.id, progress, clearAllTimeouts, animateInTransition])
 
   return {
     // State

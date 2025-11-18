@@ -9,7 +9,7 @@ export default function FaturamentoQuizPage() {
 	};
 
 	return (
-		<PageLayout>
+		<PageLayout headerVariant="logo-only" hideFooter={true}>
 			<QuizForm onComplete={handleQuizComplete} />
 		</PageLayout>
 	);

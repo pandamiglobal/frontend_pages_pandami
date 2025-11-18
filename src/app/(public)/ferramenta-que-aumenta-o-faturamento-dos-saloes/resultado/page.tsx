@@ -9,7 +9,7 @@ export default function ResultadoPage() {
   }
 
   return (
-   <PageLayout>
+   <PageLayout headerVariant="hidden" hideFooter={true}>
       <QuizResults 
         answers={{}} 
         onRestart={handleRestart} 

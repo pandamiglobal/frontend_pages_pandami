@@ -25,9 +25,9 @@ export function QuizResults({ answers }: QuizResultsProps) {
   const socialProofInView = useInView(socialProofRef, { once: true, amount: 0.5 })
 
   return (
-    <section className="relative bg-[#f7f7f7] min-h-screen flex flex-col">
+    <section className="relative bg-neutral-50 min-h-screen flex flex-col">
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-70"></div>
+      <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none"></div>
 
       <Container className="flex-1 flex flex-col justify-center">
         <div className="relative py-16 max-w-4xl mx-auto w-full">
@@ -37,52 +37,49 @@ export function QuizResults({ answers }: QuizResultsProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={cardInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="bg-white rounded-2xl shadow-lg p-8 md:p-12"
+            className="bg-white rounded-2xl border border-neutral-200 shadow-lg p-8 md:p-12"
           >
             {/* Badge Quiz Completo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={cardInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
-              className="flex justify-center mb-4"
+              className="flex justify-center mb-8"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-green-50 text-green-700 border border-green-100 rounded-full text-sm font-medium">
                 <CheckCircle2 className="h-4 w-4" />
-                <span>Quiz Completo</span>
+                <span>Análise Concluída</span>
               </div>
             </motion.div>
 
             {/* Icon and Title */}
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[hsl(var(--primary-gradient-from))] to-[hsl(var(--primary-gradient-to))] rounded-full mb-6">
-                <Search className="h-8 w-8 text-white" />
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-neutral-900 rounded-2xl mb-6 shadow-lg shadow-neutral-900/20">
+                <Search className="h-10 w-10 text-white" />
               </div>
               
-              <h1 className="font-semibold text-3xl md:text-4xl text-black leading-tight mb-4">
-                Seu salão tem um grande potencial de faturamento escondido.
+              <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl text-neutral-900 leading-tight mb-6 tracking-tight">
+                Seu salão tem um <span className="text-primary">potencial oculto</span> de faturamento.
               </h1>
             </div>
 
             {/* Main Result Text */}
-            <div className="mb-8">
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
-                Pelas suas respostas, existe um ponto em comum: seus clientes poderiam 
-                <span className="font-semibold text-primary"> confiar mais</span>, 
-                <span className="font-semibold text-primary"> indicar mais</span> e 
-                <span className="font-semibold text-primary"> aceitar cortes e serviços de maior valor</span> — 
-                se tivessem mais clareza antes do atendimento.
-              </p>
+            <div className="mb-12 max-w-3xl mx-auto text-center">
+              <div className="space-y-6 text-lg md:text-xl text-neutral-600 leading-relaxed">
+                <p>
+                  Pelas suas respostas, identificamos um padrão claro: seus clientes poderiam 
+                  <strong className="text-neutral-900"> confiar mais</strong>, 
+                  <strong className="text-neutral-900"> indicar mais</strong> e 
+                  <strong className="text-neutral-900"> aceitar serviços de maior valor</strong> — 
+                  se tivessem a clareza visual necessária antes do atendimento.
+                </p>
 
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
-                Hoje, muitos profissionais perdem faturamento não por falta de talento, 
-                mas por falta de <span className="font-semibold">previsibilidade</span>, 
-                <span className="font-semibold"> diferenciação</span> e 
-                <span className="font-semibold"> comunicação visual clara</span>.
-              </p>
-
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
-                E é exatamente isso que a tecnologia certa consegue resolver.
-              </p>
+                <p>
+                  Hoje, o faturamento é perdido não por falta de técnica, 
+                  mas pela ausência de <strong className="text-neutral-900">previsibilidade</strong> e 
+                  <strong className="text-neutral-900"> diferenciação</strong> na experiência do cliente.
+                </p>
+              </div>
             </div>
 
             {/* Prova Social */}
@@ -91,13 +88,12 @@ export function QuizResults({ answers }: QuizResultsProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={socialProofInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              className="mb-8 text-center"
+              className="mb-12 text-center bg-neutral-50 rounded-xl p-6 border border-neutral-100"
             >
-              <p className="text-gray-600 text-base md:text-lg">
-                <span className="font-semibold text-primary">
+              <p className="text-neutral-600 text-base md:text-lg">
+                Junte-se a <span className="font-bold text-neutral-900">
                   <AnimatedCounter value={250} duration={2} suffix="+ salões" />
-                </span>{" "}
-                já estão melhorando seu faturamento com a PandaMi
+                </span> que já estão transformando seus resultados com a PandaMi.
               </p>
             </motion.div>
 
@@ -107,75 +103,29 @@ export function QuizResults({ answers }: QuizResultsProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={benefitsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="grid md:grid-cols-2 gap-4 mb-10"
+              className="grid md:grid-cols-2 gap-6 mb-12"
             >
-              <motion.div
-                whileHover={{ scale: 1.02, y: -2 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Search className="h-5 w-5 text-primary" />
+              {[
+                { icon: Search, text: "Mostrar resultado ideal antes do corte" },
+                { icon: TrendingUp, text: "Aumentar a confiança do cliente" },
+                { icon: Users, text: "Reduzir retrabalho e dúvidas" },
+                { icon: DollarSign, text: "Aumentar ticket médio dos serviços" }
+              ].map((benefit, idx) => (
+                <motion.div
+                  key={idx}
+                  whileHover={{ y: -4 }}
+                  className="flex items-center p-5 bg-white border border-neutral-200 rounded-xl shadow-sm hover:shadow-md transition-all"
+                >
+                  <div className="flex-shrink-0 mr-4">
+                    <div className="w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center">
+                      <benefit.icon className="h-6 w-6 text-neutral-900" />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">
-                    Mostrar resultado ideal antes do corte
+                  <p className="font-semibold text-neutral-900 text-lg">
+                    {benefit.text}
                   </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.02, y: -2 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <TrendingUp className="h-5 w-5 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">
-                    Aumentar a confiança do cliente
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.02, y: -2 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Users className="h-5 w-5 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">
-                    Reduzir retrabalho
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.02, y: -2 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl cursor-default transition-shadow hover:shadow-md"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <DollarSign className="h-5 w-5 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-1">
-                    Aumentar ticket médio
-                  </p>
-                </div>
-              </motion.div>
+                </motion.div>
+              ))}
             </motion.div>
 
             {/* CTA Section */}
@@ -184,36 +134,33 @@ export function QuizResults({ answers }: QuizResultsProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-              className="text-center border-t border-gray-200 pt-8"
+              className="text-center pt-8 border-t border-neutral-100"
             >
-              <div className="mb-6">
-                <Link href="/" className="block">
+              <div className="max-w-2xl mx-auto">
+                <h3 className="text-2xl font-bold text-neutral-900 mb-6">
+                  Quer ver como resolver isso na prática?
+                </h3>
+                
+                <Link href="/ferramenta-que-aumenta-o-faturamento-dos-saloes" className="block w-full">
                   <motion.div
-                    animate={{
-                      scale: [1, 1.03, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    whileHover={{
-                      scale: 1.05,
-                    }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="w-full"
                   >
                     <PrimaryButton
                       icon={<ArrowRight className="h-5 w-5" />}
                       size="lg"
-                      className="px-8 py-4 text-lg w-full"
+                      className="w-full py-6 text-lg md:text-xl font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all"
                     >
-                      Quero ver a ferramenta que aumenta o faturamento dos salões
+                      Conhecer a ferramenta agora
                     </PrimaryButton>
                   </motion.div>
                 </Link>
+                
+                <p className="mt-4 text-sm text-neutral-500">
+                  Sem compromisso. Apenas veja o que é possível.
+                </p>
               </div>
-
-             
             </motion.div>
           </motion.div>
         </div>
