@@ -6,13 +6,15 @@ import {
 	UsePublicProfileViewModelReturn,
 } from "@/common/types/IPublicProfile";
 import { ProfileHeaderWrapper } from "../../organisms/public-profile/wrappers/profile-header-wrapper";
-import { ServicesSectionWrapper } from "../../organisms/public-profile/wrappers/services-section-wrapper";
-import { InformationSectionWrapper } from "../../organisms/public-profile/wrappers/information-section-wrapper";
 import { PrimaryButton } from "../../molecules/primary-button";
 import { Phone, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
+
+const ServicesSectionWrapper = dynamic(() => import("../../organisms/public-profile/wrappers/services-section-wrapper").then(mod => mod.ServicesSectionWrapper));
+const InformationSectionWrapper = dynamic(() => import("../../organisms/public-profile/wrappers/information-section-wrapper").then(mod => mod.InformationSectionWrapper));
 
 interface PublicProfilePageViewProps {
 	profile: IPublicProfileFullResponse | null;
@@ -114,6 +116,7 @@ export function PublicProfilePageView({
 								width={160}
 								height={24}
 								className="w-[120px] lg:w-[160px] h-auto"
+								style={{ height: 'auto' }}
 								priority
 							/>
 						</Link>
@@ -156,6 +159,7 @@ export function PublicProfilePageView({
 									width={120}
 									height={32}
 									className="h-8 w-auto text-neutral-900"
+									style={{ width: 'auto' }}
 								/>
 							</Link>
 						</div>

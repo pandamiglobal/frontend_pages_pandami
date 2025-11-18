@@ -37,7 +37,6 @@ export const VariantCard = memo(({
         width={106}
         height={106}
         className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover"
-        loading={index === 0 ? "eager" : "lazy"}
       />
       <div className="flex flex-col items-center gap-1.5">
         <div className="text-neutral-800 text-sm font-bold">

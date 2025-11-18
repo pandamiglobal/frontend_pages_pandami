@@ -98,6 +98,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
                 width={160}
                 height={24}
                 className="h-6 lg:h-8 w-auto"
+                style={{ width: 'auto' }}
               />
             </Link>
           </div>
@@ -131,6 +132,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
 									width={160}
 									height={24}
 									className="h-6 lg:h-8 w-auto"
+									style={{ width: 'auto' }}
 								/>
 							</Link>
 						</div>
@@ -233,6 +235,8 @@ export function Header({ variant = 'default' }: HeaderProps) {
 									width={160}
 									height={24}
 									className="h-6 lg:h-8 w-auto"
+									style={{ width: 'auto' }}
+									priority
 								/>
 							</Link>
 							<div className="flex items-center border rounded-md px-3 py-2 bg-card">

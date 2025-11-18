@@ -1,13 +1,16 @@
 import { HeroSection } from "@/app/_components/organisms/sections/hero-section";
 import { WhyVisagismSection } from "@/app/_components/organisms/sections/why-visagism-section";
-import { AboutVisagismSection } from "@/app/_components/organisms/sections/about-visagism-section";
-import { SocialProofSection } from "@/app/_components/organisms/sections/social-proof-section";
-import FAQSection from "@/app/_components/organisms/sections/faq-section";
-import CarouselSection from "@/app/_components/organisms/sections/carousel-section";
-import { CtaSection } from "@/app/_components/organisms/sections/cta-section";
-import { BenefitsSection } from "@/app/_components/organisms/sections/benefits-section";
-import { PricingSection } from "@/app/_components/organisms/sections/pricing-section";
-import { BarberTestimonialsSection } from "@/app/_components/organisms/sections/barber-testimonials-section";
+import dynamic from "next/dynamic";
+
+const AboutVisagismSection = dynamic(() => import("@/app/_components/organisms/sections/about-visagism-section").then(mod => mod.AboutVisagismSection));
+const SocialProofSection = dynamic(() => import("@/app/_components/organisms/sections/social-proof-section").then(mod => mod.SocialProofSection));
+const FAQSection = dynamic(() => import("@/app/_components/organisms/sections/faq-section"));
+const CarouselSection = dynamic(() => import("@/app/_components/organisms/sections/carousel-section"));
+const CtaSection = dynamic(() => import("@/app/_components/organisms/sections/cta-section").then(mod => mod.CtaSection));
+const BenefitsSection = dynamic(() => import("@/app/_components/organisms/sections/benefits-section").then(mod => mod.BenefitsSection));
+const PricingSection = dynamic(() => import("@/app/_components/organisms/sections/pricing-section").then(mod => mod.PricingSection));
+const BarberTestimonialsSection = dynamic(() => import("@/app/_components/organisms/sections/barber-testimonials-section").then(mod => mod.BarberTestimonialsSection));
+
 import { 
 	FAQJsonLd, 
 	OrganizationJsonLd, 

@@ -187,7 +187,6 @@ export function AboutVisagismComparisonSlider({
 					if (!hasSeenAffordance) setHasSeenAffordance(true);
 				}}
 				onTouchStart={(e) => {
-					e.preventDefault();
 					isDraggingRef.current = true;
 					if (!hasSeenAffordance) setHasSeenAffordance(true);
 				}}
