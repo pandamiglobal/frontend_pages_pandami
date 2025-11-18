@@ -43,7 +43,7 @@ export function PublicProfilePageView({
 				{/* Call Button */}
 				{profile.phone && (
 					<PrimaryButton
-						href={`tel:${profile.phone.replace(/\D/g, "")}`}
+						href={`tel:${profile.phone}`}
 						variant="custom"
 						className={cn(
 							"h-12 px-4 md:px-6 bg-neutral-800 hover:bg-neutral-700 text-white rounded-xl flex items-center gap-2 transition-colors",

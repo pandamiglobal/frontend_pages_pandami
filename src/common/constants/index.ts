@@ -15,7 +15,7 @@ export const SOCIAL_LINKS = {
 	instagram: "https://www.instagram.com/pandamibrasil",
 	tiktok: "https://www.tiktok.com/@pandamibrasil",
 	linkedin: "https://www.linkedin.com/company/pandami",
-	whatsapp: "https://wa.me/5548984495927?text=Oi! Vim pelo site de vocês e quero conversar melhor a solução da PandaMi",
+	whatsapp: "https://wa.me/5548984495927?text=Oi! Vim pelo site de vocês e quero entender mais sobre as soluções da PandaMi",
 } as const;
 
 // FAQ data
