@@ -1,15 +1,26 @@
 import { cn } from "@/lib/utils"
-import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from "react"
+import { type ButtonHTMLAttributes, forwardRef, type ReactNode, type AnchorHTMLAttributes } from "react"
+import Link from "next/link"
 
-export interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type BaseProps = {
   variant?: "default" | "outline" | "outline-solid" | "white"
   size?: "default" | "sm" | "lg"
   icon?: ReactNode
   iconPosition?: "left" | "right"
 }
 
+type ButtonProps = BaseProps & ButtonHTMLAttributes<HTMLButtonElement> & {
+  href?: never
+}
+
+type LinkProps = BaseProps & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
+  href: string
+}
+
+export type PrimaryButtonProps = ButtonProps | LinkProps
+
 // Constantes para melhor manutenibilidade
-const BASE_CLASSES = "inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-full in-[#container]:rounded-xl"
+const BASE_CLASSES = "inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-xl"
 
 const VARIANT_CLASSES = {
   default: "bg-linear-to-r from-[hsl(var(--primary-gradient-from))] to-[hsl(var(--primary-gradient-to))] text-primary-foreground hover:from-[hsl(var(--primary-gradient-hover-from))] hover:to-[hsl(var(--primary-gradient-hover-to))]",
@@ -25,7 +36,7 @@ const SIZE_CLASSES = {
   lg: "h-11 px-8 py-4 text-base"
 } as const
 
-const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryButtonProps>(
+const PrimaryButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, PrimaryButtonProps>(
   ({ 
     className, 
     variant = "default", 
@@ -41,21 +52,45 @@ const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryButtonProps>(
       </span>
     )
 
-    return (
-      <button
-        ref={ref}
-        className={cn(
-          BASE_CLASSES,
-          VARIANT_CLASSES[variant],
-          SIZE_CLASSES[size],
-          className,
-          "cursor-pointer" // Adicionando a classe cursor-pointer aqui
-        )}
-        {...props}
-      >
+    const baseClassName = cn(
+      BASE_CLASSES,
+      VARIANT_CLASSES[variant],
+      SIZE_CLASSES[size],
+      className,
+      "cursor-pointer"
+    )
+
+    const content = (
+      <>
         {iconPosition === "left" && iconElement}
         {children}
         {iconPosition === "right" && iconElement}
+      </>
+    )
+
+    // Se tem href, renderiza como Link
+    if ('href' in props && props.href) {
+      const { href, ...linkProps } = props
+      return (
+        <Link
+          href={href}
+          ref={ref as React.Ref<HTMLAnchorElement>}
+          className={baseClassName}
+          {...linkProps}
+        >
+          {content}
+        </Link>
+      )
+    }
+
+    // Senão, renderiza como button
+    return (
+      <button
+        ref={ref as React.Ref<HTMLButtonElement>}
+        className={baseClassName}
+        {...props as ButtonHTMLAttributes<HTMLButtonElement>}
+      >
+        {content}
       </button>
     )
   }

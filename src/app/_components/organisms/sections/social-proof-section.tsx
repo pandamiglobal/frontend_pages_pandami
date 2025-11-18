@@ -27,7 +27,6 @@ interface Testimonial {
 	avatar: string; // pequeno círculo
 }
 
-// Imagens reais de antes/depois em /public/lp/images/social-proof
 const testimonials: Testimonial[] = [
 	{
 		id: "patricia",

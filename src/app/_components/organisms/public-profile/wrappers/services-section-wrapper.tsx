@@ -2,6 +2,7 @@
 
 import { IPublicProfileFullResponse } from '@/common/types/IPublicProfile'
 import { ServicesList } from '../services-list/services-list'
+import { SectionCard } from '../section-card/section-card'
 
 interface ServicesSectionWrapperProps {
   profile: IPublicProfileFullResponse
@@ -18,9 +19,8 @@ export function ServicesSectionWrapper({ profile, viewModel }: ServicesSectionWr
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Serviços</h2>
+    <SectionCard title="Serviços">
       <ServicesList services={profile.services} />
-    </div>
+    </SectionCard>
   )
 }

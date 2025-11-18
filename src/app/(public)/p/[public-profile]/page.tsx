@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { GetPublicProfileBySlugAction } from '@/server/actions/get-public-profile.action'
-import { PublicProfilePageView } from '@/app/_components/pages/public-profile-page/public-profile-page.view'
+import { PublicProfilePage } from '@/app/_components/pages/public-profile-page/public-profile-page'
 
 interface PublicProfilePageProps {
   params: Promise<{
@@ -12,7 +12,7 @@ interface PublicProfilePageProps {
  * Server component for public profile page
  * Resolves slug, calls server action, and passes data to client view component
  */
-export default async function PublicProfilePage({ params }: PublicProfilePageProps) {
+export default async function PublicProfilePageRoute({ params }: PublicProfilePageProps) {
   const { 'public-profile': slug } = await params
 
   try {
@@ -30,7 +30,7 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
     const profileData = await GetPublicProfileBySlugAction(slug)
 
     // Pass data to client component for interactive features
-    return <PublicProfilePageView initialData={profileData} slug={slug} />
+    return <PublicProfilePage initialData={profileData} slug={slug} />
   } catch (error: any) {
     // Handle specific error cases
     if (error.message.includes('PROFILE_NOT_FOUND') || 
@@ -40,7 +40,7 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
 
     // For other errors, let the client component handle them
     // This allows for retry functionality and better UX
-    return <PublicProfilePageView initialData={null} slug={slug} error={error.message} />
+    return <PublicProfilePage initialData={null} slug={slug} error={error.message} />
   }
 }
 

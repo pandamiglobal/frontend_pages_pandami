@@ -1,7 +1,7 @@
 'use client'
 
-import { Instagram, Linkedin, MessageCircle } from 'lucide-react'
-import { ExternalLink } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface SocialLinksProps {
   instagram?: string
@@ -10,59 +10,30 @@ interface SocialLinksProps {
   linkedin?: string
 }
 
+type SocialPlatform = 'instagram' | 'whatsapp' | 'tiktok' | 'linkedin'
+
 /**
  * Social links component for public view
- * Displays social media links with platform icons and safe external links
- * No edit/delete buttons - read-only display
+ * Displays social media links with branded SVG icons
+ * Following project pattern with simple-icons style
  */
 export function SocialLinks({ instagram, whatsapp, tiktok, linkedin }: SocialLinksProps) {
-  const links = [
-    {
-      name: 'Instagram',
-      url: instagram,
-      icon: Instagram,
-      color: 'text-pink-600',
-      bgColor: 'bg-pink-50 hover:bg-pink-100',
-    },
-    {
-      name: 'WhatsApp',
-      url: whatsapp,
-      icon: MessageCircle,
-      color: 'text-green-600',
-      bgColor: 'bg-green-50 hover:bg-green-100',
-    },
-    {
-      name: 'TikTok',
-      url: tiktok,
-      icon: ExternalLink,
-      color: 'text-black',
-      bgColor: 'bg-gray-50 hover:bg-gray-100',
-    },
-    {
-      name: 'LinkedIn',
-      url: linkedin,
-      icon: Linkedin,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50 hover:bg-blue-100',
-    },
-  ].filter(link => link.url) // Only show links that exist
-
-  if (links.length === 0) {
-    return (
-      <div className="text-center py-4 text-gray-500">
-        <p>Nenhuma rede social disponível.</p>
-      </div>
-    )
+  const getPlatformIcon = (platform: SocialPlatform): string => {
+    return `/svg/branded-social-media/social-media-${platform}.svg`
   }
 
-  // Validate and sanitize URL
+  const formatPlatformLabel = (platform: string): string => {
+    if (platform === 'linkedin') return 'LinkedIn'
+    if (platform === 'whatsapp') return 'WhatsApp'
+    if (platform === 'tiktok') return 'TikTok'
+    return platform.charAt(0).toUpperCase() + platform.slice(1)
+  }
+
   const sanitizeUrl = (url: string): string => {
     try {
-      // Ensure URL has protocol
       if (!url.startsWith('http://') && !url.startsWith('https://')) {
         return `https://${url}`
       }
-      // Validate URL format
       new URL(url)
       return url
     } catch {
@@ -70,25 +41,45 @@ export function SocialLinks({ instagram, whatsapp, tiktok, linkedin }: SocialLin
     }
   }
 
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-      {links.map((link) => {
-        const Icon = link.icon
-        const safeUrl = sanitizeUrl(link.url!)
+  const socialLinks = [
+    { platform: 'instagram' as SocialPlatform, url: instagram },
+    { platform: 'whatsapp' as SocialPlatform, url: whatsapp },
+    { platform: 'tiktok' as SocialPlatform, url: tiktok },
+    { platform: 'linkedin' as SocialPlatform, url: linkedin },
+  ].filter(link => link.url)
 
-        return (
-          <a
-            key={link.name}
-            href={safeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex flex-col items-center justify-center p-4 rounded-lg border border-gray-200 transition-colors ${link.bgColor}`}
-          >
-            <Icon className={`w-6 h-6 mb-2 ${link.color}`} />
-            <span className="text-sm font-medium text-gray-900">{link.name}</span>
-          </a>
-        )
-      })}
+  if (socialLinks.length === 0) {
+    return (
+      <p className="text-sm text-neutral-600">Nenhuma rede social adicionada.</p>
+    )
+  }
+
+  return (
+    <div className="flex flex-col gap-2">
+      {socialLinks.map(({ platform, url }) => (
+        <Link
+          key={platform}
+          href={sanitizeUrl(url!)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-between rounded border border-neutral-200 px-3 py-2 hover:bg-neutral-50 transition-colors"
+        >
+          <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center w-5 h-5">
+              <Image
+                src={getPlatformIcon(platform)}
+                alt={formatPlatformLabel(platform)}
+                width={20}
+                height={20}
+                className="w-5 h-5"
+              />
+            </div>
+            <span className="text-sm font-medium text-neutral-900">
+              {formatPlatformLabel(platform)}
+            </span>
+          </div>
+        </Link>
+      ))}
     </div>
   )
 }

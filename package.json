@@ -43,6 +43,7 @@
     "react-hot-toast": "^2.5.2",
     "react-input-mask": "^2.0.4",
     "react-markdown": "^10.1.0",
+    "react-toastify": "^11.0.5",
     "recharts": "^3.2.1",
     "sanitize-html": "^2.14.0",
     "simple-icons": "^14.11.0",

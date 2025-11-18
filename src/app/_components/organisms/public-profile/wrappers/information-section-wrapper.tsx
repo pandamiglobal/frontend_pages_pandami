@@ -5,7 +5,9 @@ import { BusinessHours } from '../business-hours/business-hours'
 import { SocialLinks } from '../social-links/social-links'
 import { CustomLinks } from '../custom-links/custom-links'
 import { PaymentMethods } from '../payment-methods/payment-methods'
-import { MapPin, Phone } from 'lucide-react'
+import { SectionCard } from '../section-card/section-card'
+import { MapPin, Phone, Home, Building2, Map, Hash } from 'lucide-react'
+import Link from 'next/link'
 
 interface InformationSectionWrapperProps {
   profile: IPublicProfileFullResponse
@@ -18,7 +20,8 @@ interface InformationSectionWrapperProps {
  * All in read-only mode (no edit buttons)
  */
 export function InformationSectionWrapper({ profile, viewModel }: InformationSectionWrapperProps) {
-  const hasContactInfo = profile.show_phone || viewModel.hasAddress
+  const hasAddress = viewModel.hasAddress
+  const hasPhone = profile.show_phone && profile.phone
   const hasBusinessHours = viewModel.hasBusinessHours
   const hasSocialLinks = viewModel.hasSocialLinks
   const hasCustomLinks = viewModel.hasCustomLinks && profile.show_links
@@ -26,62 +29,92 @@ export function InformationSectionWrapper({ profile, viewModel }: InformationSec
 
   return (
     <div className="space-y-6">
-      {/* Contact Information */}
-      {hasContactInfo && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Contato</h2>
+      {/* Address Section */}
+      {hasAddress && (
+        <SectionCard title="Endereço">
           <div className="space-y-3">
-            {profile.show_phone && profile.phone && (
-              <div className="flex items-center gap-3 text-gray-700">
-                <Phone className="w-5 h-5 text-gray-500" />
-                <span>{viewModel.formattedPhone}</span>
+            {/* Street and Number */}
+            {(profile.street || profile.address_number) && (
+              <div className="flex items-start gap-3">
+                <Home className="w-4 h-4 text-neutral-500 mt-0.5 flex-shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-neutral-900">
+                    {[profile.street, profile.address_number].filter(Boolean).join(', ')}
+                  </p>
+                </div>
               </div>
             )}
-            {viewModel.hasAddress && (
-              <div className="flex items-start gap-3 text-gray-700">
-                <MapPin className="w-5 h-5 text-gray-500 mt-0.5" />
-                <span>{viewModel.formattedAddress}</span>
+
+            {/* City and State */}
+            {(profile.city || profile.state) && (
+              <div className="flex items-start gap-3">
+                <Map className="w-4 h-4 text-neutral-500 mt-0.5 flex-shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm text-neutral-600">
+                    {[profile.city, profile.state].filter(Boolean).join(', ')}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Postal Code */}
+            {profile.postal_code && (
+              <div className="flex items-start gap-3">
+                <Hash className="w-4 h-4 text-neutral-500 mt-0.5 flex-shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm text-neutral-600">CEP: {profile.postal_code}</p>
+                </div>
               </div>
             )}
           </div>
-        </div>
+        </SectionCard>
+      )}
+
+      {/* Phone Section */}
+      {hasPhone && (
+        <SectionCard title="Telefone">
+          <div className="text-sm text-neutral-800">
+            <Link 
+              href={`tel:${profile.phone.replace(/\D/g, '')}`} 
+              className="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              {viewModel.formattedPhone}
+            </Link>
+          </div>
+        </SectionCard>
       )}
 
       {/* Business Hours */}
       {hasBusinessHours && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Horário de Funcionamento</h2>
-          <BusinessHours hours={profile.opening_hours} />
-        </div>
+        <SectionCard title="Horários de funcionamento">
+          <BusinessHours hours={viewModel.businessHoursDisplay} />
+        </SectionCard>
       )}
 
       {/* Social Media Links */}
       {hasSocialLinks && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Redes Sociais</h2>
+        <SectionCard title="Redes Sociais">
           <SocialLinks
             instagram={profile.instagram_link}
             whatsapp={profile.whatsapp_link}
             tiktok={profile.tiktok_link}
             linkedin={profile.linkedin_link}
           />
-        </div>
+        </SectionCard>
       )}
 
       {/* Custom Links */}
       {hasCustomLinks && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Links</h2>
+        <SectionCard title="Links">
           <CustomLinks links={profile.custom_links} />
-        </div>
+        </SectionCard>
       )}
 
       {/* Payment Methods */}
       {hasPaymentMethods && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Formas de Pagamento</h2>
+        <SectionCard title="Formas de Pagamento">
           <PaymentMethods methods={profile.payment_methods} />
-        </div>
+        </SectionCard>
       )}
     </div>
   )

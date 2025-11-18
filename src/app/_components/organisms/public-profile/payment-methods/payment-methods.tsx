@@ -1,79 +1,78 @@
 'use client'
 
-import { IPublicProfilePaymentMethod, PaymentMethodType } from '@/common/types/IPublicProfile'
-import { Banknote, CreditCard, Smartphone, Building2, DollarSign } from 'lucide-react'
+import { IPublicProfilePaymentMethod } from '@/common/types/IPublicProfile'
+import { transformPaymentMethods, getPaymentMethodIcon } from '@/lib/utils/public-profile-helpers'
+import Image from 'next/image'
+import { Banknote, CreditCard, Building2 } from 'lucide-react'
 
 interface PaymentMethodsProps {
   methods: IPublicProfilePaymentMethod[]
 }
 
 /**
- * Payment methods component for public view
- * Reuses SaaS PaymentMethodsList layout but read-only
- * Displays accepted payment methods with icons
+ * Render payment method icon based on SSOT configuration
  */
-export function PaymentMethods({ methods }: PaymentMethodsProps) {
-  // Filter only active payment methods
-  const activeMethods = methods.filter(method => method.active)
+function PaymentIcon({ iconType }: { iconType: string }) {
+  const iconConfig = getPaymentMethodIcon(iconType)
+  
+  if (!iconConfig) return null
 
-  if (activeMethods.length === 0) {
+  if (iconConfig.type === 'svg') {
     return (
-      <div className="text-center py-4 text-gray-500">
-        <p>Nenhuma forma de pagamento disponível.</p>
-      </div>
+      <Image
+        src={iconConfig.src}
+        alt={iconConfig.alt}
+        width={16}
+        height={16}
+        className="size-4"
+      />
     )
   }
 
-  const paymentMethodConfig: Record<PaymentMethodType, { name: string; icon: any; color: string }> = {
-    [PaymentMethodType.CASH]: {
-      name: 'Dinheiro',
-      icon: Banknote,
-      color: 'text-green-600',
-    },
-    [PaymentMethodType.CREDIT_CARD]: {
-      name: 'Cartão de Crédito',
-      icon: CreditCard,
-      color: 'text-blue-600',
-    },
-    [PaymentMethodType.DEBIT_CARD]: {
-      name: 'Cartão de Débito',
-      icon: CreditCard,
-      color: 'text-purple-600',
-    },
-    [PaymentMethodType.PIX]: {
-      name: 'PIX',
-      icon: Smartphone,
-      color: 'text-teal-600',
-    },
-    [PaymentMethodType.BANK_TRANSFER]: {
-      name: 'Transferência Bancária',
-      icon: Building2,
-      color: 'text-orange-600',
-    },
+  // Render Lucide icon with default green color
+  const iconProps = { className: 'size-4 text-green-600' }
+  
+  switch (iconConfig.name) {
+    case 'Banknote':
+      return <Banknote {...iconProps} />
+    case 'CreditCard':
+      return <CreditCard {...iconProps} />
+    case 'Building2':
+      return <Building2 {...iconProps} />
+    default:
+      return null
+  }
+}
+
+/**
+ * Payment methods component for public view
+ * Uses my-site-helpers as SSOT for all payment method data
+ */
+export function PaymentMethods({ methods }: PaymentMethodsProps) {
+  // Transform using official helper (SSOT)
+  const transformedMethods = transformPaymentMethods({ 
+    payment_methods: methods.filter(m => m.active) 
+  } as any)
+
+  if (transformedMethods.length === 0) {
+    return (
+      <p className="text-sm text-neutral-600">Nenhuma forma de pagamento configurada.</p>
+    )
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-      {activeMethods.map((method) => {
-        const config = paymentMethodConfig[method.method] || {
-          name: method.method,
-          icon: DollarSign,
-          color: 'text-gray-600',
-        }
-        const Icon = config.icon
-
-        return (
-          <div
-            key={method.id}
-            className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg bg-gray-50"
-          >
-            <Icon className={`w-6 h-6 mb-2 ${config.color}`} />
-            <span className="text-sm font-medium text-gray-900 text-center">
-              {config.name}
-            </span>
-          </div>
-        )
-      })}
+    <div className="flex flex-wrap gap-2">
+      {transformedMethods.map((method) => (
+        <div
+          key={method.id}
+          className="inline-flex items-center gap-2 rounded border border-neutral-200 px-3 py-1.5 bg-neutral-50"
+        >
+          <PaymentIcon iconType={method.icon} />
+          <span className="text-sm font-medium text-neutral-900">
+            {method.label}
+          </span>
+        </div>
+      ))}
     </div>
   )
 }
