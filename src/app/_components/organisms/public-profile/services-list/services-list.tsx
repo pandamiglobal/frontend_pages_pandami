@@ -15,7 +15,7 @@ interface ServicesListProps {
 export function ServicesList({ services }: ServicesListProps) {
   if (!services || services.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="text-center py-8 text-neutral-500">
         <p>Esse perfil não possui serviços cadastrados.</p>
       </div>
     )

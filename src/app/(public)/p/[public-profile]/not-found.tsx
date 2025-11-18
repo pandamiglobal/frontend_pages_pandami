@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { Search } from 'lucide-react'
+import { PrimaryButton } from '@/app/_components/molecules/primary-button'
 
 /**
  * Custom not-found page for public profiles
@@ -6,45 +8,28 @@ import Link from 'next/link'
  */
 export default function PublicProfileNotFound() {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="text-center space-y-6 max-w-md">
-        {/* Icon */}
-        <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center">
-          <svg 
-            className="w-8 h-8 text-muted-foreground" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" 
-            />
-          </svg>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-50 px-4">
+      <div className="max-w-md w-full bg-white border border-neutral-200 rounded-2xl p-8 text-center shadow-sm">
+        <div className="mx-auto w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center mb-4">
+          <Search className="w-6 h-6 text-neutral-600" />
         </div>
+        
+        <h2 className="text-xl font-bold text-neutral-900 mb-2">
+          Perfil não encontrado
+        </h2>
+        
+        <p className="text-neutral-600 mb-6">
+          O perfil que você está procurando não existe ou foi removido. Verifique o endereço digitado.
+        </p>
 
-        {/* Message */}
-        <div className="space-y-2">
-          <h1 className="text-2xl font-bold text-foreground">Perfil não encontrado</h1>
-          <p className="text-muted-foreground">
-            O perfil que você está procurando não existe ou foi removido.
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Verifique se o URL está correto ou entre em contato com o profissional.
-          </p>
-        </div>
-
-        {/* Actions */}
         <div className="space-y-3">
-          <Link 
-            href="/"
-            className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors font-medium"
-          >
-            Voltar para a página inicial
+          <Link href="/" className="w-full block">
+            <PrimaryButton className="w-full justify-center">
+              Voltar para o início
+            </PrimaryButton>
           </Link>
-          <p className="text-xs text-muted-foreground">
+          
+          <p className="text-xs text-neutral-500">
             Ou procure por outros profissionais na Pandami
           </p>
         </div>

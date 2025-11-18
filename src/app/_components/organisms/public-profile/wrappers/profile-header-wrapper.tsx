@@ -6,6 +6,7 @@ import { ProfileHeader } from '../profile-header/profile-header'
 interface ProfileHeaderWrapperProps {
   profile: IPublicProfileFullResponse
   viewModel: UsePublicProfileViewModelReturn
+  actions?: React.ReactNode
 }
 
 /**
@@ -13,7 +14,7 @@ interface ProfileHeaderWrapperProps {
  * Adapted from SaaS MySiteProfileHeader but read-only (no edit handlers)
  * Uses googleMapsUrl from viewModel (computed by usePublicProfileViewModel hook)
  */
-export function ProfileHeaderWrapper({ profile, viewModel }: ProfileHeaderWrapperProps) {
+export function ProfileHeaderWrapper({ profile, viewModel, actions }: ProfileHeaderWrapperProps) {
   return (
     <ProfileHeader
       profile={profile}
@@ -22,6 +23,7 @@ export function ProfileHeaderWrapper({ profile, viewModel }: ProfileHeaderWrappe
       openHours={viewModel.openHours}
       openHoursDetails={viewModel.openHoursDetails}
       businessStatus={viewModel.businessStatus}
+      actions={actions}
     />
   )
 }

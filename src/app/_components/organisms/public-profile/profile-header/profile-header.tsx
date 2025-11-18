@@ -1,9 +1,10 @@
 'use client'
 
 import { IPublicProfileFullResponse } from '@/common/types/IPublicProfile'
-import { MapPin, ExternalLink, Clock } from 'lucide-react'
+import { MapPin, ExternalLink, Clock, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useProfileImage } from '@/common/hooks/use-profile-image'
 
 interface ProfileHeaderProps {
   profile: IPublicProfileFullResponse
@@ -12,6 +13,7 @@ interface ProfileHeaderProps {
   openHours?: string
   openHoursDetails?: string
   businessStatus?: 'open' | 'closed' | 'no-hours'
+  actions?: React.ReactNode
 }
 
 /**
@@ -25,13 +27,16 @@ export function ProfileHeader({
   locationUrl,
   openHours = 'Horários não informados',
   openHoursDetails,
-  businessStatus = 'no-hours'
+  businessStatus = 'no-hours',
+  actions
 }: ProfileHeaderProps) {
   // Check if profile has image
   const hasProfileImage = Boolean(profile.public_profile_image?.file_name)
-  const profileImageUrl = hasProfileImage
-    ? `${process.env.NEXT_PUBLIC_SAAS_API_URL}/storage/${profile.public_profile_image.file_name}`
-    : null
+  
+  // Use hook to fetch image data
+  const { imageUrl: profileImageUrl, isLoading: isImageLoading } = useProfileImage(
+    hasProfileImage ? profile.public_profile_image.file_name : undefined
+  )
 
   // Get first letter of name for fallback
   const firstLetter = profile.name.charAt(0).toUpperCase()
@@ -45,7 +50,11 @@ export function ProfileHeader({
 				{/* Avatar */}
 				<div className="relative mb-4">
 					<div className="relative w-24 h-24 rounded-full border-4 border-neutral-800 shadow-lg overflow-hidden bg-neutral-800">
-						{hasProfileImage && profileImageUrl ? (
+						{isImageLoading ? (
+              <div className="w-full h-full flex items-center justify-center bg-neutral-800">
+                <Loader2 className="w-8 h-8 text-neutral-500 animate-spin" />
+              </div>
+            ) : hasProfileImage && profileImageUrl ? (
 							<Image
 								src={profileImageUrl}
 								alt={profile.name}
@@ -94,7 +103,7 @@ export function ProfileHeader({
 										? "text-green-400"
 										: businessStatus === "closed"
 										? "text-yellow-400"
-										: "text-red-400"
+										: "text-neutral-400"
 								}`}
 							>
 								{openHours}
@@ -105,7 +114,7 @@ export function ProfileHeader({
 										? "bg-green-500"
 										: businessStatus === "closed"
 										? "bg-yellow-500"
-										: "bg-red-500"
+										: "bg-neutral-500"
 								}`}
 								aria-label={
 									businessStatus === "open"
@@ -139,7 +148,12 @@ export function ProfileHeader({
 					</Link>
 				)}
 
-	
+				{/* Desktop Actions */}
+				{actions && (
+					<div className="mt-6 w-full max-w-md hidden md:block">
+						{actions}
+					</div>
+				)}
 			</div>
 		</header>
 	);

@@ -18,7 +18,7 @@ export function CustomLinks({ links }: CustomLinksProps) {
 
   if (activeLinks.length === 0) {
     return (
-      <div className="text-center py-4 text-gray-500">
+      <div className="text-center py-4 text-neutral-500">
         <p>Nenhum link disponível.</p>
       </div>
     )
@@ -61,15 +61,15 @@ export function CustomLinks({ links }: CustomLinksProps) {
             href={safeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 hover:shadow-md transition-all group"
+            className="flex items-center justify-between p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-all group"
           >
             <div className="flex-1 min-w-0">
-              <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+              <h3 className="font-medium text-neutral-900 group-hover:text-primary transition-colors">
                 {link.name}
               </h3>
-              <p className="text-sm text-gray-500 truncate">{domain}</p>
+              <p className="text-sm text-neutral-500 truncate">{domain}</p>
             </div>
-            <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors flex-shrink-0 ml-3" />
+            <ExternalLink className="w-5 h-5 text-neutral-400 group-hover:text-primary transition-colors flex-shrink-0 ml-3" />
           </a>
         )
       })}

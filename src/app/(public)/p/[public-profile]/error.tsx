@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { AlertCircle } from 'lucide-react'
+import { PrimaryButton } from '@/app/_components/molecules/primary-button'
 
 /**
  * Error boundary for public profile page
@@ -33,56 +35,36 @@ export default function PublicProfileError({
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="text-center space-y-6 max-w-md">
-        {/* Error Icon */}
-        <div className="mx-auto w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center">
-          <svg 
-            className="w-8 h-8 text-destructive" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.502 0L4.268 18.5c-.77.833.192 2.5 1.732 2.5z" 
-            />
-          </svg>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-50 px-4">
+      <div className="max-w-md w-full bg-white border border-neutral-200 rounded-2xl p-8 text-center shadow-sm">
+        <div className="mx-auto w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
+          <AlertCircle className="w-6 h-6 text-red-600" />
         </div>
+        
+        <h2 className="text-xl font-bold text-neutral-900 mb-2">
+          Erro ao carregar perfil
+        </h2>
+        
+        <p className="text-neutral-600 mb-6">
+          {error.message || 'Ocorreu um erro inesperado. Tente novamente.'}
+        </p>
 
-        {/* Error Message */}
-        <div className="space-y-2">
-          <h1 className="text-2xl font-bold text-foreground">Erro ao carregar perfil</h1>
-          <p className="text-muted-foreground">
-            Não foi possível carregar o perfil no momento.
-          </p>
-          <p className="text-sm text-muted-foreground">
-            {error.message || 'Ocorreu um erro inesperado. Tente novamente.'}
-          </p>
-        </div>
-
-        {/* Actions */}
         <div className="space-y-3">
-          <button
+          <PrimaryButton 
             onClick={handleRetry}
-            className="w-full inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors font-medium"
+            className="w-full justify-center"
           >
             Tentar novamente
-          </button>
-          <button
+          </PrimaryButton>
+          
+          <PrimaryButton 
             onClick={handleGoHome}
-            className="w-full inline-flex items-center justify-center px-6 py-3 bg-muted text-muted-foreground rounded-md hover:bg-muted/80 transition-colors font-medium"
+            variant="outline" 
+            className="w-full justify-center"
           >
-            Voltar para a página inicial
-          </button>
+            Voltar para o início
+          </PrimaryButton>
         </div>
-
-        {/* Help Text */}
-        <p className="text-xs text-muted-foreground">
-          Se o problema persistir, entre em contato com nosso suporte.
-        </p>
       </div>
     </div>
   )

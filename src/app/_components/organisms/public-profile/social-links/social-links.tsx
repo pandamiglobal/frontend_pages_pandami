@@ -53,7 +53,8 @@ export function SocialLinks({ instagram, whatsapp, tiktok, linkedin }: SocialLin
 
       // Casos específicos por plataforma
       if (platform === "instagram" || platform === "tiktok") {
-        const handle = path.replace(/^\//, "")
+        // Remove leading slash and optional @ if user included it in URL path
+        const handle = path.replace(/^[\/@]+/, "")
         return handle ? `@${handle}` : null
       }
 

@@ -564,3 +564,15 @@ export function generateGoogleMapsUrl(address?: {
 	const query = encodeURIComponent(parts.join(", "));
 	return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
+
+/**
+ * Validates if the profile slug matches the API requirements
+ * @param slug - The slug to validate
+ * @returns true if valid, false otherwise
+ */
+export function isValidSlug(slug: unknown): boolean {
+	if (!slug || typeof slug !== 'string') return false;
+	if (slug.length < 3 || slug.length > 50) return false;
+	// Only allow lowercase alphanumeric and hyphens
+	return /^[a-z0-9-]+$/.test(slug);
+}
