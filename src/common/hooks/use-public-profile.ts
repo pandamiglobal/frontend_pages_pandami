@@ -12,7 +12,15 @@ import {
 } from "@/common/types/IPublicProfile";
 import { logger } from "@/lib/utils/logger";
 import { toast } from "react-toastify";
-import { transformBusinessHours } from "@/lib/utils/public-profile-helpers";
+import {
+	transformBusinessHours,
+	formatPhoneNumber,
+	formatAddress,
+	calculatePriceRange,
+	buildWhatsAppUrl,
+	generateGoogleMapsUrl,
+} from "@/lib/utils/public-profile-helpers";
+import { PUBLIC_PROFILE_KEYS } from "@/lib/constants/public-profile/swr-keys";
 
 /**
  * Default SWR configuration for public profile fetching
@@ -71,7 +79,7 @@ export function usePublicProfile(
 		IPublicProfileFullResponse,
 		PublicProfileApiError
 	>(
-		slug ? `/public-profile/${slug}` : null,
+		slug ? PUBLIC_PROFILE_KEYS.profile(slug) : null,
 		() => fetchPublicProfile(slug),
 		{
 			...defaultConfig,
@@ -160,36 +168,54 @@ export function usePublicProfileViewModel(
 	const whatsappUrl = profile?.phone ? buildWhatsAppUrl(profile.phone) : "";
 	const canContactViaWhatsApp = Boolean(profile?.phone && profile?.show_phone);
 
+	// Google Maps integration
+	// Generate URL if there's address data (city and state are minimum required)
+	const googleMapsUrl = profile && (profile.city || profile.state) ? generateGoogleMapsUrl({
+		street: profile.street,
+		number: profile.address_number,
+		city: profile.city,
+		state: profile.state,
+		zipCode: profile.postal_code,
+		country: "Brasil"
+	}) : "";
+	
+	// Only show maps button if show_address is explicitly true (or undefined for backward compatibility)
+	const canViewOnMaps = Boolean(
+		profile && 
+		googleMapsUrl && 
+		(profile.show_address === true || profile.show_address === undefined)
+	);
+
 	// Calculate smart opening hours using transformed business hours
-	const todayHour = businessHoursDisplay.find(h => h.isToday)
-	let openHours = 'Horários não informados'
-	let openHoursDetails: string | undefined = undefined
-	let businessStatus: 'open' | 'closed' | 'no-hours' = 'no-hours'
+	const todayHour = businessHoursDisplay.find(h => h.isToday);
+	let openHours = 'Horários não informados';
+	let openHoursDetails: string | undefined = undefined;
+	let businessStatus: 'open' | 'closed' | 'no-hours' = 'no-hours';
 
 	if (businessHoursDisplay.length > 0 && todayHour) {
-		openHours = todayHour.day
+		openHours = todayHour.day;
 		if (todayHour.isOpen) {
-			openHoursDetails = `${todayHour.openTime} - ${todayHour.closeTime}`
+			openHoursDetails = `${todayHour.openTime} - ${todayHour.closeTime}`;
 			// Check if currently open based on time
-			const now = new Date()
-			const currentMinutes = now.getHours() * 60 + now.getMinutes()
+			const now = new Date();
+			const currentMinutes = now.getHours() * 60 + now.getMinutes();
 			
-			const [startHour, startMinute] = todayHour.openTime.split(':').map(Number)
-			const startMinutes = startHour * 60 + startMinute
+			const [startHour, startMinute] = todayHour.openTime.split(':').map(Number);
+			const startMinutes = startHour * 60 + startMinute;
 			
-			const [endHour, endMinute] = todayHour.closeTime.split(':').map(Number)
-			const endMinutes = endHour * 60 + endMinute
+			const [endHour, endMinute] = todayHour.closeTime.split(':').map(Number);
+			const endMinutes = endHour * 60 + endMinute;
 
-			businessStatus = (currentMinutes >= startMinutes && currentMinutes <= endMinutes) ? 'open' : 'closed'
+			businessStatus = (currentMinutes >= startMinutes && currentMinutes <= endMinutes) ? 'open' : 'closed';
 		} else {
-			openHoursDetails = 'Fechado hoje'
-			businessStatus = 'closed'
+			openHoursDetails = 'Fechado hoje';
+			businessStatus = 'closed';
 		}
 	} else if (businessHoursDisplay.length > 0) {
 		// Has business hours but today is not configured
-		openHours = 'Fechado hoje'
-		openHoursDetails = 'Sem horário configurado para hoje'
-		businessStatus = 'closed'
+		openHours = 'Fechado hoje';
+		openHoursDetails = 'Sem horário configurado para hoje';
+		businessStatus = 'closed';
 	}
 
 	return {
@@ -222,67 +248,12 @@ export function usePublicProfileViewModel(
 		whatsappUrl,
 		canContactViaWhatsApp,
 
+		// Google Maps integration
+		googleMapsUrl,
+		canViewOnMaps,
+
 		// SWR utilities
 		isValidating,
 		mutate,
 	};
-}
-
-// Helper functions
-function formatPhoneNumber(phone: string): string {
-	// Remove non-numeric characters
-	const cleaned = phone.replace(/\D/g, "");
-
-	// Format for Brazilian numbers: +55 (XX) XXXXX-XXXX
-	if (cleaned.length === 13 && cleaned.startsWith("55")) {
-		return `+55 (${cleaned.slice(2, 4)}) ${cleaned.slice(4, 9)}-${cleaned.slice(
-			9
-		)}`;
-	}
-
-	// Return original if can't format
-	return phone;
-}
-
-function formatAddress(profile: IPublicProfileFullResponse): string {
-	const parts = [
-		profile.street,
-		profile.address_number,
-		profile.city,
-		profile.state,
-		profile.postal_code,
-	].filter(Boolean);
-
-	return parts.join(", ");
-}
-
-function calculatePriceRange(services: any[]): string {
-	const activeServices = services.filter((s) => s.price_from || s.price_to);
-
-	if (activeServices.length === 0) return "";
-
-	const prices = activeServices
-		.flatMap((s) => [s.price_from || Infinity, s.price_to || Infinity])
-		.filter((p) => p !== Infinity);
-
-	if (prices.length === 0) return "";
-
-	const min = Math.min(...prices);
-	const max = Math.max(...prices);
-
-	if (min === max) {
-		return `R$ ${min.toFixed(2)}`;
-	}
-
-	return `R$ ${min.toFixed(2)} - ${max.toFixed(2)}`;
-}
-
-
-function buildWhatsAppUrl(phone: string, message?: string): string {
-	const cleanedPhone = phone.replace(/\D/g, "");
-	const encodedMessage = message ? encodeURIComponent(message) : "";
-
-	return `https://wa.me/${cleanedPhone}${
-		encodedMessage ? `?text=${encodedMessage}` : ""
-	}`;
 }

@@ -1,6 +1,7 @@
 import type {
 	IPublicProfileFullResponse,
 	IPublicProfileOpeningHour,
+	IPublicProfileService,
 	IPaymentMethod,
 	IPortfolioImage,
 	IBusinessHours,
@@ -15,7 +16,6 @@ export function normalizePaymentMethod(
 	method: string
 ): "PIX" | "CASH" | "CREDIT_CARD" | "DEBIT_CARD" | "BANK_TRANSFER" | "UNKNOWN" {
 	switch (method.toUpperCase()) {
-		case "PIX":
 		case "PIX":
 			return "PIX";
 		case "DINHEIRO":
@@ -107,10 +107,6 @@ export function getPaymentMethodLabel(method: string): string {
 }
 
 /**
- * Get normalized payment method key for icon rendering
- */
-
-/**
  * Convert normalized payment method to API format (Portuguese)
  * Converts: PIX, CASH, CREDIT_CARD, DEBIT_CARD, BANK_TRANSFER
  * To API format: PIX, DINHEIRO, CARTAO_CREDITO, TRANSFERENCIA_BANCARIA
@@ -153,7 +149,7 @@ export function convertPaymentMethodFromApiFormat(
  * Convert weekday string to Brazilian Portuguese day label
  * Supports multiple formats: MONDAY, MON, Monday, etc.
  */
-export function getDayLabel(weekday: string | any): string {
+export function getDayLabel(weekday: string): string {
 	// Convert to uppercase and trim to handle any format
 	const normalizedDay = String(weekday).toUpperCase().trim();
 
@@ -229,11 +225,24 @@ export function formatServicePrice(price: number): string {
 }
 
 /**
+ * Service display format
+ */
+export interface IServiceDisplay {
+	id: string;
+	title: string;
+	description: string;
+	price: number;
+	price_to?: number;
+	duration: string;
+	enabled: boolean;
+}
+
+/**
  * Transform API profile data to UI service format
  */
 export function transformServices(
 	apiData: IPublicProfileFullResponse
-): IService[] {
+): IServiceDisplay[] {
 	return apiData.services.map((service) => ({
 		id: service.id.toString(),
 		title: service.name,
@@ -270,23 +279,15 @@ export function transformPaymentMethods(
 
 /**
  * Transform API profile data to UI portfolio image format
+ * Note: Gallery/portfolio images are not currently in the API response
+ * This function is kept for future implementation
  */
 export function transformPortfolioImages(
 	apiData: IPublicProfileFullResponse
 ): IPortfolioImage[] {
-	const safeGallery = Array.isArray(apiData.gallery) ? apiData.gallery : [];
-	return (
-		safeGallery
-			// Não incluir itens marcados como avatar
-			.filter((image) => image?.caption?.toLowerCase() !== "avatar")
-			// Excluir itens sem URL válida para evitar src=""
-			.filter((image) => Boolean(image?.File?.url))
-			.map((image) => ({
-				id: image.id.toString(),
-				url: image.File!.url,
-				alt: image.caption || image.File!.filename || "Imagem",
-			}))
-	);
+	// Gallery is not yet implemented in the API
+	// Return empty array for now
+	return [];
 }
 
 /**
@@ -351,9 +352,10 @@ export function transformCustomLinks(
 	apiData: IPublicProfileFullResponse
 ): ICustomLink[] {
 	return apiData.custom_links.map((link) => ({
-		id: link.id.toString(),
+		id: link.id,
 		name: link.name,
 		url: link.url,
+		active: link.active,
 	}));
 }
 
@@ -452,4 +454,112 @@ function getDayNumber(weekday: string): number {
 		SATURDAY: 6,
 	};
 	return dayMap[weekday.toUpperCase()] ?? 0;
+}
+
+/**
+ * Format phone number to Brazilian format
+ * @param phone - Phone number string
+ * @returns Formatted phone number: +55 (XX) XXXXX-XXXX
+ */
+export function formatPhoneNumber(phone: string): string {
+	const cleaned = phone.replace(/\D/g, "");
+
+	// Format for Brazilian numbers: +55 (XX) XXXXX-XXXX
+	if (cleaned.length === 13 && cleaned.startsWith("55")) {
+		return `+55 (${cleaned.slice(2, 4)}) ${cleaned.slice(4, 9)}-${cleaned.slice(9)}`;
+	}
+
+	return phone;
+}
+
+/**
+ * Format address from profile data
+ * @param profile - Public profile data
+ * @returns Formatted address string
+ */
+export function formatAddress(profile: IPublicProfileFullResponse): string {
+	const parts = [
+		profile.street,
+		profile.address_number,
+		profile.city,
+		profile.state,
+		profile.postal_code,
+	].filter(Boolean);
+
+	return parts.join(", ");
+}
+
+/**
+ * Calculate price range from services
+ * @param services - Array of services
+ * @returns Formatted price range string
+ */
+export function calculatePriceRange(services: IPublicProfileFullResponse['services']): string {
+	const activeServices = services.filter((s) => s.price_from || s.price_to);
+
+	if (activeServices.length === 0) return "";
+
+	const prices = activeServices
+		.flatMap((s) => [s.price_from || Infinity, s.price_to || Infinity])
+		.filter((p) => p !== Infinity);
+
+	if (prices.length === 0) return "";
+
+	const min = Math.min(...prices);
+	const max = Math.max(...prices);
+
+	if (min === max) {
+		return `R$ ${min.toFixed(2)}`;
+	}
+
+	return `R$ ${min.toFixed(2)} - ${max.toFixed(2)}`;
+}
+
+/**
+ * Build WhatsApp URL with optional message
+ * @param phone - Phone number
+ * @param message - Optional message to pre-fill
+ * @returns WhatsApp URL
+ */
+export function buildWhatsAppUrl(phone: string, message?: string): string {
+	const cleanedPhone = phone.replace(/\D/g, "");
+	const encodedMessage = message ? encodeURIComponent(message) : "";
+
+	return `https://wa.me/${cleanedPhone}${encodedMessage ? `?text=${encodedMessage}` : ""}`;
+}
+
+/**
+ * Generate Google Maps search URL from address components
+ * Based on SaaS GenerateGoogleMapsLink implementation
+ * @param address - Address components
+ * @returns Google Maps search URL
+ */
+export function generateGoogleMapsUrl(address?: {
+	street?: string;
+	number?: string;
+	city?: string;
+	state?: string;
+	zipCode?: string;
+	country?: string;
+}): string {
+	if (!address) return "";
+
+	const parts: string[] = [];
+
+	// Prefer more specific street+number first if available
+	const streetLine = [address.street, address.number].filter(Boolean).join(" ");
+	if (streetLine) parts.push(streetLine);
+
+	// Core query parts
+	if (address.zipCode) parts.push(address.zipCode);
+	if (address.city) parts.push(address.city);
+	if (address.state) parts.push(address.state);
+
+	// Country is optional; include if present
+	if (address.country) parts.push(address.country);
+
+	if (parts.length === 0) return "";
+
+	const query = encodeURIComponent(parts.join(", "));
+	return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }

@@ -23,14 +23,59 @@ export enum PaymentMethodType {
   BANK_TRANSFER = "BANK_TRANSFER"
 }
 
-// Core Entities
-export interface ICustomLink {
-  id: number
-  name: string
-  url: string
-  active: boolean
+/**
+ * Payment method with display information (UI format)
+ */
+export interface IPaymentMethod {
+	id: string;
+	icon: "PIX" | "CASH" | "CREDIT_CARD" | "DEBIT_CARD" | "BANK_TRANSFER";
+	label: string;
 }
 
+/**
+ * Portfolio/gallery image (UI format)
+ */
+export interface IPortfolioImage {
+	id: string;
+	url: string;
+	alt: string;
+}
+
+/**
+ * Business operating hours for a specific day (UI format)
+ */
+export interface IBusinessHours {
+	id: string;
+	day: string;
+	isOpen: boolean;
+	openTime: string;
+	closeTime: string;
+	isToday?: boolean;
+}
+
+/**
+ * Social media platform type
+ */
+export type SocialMediaPlatform =
+	| "instagram"
+	| "linkedin"
+	| "tiktok"
+	| "whatsapp";
+
+/**
+ * Social media link information (UI format)
+ */
+export interface ISocialMedia {
+	id: string;
+	platform: SocialMediaPlatform;
+	handle: string;
+	url: string;
+}
+
+
+/**
+ * Service from API (snake_case format)
+ */
 export interface IPublicProfileService {
   id: number
   name: string
@@ -137,13 +182,14 @@ export interface IPublicProfileResponse {
   updated_at: string
 }
 
-export interface ICustomLinkFormatted {
+/**
+ * Custom link from API
+ */
+export interface ICustomLink {
   id: number
   name: string
   url: string
   active: boolean
-  display_url?: string
-  favicon?: string
 }
 
 // Full Response (used by public profile view)
@@ -191,38 +237,6 @@ export interface IPublicProfileFullResponse {
   updated_at: string
 }
 
-// View Model Types
-export interface PublicProfileViewModel {
-  // Profile data
-  profile: IPublicProfileFullResponse | null
-  isLoading: boolean
-  error: string | null
-  
-  // Computed properties
-  hasServices: boolean
-  hasBusinessHours: boolean
-  hasPaymentMethods: boolean
-  hasSocialLinks: boolean
-  hasCustomLinks: boolean
-  hasAddress: boolean
-  
-  // Display formatting
-  formattedPhone: string
-  formattedAddress: string
-  priceRange: string
-  businessHoursDisplay: BusinessHoursDisplay[]
-  
-  // WhatsApp integration
-  whatsappUrl: string
-  canContactViaWhatsApp: boolean
-}
-
-export interface BusinessHoursDisplay {
-  day: string
-  hours: string
-  isOpen: boolean
-  isActive: boolean
-}
 
 // Error Types
 export enum PublicProfileErrorType {
@@ -292,3 +306,49 @@ export interface UsePublicProfileReturn {
     shouldRevalidate?: boolean
   ) => Promise<IPublicProfileFullResponse | undefined>
 }
+
+export interface UsePublicProfileViewModelReturn {
+  // Profile data
+  profile: IPublicProfileFullResponse | null
+  data: IPublicProfileFullResponse | null // For compatibility with UsePublicProfileReturn
+  isLoading: boolean
+  error: PublicProfileApiError | null
+  
+  // Computed properties
+  hasServices: boolean
+  hasBusinessHours: boolean
+  hasPaymentMethods: boolean
+  hasSocialLinks: boolean
+  hasCustomLinks: boolean
+  hasAddress: boolean
+  
+  // Display formatting
+  formattedPhone: string
+  formattedAddress: string
+  priceRange: string
+  businessHoursDisplay: IBusinessHours[]
+  
+  // Smart opening hours
+  openHours: string
+  openHoursDetails: string | undefined
+  businessStatus: 'open' | 'closed' | 'no-hours'
+  
+  // WhatsApp integration
+  whatsappUrl: string
+  canContactViaWhatsApp: boolean
+  
+  // Google Maps integration
+  googleMapsUrl: string
+  canViewOnMaps: boolean
+  
+  // SWR utilities
+  isValidating: boolean
+  mutate: (
+    data?: IPublicProfileFullResponse | Promise<IPublicProfileFullResponse>,
+    shouldRevalidate?: boolean
+  ) => Promise<IPublicProfileFullResponse | undefined>
+}
+
+
+
+

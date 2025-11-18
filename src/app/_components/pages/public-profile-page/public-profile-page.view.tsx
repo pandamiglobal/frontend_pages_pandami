@@ -27,7 +27,6 @@ interface PublicProfilePageViewProps {
  */
 export function PublicProfilePageView({
 	profile,
-	isLoading,
 	error,
 	viewModel,
 }: PublicProfilePageViewProps) {
@@ -88,15 +87,16 @@ export function PublicProfilePageView({
 					)}
 				</div>
 			</main>
-			{/* Action Buttons Footer */}
+			{/*  Buttons Footer */}
 			{profile && (
 				<footer className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
 					<div className="container mx-auto py-4">
 						<div className="max-w-4xl mx-auto flex items-center justify-center gap-3">
 							{/* Call Button */}
-							{profile.show_phone && profile.phone && (
+							{profile.phone && (
 								<PrimaryButton
 									href={`tel:${profile.phone.replace(/\D/g, '')}`}
+									variant="custom"
 									className="h-12 px-6 bg-neutral-800 hover:bg-neutral-900 text-white rounded-xl flex items-center gap-2 transition-colors"
 								>
 									<Phone className="w-5 h-5" />
@@ -105,9 +105,10 @@ export function PublicProfilePageView({
 							)}
 
 							{/* WhatsApp Button */}
-							{viewModel.canContactViaWhatsApp && (
+							{viewModel.whatsappUrl  && (
 								<PrimaryButton
 									href={viewModel.whatsappUrl}
+                  variant="custom" 
 									className="h-12 px-6 bg-green-500 hover:bg-green-600 text-white rounded-xl flex items-center gap-2 transition-colors"
 								>
 									<Image

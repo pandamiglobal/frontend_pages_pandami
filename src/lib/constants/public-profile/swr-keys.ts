@@ -1,13 +1,13 @@
 /**
- * SWR Cache Keys for My Site
+ * SWR Cache Keys for Public Profile
  * Centralized cache key management for consistent caching across the application
  */
 
 /**
- * Generate cache keys for my-site related data
+ * Generate cache keys for public-profile related data
  * Keys can be scoped by slug for public profiles or use default for authenticated user
  */
-export const MY_SITE_KEYS = {
+export const PUBLIC_PROFILE_KEYS = {
 	/**
 	 * Main profile data cache key
 	 * @param slug - Optional slug for public profile access
@@ -98,8 +98,4 @@ export const CACHE_TTL = {
 
 	/** Phone - 5 minutes */
 	PHONE: 5 * 60 * 1000,
-} as const;
-
-export const PUBLIC_PROFILE_KEYS = {
-	avatar: () => "public-profile-avatar",
 } as const;

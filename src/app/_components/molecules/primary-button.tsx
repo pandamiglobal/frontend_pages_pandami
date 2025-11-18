@@ -3,7 +3,7 @@ import { type ButtonHTMLAttributes, forwardRef, type ReactNode, type AnchorHTMLA
 import Link from "next/link"
 
 type BaseProps = {
-  variant?: "default" | "outline" | "outline-solid" | "white"
+  variant?: "default" | "outline" | "outline-solid" | "white" | "custom"
   size?: "default" | "sm" | "lg"
   icon?: ReactNode
   iconPosition?: "left" | "right"
@@ -27,7 +27,8 @@ const VARIANT_CLASSES = {
   outline: "border-2 border-primary text-primary bg-transparent hover:bg-primary/10 dark:border-primary dark:text-primary",
   // Alias de compatibilidade: "outline-solid" usa o mesmo estilo de outline
   "outline-solid": "border-2 border-primary text-primary bg-transparent hover:bg-primary/10 dark:border-primary dark:text-primary",
-  white: "bg-background text-primary border border-input hover:bg-accent dark:bg-background dark:text-primary"
+  white: "bg-background text-primary border border-input hover:bg-accent dark:bg-background dark:text-primary",
+  custom: "text-primary"
 } as const
 
 const SIZE_CLASSES = {
