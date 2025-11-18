@@ -16,7 +16,7 @@ export function ServicesList({ services }: ServicesListProps) {
   if (!services || services.length === 0) {
     return (
       <div className="text-center py-8 text-gray-500">
-        <p>Nenhum serviço disponível no momento.</p>
+        <p>Esse perfil não possui serviços cadastrados.</p>
       </div>
     )
   }
@@ -53,31 +53,31 @@ export function ServicesList({ services }: ServicesListProps) {
   }
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="space-y-3">
       {services.map((service) => (
         <div
           key={service.id}
-          className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+          className="rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <h3 className="text-sm font-semibold text-neutral-900 mb-1">
             {service.name}
           </h3>
           
           {service.description && (
-            <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+            <p className="text-xs text-neutral-600 mb-2 line-clamp-2">
               {service.description}
             </p>
           )}
 
-          <div className="flex flex-wrap gap-3 text-sm">
-            <div className="flex items-center gap-1.5 text-gray-700">
-              <DollarSign className="w-4 h-4 text-green-600" />
+          <div className="mt-1 flex items-center justify-between text-sm">
+            <div className="flex items-center gap-1.5 text-emerald-600 font-semibold">
+              <DollarSign className="w-4 h-4" />
               <span>{formatPrice(service.price_from, service.price_to)}</span>
             </div>
 
             {service.duration_hours && (
-              <div className="flex items-center gap-1.5 text-gray-700">
-                <Clock className="w-4 h-4 text-blue-600" />
+              <div className="flex items-center gap-1.5 text-xs text-neutral-600">
+                <Clock className="w-4 h-4" />
                 <span>{formatDuration(service.duration_hours)}</span>
               </div>
             )}

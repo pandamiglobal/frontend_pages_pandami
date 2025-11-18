@@ -1,6 +1,7 @@
 "use client";
 
 import useSWR from "swr";
+import { useMemo } from "react";
 import { GetPublicProfileBySlugAction } from "@/server/actions/get-public-profile.action";
 import {
 	IPublicProfileFullResponse,
@@ -21,6 +22,7 @@ import {
 	generateGoogleMapsUrl,
 } from "@/lib/utils/public-profile-helpers";
 import { PUBLIC_PROFILE_KEYS } from "@/lib/constants/public-profile/swr-keys";
+import { useBusinessStatus } from "./use-business-status";
 
 /**
  * Default SWR configuration for public profile fetching
@@ -119,6 +121,10 @@ export function usePublicProfile(
 
 /**
  * Extended hook with computed properties for view components
+ * Refactored for SOLID/Clean Code:
+ * - Separated concerns (Business status logic moved to useBusinessStatus)
+ * - Memoized heavy calculations
+ * - Removed hydration mismatch risks
  */
 export function usePublicProfileViewModel(
 	slug: string,
@@ -132,125 +138,113 @@ export function usePublicProfileViewModel(
 		mutate,
 	} = usePublicProfile(slug, config);
 
-	// Computed properties
-	const hasServices = profile?.services ? profile.services.length > 0 : false;
-	const hasBusinessHours = profile?.opening_hours
-		? profile.opening_hours.length > 0
-		: false;
-	const hasPaymentMethods = profile?.payment_methods
-		? profile.payment_methods.length > 0
-		: false;
-	const hasSocialLinks = Boolean(
-		profile?.instagram_link ||
+	// 1. Computed boolean flags (fast, no memo needed usually, but consistent style)
+	const flags = useMemo(() => ({
+		hasServices: profile?.services ? profile.services.length > 0 : false,
+		hasBusinessHours: profile?.opening_hours ? profile.opening_hours.length > 0 : false,
+		hasPaymentMethods: profile?.payment_methods ? profile.payment_methods.length > 0 : false,
+		hasSocialLinks: Boolean(
+			profile?.instagram_link ||
 			profile?.whatsapp_link ||
 			profile?.tiktok_link ||
 			profile?.linkedin_link
-	);
-	const hasCustomLinks = profile?.custom_links
-		? profile.custom_links.length > 0
-		: false;
-	const hasAddress = Boolean(
-		profile?.show_address && profile?.street && profile?.city && profile?.state
-	);
+		),
+		hasCustomLinks: profile?.custom_links ? profile.custom_links.length > 0 : false,
+	}), [profile]);
 
-	// Display formatting
-	const formattedPhone = profile?.phone ? formatPhoneNumber(profile.phone) : "";
-	const formattedAddress =
-		profile && profile.show_address ? formatAddress(profile) : "";
-	const priceRange = profile?.services
-		? calculatePriceRange(profile.services)
-		: "";
-	const businessHoursDisplay = profile
-		? transformBusinessHours(profile)
-		: [];
+	// 2. Address logic
+	const addressInfo = useMemo(() => {
+		// Address visibility (backward compatible: undefined = true)
+		const canShowAddress = Boolean(
+			profile && (profile.show_address === true || profile.show_address === undefined)
+		);
+		const hasAddressData = Boolean(
+			profile && (profile.street || profile.city || profile.state || profile.postal_code)
+		);
+		const hasAddress = Boolean(canShowAddress && hasAddressData);
+		
+		return { canShowAddress, hasAddressData, hasAddress };
+	}, [profile]);
 
-	// WhatsApp integration
-	const whatsappUrl = profile?.phone ? buildWhatsAppUrl(profile.phone) : "";
-	const canContactViaWhatsApp = Boolean(profile?.phone && profile?.show_phone);
+	// 3. Formatting (memoized)
+	const formattedData = useMemo(() => ({
+		formattedPhone: profile?.phone ? formatPhoneNumber(profile.phone) : "",
+		formattedAddress: profile && (profile.show_address === true || profile.show_address === undefined)
+			? formatAddress(profile)
+			: "",
+		priceRange: profile?.services ? calculatePriceRange(profile.services) : "",
+	}), [profile]);
 
-	// Google Maps integration
-	// Generate URL if there's address data (city and state are minimum required)
-	const googleMapsUrl = profile && (profile.city || profile.state) ? generateGoogleMapsUrl({
-		street: profile.street,
-		number: profile.address_number,
-		city: profile.city,
-		state: profile.state,
-		zipCode: profile.postal_code,
-		country: "Brasil"
-	}) : "";
-	
-	// Only show maps button if show_address is explicitly true (or undefined for backward compatibility)
-	const canViewOnMaps = Boolean(
-		profile && 
-		googleMapsUrl && 
-		(profile.show_address === true || profile.show_address === undefined)
+	// 4. Business Hours - Separation of concerns
+	// First, get the raw transformed list
+	const baseBusinessHours = useMemo(() => 
+		profile ? transformBusinessHours(profile) : [], 
+		[profile]
 	);
 
-	// Calculate smart opening hours using transformed business hours
-	const todayHour = businessHoursDisplay.find(h => h.isToday);
-	let openHours = 'Horários não informados';
-	let openHoursDetails: string | undefined = undefined;
-	let businessStatus: 'open' | 'closed' | 'no-hours' = 'no-hours';
+	// Then, delegate status logic to specific hook
+	const { 
+		businessStatus, 
+		openHours, 
+		openHoursDetails, 
+		currentDayIndex 
+	} = useBusinessStatus(baseBusinessHours);
 
-	if (businessHoursDisplay.length > 0 && todayHour) {
-		openHours = todayHour.day;
-		if (todayHour.isOpen) {
-			openHoursDetails = `${todayHour.openTime} - ${todayHour.closeTime}`;
-			// Check if currently open based on time
-			const now = new Date();
-			const currentMinutes = now.getHours() * 60 + now.getMinutes();
-			
-			const [startHour, startMinute] = todayHour.openTime.split(':').map(Number);
-			const startMinutes = startHour * 60 + startMinute;
-			
-			const [endHour, endMinute] = todayHour.closeTime.split(':').map(Number);
-			const endMinutes = endHour * 60 + endMinute;
+	// Finally, merge isToday flag for display (Client-side only to avoid hydration mismatch)
+	const businessHoursDisplay = useMemo(() => {
+		if (currentDayIndex === -1) return baseBusinessHours;
+		return baseBusinessHours.map((h, index) => ({
+			...h,
+			isToday: index === currentDayIndex
+		}));
+	}, [baseBusinessHours, currentDayIndex]);
 
-			businessStatus = (currentMinutes >= startMinutes && currentMinutes <= endMinutes) ? 'open' : 'closed';
-		} else {
-			openHoursDetails = 'Fechado hoje';
-			businessStatus = 'closed';
-		}
-	} else if (businessHoursDisplay.length > 0) {
-		// Has business hours but today is not configured
-		openHours = 'Fechado hoje';
-		openHoursDetails = 'Sem horário configurado para hoje';
-		businessStatus = 'closed';
-	}
+	// 5. Integrations (WhatsApp & Google Maps)
+	const integrations = useMemo(() => {
+		const whatsappUrl = profile?.whatsapp_link ||
+			(profile?.phone ? buildWhatsAppUrl(profile.phone) : "");
+		const canContactViaWhatsApp = Boolean(whatsappUrl);
+
+		const googleMapsUrl = profile && (profile.city || profile.state) ? generateGoogleMapsUrl({
+			street: profile.street,
+			number: profile.address_number,
+			city: profile.city,
+			state: profile.state,
+			zipCode: profile.postal_code,
+			country: "Brasil"
+		}) : "";
+
+		const canViewOnMaps = Boolean(
+			profile && 
+			googleMapsUrl && 
+			(profile.show_address === true || profile.show_address === undefined)
+		);
+
+		return { whatsappUrl, canContactViaWhatsApp, googleMapsUrl, canViewOnMaps };
+	}, [profile]);
 
 	return {
 		// Profile data
 		profile,
-		data: profile, // For compatibility with UsePublicProfileReturn
+		data: profile,
 		isLoading,
 		error,
 
-		// Computed properties
-		hasServices,
-		hasBusinessHours,
-		hasPaymentMethods,
-		hasSocialLinks,
-		hasCustomLinks,
-		hasAddress,
+		// Boolean flags
+		...flags,
+		hasAddress: addressInfo.hasAddress,
 
-		// Display formatting
-		formattedPhone,
-		formattedAddress,
-		priceRange,
+		// Formatted data
+		...formattedData,
 		businessHoursDisplay,
 
-		// Smart opening hours
+		// Smart opening hours (from useBusinessStatus)
 		openHours,
 		openHoursDetails,
 		businessStatus,
 
-		// WhatsApp integration
-		whatsappUrl,
-		canContactViaWhatsApp,
-
-		// Google Maps integration
-		googleMapsUrl,
-		canViewOnMaps,
+		// Integrations
+		...integrations,
 
 		// SWR utilities
 		isValidating,

@@ -3,7 +3,7 @@
 import { IPublicProfilePaymentMethod } from '@/common/types/IPublicProfile'
 import { transformPaymentMethods, getPaymentMethodIcon } from '@/lib/utils/public-profile-helpers'
 import Image from 'next/image'
-import { Banknote, CreditCard, Building2 } from 'lucide-react'
+import { Banknote, CreditCard, Landmark } from 'lucide-react'
 
 interface PaymentMethodsProps {
   methods: IPublicProfilePaymentMethod[]
@@ -37,8 +37,8 @@ function PaymentIcon({ iconType }: { iconType: string }) {
       return <Banknote {...iconProps} />
     case 'CreditCard':
       return <CreditCard {...iconProps} />
-    case 'Building2':
-      return <Building2 {...iconProps} />
+    case 'Landmark':
+      return <Landmark {...iconProps} />
     default:
       return null
   }

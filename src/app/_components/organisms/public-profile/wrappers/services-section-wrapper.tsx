@@ -14,13 +14,9 @@ interface ServicesSectionWrapperProps {
  * Displays services list in read-only mode (no add/edit/delete buttons)
  */
 export function ServicesSectionWrapper({ profile, viewModel }: ServicesSectionWrapperProps) {
-  if (!profile.services || profile.services.length === 0) {
-    return null
-  }
-
   return (
     <SectionCard title="Serviços">
-      <ServicesList services={profile.services} />
+      <ServicesList services={profile.services || []} />
     </SectionCard>
   )
 }

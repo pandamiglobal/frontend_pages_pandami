@@ -85,7 +85,7 @@ export const PAYMENT_METHOD_ICONS = {
 	},
 	BANK_TRANSFER: {
 		type: "lucide" as const,
-		name: "Building2",
+		name: "Landmark",
 	},
 } as const;
 
@@ -425,9 +425,10 @@ export function transformBusinessHours(
 
 	return WEEKDAYS.map((dayKey) => {
 		const existing = byWeekday[dayKey];
-		const now = new Date();
-		const currentDay = now.getDay();
-		const dayNumber = getDayNumber(dayKey);
+		// Removed date dependency for SSR safety
+		// const now = new Date();
+		// const currentDay = now.getDay();
+		// const dayNumber = getDayNumber(dayKey);
 
 		return {
 			id: existing ? String(existing.id) : `${dayKey.toLowerCase()}`,
@@ -435,7 +436,7 @@ export function transformBusinessHours(
 			isOpen: existing ? existing.active : false,
 			openTime: existing ? existing.start_time : "09:00",
 			closeTime: existing ? existing.end_time : "18:00",
-			isToday: dayNumber === currentDay,
+			isToday: false, // Logic moved to client hook
 		};
 	});
 }

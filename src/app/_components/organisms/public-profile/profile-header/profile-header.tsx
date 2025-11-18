@@ -123,25 +123,23 @@ export function ProfileHeader({
 				</div>
 
 				{/* Location */}
-				{location && (
-					<address className="flex items-center gap-2 text-sm text-neutral-300 not-italic">
-						<MapPin className="w-4 h-4 text-neutral-400" aria-hidden="true" />
-						<span>{location}</span>
-					</address>
-				)}
-
-				{/* View Location Button */}
-				{locationUrl && (
+				{location && locationUrl && (
 					<Link
 						href={locationUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium transition-colors"
+						className="text-neutral-400 hover:text-neutral-200 transition-colors"
+						aria-label="Ver localização no mapa"
 					>
-						Ver localização no Maps
-						<ExternalLink className="w-4 h-4" />
+						<address className="flex items-center gap-2 text-sm text-neutral-300 not-italic">
+							<MapPin className="w-4 h-4 text-neutral-400" aria-hidden="true" />
+							<span>{location}</span>
+							{locationUrl && <ExternalLink className="size-4" />}
+						</address>
 					</Link>
 				)}
+
+	
 			</div>
 		</header>
 	);

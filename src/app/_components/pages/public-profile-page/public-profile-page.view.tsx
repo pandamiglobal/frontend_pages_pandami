@@ -60,7 +60,8 @@ export function PublicProfilePageView({
 								alt="Pandami Logo"
 								width={160}
 								height={24}
-								className="h-6 lg:h-8 w-auto"
+								className="w-[120px] lg:w-[160px] h-auto"
+								priority
 							/>
 						</Link>
 					</div>
@@ -74,7 +75,7 @@ export function PublicProfilePageView({
 					)}
 
 					{/* Services Section */}
-					{profile && viewModel.hasServices && (
+					{profile && (
 						<ServicesSectionWrapper profile={profile} viewModel={viewModel} />
 					)}
 
@@ -89,38 +90,36 @@ export function PublicProfilePageView({
 			</main>
 			{/*  Buttons Footer */}
 			{profile && (
-				<footer className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-					<div className="container mx-auto py-4">
-						<div className="max-w-4xl mx-auto flex items-center justify-center gap-3">
+				<footer className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
+					<div className="mx-auto py-4">
+						<div className="max-w-4xl mx-auto flex items-center justify-center gap-2">
 							{/* Call Button */}
 							{profile.phone && (
 								<PrimaryButton
-									href={`tel:${profile.phone.replace(/\D/g, '')}`}
+									href={`tel:${profile.phone.replace(/\D/g, "")}`}
 									variant="custom"
-									className="h-12 px-6 bg-neutral-800 hover:bg-neutral-900 text-white rounded-xl flex items-center gap-2 transition-colors"
+									className="h-12 px-4 md:px-6 bg-neutral-800 hover:bg-neutral-900 text-white rounded-xl flex items-center gap-2 transition-colors"
 								>
-									<Phone className="w-5 h-5" />
+									<Phone className="size-4 md:size-5" />
 									<span className="font-medium">Ligar</span>
 								</PrimaryButton>
 							)}
 
 							{/* WhatsApp Button */}
-							{viewModel.whatsappUrl  && (
+							{viewModel.whatsappUrl && (
 								<PrimaryButton
 									href={viewModel.whatsappUrl}
-                  variant="custom" 
-									className="h-12 px-6 bg-green-500 hover:bg-green-600 text-white rounded-xl flex items-center gap-2 transition-colors"
+									variant="custom"
+									className="h-12 px-2 md:px-6 bg-green-500 hover:bg-green-600 text-white rounded-xl flex items-center gap-2 transition-colors w-full"
 								>
 									<Image
 										src="/svg/whatsapp-icon.svg"
 										alt="WhatsApp"
 										width={20}
 										height={20}
-										className="w-5 h-5"
+										className="size-4 md:size-5"
 									/>
-									<span className="font-medium">
-										<span className="hidden sm:inline">Agendar no </span>WhatsApp
-									</span>
+									<span className="font-medium">Chamar no WhatsApp</span>
 								</PrimaryButton>
 							)}
 						</div>
