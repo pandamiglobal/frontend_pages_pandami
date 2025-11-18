@@ -12,7 +12,7 @@ export async function getPublicProfileBySlug(
 ): Promise<IPublicProfileFullResponse> {
 	try {
 		const response = await api.get<IPublicProfileFullResponse>(
-			`/public-profile/public/${slug}`
+			`/public-profile/${slug}`
 		);
 		return response.data;
 	} catch (error: any) {

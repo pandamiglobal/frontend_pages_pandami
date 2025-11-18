@@ -134,10 +134,10 @@ export function Footer() {
 							<li className="flex items-center gap-2 justify-center md:justify-start">
 								<Phone className="h-4 w-4" />
 								<a
-									href="tel:08008789746"
+									href="tel:5548984495927"
 									className="hover:text-primary transition-colors"
 								>
-									0800 878 9746
+									{`+55 (48) 98449-5927`}
 								</a>
 							</li>
 							<li className="flex items-center gap-2 justify-center md:justify-start">
@@ -145,7 +145,7 @@ export function Footer() {
 								<span>Seg-Sex: 8h às 18h</span>
 							</li>
 						</ul>
-							<div className="mt-4">
+						<div className="mt-4">
 							<h4 className="text-sm mb-3 text-gray-700">Siga-nos</h4>
 							<div className="flex gap-3 justify-center md:justify-start">
 								{SOCIAL_MEDIA.map((s) => (
@@ -173,7 +173,9 @@ export function Footer() {
 				</div>
 				{/* Parceiros e certificações (consome PARTNERS do constants) */}
 				<div className="mt-16">
-					<h3 className="mb-4 text-left font-quicksand text-lg font-semibold text-gray-800">Parceiros e certificações</h3>
+					<h3 className="mb-4 text-left font-quicksand text-lg font-semibold text-gray-800">
+						Parceiros e certificações
+					</h3>
 					<div
 						className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:justify-between"
 						role="list"

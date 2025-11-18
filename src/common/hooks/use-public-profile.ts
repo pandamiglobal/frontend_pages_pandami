@@ -89,7 +89,7 @@ export function usePublicProfile(
     isValidating,
     mutate
   } = useSWR<IPublicProfileFullResponse, PublicProfileApiError>(
-    slug ? `/public-profile/public/${slug}` : null,
+    slug ? `/public-profile/${slug}` : null,
     () => fetchPublicProfile(slug),
     mergedConfig
   )
