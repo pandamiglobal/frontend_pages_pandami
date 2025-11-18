@@ -114,11 +114,11 @@ export function QuizResults({ answers }: QuizResultsProps) {
                 <motion.div
                   key={idx}
                   whileHover={{ y: -4 }}
-                  className="flex items-center p-5 bg-white border border-neutral-200 rounded-xl shadow-sm hover:shadow-md transition-all"
+                  className="flex items-center p-5 bg-white border border-neutral-200 rounded-xl shadow-sm hover:shadow-md transition-all hover:border-green-200"
                 >
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center">
-                      <benefit.icon className="h-6 w-6 text-neutral-900" />
+                    <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center">
+                      <benefit.icon className="h-6 w-6 text-green-600" />
                     </div>
                   </div>
                   <p className="font-semibold text-neutral-900 text-lg">
@@ -143,14 +143,20 @@ export function QuizResults({ answers }: QuizResultsProps) {
                 
                 <Link href="/ferramenta-que-aumenta-o-faturamento-dos-saloes" className="block w-full">
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    animate={{ scale: [1, 1.02, 1] }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className="w-full"
                   >
                     <PrimaryButton
                       icon={<ArrowRight className="h-5 w-5" />}
                       size="lg"
-                      className="w-full py-6 text-lg md:text-xl font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all"
+                      className="w-full h-auto min-h-[3.5rem] py-6 text-lg md:text-xl font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all text-white border-none whitespace-normal"
                     >
                       Conhecer a ferramenta agora
                     </PrimaryButton>
