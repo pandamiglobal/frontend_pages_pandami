@@ -76,10 +76,6 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
     return timeout
   }, [])
 
-  const animateOptionSelection = useCallback((optionIndex: number) => {
-    // A animação de seleção agora é feita diretamente no componente QuizOptionButton
-    // usando useEffect quando isSelected muda para true
-  }, [])
 
   const animateOutTransition = useCallback(() => {
     setIsGsapAnimating(true)

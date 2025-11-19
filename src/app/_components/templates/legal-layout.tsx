@@ -5,25 +5,25 @@ import { LegalPageConfig } from "@/common/types/ILegalMetadata";
 import { FileText, Shield } from "lucide-react";
 
 const getIcon = (iconName: string) => {
-  const icons = {
-    FileText: <FileText className="h-6 w-6" />,
-    Shield: <Shield className="h-6 w-6" />,
-  };
-  return icons[iconName as keyof typeof icons] || null;
+	const icons = {
+		FileText: <FileText className="h-6 w-6" />,
+		Shield: <Shield className="h-6 w-6" />,
+	};
+	return icons[iconName as keyof typeof icons] || null;
 };
 
 interface LegalLayoutProps {
-  children: ReactNode;
-  config: LegalPageConfig;
-  currentPath?: string;
+	children: ReactNode;
+	config: LegalPageConfig;
+	currentPath?: string;
 }
 
 export default function LegalLayout({
-  children,
-  config,
-  currentPath
+	children,
+	config,
+	currentPath,
 }: LegalLayoutProps) {
-  return (
+	return (
 		<div className="min-h-screen bg-background mt-40">
 			{/* Breadcrumb simples */}
 			<div className="absolute top-16 left-0 w-full border-b bg-muted/30">
