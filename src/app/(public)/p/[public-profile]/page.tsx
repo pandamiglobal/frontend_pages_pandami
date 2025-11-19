@@ -5,6 +5,7 @@ import { PublicProfileErrorState } from '@/app/_components/pages/public-profile-
 import { PublicProfileSeoHelper } from '@/lib/utils/seo-helper'
 import { isValidSlug } from '@/lib/utils/public-profile-helpers'
 import { Metadata } from 'next'
+import { PublicProfileErrorType } from '@/common/types/IPublicProfile'
 
 interface PublicProfilePageProps {
   params: Promise<{
@@ -25,26 +26,30 @@ export default async function PublicProfilePageRoute({ params }: PublicProfilePa
     return <PublicProfileErrorState type="invalid_slug" />
   }
 
-  try {
-    // Fetch profile data using server action
-    const profileData = await GetPublicProfileBySlugAction(slug)
+  // Fetch profile data using server action (returns structured result)
+  const result = await GetPublicProfileBySlugAction(slug)
 
-    // Pass data to client component for interactive features
-    return <PublicProfilePage initialData={profileData} slug={slug} />
-  } catch (error: any) {
-    // Handle specific error cases
-    const errorMessage = error?.message || (typeof error === 'string' ? error : 'Erro ao carregar perfil');
+  // Handle error cases with structured error response
+  if (!result.success) {
+    const { error } = result
 
-    if (errorMessage.includes('PROFILE_NOT_FOUND') ||
-      errorMessage.includes('VALIDATION_ERROR') ||
-      errorMessage === 'Perfil não encontrado') {
+    // NOT_FOUND errors should use Next.js notFound() for proper 404 handling
+    if (error.type === PublicProfileErrorType.NOT_FOUND) {
       notFound()
     }
 
-    // For other errors, let the client component handle them
-    // This allows for retry functionality and better UX
-    return <PublicProfilePage initialData={null} slug={slug} error={errorMessage} />
+    // For other errors, pass to client component for retry functionality
+    return <PublicProfilePage 
+      initialData={null} 
+      slug={slug} 
+      error={error.message}
+      errorType={error.type}
+      retryable={error.retryable}
+    />
   }
+
+  // Success case: pass data to client component
+  return <PublicProfilePage initialData={result.data} slug={slug} />
 }
 
 /**
@@ -62,18 +67,19 @@ export async function generateMetadata({ params }: PublicProfilePageProps): Prom
     }
   }
 
-  try {
-    const profileData = await GetPublicProfileBySlugAction(slug)
+  const result = await GetPublicProfileBySlugAction(slug)
 
-    return PublicProfileSeoHelper.generateMetadata({
-      profile: profileData,
-      profession: 'Cabeleireiro' // Hardcoded as per requirement, could be dynamic in future
-    })
-  } catch {
-    // Fallback metadata for error cases
+  // Handle error cases
+  if (!result.success) {
     return {
       title: 'Perfil não encontrado | Pandami',
       description: 'O perfil que você está procurando não foi encontrado.',
     }
   }
+
+  // Success case: generate metadata
+  return PublicProfileSeoHelper.generateMetadata({
+    profile: result.data,
+    profession: 'Cabeleireiro' // Hardcoded as per requirement, could be dynamic in future
+  })
 }

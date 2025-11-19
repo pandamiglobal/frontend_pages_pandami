@@ -294,6 +294,26 @@ export type PublicProfileApiResponse =
   | GetPublicProfileResponse
   | GetPublicProfileErrorResponse
 
+// Server Action Result Types (for safe error handling in production)
+export interface ServerActionSuccess<T> {
+  success: true
+  data: T
+}
+
+export interface ServerActionError {
+  success: false
+  error: {
+    type: PublicProfileErrorType
+    message: string
+    retryable: boolean
+  }
+}
+
+export type ServerActionResult<T> = ServerActionSuccess<T> | ServerActionError
+
+// Specific type for GetPublicProfileBySlugAction
+export type GetPublicProfileResult = ServerActionResult<IPublicProfileFullResponse>
+
 // SWR Hook Types
 export interface UsePublicProfileConfig {
   revalidateOnFocus?: boolean

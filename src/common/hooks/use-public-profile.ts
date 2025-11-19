@@ -11,7 +11,6 @@ import {
 	UsePublicProfileReturn,
 	UsePublicProfileViewModelReturn,
 } from "@/common/types/IPublicProfile";
-import { logger } from "@/lib/utils/logger";
 import { toast } from "react-toastify";
 import {
 	transformBusinessHours,
@@ -38,29 +37,31 @@ const defaultConfig: UsePublicProfileConfig = {
 
 /**
  * Fetcher function for SWR
+ * Processes structured result from Server Action
  */
 async function fetchPublicProfile(
 	slug: string
 ): Promise<IPublicProfileFullResponse> {
-	try {
-		const result = await GetPublicProfileBySlugAction(slug);
-		return result;
-	} catch (error: any) {
-		// Criar erro estruturado para o SWR
-		const apiError = new PublicProfileApiError(
-			error?.message === 'Perfil não encontrado' 
-				? PublicProfileErrorType.NOT_FOUND 
-				: PublicProfileErrorType.SERVER_ERROR,
-			error?.message || 'Erro ao carregar perfil',
-			error,
-			error?.message !== 'Perfil não encontrado' // Retry apenas se não for 404
-		);
-
-		// Log apenas erros não esperados (não 404)
+	const result = await GetPublicProfileBySlugAction(slug);
+	
+	// Handle structured error response
+	if (!result.success) {
+		const { error } = result;
 		
-		// Lançar erro para o SWR tratar
+		// Create structured error for SWR
+		const apiError = new PublicProfileApiError(
+			error.type,
+			error.message,
+			error,
+			error.retryable
+		);
+		
+		// Throw error for SWR to handle
 		throw apiError;
 	}
+	
+	// Return data on success
+	return result.data;
 }
 
 /**
