@@ -1,6 +1,5 @@
 import { IPublicProfileFullResponse } from "@/common/types/IPublicProfile";
 import api from "@/server/services/api";
-import { logger } from "@/lib/utils/logger";
 
 /**
  * Fetches a public profile by slug from the Pandami API
@@ -18,12 +17,10 @@ export async function getPublicProfileBySlug(
 		return response.data;
 	} catch (error: any) {
 		if (error.response?.status === 404) {
-      logger.debug('Profile not found details:', error.response.data);
-			throw new Error("Perfil não encontrado");
+			throw new Error("Desculpe, esse perfil não foi encontrado");
+		} if (error.response?.status === 500) {
+			throw new Error("Desculpe esse perfil é inválido ou foi movido");
 		}
-    
-    // Log unexpected errors for debugging
-    logger.error('Error in getPublicProfileBySlug:', error);
-		throw new Error("Erro ao carregar perfil público");
+		throw new Error;
 	}
 }

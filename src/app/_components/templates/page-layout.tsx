@@ -1,6 +1,6 @@
 'use client'
 
-import { ThemeProvider } from "@/app/(public)/providers";
+import { ThemeProvider } from "@/app/providers";
 import { Header } from "@/app/_components/organisms/header";
 import { Footer } from "@/app/_components/organisms/footer";
 import { Modal } from "@/app/_components/organisms/modal";

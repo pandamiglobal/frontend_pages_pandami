@@ -11,10 +11,9 @@ import { Phone, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import dynamic from "next/dynamic";
-
-const ServicesSectionWrapper = dynamic(() => import("../../organisms/public-profile/wrappers/services-section-wrapper").then(mod => mod.ServicesSectionWrapper));
-const InformationSectionWrapper = dynamic(() => import("../../organisms/public-profile/wrappers/information-section-wrapper").then(mod => mod.InformationSectionWrapper));
+import { PublicProfileErrorState } from "./public-profile-error-state";
+import { ServicesSectionWrapper } from "../../organisms/public-profile/wrappers/services-section-wrapper";
+import { InformationSectionWrapper } from "../../organisms/public-profile/wrappers/information-section-wrapper";
 
 interface PublicProfilePageViewProps {
 	profile: IPublicProfileFullResponse | null;
@@ -81,25 +80,14 @@ export function PublicProfilePageView({
 
 	// Handle error states
 	if (error) {
+		const isNotFound = (error instanceof PublicProfileApiError && error.type === "NOT_FOUND") ||
+			(error instanceof Error && (error.message.includes('NOT_FOUND') || error.message === 'Perfil não encontrado'));
+
 		return (
-			<div className="min-h-screen flex flex-col items-center justify-center bg-neutral-50 px-4">
-				<div className="max-w-md w-full bg-white border border-neutral-200 rounded-2xl p-8 text-center shadow-sm">
-					<div className="mx-auto w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-						<AlertCircle className="w-6 h-6 text-red-600" />
-					</div>
-					<h2 className="text-xl font-bold text-neutral-900 mb-2">
-						Perfil indisponível
-					</h2>
-					<p className="text-neutral-600 mb-6">
-						{error?.message || "Não foi possível carregar as informações deste perfil. Tente novamente mais tarde."}
-					</p>
-					<Link href="/">
-						<PrimaryButton variant="outline" className="w-full justify-center">
-							Voltar para o início
-						</PrimaryButton>
-					</Link>
-				</div>
-			</div>
+			<PublicProfileErrorState
+				type={isNotFound ? "not_found" : "generic_error"}
+				message={isNotFound ? undefined : error.message}
+			/>
 		);
 	}
 
@@ -128,8 +116,8 @@ export function PublicProfilePageView({
 				<div className="max-w-4xl mx-auto space-y-6">
 					{/* Profile Header Section */}
 					{profile && (
-						<ProfileHeaderWrapper 
-							profile={profile} 
+						<ProfileHeaderWrapper
+							profile={profile}
 							viewModel={viewModel}
 							actions={renderActionButtons(true)}
 						/>
@@ -171,7 +159,7 @@ export function PublicProfilePageView({
 								</PrimaryButton>
 							</Link>
 
-							<Link 
+							<Link
 								href="/ferramenta-que-aumenta-o-faturamento-dos-saloes"
 								className="block text-sm font-medium text-neutral-600 hover:text-neutral-900 underline underline-offset-4 transition-colors"
 							>

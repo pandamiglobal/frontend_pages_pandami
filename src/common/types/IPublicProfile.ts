@@ -237,6 +237,15 @@ export interface IPublicProfileFullResponse {
   updated_at: string
 }
 
+export interface IAvatarResponse {
+  avatar: string
+}
+
+export interface IAxiosResponseError {
+  error: string
+  message: string
+}
+
 
 // Error Types
 export enum PublicProfileErrorType {

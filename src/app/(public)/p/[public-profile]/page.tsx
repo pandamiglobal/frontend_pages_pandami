@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { GetPublicProfileBySlugAction } from '@/server/actions/get-public-profile.action'
 import { PublicProfilePage } from '@/app/_components/pages/public-profile-page/public-profile-page'
+import { PublicProfileErrorState } from '@/app/_components/pages/public-profile-page/public-profile-error-state'
 import { PublicProfileSeoHelper } from '@/lib/utils/seo-helper'
 import { isValidSlug } from '@/lib/utils/public-profile-helpers'
 import { Metadata } from 'next'
@@ -21,7 +22,7 @@ export default async function PublicProfilePageRoute({ params }: PublicProfilePa
   // Validate slug format strictly before API call
   // This prevents unnecessary requests for invalid URLs (e.g. containing @)
   if (!isValidSlug(slug)) {
-    notFound()
+    return <PublicProfileErrorState type="invalid_slug" />
   }
 
   try {
@@ -32,11 +33,11 @@ export default async function PublicProfilePageRoute({ params }: PublicProfilePa
     return <PublicProfilePage initialData={profileData} slug={slug} />
   } catch (error: any) {
     // Handle specific error cases
-    const errorMessage = error.message || '';
-    
-    if (errorMessage.includes('PROFILE_NOT_FOUND') || 
-        errorMessage.includes('VALIDATION_ERROR') ||
-        errorMessage === 'Perfil não encontrado') {
+    const errorMessage = error?.message || (typeof error === 'string' ? error : 'Erro ao carregar perfil');
+
+    if (errorMessage.includes('PROFILE_NOT_FOUND') ||
+      errorMessage.includes('VALIDATION_ERROR') ||
+      errorMessage === 'Perfil não encontrado') {
       notFound()
     }
 
@@ -56,14 +57,14 @@ export async function generateMetadata({ params }: PublicProfilePageProps): Prom
   // Validate slug format before API call
   if (!isValidSlug(slug)) {
     return {
-      title: 'Perfil não encontrado | Pandami',
-      description: 'O perfil que você está procurando não foi encontrado.',
+      title: 'Busca inválida | Pandami',
+      description: 'O termo pesquisado contém caracteres inválidos.',
     }
   }
 
   try {
     const profileData = await GetPublicProfileBySlugAction(slug)
-    
+
     return PublicProfileSeoHelper.generateMetadata({
       profile: profileData,
       profession: 'Cabeleireiro' // Hardcoded as per requirement, could be dynamic in future

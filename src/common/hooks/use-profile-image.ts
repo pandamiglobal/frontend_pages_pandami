@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { SelectPublicProfileAvatarAction } from '@/server/actions/select-public-profile-avatar.action'
 
 interface UseProfileImageReturn {
   imageUrl: string | null
@@ -7,9 +8,8 @@ interface UseProfileImageReturn {
 }
 
 /**
- * Hook to fetch profile image from API using filename
- * Handles fetching the image blob and converting to an Object URL for display
- * This is useful for handling authenticated images or controlling image loading manually
+ * Hook to fetch profile image using the server action
+ * Handles fetching the image data (base64) and displaying it
  */
 export function useProfileImage(fileName?: string): UseProfileImageReturn {
   const [imageUrl, setImageUrl] = useState<string | null>(null)
@@ -18,7 +18,6 @@ export function useProfileImage(fileName?: string): UseProfileImageReturn {
 
   useEffect(() => {
     let mounted = true
-    let objectUrl: string | null = null
 
     const fetchImage = async () => {
       if (!fileName) {
@@ -30,29 +29,26 @@ export function useProfileImage(fileName?: string): UseProfileImageReturn {
       setError(null)
 
       try {
-        // Construct the URL
-        const url = `${process.env.NEXT_PUBLIC_SAAS_API_URL}/storage/${fileName}`
-        
-        // Fetch the image data
-        const response = await fetch(url)
-        
-        if (!response.ok) {
-          throw new Error(`Failed to fetch image: ${response.statusText}`)
-        }
-
-        // Get blob data
-        const blob = await response.blob()
+        const response = await SelectPublicProfileAvatarAction(fileName)
         
         if (mounted) {
-          // Create an object URL (more efficient than base64 strings)
-          objectUrl = URL.createObjectURL(blob)
-          setImageUrl(objectUrl)
+          if ('error' in response) {
+            throw new Error(response.message)
+          }
+
+          // Assuming response.avatar is the image data (base64 or url)
+          let avatarSrc = response.avatar
+          
+          // Add data URI prefix if it's a raw base64 string
+          if (avatarSrc && !avatarSrc.startsWith('http') && !avatarSrc.startsWith('data:')) {
+            avatarSrc = `data:image/png;base64,${avatarSrc}`
+          }
+          
+          setImageUrl(avatarSrc)
         }
       } catch (err) {
         if (mounted) {
           setError(err instanceof Error ? err : new Error('Unknown error loading image'))
-          // Fallback: try setting the direct URL if fetch fails (e.g. CORS issues)
-          // setImageUrl(`${process.env.NEXT_PUBLIC_SAAS_API_URL}/storage/${fileName}`)
         }
       } finally {
         if (mounted) {
@@ -63,12 +59,8 @@ export function useProfileImage(fileName?: string): UseProfileImageReturn {
 
     fetchImage()
 
-    // Cleanup function to revoke object URL and avoid memory leaks
     return () => {
       mounted = false
-      if (objectUrl) {
-        URL.revokeObjectURL(objectUrl)
-      }
     }
   }, [fileName])
 

@@ -57,10 +57,7 @@ async function fetchPublicProfile(
 		);
 
 		// Log apenas erros não esperados (não 404)
-		if (apiError.type !== PublicProfileErrorType.NOT_FOUND) {
-			logger.error('Error fetching profile:', error);
-		}
-
+		
 		// Lançar erro para o SWR tratar
 		throw apiError;
 	}
