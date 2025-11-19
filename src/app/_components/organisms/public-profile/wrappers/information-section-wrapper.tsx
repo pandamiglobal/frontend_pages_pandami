@@ -1,6 +1,6 @@
 'use client'
 
-import { IPublicProfileFullResponse } from '@/common/types/IPublicProfile'
+import { IPublicProfileFullResponse, UsePublicProfileViewModelReturn } from '@/common/types/IPublicProfile'
 import { BusinessHours } from '../business-hours/business-hours'
 import { SocialLinks } from '../social-links/social-links'
 import { CustomLinks } from '../custom-links/custom-links'
@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 interface InformationSectionWrapperProps {
   profile: IPublicProfileFullResponse
-  viewModel: any
+  viewModel: UsePublicProfileViewModelReturn
 }
 
 /**
@@ -23,7 +23,6 @@ export function InformationSectionWrapper({ profile, viewModel }: InformationSec
   const hasAddress = viewModel.hasAddress
   const hasPhone = profile.show_phone && profile.phone
   const hasBusinessHours = viewModel.hasBusinessHours
-  const hasCustomLinks = viewModel.hasCustomLinks && profile.show_links
   const canViewOnMaps = viewModel.canViewOnMaps
   const hasAddressData = Boolean(
     profile.street || profile.address_number || profile.city || profile.state || profile.postal_code
@@ -85,7 +84,7 @@ export function InformationSectionWrapper({ profile, viewModel }: InformationSec
       {/* Business Hours */}
       {hasBusinessHours && (
         <SectionCard title="Horários de funcionamento">
-          <BusinessHours hours={viewModel.businessHoursDisplay} />
+          <BusinessHours hours={viewModel.businessHoursDisplay.map(h => ({ ...h, isToday: h.isToday || false }))} />
         </SectionCard>
       )}
 
@@ -100,11 +99,9 @@ export function InformationSectionWrapper({ profile, viewModel }: InformationSec
       </SectionCard>
 
       {/* Custom Links */}
-      {hasCustomLinks && (
-        <SectionCard title="Links">
-          <CustomLinks links={profile.custom_links} />
-        </SectionCard>
-      )}
+      <SectionCard title="Links">
+        <CustomLinks links={profile.custom_links || []} />
+      </SectionCard>
 
       {/* Payment Methods */}
       <SectionCard title="Formas de Pagamento">

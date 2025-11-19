@@ -146,7 +146,7 @@ export function usePublicProfileViewModel(
 			profile?.tiktok_link ||
 			profile?.linkedin_link
 		),
-		hasCustomLinks: profile?.custom_links ? profile.custom_links.length > 0 : false,
+		hasCustomLinks: profile?.custom_links ? profile.custom_links.filter(link => link.active).length > 0 : false,
 	}), [profile]);
 
 	// 2. Address logic
