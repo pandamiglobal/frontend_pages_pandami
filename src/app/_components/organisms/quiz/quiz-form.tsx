@@ -22,9 +22,9 @@ export function QuizForm({ onComplete }: QuizFormProps) {
   
   const {
     selectedOption,
-    selectedOptionColor,
     isAnimating,
-    currentQuestion,
+    isGsapAnimating,
+    stepIndex,
     currentQuestionData,
     progress,
     isLastQuestion,
@@ -59,7 +59,7 @@ export function QuizForm({ onComplete }: QuizFormProps) {
       <Container className="flex-1 flex flex-col justify-center">
         <div className="relative py-16 max-w-4xl mx-auto w-full">
           <QuizProgress
-            currentQuestion={currentQuestion}
+            currentQuestion={stepIndex}
             totalQuestions={QUIZ_QUESTIONS.length}
             progress={progress}
             ref={progressRef}

@@ -22,7 +22,7 @@ export const QuizOptionButton = memo(function QuizOptionButton({ option, index, 
       className={cn(
         "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer relative overflow-hidden group",
         isSelected 
-          ? cn(option.borderColor, "bg-neutral-50 shadow-md", option.bgColor) 
+          ? cn("border-neutral-900 bg-neutral-50 shadow-sm", option.bgColor) 
           : "border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
       )}
     >
@@ -30,6 +30,7 @@ export const QuizOptionButton = memo(function QuizOptionButton({ option, index, 
         <QuizRadio
           value={buttonId}
           checked={isSelected}
+          onChange={() => onSelect(index)}
           fillColor={fillColor}
           className="mr-4 shrink-0"
         />

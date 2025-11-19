@@ -36,7 +36,7 @@ export const QuizProgress = forwardRef<HTMLDivElement, QuizProgressProps>(
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <span className="text-sm font-medium text-gray-700 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
-            Pergunta {currentQuestion + 1} de {totalQuestions}
+            Pergunta {currentQuestion} de {totalQuestions}
           </span>
           <span className="text-sm font-medium text-gray-700 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
             {Math.round(progress)}% concluído

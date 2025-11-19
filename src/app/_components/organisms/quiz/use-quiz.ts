@@ -30,6 +30,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null)
   const [selectedOptionColor, setSelectedOptionColor] = useState<'green' | 'blue' | 'amber' | 'red' | 'gray'>('green')
   const [isAnimating, setIsAnimating] = useState(false)
+  const [isGsapAnimating, setIsGsapAnimating] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
   
   const questionRef = useRef<HTMLDivElement>(null)
@@ -37,28 +38,28 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
   const progressRef = useRef<HTMLDivElement>(null)
   const timeoutRefs = useRef<NodeJS.Timeout[]>([])
   
-  // Validar índice da pergunta e fazer redirect se inválido
-  const stepIndex = parseInt(searchParams.get('stepIndex') || '0')
-  const isValidIndex = !isNaN(stepIndex) && stepIndex >= 0 && stepIndex < QUIZ_QUESTIONS.length
+  // Validar índice da pergunta e fazer redirect se inválido (stepIndex 1-7)
+  const stepIndex = parseInt(searchParams.get('stepIndex') || '1')
+  const isValidIndex = !isNaN(stepIndex) && stepIndex >= 1 && stepIndex <= QUIZ_QUESTIONS.length
   
-  // Redirect para índice 0 se inválido
+  // Redirect para índice 1 se inválido
   useEffect(() => {
     try {
-      if (!isValidIndex && stepIndex !== 0) {
-        router.replace('/ferramenta-que-aumenta-o-faturamento-dos-saloes?stepIndex=0')
+      if (!isValidIndex && stepIndex !== 1) {
+        router.replace('/ferramenta-que-aumenta-o-faturamento-dos-saloes?stepIndex=1')
         return
       }
     } catch (error) {
       console.error('Error during navigation redirect:', error)
       // Fallback to window.location if router fails
-      window.location.href = '/ferramenta-que-aumenta-o-faturamento-dos-saloes'
+      window.location.href = '/ferramenta-que-aumenta-o-faturamento-dos-saloes?stepIndex=1'
     }
   }, [stepIndex, isValidIndex, router])
   
-  const currentQuestion = isValidIndex ? stepIndex : 0
-  const currentQuestionData = QUIZ_QUESTIONS[currentQuestion]
-  const progress = ((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100
-  const isLastQuestion = currentQuestion === QUIZ_QUESTIONS.length - 1
+  // stepIndex is 1-indexed (1-7), but array is 0-indexed (0-6)
+  const currentQuestionData = QUIZ_QUESTIONS[stepIndex - 1]
+  const progress = (stepIndex / QUIZ_QUESTIONS.length) * 100
+  const isLastQuestion = stepIndex === QUIZ_QUESTIONS.length
   
   // Cleanup timeouts
   const clearAllTimeouts = useCallback(() => {
@@ -81,6 +82,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
   }, [])
 
   const animateOutTransition = useCallback(() => {
+    setIsGsapAnimating(true)
     const timeline = gsap.timeline()
     
     if (questionRef.current && optionsRef.current) {
@@ -97,11 +99,17 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
       timeline.to({}, { duration: 0.1 })
     }
     
+    // Reset isGsapAnimating quando a animação terminar
+    timeline.eventCallback("onComplete", () => {
+      setIsGsapAnimating(false)
+    })
+    
     return timeline
   }, [])
 
   const animateInTransition = useCallback(() => {
     if (questionRef.current && optionsRef.current) {
+      setIsGsapAnimating(true)
       gsap.fromTo(
         [questionRef.current, optionsRef.current],
         { 
@@ -114,13 +122,19 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
           duration: 0.4,
           stagger: 0.1,
           ease: "power2.out",
-          delay: 0.1
+          delay: 0.1,
+          onComplete: () => {
+            setIsGsapAnimating(false)
+          }
         }
       )
     }
   }, [])
 
   const handleOptionSelect = useCallback((optionIndex: number) => {
+    // Bloquear seleção durante animações ou confirmação
+    if (isAnimating || showConfirmation || isGsapAnimating) return
+    
     setSelectedOption(optionIndex)
     
     // Extract color from the selected option
@@ -134,7 +148,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
         }
       }
     }
-  }, [currentQuestionData])
+  }, [currentQuestionData, isAnimating, showConfirmation, isGsapAnimating])
 
   const handleRadioChange = useCallback((value: string) => {
     const optionIndex = parseInt(value.replace('option-', ''))
@@ -182,7 +196,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
     addTimeout(() => {
       const newAnswers = {
         ...answers,
-        [currentQuestionData.id]: selectedOption
+        [stepIndex]: selectedOption
       }
       setAnswers(newAnswers)
 
@@ -196,7 +210,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
             onComplete(newAnswers)
             setIsAnimating(false)
           } else {
-            const nextStep = currentQuestion + 1
+            const nextStep = stepIndex + 1
             router.push(`/ferramenta-que-aumenta-o-faturamento-dos-saloes?stepIndex=${nextStep}`)
             // Aguardar navegação e então animar entrada
             addTimeout(() => {
@@ -210,7 +224,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
             window.location.href =
 							"/ferramenta-que-aumenta-o-faturamento-dos-saloes/resultado";
           } else {
-            const nextStep = currentQuestion + 1
+            const nextStep = stepIndex + 1
             window.location.href = `/ferramenta-que-aumenta-o-faturamento-dos-saloes?stepIndex=${nextStep}`
           }
           setIsAnimating(false)
@@ -218,23 +232,30 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
       })
     }, 1200)
     
-  }, [selectedOption, isAnimating, currentQuestionData, answers, isLastQuestion, currentQuestion, onComplete, router, animateOutTransition, confettiRef, buttonRef, clearAllTimeouts, addTimeout])
+  }, [selectedOption, isAnimating, currentQuestionData, answers, isLastQuestion, stepIndex, onComplete, router, animateOutTransition, confettiRef, buttonRef, clearAllTimeouts, addTimeout])
 
   useEffect(() => {
     if (!currentQuestionData) return
-    
+        
     // Limpar timeouts anteriores
     clearAllTimeouts()
     
     // Reset states para nova pergunta
-    const previousAnswer = answers[currentQuestionData.id] ?? null
+    const previousAnswer = answers[stepIndex] ?? null
     setSelectedOption(previousAnswer)
     setShowConfirmation(false)
     
     // Reset estado de animação
     setIsAnimating(false)
     
-    // Animar apenas a progress bar
+    return () => {
+      timeoutRefs.current.forEach(timeout => clearTimeout(timeout))
+      timeoutRefs.current = []
+    }
+  }, [stepIndex]) // Apenas stepIndex como dependência principal
+  
+  // Separar animação da progress bar em useEffect separado
+  useEffect(() => {
     if (progressRef.current) {
       gsap.to(progressRef.current, {
         width: `${progress}%`,
@@ -242,19 +263,16 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
         ease: "power2.out"
       })
     }
-    
-    return () => {
-      clearAllTimeouts()
-    }
-  }, [currentQuestion, answers, currentQuestionData?.id, progress, clearAllTimeouts])
+  }, [progress])
 
   return {
     // State
     selectedOption,
     selectedOptionColor,
     isAnimating,
+    isGsapAnimating,
     showConfirmation,
-    currentQuestion,
+    stepIndex,
     currentQuestionData,
     progress,
     isLastQuestion,
