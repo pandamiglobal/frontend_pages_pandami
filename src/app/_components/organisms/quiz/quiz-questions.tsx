@@ -10,6 +10,7 @@ export interface QuizOption {
   icon: React.ReactNode
   color: string
   bgColor: string
+  borderColor: string
 }
 
 export interface QuizQuestion {
@@ -22,23 +23,24 @@ const createOption = (
   text: string, 
   icon: React.ReactNode, 
   color: string, 
-  bgColor: string
-): QuizOption => ({ text, icon, color, bgColor })
+  bgColor: string,
+  borderColor: string
+): QuizOption => ({ text, icon, color, bgColor, borderColor })
 
 const GREEN_OPTION = (text: string, icon: React.ReactNode) => 
-  createOption(text, icon, "text-green-600", "bg-green-50")
+  createOption(text, icon, "text-green-600", "bg-green-50", "border-green-500")
 
 const BLUE_OPTION = (text: string, icon: React.ReactNode) => 
-  createOption(text, icon, "text-blue-600", "bg-blue-50")
+  createOption(text, icon, "text-blue-600", "bg-blue-50", "border-blue-500")
 
 const AMBER_OPTION = (text: string, icon: React.ReactNode) => 
-  createOption(text, icon, "text-amber-600", "bg-amber-50")
+  createOption(text, icon, "text-amber-600", "bg-amber-50", "border-amber-500")
 
 const RED_OPTION = (text: string, icon: React.ReactNode) => 
-  createOption(text, icon, "text-red-600", "bg-red-50")
+  createOption(text, icon, "text-red-600", "bg-red-50", "border-red-500")
 
 const GRAY_OPTION = (text: string, icon: React.ReactNode) => 
-  createOption(text, icon, "text-gray-600", "bg-gray-50")
+  createOption(text, icon, "text-gray-600", "bg-gray-50", "border-gray-500")
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {

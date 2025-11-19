@@ -198,6 +198,10 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
           } else {
             const nextStep = currentQuestion + 1
             router.push(`/ferramenta-que-aumenta-o-faturamento-dos-saloes?stepIndex=${nextStep}`)
+            // Aguardar navegação e então animar entrada
+            addTimeout(() => {
+              animateInTransition()
+            }, 100)
           }
         } catch (error) {
           console.error('Error during navigation:', error)
@@ -225,11 +229,10 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
     // Reset states para nova pergunta
     const previousAnswer = answers[currentQuestionData.id] ?? null
     setSelectedOption(previousAnswer)
-    setIsAnimating(false)
     setShowConfirmation(false)
     
-    // Animar entrada dos novos elementos
-    animateInTransition()
+    // Reset estado de animação
+    setIsAnimating(false)
     
     // Animar apenas a progress bar
     if (progressRef.current) {
@@ -243,7 +246,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
     return () => {
       clearAllTimeouts()
     }
-  }, [currentQuestion, answers, currentQuestionData?.id, progress, clearAllTimeouts, animateInTransition])
+  }, [currentQuestion, answers, currentQuestionData?.id, progress, clearAllTimeouts])
 
   return {
     // State

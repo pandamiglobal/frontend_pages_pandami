@@ -14,15 +14,15 @@ interface QuizRadioProps {
 
 // Helper to map fill colors to ring/bg colors
 function getColorClasses(fillColor: string, checked: boolean) {
-  if (!checked) return "border-neutral-300 hover:border-neutral-400"
+  if (!checked) return "border-neutral-200 hover:border-neutral-300 shadow-sm hover:shadow-md"
   
   // Default to primary/green if standard
-  if (fillColor.includes('green')) return "border-green-600 bg-green-600"
-  if (fillColor.includes('blue')) return "border-blue-600 bg-blue-600"
-  if (fillColor.includes('amber')) return "border-amber-600 bg-amber-600"
-  if (fillColor.includes('red')) return "border-red-600 bg-red-600"
+  if (fillColor.includes('green')) return "border-green-500 bg-green-500 shadow-md shadow-green-100"
+  if (fillColor.includes('blue')) return "border-blue-500 bg-blue-500 shadow-md shadow-blue-100"
+  if (fillColor.includes('amber')) return "border-amber-500 bg-amber-500 shadow-md shadow-amber-100"
+  if (fillColor.includes('red')) return "border-red-500 bg-red-500 shadow-md shadow-red-100"
   
-  return "border-neutral-900 bg-neutral-900"
+  return "border-neutral-600 bg-neutral-600 shadow-md shadow-neutral-100"
 }
 
 export const QuizRadio = forwardRef<HTMLInputElement, QuizRadioProps>(
@@ -44,7 +44,7 @@ export const QuizRadio = forwardRef<HTMLInputElement, QuizRadioProps>(
         />
         <div 
           className={cn(
-            "flex items-center justify-center w-5 h-5 rounded-full border transition-all duration-200",
+            "flex items-center justify-center w-5 h-5 rounded-full border-2 transition-all duration-300 ease-in-out",
             getColorClasses(fillColor, checked),
             className
           )}
