@@ -17,7 +17,7 @@ export async function getPublicProfileBySlug(
 		return response.data;
 	} catch (error: any) {
 		if (error.response?.status === 404) {
-			throw new Error("Desculpe, esse perfil não foi encontrado");
+			throw new Error("Desculpe, estamos enfrentando instabilidade no momento. Tente novamente ou mais tarde!");
 		} if (error.response?.status === 500) {
 			throw new Error("Desculpe esse perfil é inválido ou foi movido");
 		}
