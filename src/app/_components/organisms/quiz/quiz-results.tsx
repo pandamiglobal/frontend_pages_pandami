@@ -141,7 +141,7 @@ export function QuizResults({ answers }: QuizResultsProps) {
                   Quer ver como resolver isso na prática?
                 </h3>
                 
-                <Link href="/ferramenta-que-aumenta-o-faturamento-dos-saloes" className="block w-full">
+                <Link href="/" className="block w-full">
                   <motion.div
                     animate={{ scale: [1, 1.02, 1] }}
                     transition={{
