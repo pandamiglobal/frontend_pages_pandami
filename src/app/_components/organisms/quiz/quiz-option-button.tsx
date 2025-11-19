@@ -20,12 +20,21 @@ export const QuizOptionButton = memo(function QuizOptionButton({ option, index, 
     <div
       onClick={() => onSelect(index)}
       className={cn(
-        "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer relative overflow-hidden group",
-        isSelected 
-          ? cn("border-neutral-900 bg-neutral-50 shadow-sm", option.bgColor) 
-          : "border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
+        "w-full text-left p-4 rounded-xl border-2 border-neutral-200 transition-all duration-200 cursor-pointer relative overflow-hidden group focus-visible:outline-hidden",
+        isSelected
+          ? "bg-neutral-50 border-neutral-900 shadow-sm"
+          : "bg-white hover:shadow-sm group-hover:border-transparent group-focus-visible:border-transparent"
       )}
     >
+      <span
+        aria-hidden="true"
+        className={cn(
+          "absolute inset-0 opacity-0 transition-opacity duration-200 pointer-events-none rounded-xl border-2",
+          option.bgColor,
+          option.borderColor,
+          "group-hover:opacity-100 group-focus-visible:opacity-100"
+        )}
+      />
       <div className="flex items-center relative z-10">
         <QuizRadio
           value={buttonId}

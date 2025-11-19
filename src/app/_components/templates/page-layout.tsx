@@ -17,13 +17,7 @@ export default function PageLayout({
 	headerVariant = "default",
 	hideFooter = false,
 }: PageLayoutProps) {
-	const headerOffset =
-		headerVariant === "hidden"
-			? ""
-			: headerVariant === "logo-only"
-				? "pt-24 sm:pt-28"
-				: "pt-28 sm:pt-32";
-
+	
 	return (
 		<>
 			<ThemeProvider
@@ -33,7 +27,7 @@ export default function PageLayout({
 				disableTransitionOnChange
 			>
 				<Header variant={headerVariant} />
-				<main role="main" className={headerOffset}>
+				<main role="main" >
 					{children}
 				</main>
 				{!hideFooter && <Footer />}
