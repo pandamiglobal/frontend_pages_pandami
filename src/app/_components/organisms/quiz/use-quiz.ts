@@ -243,6 +243,14 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
     
     // Reset estado de animação
     setIsAnimating(false)
+    setIsGsapAnimating(false)
+
+    if (questionRef.current && optionsRef.current) {
+      gsap.set([questionRef.current, optionsRef.current], {
+        opacity: 1,
+        y: 0
+      })
+    }
     
     return () => {
       timeoutRefs.current.forEach(timeout => clearTimeout(timeout))
