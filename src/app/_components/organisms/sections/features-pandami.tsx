@@ -3,6 +3,7 @@
 import { Container } from "@/app/_components/atoms/ui/container";
 import FeaturesIcon from '@/app/_components/atoms/svg/features-icon';
 import Image from "next/image";
+import { FeatureCard } from "../../molecules/feature-card";
 
 export function FeaturesPandami() {
     const features = [
@@ -70,121 +71,45 @@ export function FeaturesPandami() {
                 <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-6 lg:mb-8">
                     {/* Card Visagismo - Inicio */}
 
-                    <div className="relative w-full bg-white border border-gray-200 rounded-2xl items-center shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col min-h-[550px] lg:min-h-[600px] pt-8 px-4">
-                        <div className="z-10 w-full lg:w-[300px]">
+                    <FeatureCard
+                        title="Visagismo com IA"
+                        description="IA que analisa 47 pontos do rosto e sugere os cortes que mais valorizam cada cliente. Elimina tentativa e erro. Você apresenta sugestões personalizadas com segurança total."
+                        image={{
+                            src: "/lp/images/features-pandami/visagism_feature_ai.png",
+                            alt: "Visagismo com IA",
+                        }}
+                        Icon={<FeaturesIcon status="visagism" />}
+                    />
 
-                            {/* Div dos ícones e status - inicio */}
-                            <div className="pb-4 flex flex-row items-center justify-between">
-                                <FeaturesIcon status="visagism" />
 
-                                {/* Badge de status - inicio */}
-                                {/*<div className="py-2 px-4 bg-yellow-100 flex flex-row gap-2 rounded-full">
-                                    <img src="lp/images/features-pandami/indevelopment.png"
-                                        width={16}
-                                        height={16} />
-                                    <p className="text-xs text-yellow-900">Em desenvolvimento</p>
-                                </div>*/}
-                                {/* Badge de status - fim */}
-
-                            </div>
-                            {/* Div dos ícones e status - Fim */}
-
-                            <h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
-                                {features[0].title}
-                            </h3>
-                            <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                                {features[0].description}
-                            </p>
-                        </div>
-
-                        <Image
-                            src={features[0].image}
-                            alt="Sintonia Humana"
-                            width={400}
-                            height={300}
-                            className="absolute bottom-0 w-full object-contain object-bottom "
-                        />
-                    </div>
                     {/* Card Visgaismo - Fim */}
 
                     {/* Card Site Profissional - Inicio */}
 
-                    <div className="relative w-full bg-white border border-gray-200 rounded-2xl items-center shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col min-h-[550px] lg:min-h-[600px] pt-8 px-4">
-                        <div className="z-10 w-full lg:w-[300px]">
-
-                            {/* Div dos ícones e status - inicio */}
-                            <div className="pb-4 flex flex-row items-center justify-between">
-                                <FeaturesIcon status="website" />
-
-                                {/* Badge de status - inicio */}
-                                {/*<div className="py-2 px-4 bg-yellow-100 flex flex-row gap-2 rounded-full">
-                                    <img src="lp/images/features-pandami/indevelopment.png"
-                                        width={16}
-                                        height={16} />
-                                    <p className="text-xs text-yellow-900">Em desenvolvimento</p>
-                                </div>*/}
-                                {/* Badge de status - fim */}
-
-
-                            </div>
-                            {/* Div dos ícones e status - Fim */}
-
-                            <h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
-                                {features[1].title}
-                            </h3>
-                            <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                                {features[1].description}
-                            </p>
-                        </div>
-
-                        <Image
-                            src={features[1].image}
-                            alt="Sintonia Humana"
-                            width={400}
-                            height={300}
-                            className="absolute bottom-0 w-full object-contain object-bottom " />
-                    </div>
+                    <FeatureCard
+                        title="Site profissional"
+                        description="Crie uma página com seus serviços, contato, redes sociais e cortes realizados. Compartilhe em qualquer lugar e facilite para o cliente encontrar tudo sobre você."
+                        image={{
+                            src: "/lp/images/features-pandami/website_feature.png",
+                            alt: "Site profissional",
+                        }}
+                        Icon={<FeaturesIcon status="website" />}
+                    />
 
                     {/* Card Site Profissional - Fim */}
 
 
                     {/* Card Dashboard - Inicio */}
 
-                    <div className="relative w-full bg-white border border-gray-200 rounded-2xl items-center shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col min-h-[550px] lg:min-h-[600px] pt-8 px-4">
-                        <div className="z-10 w-full lg:w-[300px]">
-
-                            {/* Div dos ícones e status - inicio */}
-                            <div className="pb-4 flex flex-row items-center justify-between">
-                                <FeaturesIcon status="dashboard" />
-
-                                {/* Badge de status - inicio */}
-                                {/*<div className="py-2 px-4 bg-yellow-100 flex flex-row gap-2 rounded-full">
-                                    <img src="lp/images/features-pandami/indevelopment.png"
-                                        width={16}
-                                        height={16} />
-                                    <p className="text-xs text-yellow-900">Em desenvolvimento</p>
-                                </div>*/}
-                                {/* Badge de status - fim */}
-
-
-                            </div>
-                            {/* Div dos ícones e status - Fim */}
-
-                            <h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
-                                {features[2].title}
-                            </h3>
-                            <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                                {features[2].description}
-                            </p>
-                        </div>
-
-                        <Image
-                            src={features[2].image}
-                            alt="Sintonia Humana"
-                            width={400}
-                            height={300}
-                            className="absolute bottom-0 w-full object-contain object-bottom " />
-                    </div>
+                    <FeatureCard
+                        title="Dashboard completo"
+                        description="Visualize clientes, históricos, relatórios e informações importantes em um só lugar. Anote preferências de conversa e estilos favoritos de cada cliente."
+                        image={{
+                            src: "/lp/images/features-pandami/dashboard_feature.png",
+                            alt: "Dashboard completo",
+                        }}
+                        Icon={<FeaturesIcon status="dashboard" />}
+                    />
 
 
                 </div>
@@ -192,57 +117,26 @@ export function FeaturesPandami() {
                 <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-6 lg:mb-8">
                     {/* Card Formatos de rosto */}
 
-                    <div className="relative w-full bg-white border border-gray-200 rounded-2xl items-center shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col min-h-[550px] lg:min-h-[600px] pt-8 px-4">
-                        <div className="z-10 w-full">
-
-                            {/* Div dos ícones e status - inicio */}
-                            <div className="pb-4 flex flex-row items-center justify-between">
-                                <FeaturesIcon status="faceformat" />
-
-                            </div>
-                            {/* Div dos ícones e status - Fim */}
-
-                            <h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
-                                {features[3].title}
-                            </h3>
-                            <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                                {features[3].description}
-                            </p>
-                        </div>
-
-                        <Image
-                            src={features[3].image}
-                            alt="Sintonia Humana"
-                            width={400}
-                            height={300}
-                            className="absolute bottom-0 w-full object-contain object-bottom " />
-                    </div>
+                    <FeatureCard
+                        title="Formatos de rosto"
+                        description="Consulte rapidamente as combinações ideais entre formato de rosto e cortes para cada cliente."
+                        image={{
+                            src: "/lp/images/features-pandami/face_format_feature.png",
+                            alt: "Formatos de rosto",
+                        }}
+                        Icon={<FeaturesIcon status="faceformat" />}
+                    />
                     {/* Card Catalogo de cortes */}
 
-                    <div className="relative w-full bg-white border border-gray-200 rounded-2xl items-center shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col min-h-[550px] lg:min-h-[600px] pt-8 px-4">
-                        <div className="z-10 w-full">
-
-                            {/* Div dos ícones e status - inicio */}
-                            <div className="pb-4 flex flex-row items-center justify-between">
-                                <FeaturesIcon status="cutcatalog" />
-                            </div>
-                            {/* Div dos ícones e status - Fim */}
-
-                            <h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
-                                {features[4].title}
-                            </h3>
-                            <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                                {features[4].description}
-                            </p>
-                        </div>
-
-                        <Image
-                            src={features[4].image}
-                            alt="Sintonia Humana"
-                            width={400}
-                            height={300}
-                            className="absolute bottom-0 w-full object-contain object-bottom " />
-                    </div>
+                    <FeatureCard
+                        title="Catalogo de cortes"
+                        description="Apresente opções profissionais aos clientes com nosso banco completo de referências masculinas e femininas."
+                        image={{
+                            src: "/lp/images/features-pandami/cut_catalog_feature.png",
+                            alt: "Catalogo de cortes",
+                        }}
+                        Icon={<FeaturesIcon status="cutcatalog" />}
+                    />
 
                 </div>
 
@@ -250,118 +144,44 @@ export function FeaturesPandami() {
                 <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-6 lg:mb-8">
                     {/* Card CRM - Inicio */}
 
-                    <div className="relative w-full bg-white border border-gray-200 rounded-2xl items-center shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col min-h-[550px] lg:min-h-[600px] pt-8 px-4">
-                        <div className="z-10 w-full lg:w-[300px]">
-
-                            {/* Div dos ícones e status - inicio */}
-                            <div className="pb-4 flex flex-row items-center justify-between">
-                                <FeaturesIcon status="visagism" />
-
-                                {/* Badge de status - inicio */}
-                                <div className="py-2 px-4 bg-yellow-100 flex flex-row gap-2 rounded-full">
-                                    <img src="lp/images/features-pandami/indevelopment.png"
-                                        width={16}
-                                        height={16} />
-                                    <p className="text-xs text-yellow-900">Em desenvolvimento</p>
-                                </div>
-                                {/* Badge de status - fim */}
-
-                            </div>
-                            {/* Div dos ícones e status - Fim */}
-
-                            <h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
-                                {features[5].title}
-                            </h3>
-                            <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                                {features[5].description}
-                            </p>
-                        </div>
-
-                        <Image
-                            src={features[5].image}
-                            alt="Sintonia Humana"
-                            width={400}
-                            height={300}
-                            className="absolute bottom-0 w-full object-contain object-bottom " />
-                    </div>
+                    <FeatureCard
+                        title="CRM"
+                        description="Controle financeiro integrado com histórico de clientes, cálculo automático de comissões, programa de fidelidade e relatórios gerenciais. Tudo para você ter o negócio sob controle."
+                        image={{
+                            src: "/lp/images/features-pandami/crm_feature.png",
+                            alt: "CRM",
+                        }}
+                        Icon={<FeaturesIcon status="visagism" />}
+                        badge={true}
+                    />
                     {/* Card CRM - Fim */}
 
                     {/* Card Afiliados  - Inicio */}
 
-                    <div className="relative w-full bg-white border border-gray-200 rounded-2xl items-center shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col min-h-[550px] lg:min-h-[600px] pt-8 px-4">
-                        <div className="z-10 w-full lg:w-[300px]">
-
-                            {/* Div dos ícones e status - inicio */}
-                            <div className="pb-4 flex flex-row items-center justify-between">
-                                <FeaturesIcon status="affiliated" />
-
-                                {/* Badge de status - inicio */}
-                                <div className="py-2 px-4 bg-yellow-100 flex flex-row gap-2 rounded-full">
-                                    <img src="lp/images/features-pandami/indevelopment.png"
-                                        width={16}
-                                        height={16} />
-                                    <p className="text-xs text-yellow-900">Em desenvolvimento</p>
-                                </div>
-                                {/* Badge de status - fim */}
-
-
-                            </div>
-                            {/* Div dos ícones e status - Fim */}
-
-                            <h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
-                                {features[6].title}
-                            </h3>
-                            <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                                {features[6].description}
-                            </p>
-                        </div>
-
-                        <Image
-                            src={features[6].image}
-                            alt="Sintonia Humana"
-                            width={400}
-                            height={300}
-                            className="absolute left-2.5 bottom-0 w-full object-contain object-bottom " />
-                    </div>
+                    <FeatureCard
+                        title="Seja um afiliado"
+                        description="Torne-se afiliado dos produtos PandaMI e ganhe comissão em cada venda realizada aos seus clientes."
+                        image={{
+                            src: "/lp/images/features-pandami/affiliated_feature.png",
+                            alt: "Seja um afiliado",
+                        }}
+                        Icon={<FeaturesIcon status="affiliated" />}
+                        badge={true}
+                    />
                     {/* Card Afiliados  - Fim */}
 
                     {/* Card Agendamento  - Inicio */}
 
-                    <div className="relative w-full bg-white border border-gray-200 rounded-2xl items-center shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col min-h-[550px] lg:min-h-[600px] pt-8 px-4">
-                        <div className="z-10 w-full lg:w-[300px]">
-
-                            {/* Div dos ícones e status - inicio */}
-                            <div className="pb-4 flex flex-row items-center justify-between">
-                                <FeaturesIcon status="dashboard" />
-
-                                {/* Badge de status - inicio */}
-                                <div className="py-2 px-4 bg-yellow-100 flex flex-row gap-2 rounded-full">
-                                    <img src="lp/images/features-pandami/indevelopment.png"
-                                        width={16}
-                                        height={16} />
-                                    <p className="text-xs text-yellow-900">Em desenvolvimento</p>
-                                </div>
-                                {/* Badge de status - fim */}
-
-
-                            </div>
-                            {/* Div dos ícones e status - Fim */}
-
-                            <h3 className="text-xl lg:text-2xl font-medium text-stone-900 mb-2 lg:mb-3">
-                                {features[7].title}
-                            </h3>
-                            <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                                {features[7].description}
-                            </p>
-                        </div>
-
-                        <Image
-                            src={features[7].image}
-                            alt="Sintonia Humana"
-                            width={400}
-                            height={300}
-                            className="absolute bottom-0 w-full object-contain object-bottom " />
-                    </div>
+                    <FeatureCard
+                        title="Agendamento"
+                        description="Seus clientes agendam online 24/7 e você recebe notificações automáticas. Sem ligações, sem WhatsApp lotado, sem esquecimentos."
+                        image={{
+                            src: "/lp/images/features-pandami/booking_feature.png",
+                            alt: "Agendamento",
+                        }}
+                        Icon={<FeaturesIcon status="dashboard" />}
+                        badge={true}
+                    />
 
                     {/* Card Agendamento  - Fim */}
 
