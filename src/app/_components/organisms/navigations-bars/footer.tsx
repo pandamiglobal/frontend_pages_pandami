@@ -18,7 +18,7 @@ export function Footer() {
 								width={50}
 								height={50}
 								className="h-10 w-auto"
-								style={{ width: 'auto' }}
+								style={{ width: "auto" }}
 							/>
 						</div>
 						<p className="text-sm text-gray-600 mb-6 max-w-sm">
@@ -135,7 +135,7 @@ export function Footer() {
 							<li className="flex items-center gap-2 justify-center md:justify-start">
 								<Phone className="h-4 w-4" />
 								<a
-									href="tel:5548984495927"
+									href="https://wa.me/5548984495927?text=Oi!%20Vim%20pelo%20site%20de%20voc%C3%AAs%20e%20quero%20entender%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20PandaMi"
 									className="hover:text-primary transition-colors"
 								>
 									{`+55 (48) 98449-5927`}

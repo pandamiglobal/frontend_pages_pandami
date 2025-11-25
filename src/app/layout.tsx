@@ -6,7 +6,7 @@ import Script from "next/script";
 import { Metadata } from "next";
 import defaultSeo from "@/common/config/default-seo";
 
-import { ConsentScripts } from "@/app/_components/organisms/consent-scripts";
+import { ConsentScripts } from "@/app/_components/organisms/consent-cookies-modal/consent-scripts";
 
 
 const ubuntu = Ubuntu({

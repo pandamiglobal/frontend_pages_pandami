@@ -1,10 +1,10 @@
 "use client";
 
 import { ThemeProvider } from "@/app/providers";
-import { Header } from "@/app/_components/organisms/header";
-import { Footer } from "@/app/_components/organisms/footer";
-import { Modal } from "@/app/_components/organisms/modal";
-import { CookiesModal } from "@/app/_components/organisms/cookies-modal";
+import { Header } from "@/app/_components/organisms/navigations-bars/header";
+import { Footer } from "@/app/_components/organisms/navigations-bars/footer";
+import { Modal } from "@/app/_components/molecules/modal";
+import { CookiesModal } from "@/app/_components/organisms/consent-cookies-modal/cookies-modal";
 
 interface PageLayoutProps {
 	children: React.ReactNode;

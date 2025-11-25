@@ -9,6 +9,7 @@ import { CtaSection } from "@/app/_components/organisms/sections/cta-section";
 import { BenefitsSection } from "@/app/_components/organisms/sections/benefits-section";
 import { PricingSection } from "@/app/_components/organisms/sections/pricing-section";
 import { BarberTestimonialsSection } from "@/app/_components/organisms/sections/barber-testimonials-section";
+import { VideoCtaSection } from "@/app/_components/organisms/sections/video-cta-section";
 
 import {
 	FAQJsonLd,
@@ -24,7 +25,6 @@ import {
 } from "@/app/_components/templates/seo/article-json-ld";
 import { FAQ_DATA, SITE_CONFIG } from "@/common/constants";
 import PageLayout from "@/app/_components/templates/page-layout";
-// Removidos imports específicos da seção de benefícios (agora componentizada)
 
 export default function Home() {
 	const breadcrumbItems = [
@@ -54,6 +54,7 @@ export default function Home() {
 					<SocialProofSection />
 					<BarberTestimonialsSection />
 					<PricingSection />
+					<VideoCtaSection />
 					<FAQSection faq={FAQ_DATA} />
 					<CtaSection />
 				</main>
