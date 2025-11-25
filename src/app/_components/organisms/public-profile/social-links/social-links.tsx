@@ -31,47 +31,78 @@ export function SocialLinks({ instagram, whatsapp, tiktok, linkedin }: SocialLin
     return platform.charAt(0).toUpperCase() + platform.slice(1)
   }
 
-  const sanitizeUrl = (url: string): string => {
-    try {
-      if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        return `https://${url}`
-      }
-      new URL(url)
-      return url
-    } catch {
-      return "#"
+  const formatSocialUrl = (platform: SocialPlatform, value: string): string => {
+    if (!value) return '#'
+    
+    const cleanValue = value.trim()
+
+    // If it looks like a full URL, assume it is one and ensure protocol
+    if (cleanValue.startsWith('http://') || cleanValue.startsWith('https://')) {
+       return cleanValue
+    }
+    
+    // Specific platform handling for handles/usernames/numbers
+    switch (platform) {
+      case 'whatsapp':
+        // Remove all non-digits
+        const digits = cleanValue.replace(/\D/g, '')
+        return `https://wa.me/${digits}`
+      
+      case 'instagram':
+        // Remove @ and /
+        const igHandle = cleanValue.replace(/^[@\/]+/, '')
+        return `https://instagram.com/${igHandle}`
+        
+      case 'tiktok':
+        // Ensure it has @
+        const tiktokHandle = cleanValue.replace(/^[@\/]+/, '')
+        return `https://tiktok.com/@${tiktokHandle}`
+        
+      case 'linkedin':
+        // Assume profile if not full URL
+        const linkedinHandle = cleanValue.replace(/^[\/]+/, '')
+        return `https://linkedin.com/in/${linkedinHandle}`
+        
+      default:
+         // Fallback to https://{value}
+         return `https://${cleanValue}`
     }
   }
 
-  const formatHandle = (platform: SocialPlatform, url: string): string | null => {
+  const getDisplayHandle = (platform: SocialPlatform, url: string): string | null => {
+    if (!url) return null
+    
+    // First, get the "full" url to parse it consistently
+    const fullUrl = formatSocialUrl(platform, url)
+    
     try {
-      const safeUrl = sanitizeUrl(url)
-      const parsed = new URL(safeUrl)
-      const path = parsed.pathname.replace(/\/+$/, "") // remove barra final
-
-      if (!path || path === "/") return null
-
-      // Casos específicos por plataforma
-      if (platform === "instagram" || platform === "tiktok") {
-        // Remove leading slash and optional @ if user included it in URL path
-        const handle = path.replace(/^[\/@]+/, "")
-        return handle ? `@${handle}` : null
-      }
-
-      if (platform === "linkedin") {
-        return path // ex: /in/carlosbarber
-      }
-
-      if (platform === "whatsapp") {
-        // Para WhatsApp, formatar o path numérico como telefone brasileiro
-        const digits = path.replace(/\D/g, "")
-        if (!digits) return null
-        return formatPhoneNumber(digits)
-      }
-
-      return path
+       const parsed = new URL(fullUrl)
+       
+       if (platform === 'whatsapp') {
+          // For whatsapp, we want the phone number formatted
+          // path is /55489999...
+          const digits = parsed.pathname.replace(/\D/g, '')
+          return formatPhoneNumber(digits)
+       }
+       
+       if (platform === 'linkedin') {
+           // /in/username or /company/companyname
+           // Just return the last part of the path
+           const parts = parsed.pathname.split('/').filter(Boolean)
+           return parts.length > 0 ? `/${parts[parts.length - 1]}` : null
+       }
+       
+       // Instagram and TikTok
+       // path is /username or /@username
+       const path = parsed.pathname.replace(/^\//, '')
+       if (!path) return null
+       
+       // For display, we usually want @username
+       const handle = path.replace(/^@/, '')
+       return `@${handle}`
+       
     } catch {
-      return null
+       return url
     }
   }
 
@@ -91,8 +122,8 @@ export function SocialLinks({ instagram, whatsapp, tiktok, linkedin }: SocialLin
   return (
     <div className="space-y-2">
       {socialLinks.map(({ platform, url }) => {
-        const safeUrl = sanitizeUrl(url!)
-        const handle = formatHandle(platform, url!)
+        const safeUrl = formatSocialUrl(platform, url!)
+        const handle = getDisplayHandle(platform, url!)
 
         return (
           <Link

@@ -199,8 +199,13 @@ export function usePublicProfileViewModel(
 
 	// 5. Integrations (WhatsApp & Google Maps)
 	const integrations = useMemo(() => {
-		const whatsappUrl = profile?.whatsapp_link ||
-			(profile?.phone ? buildWhatsAppUrl(profile.phone) : "");
+		// WhatsApp URL with standard message
+		const whatsappMessage = "Oi! Vim pelo site de vocês e quero agendar um horário.";
+		// Use whatsapp_link strictly as per requirement (phone is distinct)
+		const whatsappUrl = profile?.whatsapp_link 
+			? buildWhatsAppUrl(profile.whatsapp_link, whatsappMessage)
+			: "";
+			
 		const canContactViaWhatsApp = Boolean(whatsappUrl);
 
 		const googleMapsUrl = profile && (profile.city || profile.state) ? generateGoogleMapsUrl({
