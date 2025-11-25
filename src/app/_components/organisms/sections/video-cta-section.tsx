@@ -62,11 +62,13 @@ export function VideoCtaSection() {
 							{/* Video Container */}
 							<div className="relative w-full overflow-hidden rounded-2xl shadow-2xl border border-neutral-100 bg-white aspect-[9/16]">
 								<VturbVideoPlayer
-									videoId="6925bd886eab3cd25c53e051"
+									videoId="692607a5cb74e367057e6868"
 									accountId="6ac07b58-9e8e-40a1-8fed-da5b5628f8f1"
-									m3u8Id="6925bd856f8dcb3633ebadc4"
+									m3u8Id="692607a5cb74e367057e6868"
 									className="w-full h-full bg-neutral-100"
 								/>
+
+
 							</div>
 
 							{/* Floating Elements */}
