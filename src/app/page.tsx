@@ -1,5 +1,6 @@
 import { HeroSection } from "@/app/_components/organisms/sections/hero-section";
 import { WhyVisagismSection } from "@/app/_components/organisms/sections/why-visagism-section";
+import { FeaturesPandami } from "@/app/_components/organisms/sections/features-pandami";
 import { AboutVisagismSection } from "@/app/_components/organisms/sections/about-visagism-section";
 import { SocialProofSection } from "@/app/_components/organisms/sections/social-proof-section";
 import FAQSection from "@/app/_components/organisms/sections/faq-section";
@@ -9,17 +10,17 @@ import { BenefitsSection } from "@/app/_components/organisms/sections/benefits-s
 import { PricingSection } from "@/app/_components/organisms/sections/pricing-section";
 import { BarberTestimonialsSection } from "@/app/_components/organisms/sections/barber-testimonials-section";
 
-import { 
-	FAQJsonLd, 
-	OrganizationJsonLd, 
-	ProductJsonLd, 
-	BreadcrumbJsonLd, 
-	ReviewJsonLd 
+import {
+	FAQJsonLd,
+	OrganizationJsonLd,
+	ProductJsonLd,
+	BreadcrumbJsonLd,
+	ReviewJsonLd
 } from "@/app/_components/templates/seo/json-ld";
-import { 
-	ArticleJsonLd, 
-	LocalBusinessJsonLd, 
-	WebSiteJsonLd 
+import {
+	ArticleJsonLd,
+	LocalBusinessJsonLd,
+	WebSiteJsonLd
 } from "@/app/_components/templates/seo/article-json-ld";
 import { FAQ_DATA, SITE_CONFIG } from "@/common/constants";
 import PageLayout from "@/app/_components/templates/page-layout";
@@ -48,6 +49,7 @@ export default function Home() {
 					<WhyVisagismSection />
 					<CarouselSection />
 					<BenefitsSection />
+					<FeaturesPandami />
 					<AboutVisagismSection />
 					<SocialProofSection />
 					<BarberTestimonialsSection />
