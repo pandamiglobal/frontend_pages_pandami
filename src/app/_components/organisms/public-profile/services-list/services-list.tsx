@@ -24,12 +24,15 @@ export function ServicesList({ services }: ServicesListProps) {
   const formatPrice = (from?: number, to?: number): string => {
     if (!from && !to) return 'Preço sob consulta'
     
-    if (from && to && from !== to) {
-      return `R$ ${from.toFixed(2)} - R$ ${to.toFixed(2)}`
+    const fromNum = typeof from === 'number' ? from : Number(from) || 0
+    const toNum = typeof to === 'number' ? to : Number(to) || 0
+    
+    if (fromNum && toNum && fromNum !== toNum) {
+      return `R$ ${fromNum.toFixed(2)} - R$ ${toNum.toFixed(2)}`
     }
     
-    const price = from || to || 0
-    return `R$ ${price.toFixed(2)}`
+    const price = fromNum || toNum || 0
+    return `R$ ${Number(price).toFixed(2)}`
   }
 
   const formatDuration = (hours?: number): string => {
