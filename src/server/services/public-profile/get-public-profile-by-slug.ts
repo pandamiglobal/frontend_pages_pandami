@@ -17,7 +17,7 @@ export async function getPublicProfileBySlug(
 ): Promise<GetPublicProfileResult> {
 	try {
 		const response = await api.get<IPublicProfileFullResponse>(
-			`/public-profile/${slug}`
+			`/public-profile/s/${slug}`
 		);
 		
 		return {
