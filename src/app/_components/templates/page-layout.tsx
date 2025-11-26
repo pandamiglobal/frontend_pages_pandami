@@ -5,6 +5,7 @@ import { Header } from "@/app/_components/organisms/navigations-bars/header";
 import { Footer } from "@/app/_components/organisms/navigations-bars/footer";
 import { Modal } from "@/app/_components/molecules/modal";
 import { CookiesModal } from "@/app/_components/organisms/consent-cookies-modal/cookies-modal";
+import { SeoConfig } from "@/app/_components/templates/seo/json-ld";
 
 interface PageLayoutProps {
 	children: React.ReactNode;
@@ -20,6 +21,7 @@ export default function PageLayout({
 	
 	return (
 		<>
+			<SeoConfig />
 			<ThemeProvider
 				attribute="class"
 				defaultTheme="light"
@@ -27,9 +29,7 @@ export default function PageLayout({
 				disableTransitionOnChange
 			>
 				<Header variant={headerVariant} />
-				<main role="main" >
-					{children}
-				</main>
+				<main role="main">{children}</main>
 				{!hideFooter && <Footer />}
 				<Modal />
 				<CookiesModal />

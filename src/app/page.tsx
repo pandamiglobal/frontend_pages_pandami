@@ -10,39 +10,15 @@ import { BenefitsSection } from "@/app/_components/organisms/sections/benefits-s
 import { PricingSection } from "@/app/_components/organisms/sections/pricing-section";
 import { BarberTestimonialsSection } from "@/app/_components/organisms/sections/barber-testimonials-section";
 import { VideoCtaSection } from "@/app/_components/organisms/sections/video-cta-section";
-
-import {
-	FAQJsonLd,
-	OrganizationJsonLd,
-	ProductJsonLd,
-	BreadcrumbJsonLd,
-	ReviewJsonLd
-} from "@/app/_components/templates/seo/json-ld";
-import {
-	ArticleJsonLd,
-	LocalBusinessJsonLd,
-	WebSiteJsonLd
-} from "@/app/_components/templates/seo/article-json-ld";
-import { FAQ_DATA, SITE_CONFIG } from "@/common/constants";
+import { FAQ_DATA } from "@/common/constants";
 import PageLayout from "@/app/_components/templates/page-layout";
 
 export default function Home() {
-	const breadcrumbItems = [
-		{ name: "Início", url: SITE_CONFIG.url },
-		{ name: "Visagismo com IA", url: `${SITE_CONFIG.url}/#visagismo` }
-	];
-
 	return (
 		<>
 			{/* JSON-LD Structured Data */}
-			<WebSiteJsonLd />
-			<OrganizationJsonLd />
-			<LocalBusinessJsonLd />
-			<ProductJsonLd />
-			<ArticleJsonLd />
-			<FAQJsonLd faq={FAQ_DATA} />
-			<BreadcrumbJsonLd items={breadcrumbItems} />
-			<ReviewJsonLd />
+		
+
 			<PageLayout>
 				<main>
 					<HeroSection />

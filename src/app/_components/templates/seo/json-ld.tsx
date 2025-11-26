@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import { JSON_LD_SEO } from "@/common/constants/json-ld-seo";
 
 interface JsonLdProps {
   data: Record<string, unknown>;
@@ -44,7 +45,7 @@ export const FAQJsonLd = ({ faq }: FAQJsonLdProps) => {
   }
 
   const faqStructuredData = {
-    "@context": "https://schema.org",
+    "@context": JSON_LD_SEO.CONTEXT,
     "@type": "FAQPage",
     "mainEntity": validFaq.map((item) => ({
       "@type": "Question",
@@ -62,25 +63,30 @@ export const FAQJsonLd = ({ faq }: FAQJsonLdProps) => {
 // Componente para dados da organização
 export const OrganizationJsonLd = () => {
   const organizationData = {
-    "@context": "https://schema.org",
+    "@context": JSON_LD_SEO.CONTEXT,
     "@type": "Organization",
-    "name": "PandaMi",
-    "description": "Visagismo com IA ",
-    "url": process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br",
-    "logo": `${process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"}/logo.svg`,
-    "sameAs": [
-      "https://www.instagram.com/pandami",
-      "https://www.facebook.com/pandami",
-      "https://www.linkedin.com/company/pandami"
-    ],
+    "@id": JSON_LD_SEO.IDS.ORGANIZATION,
+    "name": JSON_LD_SEO.ORGANIZATION.NAME,
+    "description": JSON_LD_SEO.ORGANIZATION.DESCRIPTION,
+    "url": JSON_LD_SEO.SITE_URL,
+    "logo": {
+      "@type": "ImageObject",
+      "@id": JSON_LD_SEO.IDS.PRIMARY_LOGO,
+      "url": JSON_LD_SEO.ORGANIZATION.LOGO,
+      "contentUrl": JSON_LD_SEO.ORGANIZATION.LOGO,
+      "width": "512",
+      "height": "512",
+      "caption": JSON_LD_SEO.ORGANIZATION.NAME
+    },
+    "sameAs": JSON_LD_SEO.ORGANIZATION.SAME_AS,
     "contactPoint": {
       "@type": "ContactPoint",
-      "contactType": "customer service",
-      "availableLanguage": "Portuguese"
+      "contactType": JSON_LD_SEO.ORGANIZATION.CONTACT.TYPE,
+      "availableLanguage": JSON_LD_SEO.ORGANIZATION.CONTACT.LANGUAGE
     },
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "BR"
+      "addressCountry": JSON_LD_SEO.ORGANIZATION.CONTACT.ADDRESS.COUNTRY
     }
   };
 
@@ -90,36 +96,35 @@ export const OrganizationJsonLd = () => {
 // Componente para produto/serviço
 export const ProductJsonLd = () => {
   const productData = {
-		"@context": "https://schema.org",
-		"@type": "SoftwareApplication",
-		name: "PandaMi | Visagismo com IA",
-		description:
-			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
-		url: process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br",
-		applicationCategory: "BeautyApplication",
-		operatingSystem: "Web Browser",
-		offers: {
-			"@type": "Offer",
-			price: "0",
-			priceCurrency: "BRL",
-			description: "Teste grátis de 7 dias",
-			availability: "https://schema.org/InStock",
-		},
-		aggregateRating: {
-			"@type": "AggregateRating",
-			ratingValue: "4.8",
-			ratingCount: "2000",
-			bestRating: "5",
-			worstRating: "1",
-		},
-		featureList: [
-			"Análise de cabelo com IA",
-			"Sugestões personalizadas",
-			"Compatível com todos os tipos de cabelo",
-			"Processamento em 30 segundos",
-			"Privacidade garantida",
-		],
-	};
+    "@context": JSON_LD_SEO.CONTEXT,
+    "@type": "SoftwareApplication",
+    name: JSON_LD_SEO.PRODUCT.NAME,
+    description: JSON_LD_SEO.PRODUCT.DESCRIPTION,
+    url: JSON_LD_SEO.SITE_URL,
+    author: {
+      "@id": JSON_LD_SEO.IDS.ORGANIZATION
+    },
+    applicationCategory: JSON_LD_SEO.PRODUCT.CATEGORY,
+    operatingSystem: JSON_LD_SEO.PRODUCT.OPERATING_SYSTEM,
+    offers: {
+      "@type": "Offer",
+      price: JSON_LD_SEO.PRODUCT.PRICE.AMOUNT,
+      priceCurrency: JSON_LD_SEO.PRODUCT.PRICE.CURRENCY,
+      description: JSON_LD_SEO.PRODUCT.PRICE.DESCRIPTION,
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@id": JSON_LD_SEO.IDS.ORGANIZATION
+      }
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: JSON_LD_SEO.PRODUCT.RATING.VALUE,
+      ratingCount: JSON_LD_SEO.PRODUCT.RATING.COUNT,
+      bestRating: JSON_LD_SEO.PRODUCT.RATING.BEST,
+      worstRating: JSON_LD_SEO.PRODUCT.RATING.WORST,
+    },
+    featureList: JSON_LD_SEO.PRODUCT.FEATURES,
+  };
 
   return <JsonLd data={productData} id="product-json-ld" />;
 };
@@ -127,7 +132,7 @@ export const ProductJsonLd = () => {
 // Componente para breadcrumbs
 export const BreadcrumbJsonLd = ({ items }: { items: Array<{ name: string; url: string }> }) => {
   const breadcrumbData = {
-    "@context": "https://schema.org",
+    "@context": JSON_LD_SEO.CONTEXT,
     "@type": "BreadcrumbList",
     "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
@@ -143,45 +148,161 @@ export const BreadcrumbJsonLd = ({ items }: { items: Array<{ name: string; url: 
 // Componente para reviews/testimonials
 export const ReviewJsonLd = () => {
   const reviewData = {
-    "@context": "https://schema.org",
+    "@context": JSON_LD_SEO.CONTEXT,
     "@type": "Product",
-    "name": "PandaMi - Visagismo com IA",
+    "name": JSON_LD_SEO.PRODUCT.NAME,
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "2000",
-      "bestRating": "5",
-      "worstRating": "1"
+      "ratingValue": JSON_LD_SEO.PRODUCT.RATING.VALUE,
+      "ratingCount": JSON_LD_SEO.PRODUCT.RATING.COUNT,
+      "bestRating": JSON_LD_SEO.PRODUCT.RATING.BEST,
+      "worstRating": JSON_LD_SEO.PRODUCT.RATING.WORST,
     },
-    "review": [
-      {
-        "@type": "Review",
-        "author": {
-          "@type": "Person",
-          "name": "Ana Paula"
-        },
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "reviewBody": "Revolucionou meu trabalho como visagista. A IA é incrível!"
+    "review": JSON_LD_SEO.REVIEWS.map(review => ({
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": review.AUTHOR
       },
-      {
-        "@type": "Review",
-        "author": {
-          "@type": "Person",
-          "name": "Carlos Mendes"
-        },
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "reviewBody": "Resultados surpreendentes em poucos segundos."
-      }
-    ]
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": review.RATING,
+        "bestRating": "5"
+      },
+      "reviewBody": review.BODY
+    }))
   };
 
   return <JsonLd data={reviewData} id="review-json-ld" />;
+};
+
+export const ArticleJsonLd = () => {
+  const articleData = {
+    "@context": JSON_LD_SEO.CONTEXT,
+    "@type": "Article",
+    "headline": JSON_LD_SEO.ARTICLE.HEADLINE,
+    "description": JSON_LD_SEO.ARTICLE.DESCRIPTION,
+    "image": JSON_LD_SEO.ARTICLE.IMAGES.map(img => `${JSON_LD_SEO.SITE_URL}${img}`),
+    "author": {
+      "@id": JSON_LD_SEO.IDS.ORGANIZATION
+    },
+    "publisher": {
+      "@id": JSON_LD_SEO.IDS.ORGANIZATION
+    },
+    "datePublished": "2024-01-01",
+    "dateModified": new Date().toISOString().split('T')[0],
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": JSON_LD_SEO.SITE_URL
+    },
+    "keywords": JSON_LD_SEO.ARTICLE.KEYWORDS,
+    "articleSection": JSON_LD_SEO.ARTICLE.SECTION,
+    "wordCount": JSON_LD_SEO.ARTICLE.WORD_COUNT,
+    "inLanguage": JSON_LD_SEO.ARTICLE.LANGUAGE
+  };
+
+  return <JsonLd data={articleData} id="article-json-ld" />;
+};
+
+// Componente para dados estruturados de serviço local
+export const LocalBusinessJsonLd = () => {
+  const localBusinessData = {
+    "@context": JSON_LD_SEO.CONTEXT,
+    "@type": "LocalBusiness",
+    "@id": JSON_LD_SEO.IDS.LOCAL_BUSINESS,
+    name: JSON_LD_SEO.ORGANIZATION.NAME,
+    description: JSON_LD_SEO.PRODUCT.DESCRIPTION,
+    url: JSON_LD_SEO.SITE_URL,
+    // Linkando com a Organização principal
+    "parentOrganization": {
+        "@id": JSON_LD_SEO.IDS.ORGANIZATION
+    },
+    telephone: JSON_LD_SEO.ORGANIZATION.CONTACT.TELEPHONE,
+    email: JSON_LD_SEO.ORGANIZATION.CONTACT.EMAIL,
+    address: {
+      "@type": "PostalAddress",
+      "addressCountry": JSON_LD_SEO.ORGANIZATION.CONTACT.ADDRESS.COUNTRY,
+      "addressRegion": JSON_LD_SEO.ORGANIZATION.CONTACT.ADDRESS.REGION,
+      "addressLocality": JSON_LD_SEO.ORGANIZATION.CONTACT.ADDRESS.LOCALITY,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: JSON_LD_SEO.ORGANIZATION.CONTACT.GEO.LATITUDE,
+      longitude: JSON_LD_SEO.ORGANIZATION.CONTACT.GEO.LONGITUDE,
+    },
+    openingHours: JSON_LD_SEO.LOCAL_BUSINESS.OPENING_HOURS,
+    priceRange: JSON_LD_SEO.LOCAL_BUSINESS.PRICE_RANGE,
+    paymentAccepted: JSON_LD_SEO.LOCAL_BUSINESS.PAYMENT_ACCEPTED,
+    currenciesAccepted: JSON_LD_SEO.LOCAL_BUSINESS.CURRENCIES_ACCEPTED,
+    serviceArea: {
+      "@type": "Country",
+      name: JSON_LD_SEO.LOCAL_BUSINESS.SERVICE_AREA,
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Serviços de Visagismo",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Análise de Visagismo com IA",
+            description:
+              "Análise personalizada de cabelo usando inteligência artificial",
+          },
+        },
+      ],
+    },
+  };
+
+  return <JsonLd data={localBusinessData} id="local-business-json-ld" />;
+};
+
+// Componente para dados estruturados de WebSite
+export const WebSiteJsonLd = () => {
+  const webSiteData = {
+    "@context": JSON_LD_SEO.CONTEXT,
+    "@type": "Website",
+    "@id": JSON_LD_SEO.IDS.WEBSITE,
+    name: JSON_LD_SEO.ORGANIZATION.NAME,
+    alternateName: JSON_LD_SEO.ORGANIZATION.ALTERNATE_NAME,
+    url: JSON_LD_SEO.SITE_URL,
+    description: JSON_LD_SEO.PRODUCT.DESCRIPTION,
+    inLanguage: JSON_LD_SEO.ARTICLE.LANGUAGE,
+    copyrightYear: new Date().getFullYear(),
+    copyrightHolder: {
+      "@id": JSON_LD_SEO.IDS.ORGANIZATION
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${JSON_LD_SEO.SITE_URL}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+    publisher: {
+      "@id": JSON_LD_SEO.IDS.ORGANIZATION
+    },
+  };
+  return <JsonLd data={webSiteData} id="website-json-ld" />;
+};
+
+
+interface SeoConfigProps {
+  breadcrumbItems?: Array<{ name: string; url: string }>;
+}
+
+export const SeoConfig = ({ breadcrumbItems }: SeoConfigProps) => {
+  return (
+    <>
+      <OrganizationJsonLd />
+      <ProductJsonLd />
+      {breadcrumbItems && <BreadcrumbJsonLd items={breadcrumbItems} />}
+      <ReviewJsonLd />
+      <ArticleJsonLd />
+      <LocalBusinessJsonLd />
+      <WebSiteJsonLd />
+    </>
+  );
 };
