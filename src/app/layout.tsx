@@ -71,18 +71,13 @@ export default function RootLayout({
 			suppressHydrationWarning
 			className={`${ubuntu.variable} ${fahkwang.variable}`}
 		>
+			<head>
+				{/* Bing Webmaster Tool */}
+				<meta name="msvalidate.01" content="8A95AB149BD17EA6C91FC94BE3387B48" />
+			</head>
 			<body className={`font-sans`}>
-				{/* Google Tag Manager (noscript) */}
 				<Analytics />
-				<noscript>
-					<iframe
-						src="https://www.googletagmanager.com/ns.html?id=GTM-TWV54TQV"
-						height="0"
-						width="0"
-						style={{ display: 'none', visibility: 'hidden' }}
-					/>
-				</noscript>
-				{/* End Google Tag Manager (noscript) */}
+			
 				{children}
 			</body>
 		</html>
