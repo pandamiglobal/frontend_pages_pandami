@@ -1,4 +1,4 @@
-import defaultSeo from "@/common/config/default-seo";
+import defaultSeo from "@/common/constants/default-seo";
 import BlogGrid from "@/app/_components/organisms/sections/blog-grid";
 import { Metadata } from "next";
 import PageLayout from "@/app/_components/templates/page-layout";

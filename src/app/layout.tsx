@@ -2,11 +2,10 @@ import type React from "react";
 import "./globals.css";
 import { Ubuntu, Fahkwang } from "next/font/google";
 
-import Script from "next/script";
 import { Metadata } from "next";
-import defaultSeo from "@/common/config/default-seo";
 
-import { ConsentScripts } from "@/app/_components/organisms/consent-cookies-modal/consent-scripts";
+import { DEFAULT_SEO } from "@/common/constants/default-seo";
+import Analytics from "@/app/_components/molecules/analytics";
 
 
 const ubuntu = Ubuntu({
@@ -31,9 +30,9 @@ const siteUrl =
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteUrl),
-	title: defaultSeo.title,
-	description: defaultSeo.description,
-	keywords: defaultSeo.keywords,
+	title: DEFAULT_SEO.title,
+	description: DEFAULT_SEO.description,
+	keywords: DEFAULT_SEO.keywords,
 	robots: {
 		index: true,
 		follow: true,
@@ -45,9 +44,9 @@ export const metadata: Metadata = {
 			"max-snippet": -1,
 		},
 	},
-	openGraph: defaultSeo.openGraph,
-	twitter: defaultSeo.twitter,
-	alternates: defaultSeo.alternates,
+	openGraph: DEFAULT_SEO.openGraph,
+	twitter: DEFAULT_SEO.twitter,
+	alternates: DEFAULT_SEO.alternates,
 	authors: [{ name: "PandaMi" }],
 	creator: "PandaMi",
 	publisher: "PandaMi",
@@ -72,50 +71,9 @@ export default function RootLayout({
 			suppressHydrationWarning
 			className={`${ubuntu.variable} ${fahkwang.variable}`}
 		>
-			<head>
-				{/* Google Tag Manager */}
-				<Script id="gtm-init" strategy="afterInteractive">
-					{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TWV54TQV');`}
-				</Script>
-				{/* End Google Tag Manager */}
-				<Script id="ga-consent-default" strategy="beforeInteractive">
-					{`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              // Padrão: negar até o usuário escolher
-              gtag('consent', 'default', {
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied',
-                'analytics_storage': 'denied'
-              });
-              // Sinais essenciais sem cookies
-              gtag('set', 'url_passthrough', true);
-              gtag('set', 'ads_data_redaction', true);
-            `}
-				</Script>
-				{/* GA sempre carregado para pings essenciais (consent negado por padrão) */}
-				<Script
-					src="https://www.googletagmanager.com/gtag/js?id=G-FPJQ0WXH4J"
-					strategy="afterInteractive"
-				/>
-				<Script id="ga-init" strategy="afterInteractive">
-					{`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);} 
-              gtag('js', new Date());
-              gtag('config', 'G-FPJQ0WXH4J');
-            `}
-				</Script>
-				{/* Scripts dependentes de consentimento */}
-				<ConsentScripts />
-			</head>
 			<body className={`font-sans`}>
 				{/* Google Tag Manager (noscript) */}
+				<Analytics />
 				<noscript>
 					<iframe
 						src="https://www.googletagmanager.com/ns.html?id=GTM-TWV54TQV"
