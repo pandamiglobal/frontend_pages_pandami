@@ -44,6 +44,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			</Script>
 			{/* Scripts dependentes de consentimento */}
 			<ConsentScripts />
+
+			<noscript>
+				<iframe
+					src="https://www.googletagmanager.com/ns.html?id=GTM-TWV54TQV"
+					height="0"
+					width="0"
+					style={{ display: "none", visibility: "hidden" }}
+				/>
+			</noscript>
 		</>
 	);
 }
