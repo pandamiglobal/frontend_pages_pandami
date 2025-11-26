@@ -73,6 +73,10 @@ export default function RootLayout({
 			className={`${ubuntu.variable} ${fahkwang.variable}`}
 		>
 			<head>
+				{/* Bing Webmaster Tool */}
+				<meta name="msvalidate.01" content="8A95AB149BD17EA6C91FC94BE3387B48" />
+				{/* End Bing Webmaster Tool */}
+
 				{/* Google Tag Manager */}
 				<Script id="gtm-init" strategy="afterInteractive">
 					{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
