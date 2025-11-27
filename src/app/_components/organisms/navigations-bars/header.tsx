@@ -188,6 +188,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
 									size="sm"
                   variant="outline"
 									className="px-3 whitespace-nowrap"
+									gtmData={{event: "access_saas_login", category: "button", action: "click", label: "acessar-painel"}}
 								>
 									ACESSAR PAINEL
 								</PrimaryButton>
@@ -197,6 +198,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
 									icon={<ArrowRight className="h-4 w-4" />}
 									size="sm"
 									className="px-3 whitespace-nowrap"
+									gtmData={{event: "access_saas_register", category: "button", action: "click", label: "comecar-agora"}}
 								>
 									COMEÇAR AGORA
 								</PrimaryButton>

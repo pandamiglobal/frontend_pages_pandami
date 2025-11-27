@@ -20,20 +20,18 @@ export default function Home() {
 		
 
 			<PageLayout>
-				<main>
-					<HeroSection />
-					<WhyVisagismSection />
-					<CarouselSection />
-					<BenefitsSection />
-					<FeaturesPandami />
-					<AboutVisagismSection />
-					<SocialProofSection />
-					<BarberTestimonialsSection />
-					<PricingSection />
-					<VideoCtaSection />
-					<FAQSection faq={FAQ_DATA} />
-					<CtaSection />
-				</main>
+				<HeroSection />
+				<WhyVisagismSection />
+				<CarouselSection />
+				<BenefitsSection />
+				<FeaturesPandami />
+				<AboutVisagismSection />
+				<SocialProofSection />
+				<BarberTestimonialsSection />
+				<PricingSection />
+				<VideoCtaSection />
+				<FAQSection faq={FAQ_DATA} />
+				<CtaSection />
 			</PageLayout>
 		</>
 	);
