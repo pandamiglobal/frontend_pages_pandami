@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/app/_components/atoms/ui/container";
-import { PrimaryButton } from "@/app/_components/molecules/primary-button";
+import { PrimaryButton } from "@/app/_components/molecules/branded-button";
 import { ArrowRight } from "lucide-react";
 
 // Interfaces para os componentes

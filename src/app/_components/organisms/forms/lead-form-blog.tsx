@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Input } from "@/app/_components/atoms/ui/input";
-import { PrimaryButton } from "@/app/_components/molecules/primary-button";
+import { PrimaryButton } from "@/app/_components/molecules/branded-button";
 import { useState } from "react";
 import useCreateLead from "@/common/hooks/use-create-lead";
 import { EOriginLead } from "@/common/types/ILead";

@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { PrimaryButton } from "@/app/_components/molecules/primary-button";
+import { PrimaryButton } from "@/app/_components/molecules/branded-button";
 import { useConsent } from "@/common/hooks/use-consent";
 import { useConsentAnalytics } from "@/common/hooks/use-consent-analytics";
 import { ConsentChoice } from "@/common/types/IConsentCookies";

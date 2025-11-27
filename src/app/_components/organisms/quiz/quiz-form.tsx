@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { Container } from "@/app/_components/atoms/ui/container"
-import { PrimaryButton } from "@/app/_components/molecules/primary-button"
+import { PrimaryButton } from "@/app/_components/molecules/branded-button"
 import { Confetti, type ConfettiRef } from "@/app/_components/atoms/ui/confetti"
 import { ArrowRight } from "lucide-react"
 import { QuizRadioGroup } from "./quiz-radio"

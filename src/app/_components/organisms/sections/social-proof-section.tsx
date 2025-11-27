@@ -5,7 +5,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import { Container } from "@/app/_components/atoms/ui/container";
 import { AboutVisagismComparisonSlider } from "@/app/_components/organisms/sections/about-visagism-comparison-slider";
-import { PrimaryButton } from "@/app/_components/molecules/primary-button";
+import { PrimaryButton } from "@/app/_components/molecules/branded-button";
 import { ArrowLeft, ArrowRight, XCircle, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";

@@ -1,7 +1,7 @@
 "use client"
 
 import { Container } from "@/app/_components/atoms/ui/container"
-import { PrimaryButton } from "@/app/_components/molecules/primary-button"
+import { PrimaryButton } from "@/app/_components/molecules/branded-button"
 import { ArrowRight, Search, TrendingUp, Users, DollarSign, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"

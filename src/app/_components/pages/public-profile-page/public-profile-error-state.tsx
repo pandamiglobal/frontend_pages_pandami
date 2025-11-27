@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { XCircle, Search, AlertCircle, LucideIcon } from "lucide-react";
-import { PrimaryButton } from "@/app/_components/molecules/primary-button";
+import { PrimaryButton } from "@/app/_components/molecules/branded-button";
 
 export type PublicProfileErrorType =
 	| "invalid_slug"

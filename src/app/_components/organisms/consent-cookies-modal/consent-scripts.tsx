@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState, memo } from "react";
+import { useEffect, useState } from "react";
 import Script from "next/script";
 import { useConsent } from "@/common/hooks/use-consent";
 import { ConsentChoice } from "@/common/types/IConsentCookies";
 
-const ConsentScripts = memo(() => {
+export function ConsentScripts() {
   const { choice } = useConsent();
   const [isAllowed, setIsAllowed] = useState(false);
 
@@ -47,7 +47,7 @@ const ConsentScripts = memo(() => {
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             // Define o consentimento como verdadeiro já que este script só é carregado com consentimento explícito
             c[a]("consent", true);
-          })(window, document, "clarity", "script", "tctj766hfq");
+          })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID}");
         `}
 			</Script>
 
@@ -66,10 +66,6 @@ const ConsentScripts = memo(() => {
 			</Script>
 		</>
 	);
-});
-
-ConsentScripts.displayName = "ConsentScripts";
-
-export { ConsentScripts };
+}
 
 

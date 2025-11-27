@@ -8,7 +8,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/app/_components/atom
 import { AboutVisagismComparisonSlider } from "@/app/_components/organisms/sections/about-visagism-comparison-slider";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
-import { PrimaryButton } from "@/app/_components/molecules/primary-button";
+import { PrimaryButton } from "@/app/_components/molecules/branded-button";
 import Link from "next/link";
 
 interface VariantSet {

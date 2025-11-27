@@ -12,7 +12,7 @@ import {
 	AvatarImage,
 	AvatarFallback,
 } from "@/app/_components/atoms/ui/avatar";
-import { PrimaryButton } from "@/app/_components/molecules/primary-button";
+import { PrimaryButton } from "@/app/_components/molecules/branded-button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { FAQJsonLd } from "@/app/_components/templates/seo/json-ld";

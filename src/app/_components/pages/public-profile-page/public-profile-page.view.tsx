@@ -6,7 +6,7 @@ import {
 	UsePublicProfileViewModelReturn,
 } from "@/common/types/IPublicProfile";
 import { ProfileHeaderWrapper } from "../../organisms/public-profile/wrappers/profile-header-wrapper";
-import { PrimaryButton } from "../../molecules/primary-button";
+import { PrimaryButton } from "../../molecules/branded-button";
 import { Phone, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

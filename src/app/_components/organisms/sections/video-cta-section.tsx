@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/app/_components/atoms/ui/container";
-import { PrimaryButton } from "@/app/_components/molecules/primary-button";
+import { PrimaryButton } from "@/app/_components/molecules/branded-button";
 import { VturbVideoPlayer } from "@/app/_components/molecules/vturb-video-player";
 import { TrendingUp, Users, Zap, PlayCircle, ArrowRight } from "lucide-react";
 import Image from "next/image";

@@ -1,5 +1,7 @@
+"use client";
+
 import { Container } from "@/app/_components/atoms/ui/container";
-import { PrimaryButton } from "@/app/_components/molecules/primary-button";
+import { PrimaryButton } from "@/app/_components/molecules/branded-button";
 import {
 	Target,
 	Crown,

@@ -1,12 +1,21 @@
 import { cn } from "@/lib/utils"
-import { type ButtonHTMLAttributes, forwardRef, type ReactNode, type AnchorHTMLAttributes } from "react"
+import { type ButtonHTMLAttributes, type ReactNode, type AnchorHTMLAttributes, type Ref, type MouseEvent, type MouseEventHandler } from "react"
 import Link from "next/link"
+import { sendGTMEvent } from "@/lib/utils/gtm"
+
+type GTMData = {
+  event: string
+  category: string
+  action: string
+  label: string
+}
 
 type BaseProps = {
   variant?: "default" | "outline" | "outline-solid" | "white" | "custom"
   size?: "default" | "sm" | "lg"
   icon?: ReactNode
   iconPosition?: "left" | "right"
+  gtmData?: GTMData
 }
 
 type ButtonProps = BaseProps & ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -37,67 +46,76 @@ const SIZE_CLASSES = {
   lg: "h-11 px-8 py-4 text-base"
 } as const
 
-const PrimaryButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, PrimaryButtonProps>(
-  ({ 
-    className, 
-    variant = "default", 
-    size = "default", 
-    icon, 
-    iconPosition = "right", 
-    children, 
-    ...props 
-  }, ref) => {
-    const iconElement = icon && (
-      <span className={iconPosition === "left" ? "mr-2" : "ml-2"}>
-        {icon}
-      </span>
-    )
+export function PrimaryButton({ 
+  className, 
+  variant = "default", 
+  size = "default", 
+  icon, 
+  iconPosition = "right", 
+  children, 
+  ref,
+  gtmData,
+  onClick,
+  ...props 
+}: PrimaryButtonProps & { ref?: Ref<HTMLButtonElement | HTMLAnchorElement> }) {
+  const iconElement = icon && (
+    <span className={iconPosition === "left" ? "mr-2" : "ml-2"}>
+      {icon}
+    </span>
+  )
 
-    const baseClassName = cn(
-      BASE_CLASSES,
-      VARIANT_CLASSES[variant],
-      SIZE_CLASSES[size],
-      className,
-      "cursor-pointer"
-    )
+  const baseClassName = cn(
+    BASE_CLASSES,
+    VARIANT_CLASSES[variant],
+    SIZE_CLASSES[size],
+    className,
+    "cursor-pointer"
+  )
 
-    const content = (
-      <>
-        {iconPosition === "left" && iconElement}
-        {children}
-        {iconPosition === "right" && iconElement}
-      </>
-    )
+  const content = (
+    <>
+      {iconPosition === "left" && iconElement}
+      {children}
+      {iconPosition === "right" && iconElement}
+    </>
+  )
 
-    // Se tem href, renderiza como Link
-    if ('href' in props && props.href) {
-      const { href, ...linkProps } = props
-      return (
-        <Link
-          href={href}
-          ref={ref as React.Ref<HTMLAnchorElement>}
-          className={baseClassName}
-          {...linkProps}
-        >
-          {content}
-        </Link>
-      )
+  const handleClick = (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    if (gtmData) {
+      sendGTMEvent(gtmData)
     }
+    
+    if (onClick) {
+      (onClick as MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)(e)
+    }
+  }
 
-    // Senão, renderiza como button
+  // Se tem href, renderiza como Link
+  if ('href' in props && props.href) {
+    const { href, ...linkProps } = props
     return (
-      <button
-        ref={ref as React.Ref<HTMLButtonElement>}
+      <Link
+        href={href}
+        ref={ref as Ref<HTMLAnchorElement>}
         className={baseClassName}
-        {...props as ButtonHTMLAttributes<HTMLButtonElement>}
+        onClick={handleClick}
+        {...linkProps}
       >
         {content}
-      </button>
+      </Link>
     )
   }
-)
 
-PrimaryButton.displayName = "PrimaryButton"
-
-export { PrimaryButton }
+  // Senão, renderiza como button
+  return (
+    <button
+      ref={ref as Ref<HTMLButtonElement>}
+      className={baseClassName}
+      onClick={handleClick}
+      {...props as ButtonHTMLAttributes<HTMLButtonElement>}
+    >
+      {content}
+    </button>
+  )
+}
 

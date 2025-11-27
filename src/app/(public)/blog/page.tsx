@@ -1,10 +1,10 @@
-import defaultSeo from "@/common/constants/default-seo";
+import { DEFAULT_SEO } from "@/common/constants/default-seo";
 import BlogGrid from "@/app/_components/organisms/sections/blog-grid";
 import { Metadata } from "next";
 import PageLayout from "@/app/_components/templates/page-layout";
 
 export const metadata: Metadata = {
-	title: defaultSeo.blog_title,
+	title: DEFAULT_SEO.blog_title,
 };
 
 export default async function BlogPage({ searchParams }: any) {
