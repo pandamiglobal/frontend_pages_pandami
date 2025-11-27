@@ -32,6 +32,12 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
+  /* Global timeout settings */
+  timeout: 30000, // 30 seconds for each test
+  expect: {
+    timeout: 10000, // 10 seconds for assertions
+  },
+
   /* Configure projects for major browsers */
   projects: [
     {
@@ -60,10 +66,10 @@ export default defineConfig({
     // },
   ],
 
-  
+   /*
   webServer: {
     command: 'pnpm dev',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
-   },
+   }, */
 });
