@@ -30,15 +30,14 @@ export function QuizCtaSection() {
           </p>
 
           {/* CTA Button */}
-          <Link href="/ferramenta-que-aumenta-o-faturamento-dos-saloes">
-            <PrimaryButton
+          <PrimaryButton
+              href="/ferramenta-que-aumenta-o-faturamento-dos-saloes"
               icon={<ArrowRight className="h-5 w-5" />}
               size="lg"
               className="px-8 py-4 text-lg"
             >
               Fazer o Quiz Gratuito
             </PrimaryButton>
-          </Link>
 
           {/* Additional Info */}
           <p className="text-sm text-gray-500 mt-4">

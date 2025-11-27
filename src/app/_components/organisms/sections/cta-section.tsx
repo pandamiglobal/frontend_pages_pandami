@@ -27,15 +27,14 @@ export const CtaSection: React.FC = () => {
 									oferece resultados baseados em ciência.
 								</p>
 							</div>
-							<Link href="https://app.pandami.com.br/auth/sign-up">
-								<PrimaryButton
+							<PrimaryButton
+									href="https://app.pandami.com.br/auth/sign-up"
 									size="lg"
 									icon={<ArrowRight className="h-4 w-4" />}
 									className="w-full md:max-w-72 px-4"
 								>
 									COMEÇAR TESTE DE 7 DIAS
 								</PrimaryButton>
-							</Link>
 						</div>
 
 						{/* Imagem */}

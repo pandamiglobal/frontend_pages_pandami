@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@/lib/utils"
 import { type ButtonHTMLAttributes, type ReactNode, type AnchorHTMLAttributes, type Ref, type MouseEvent, type MouseEventHandler } from "react"
 import Link from "next/link"
@@ -90,9 +92,12 @@ export function PrimaryButton({
     }
   }
 
+  const href = (props as any).href;
+
   // Se tem href, renderiza como Link
-  if ('href' in props && props.href) {
-    const { href, ...linkProps } = props
+  if (href) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { href: _href, ...linkProps } = props as any
     return (
       <Link
         href={href}

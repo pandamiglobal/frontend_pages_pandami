@@ -184,16 +184,15 @@ export function BarberTestimonialsSection() {
 					</div>
 				</div>
 
-				<Link href="https://app.pandami.com.br/auth/sign-up/">
-					<PrimaryButton
-						variant="default"
-						size="lg"
-						icon={<ArrowRight className="w-5 h-5" />}
-						iconPosition="right"
-					>
-						Quero no meu salão
-					</PrimaryButton>
-				</Link>
+				<PrimaryButton
+					href="https://app.pandami.com.br/auth/sign-up/"
+					variant="default"
+					size="lg"
+					icon={<ArrowRight className="w-5 h-5" />}
+					iconPosition="right"
+				>
+					Quero no meu salão
+				</PrimaryButton>
 			</Container>
 		</section>
 	);

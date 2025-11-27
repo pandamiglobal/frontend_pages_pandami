@@ -166,15 +166,14 @@ export function BenefitsSection() {
 								<BenefitItem key={b.title} {...b} />
 							))}
 						</ul>
-						<Link href="https://app.pandami.com.br/auth/sign-up/">
-							<PrimaryButton
+						<PrimaryButton
+								href="https://app.pandami.com.br/auth/sign-up/"
 								icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 								size="lg"
 								className="px-4 mt-3"
 							>
 								COMEÇAR TESTE DE 7 DIAS
 							</PrimaryButton>
-						</Link>
 					</div>
 					<div className="flex flex-col gap-6 items-center w-full sm:w-auto">
 						<div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">
@@ -215,15 +214,14 @@ export function BenefitsSection() {
 								<BenefitItem key={b.title} {...b} />
 							))}
 						</ul>
-						<Link href="https://app.pandami.com.br/auth/sign-up/">
-							<PrimaryButton
+						<PrimaryButton
+								href="https://app.pandami.com.br/auth/sign-up/"
 								icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 								size="lg"
 								className="px-4 mt-3"
 							>
 								COMEÇAR TESTE DE 7 DIAS
 							</PrimaryButton>
-						</Link>
 					</div>
 					<div className="flex flex-col gap-6 items-center w-full sm:w-auto">
 						<div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">

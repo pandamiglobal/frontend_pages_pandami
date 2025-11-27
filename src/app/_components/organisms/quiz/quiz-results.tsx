@@ -141,8 +141,7 @@ export function QuizResults({ answers }: QuizResultsProps) {
                   Quer ver como resolver isso na prática?
                 </h3>
                 
-                <Link href="/" className="block w-full">
-                  <motion.div
+                <motion.div
                     animate={{ scale: [1, 1.02, 1] }}
                     transition={{
                       duration: 2,
@@ -154,6 +153,7 @@ export function QuizResults({ answers }: QuizResultsProps) {
                     className="w-full"
                   >
                     <PrimaryButton
+                      href="/"
                       icon={<ArrowRight className="h-5 w-5" />}
                       size="lg"
                       className="w-full h-auto min-h-[3.5rem] py-6 text-lg md:text-xl font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all text-white border-none whitespace-normal"
@@ -161,7 +161,6 @@ export function QuizResults({ answers }: QuizResultsProps) {
                       Conhecer a ferramenta agora
                     </PrimaryButton>
                   </motion.div>
-                </Link>
                 
                 <p className="mt-4 text-sm text-neutral-500">
                   Sem compromisso. Apenas veja o que é possível.

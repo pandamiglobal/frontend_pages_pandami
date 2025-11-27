@@ -209,14 +209,13 @@ function GenderContent({ data, direction }: GenderContentProps) {
 				</div>
 
 				<div className="flex flex-col md:flex-row gap-4 mt-2">
-					<Link href="https://app.pandami.com.br/auth/sign-up/">
-						<PrimaryButton
+					<PrimaryButton
+							href="https://app.pandami.com.br/auth/sign-up/"
 							size="lg"
 							icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 						>
 							COMEÇAR TESTE DE 7 DIAS
 						</PrimaryButton>
-					</Link>
 				</div>
 			</div>
 

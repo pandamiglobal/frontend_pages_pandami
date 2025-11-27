@@ -134,11 +134,13 @@ function PricingCard({
 				</div>
 			</div>
 
-			<Link href={signUpUrl} className="w-full mt-auto">
-				<PrimaryButton className="w-full" size="lg">
+			<PrimaryButton 
+				href={signUpUrl} 
+				className="w-full mt-auto" 
+				size="lg"
+			>
 					Começar por apenas R${displayPrice.toFixed(2).replace(".", ",")}
 				</PrimaryButton>
-			</Link>
 
 			<p className="text-neutral-500 dark:text-neutral-400 text-xs mt-4 text-center">
 				{periodText[period]}

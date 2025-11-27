@@ -1,4 +1,4 @@
-import Script  from "next/script";
+import Script from "next/script";
 import { ConsentScripts } from "@/app/_components/organisms/consent-cookies-modal/consent-scripts";
 
 export default function Analytics() {

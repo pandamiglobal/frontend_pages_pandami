@@ -153,11 +153,12 @@ export function PublicProfilePageView({
 						</div>
 
 						<div className="w-full max-w-sm space-y-4 pt-2">
-							<Link href="/" className="block w-full">
-								<PrimaryButton className="w-full justify-center bg-neutral-900 hover:bg-neutral-800 text-white h-12 text-base">
+							<PrimaryButton 
+									href="/" 
+									className="w-full justify-center bg-neutral-900 hover:bg-neutral-800 text-white h-12 text-base"
+								>
 									Descobrir cortes de cabelo agora
 								</PrimaryButton>
-							</Link>
 
 							<Link
 								href="/ferramenta-que-aumenta-o-faturamento-dos-saloes"

@@ -86,14 +86,13 @@ export function PublicProfileErrorState({
 						</PrimaryButton>
 					)}
 
-					<Link href="/" className="w-full block">
-						<PrimaryButton
+					<PrimaryButton
+							href="/"
 							variant={type === "generic_error" ? "outline" : "default"}
 							className="w-full justify-center"
 						>
 							Voltar para o início
 						</PrimaryButton>
-					</Link>
 
 					{type === "not_found" && (
 						<p className="text-xs text-neutral-500">

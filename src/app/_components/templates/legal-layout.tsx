@@ -24,9 +24,9 @@ export default function LegalLayout({
 	currentPath,
 }: LegalLayoutProps) {
 	return (
-		<div className="min-h-screen bg-background mt-40">
+		<div className="min-h-screen bg-background pt-14 lg:pt-16">
 			{/* Breadcrumb simples */}
-			<div className="absolute top-16 left-0 w-full border-b bg-muted/30">
+			<div className="w-full border-b bg-muted/30">
 				<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 					<nav className="flex items-center space-x-2 text-sm text-muted-foreground py-4">
 						<Link href="/" className="hover:text-foreground transition-colors">

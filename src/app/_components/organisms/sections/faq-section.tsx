@@ -85,18 +85,14 @@ export default function FAQSection({ faq }: { faq: FAQArray }) {
 										</p>
 									</div>
 									<div className="flex justify-center lg:justify-start">
-										<Link
-											href="https://app.pandami.com.br/auth/sign-up"
-											className="w-full"
-										>
-											<PrimaryButton
+										<PrimaryButton
+												href="https://app.pandami.com.br/auth/sign-up"
 												size="lg"
 												icon={<ArrowRight className="h-4 w-4" />}
 												className="w-full md:w-auto"
 											>
 												COMEÇAR TESTE DE 7 DIAS
 											</PrimaryButton>
-										</Link>
 									</div>
 								</div>
 							</div>

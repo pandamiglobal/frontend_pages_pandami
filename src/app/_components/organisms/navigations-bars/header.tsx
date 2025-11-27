@@ -182,8 +182,8 @@ export function Header({ variant = 'default' }: HeaderProps) {
 								</button>
 							</div>
 
-							<Link href="https://app.pandami.com.br/auth/sign-in/">
-								<PrimaryButton
+							<PrimaryButton
+									href="https://app.pandami.com.br/auth/sign-in/"
 									icon={<ArrowRight className="h-4 w-4" />}
 									size="sm"
                   variant="outline"
@@ -191,17 +191,15 @@ export function Header({ variant = 'default' }: HeaderProps) {
 								>
 									ACESSAR PAINEL
 								</PrimaryButton>
-							</Link>
 
-							<Link href="https://app.pandami.com.br/auth/sign-up/">
-								<PrimaryButton
+							<PrimaryButton
+									href="https://app.pandami.com.br/auth/sign-up/"
 									icon={<ArrowRight className="h-4 w-4" />}
 									size="sm"
 									className="px-3 whitespace-nowrap"
 								>
 									COMEÇAR AGORA
 								</PrimaryButton>
-							</Link>
 						</div>
 
 						{/* Menu Mobile Toggle */}
@@ -275,34 +273,26 @@ export function Header({ variant = 'default' }: HeaderProps) {
 
 							<div className="space-y-4 mt-10">
 								{/* Substitui os botões do mobile pelos do desktop */}
-								<Link
-									href="https://app.pandami.com.br/auth/sign-in/"
-									onClick={handleLinkClick}
-									className="block"
-								>
-									<PrimaryButton 
-                    className="w-full" 
+								<PrimaryButton 
+                    href="https://app.pandami.com.br/auth/sign-in/"
+                    onClick={handleLinkClick}
+                    className="w-full block" 
                     variant="outline" 
                     size="lg"
                     icon={<ArrowRight className="h-5 w-5" />}
                   >
 										ACESSAR PAINEL
 									</PrimaryButton>
-								</Link>
 
-								<Link
-									href="https://app.pandami.com.br/auth/sign-up/"
-									onClick={handleLinkClick}
-									className="block"
-								>
-									<PrimaryButton
+								<PrimaryButton
+										href="https://app.pandami.com.br/auth/sign-up/"
+										onClick={handleLinkClick}
 										icon={<ArrowRight className="h-5 w-5" />}
-										className="w-full"
+										className="w-full block"
 										size="lg"
 									>
 										COMEÇAR AGORA
 									</PrimaryButton>
-								</Link>
 							</div>
 						</div>
 					</Container>

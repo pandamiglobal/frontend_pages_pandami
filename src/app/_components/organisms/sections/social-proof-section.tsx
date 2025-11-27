@@ -365,15 +365,14 @@ export function SocialProofSection() {
 						</div>
 
 						<div className="mt-6">
-							<Link href="https://app.pandami.com.br/auth/sign-up">
-								<PrimaryButton
+							<PrimaryButton
+									href="https://app.pandami.com.br/auth/sign-up"
 									size="lg"
 									className="w-full md:w-auto px-8 cursor-pointer"
 									icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 								>
 									Quero no meu salão
 								</PrimaryButton>
-							</Link>
 						</div>
 					</div>
 				</div>

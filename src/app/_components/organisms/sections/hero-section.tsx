@@ -38,15 +38,14 @@ export function HeroSection() {
 							</p>
 
 							<div className="flex gap-3 items-center justify-center lg:justify-start mt-2">
-								<Link href="https://app.pandami.com.br/auth/sign-up/">
-									<PrimaryButton
+								<PrimaryButton
+										href="https://app.pandami.com.br/auth/sign-up/"
 										icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 										size="lg"
 										className="px-4"
 									>
 										COMEÇAR TESTE DE 7 DIAS
 									</PrimaryButton>
-								</Link>
 							
 							</div>
 						</div>
