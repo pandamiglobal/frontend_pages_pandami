@@ -39,7 +39,13 @@ export function Header({ variant = 'default' }: HeaderProps) {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState<string>("")
+  const activeSectionRef = useRef<string>("")
   const languageButtonRef = useRef<HTMLButtonElement>(null)
+
+  // Atualizar o ref sempre que o state mudar
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
 
   // Controlar efeito de scroll
   useEffect(() => {
@@ -67,6 +73,8 @@ export function Header({ variant = 'default' }: HeaderProps) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveSection(`#${entry.target.id}`);
+          } else if (activeSectionRef.current === `#${entry.target.id}`) {
+            setActiveSection("");
           }
         });
       },

@@ -348,7 +348,6 @@ export default function CarouselSection() {
 
 				{/* Seção separada para o badge */}
 				<section
-					id="benefits"
 					className="w-full py-10  h-20 z-20  bg-neutral-800  relative flex flex-col justify-center items-center"
 				>
 					<BadgeIcon />
