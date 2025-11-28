@@ -1,6 +1,7 @@
 'use client'
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { Globe, Menu, ChevronDown, ArrowRight, X } from "lucide-react"
 import { Container } from "@/app/_components/atoms/ui/container"
@@ -33,9 +34,11 @@ interface HeaderProps {
 }
 
 export function Header({ variant = 'default' }: HeaderProps) {
+  const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState<string>("")
   const languageButtonRef = useRef<HTMLButtonElement>(null)
 
   // Controlar efeito de scroll
@@ -43,6 +46,42 @@ export function Header({ variant = 'default' }: HeaderProps) {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Detectar seção ativa baseado no scroll
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => {
+        // Suporta tanto "/#section" (home) quanto "#section" (LP)
+        if (item.href.startsWith("/#")) {
+          return item.href.substring(2);
+        } else if (item.href.startsWith("#")) {
+          return item.href.substring(1);
+        }
+        return null;
+      })
+      .filter(Boolean) as string[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
+      },
+      {
+        rootMargin: "-20% 0px -50% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   // Controlar o body quando o menu mobile está aberto
@@ -137,33 +176,44 @@ export function Header({ variant = 'default' }: HeaderProps) {
 							</Link>
 						</div>
 
-						{/* Nav Items - Apenas Desktop */}
-						<nav className="hidden lg:flex items-center justify-center flex-1">
-							{navItems.map((item) => (
-								<div key={item.title} className="mr-8 last:mr-0">
-									{item.hasDropdown ? (
-										<button
-											className="flex items-center text-base font-medium text-foreground hover:text-primary"
-											onClick={(e) => handleDropdownToggle(item.title, e)}
-										>
-											{item.icon && <item.icon className="h-5 w-5 mr-2" />}
-											{item.title}
-											<ChevronDown className="h-4 w-4 ml-1" />
-										</button>
-									) : (
-										<Link
-											href={item.href}
-											data-testid={`menu-${item.title.toLowerCase()}`}
-											className="text-base font-normal text-foreground hover:text-primary flex items-center"
-											onClick={handleLinkClick}
-										>
-											{item.icon && <item.icon className="h-5 w-5 mr-2" />}
-											{item.title}
-										</Link>
-									)}
-								</div>
-							))}
-						</nav>
+            {/* Nav Items - Apenas Desktop */}
+            <nav className="hidden lg:flex items-center justify-center flex-1">
+              {navItems.map((item) => {
+                const isAnchorLink = item.href.startsWith("/#") || item.href.startsWith("#");
+                const isActive = isAnchorLink
+                  ? activeSection === (item.href.startsWith("/#") ? item.href.substring(1) : item.href)
+                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
+
+                return (
+                  <div key={item.title} className="mr-8 last:mr-0">
+                    {item.hasDropdown ? (
+                      <button
+                        className={`flex items-center text-base font-medium hover:text-primary ${
+                          isActive ? "text-primary" : "text-foreground"
+                        }`}
+                        onClick={(e) => handleDropdownToggle(item.title, e)}
+                      >
+                        {item.icon && <item.icon className="h-5 w-5 mr-2" />}
+                        {item.title}
+                        <ChevronDown className="h-4 w-4 ml-1" />
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        data-testid={`menu-${item.title.toLowerCase()}`}
+                        className={`text-base font-normal hover:text-primary flex items-center transition-colors duration-300 ${
+                          isActive ? "text-primary" : "text-foreground"
+                        }`}
+                        onClick={handleLinkClick}
+                      >
+                        {item.icon && <item.icon className="h-5 w-5 mr-2" />}
+                        {item.title}
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
 
 						{/* Botões e controles - Desktop */}
 						<div className="hidden lg:flex items-center space-x-3 flex-1 justify-end">
@@ -248,58 +298,66 @@ export function Header({ variant = 'default' }: HeaderProps) {
 									<option value="pt-BR">Português</option>
 								</select>
 							</div>
-							<button
-								className="p-2 rounded-full hover:bg-accent"
-								onClick={() => setIsMobileMenuOpen(false)}
-								aria-label="Fechar menu"
-							>
-								<X className="h-6 w-6" />
-							</button>
-						</div>
+              <button
+                className="p-2 rounded-full hover:bg-accent"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Fechar menu"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
 
-						<div className="py-8 overflow-y-auto h-[calc(100vh-80px)]">
-							<nav className="space-y-6 mb-8">
-								{navItems.map((item) => (
-									<div key={item.title} className="border-b border-border pb-4">
-										<Link
-											href={item.href}
-											className="text-xl font-medium hover:text-primary flex items-center"
-											onClick={handleLinkClick}
-										>
-											{item.icon && <item.icon className="h-5 w-5 mr-2" />}
-											{item.title}
-										</Link>
-									</div>
-								))}
-							</nav>
+            <div className="py-8 overflow-y-auto h-[calc(100vh-80px)]">
+              <nav className="space-y-6 mb-8">
+                {navItems.map((item) => {
+                  const isAnchorLink = item.href.startsWith("/#") || item.href.startsWith("#");
+                  const isActive = isAnchorLink
+                    ? activeSection === (item.href.startsWith("/#") ? item.href.substring(1) : item.href)
+                    : pathname === item.href || pathname.startsWith(`${item.href}/`);
 
-							<div className="space-y-4 mt-10">
-								{/* Substitui os botões do mobile pelos do desktop */}
-								<PrimaryButton 
-                    href="https://app.pandami.com.br/auth/sign-in/"
-                    onClick={handleLinkClick}
-                    className="w-full block" 
-                    variant="outline" 
-                    size="lg"
-                    icon={<ArrowRight className="h-5 w-5" />}
-                  >
-										ACESSAR PAINEL
-									</PrimaryButton>
+                  return (
+                    <div key={item.title} className="border-b border-border pb-4">
+                      <Link
+                        href={item.href}
+                        className={`text-xl font-medium flex items-center transition-colors duration-300 ${
+                          isActive ? "text-primary" : "text-foreground hover:text-primary"
+                        }`}
+                        onClick={handleLinkClick}
+                      >
+                        {item.icon && <item.icon className="h-5 w-5 mr-2" />}
+                        {item.title}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </nav>
 
-								<PrimaryButton
-										href="https://app.pandami.com.br/auth/sign-up/"
-										onClick={handleLinkClick}
-										icon={<ArrowRight className="h-5 w-5" />}
-										className="w-full block"
-										size="lg"
-									>
-										COMEÇAR AGORA
-									</PrimaryButton>
-							</div>
-						</div>
-					</Container>
-				</div>
-			)}
+              <div className="flex flex-col gap-4 mt-10">
+                <PrimaryButton 
+                  href="https://app.pandami.com.br/auth/sign-in/"
+                  onClick={handleLinkClick}
+                  className="w-full flex" 
+                  variant="outline" 
+                  size="lg"
+                  icon={<ArrowRight className="h-5 w-5" />}
+                >
+                  ACESSAR PAINEL
+                </PrimaryButton>
+
+                <PrimaryButton
+                  href="https://app.pandami.com.br/auth/sign-up/"
+                  onClick={handleLinkClick}
+                  icon={<ArrowRight className="h-5 w-5" />}
+                  className="w-full flex"
+                  size="lg"
+                >
+                  COMEÇAR AGORA
+                </PrimaryButton>
+              </div>
+            </div>
+          </Container>
+        </div>
+      )}
 
 			{/* Mega Dropdown para Desktop */}
 			{activeDropdown && activeDropdown !== "language" && (
