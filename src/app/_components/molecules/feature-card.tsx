@@ -17,7 +17,7 @@ export function FeatureCard({ title, description, image, badge, Icon }: FeatureC
     return (
 
         <div className=" w-full bg-white border border-gray-200 rounded-2xl items-center shadow-[0px_12px_32px_0px_rgba(6,28,61,0.04)] overflow-hidden flex flex-col justify-between pt-8 px-4">
-            <div className="z-10 w-full max-w-[300px]">
+            <div className="z-10 w-full">
 
                 {/* Div dos ícones e status - inicio */}
                 <div className="pb-4 flex flex-row items-center justify-between">
