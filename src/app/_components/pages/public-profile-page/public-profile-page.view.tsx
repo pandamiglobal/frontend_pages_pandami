@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
 	IPublicProfileFullResponse,
 	PublicProfileApiError,
@@ -14,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { PublicProfileErrorState } from "./public-profile-error-state";
 import { ServicesSectionWrapper } from "../../organisms/public-profile/wrappers/services-section-wrapper";
 import { InformationSectionWrapper } from "../../organisms/public-profile/wrappers/information-section-wrapper";
+import { WhatsAppScheduleModal } from "../../organisms/public-profile/whatsapp-schedule-modal/whatsapp-schedule-modal";
 
 interface PublicProfilePageViewProps {
 	profile: IPublicProfileFullResponse | null;
@@ -32,6 +34,8 @@ export function PublicProfilePageView({
 	error,
 	viewModel,
 }: PublicProfilePageViewProps) {
+	const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false);
+
 	// Helper to render action buttons (Call & WhatsApp)
 	// Used in both Desktop Header and Mobile Footer
 	const renderActionButtons = (isDesktop: boolean = false) => {
@@ -57,7 +61,7 @@ export function PublicProfilePageView({
 				{/* WhatsApp Button */}
 				{viewModel.whatsappUrl && (
 					<PrimaryButton
-						href={viewModel.whatsappUrl}
+						onClick={() => setIsWhatsAppModalOpen(true)}
 						variant="custom"
 						className={cn(
 							"h-12 px-2 md:px-6 bg-green-600 hover:bg-green-500 text-white rounded-xl flex items-center gap-2 transition-colors",
@@ -178,6 +182,16 @@ export function PublicProfilePageView({
 						{renderActionButtons(false)}
 					</div>
 				</footer>
+			)}
+
+			{/* WhatsApp Schedule Modal */}
+			{profile && viewModel.whatsappUrl && (
+				<WhatsAppScheduleModal
+					isOpen={isWhatsAppModalOpen}
+					onClose={() => setIsWhatsAppModalOpen(false)}
+					whatsappLink={profile.whatsapp_link || ""}
+					profileName={profile.name}
+				/>
 			)}
 		</>
 	);
