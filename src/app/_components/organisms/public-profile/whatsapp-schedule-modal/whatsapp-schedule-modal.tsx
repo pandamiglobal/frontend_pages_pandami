@@ -11,7 +11,7 @@ import {
 	DialogTitle,
 } from "@/app/_components/atoms/ui/dialog";
 import { Calendar } from "@/app/_components/atoms/ui/calendar";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import { buildWhatsAppUrl } from "@/lib/utils/public-profile-helpers";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -122,7 +122,7 @@ export const WhatsAppScheduleModal = ({
 
 					{/* Action Buttons */}
 					<div className="space-y-3 pt-2">
-						<PrimaryButton
+						<BrandedButton
 							onClick={handleScheduleAppointment}
 							disabled={isScheduleDisabled}
 							className={cn(
@@ -139,9 +139,9 @@ export const WhatsAppScheduleModal = ({
 								className="size-5"
 							/>
 							<span className="font-medium">Agendar horário pelo WhatsApp</span>
-						</PrimaryButton>
+						</BrandedButton>
 
-						<PrimaryButton
+						<BrandedButton
 							onClick={handleDirectContact}
 							variant="outline"
 							className="w-full h-12 rounded-xl border-2 border-neutral-300 hover:bg-neutral-50"
@@ -149,7 +149,7 @@ export const WhatsAppScheduleModal = ({
 							<span className="font-medium text-neutral-700">
 								Entrar em contato direto
 							</span>
-						</PrimaryButton>
+						</BrandedButton>
 					</div>
 				</div>
 			</DialogContent>

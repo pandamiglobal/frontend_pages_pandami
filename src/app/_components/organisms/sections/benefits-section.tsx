@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/app/_components/atoms/ui/container";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import {
 	Target,
 	Crown,
@@ -166,14 +166,14 @@ export function BenefitsSection() {
 								<BenefitItem key={b.title} {...b} />
 							))}
 						</ul>
-						<PrimaryButton
+						<BrandedButton
 								href="https://app.pandami.com.br/auth/sign-up/"
 								icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 								size="lg"
 								className="px-4 mt-3"
 							>
 								COMEÇAR TESTE DE 7 DIAS
-							</PrimaryButton>
+							</BrandedButton>
 					</div>
 					<div className="flex flex-col gap-6 items-center w-full sm:w-auto">
 						<div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">
@@ -214,14 +214,14 @@ export function BenefitsSection() {
 								<BenefitItem key={b.title} {...b} />
 							))}
 						</ul>
-						<PrimaryButton
+						<BrandedButton
 								href="https://app.pandami.com.br/auth/sign-up/"
 								icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 								size="lg"
 								className="px-4 mt-3"
 							>
 								COMEÇAR TESTE DE 7 DIAS
-							</PrimaryButton>
+							</BrandedButton>
 					</div>
 					<div className="flex flex-col gap-6 items-center w-full sm:w-auto">
 						<div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg aspect-square rounded-br-lg overflow-hidden flex items-center justify-center">

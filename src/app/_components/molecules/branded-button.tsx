@@ -28,7 +28,7 @@ type LinkProps = BaseProps & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href
   href: string
 }
 
-export type PrimaryButtonProps = ButtonProps | LinkProps
+export type BrandedButtonProps = ButtonProps | LinkProps
 
 // Constantes para melhor manutenibilidade
 const BASE_CLASSES = "inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-xl"
@@ -48,7 +48,7 @@ const SIZE_CLASSES = {
   lg: "h-11 px-8 py-4 text-base"
 } as const
 
-export function PrimaryButton({ 
+export function BrandedButton({ 
   className, 
   variant = "default", 
   size = "default", 
@@ -59,7 +59,7 @@ export function PrimaryButton({
   gtmData,
   onClick,
   ...props 
-}: PrimaryButtonProps & { ref?: Ref<HTMLButtonElement | HTMLAnchorElement> }) {
+}: BrandedButtonProps & { ref?: Ref<HTMLButtonElement | HTMLAnchorElement> }) {
   const iconElement = icon && (
     <span className={iconPosition === "left" ? "mr-2" : "ml-2"}>
       {icon}
@@ -123,4 +123,3 @@ export function PrimaryButton({
     </button>
   )
 }
-

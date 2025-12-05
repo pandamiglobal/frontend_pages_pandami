@@ -12,7 +12,7 @@ import {
 	AvatarImage,
 	AvatarFallback,
 } from "@/app/_components/atoms/ui/avatar";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { FAQJsonLd } from "@/app/_components/templates/seo/json-ld";
@@ -85,14 +85,14 @@ export default function FAQSection({ faq }: { faq: FAQArray }) {
 										</p>
 									</div>
 									<div className="flex justify-center lg:justify-start">
-										<PrimaryButton
+										<BrandedButton
 												href="https://app.pandami.com.br/auth/sign-up"
 												size="lg"
 												icon={<ArrowRight className="h-4 w-4" />}
 												className="w-full md:w-auto"
 											>
 												COMEÇAR TESTE DE 7 DIAS
-											</PrimaryButton>
+											</BrandedButton>
 									</div>
 								</div>
 							</div>

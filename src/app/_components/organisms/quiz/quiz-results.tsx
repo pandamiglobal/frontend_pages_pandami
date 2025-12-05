@@ -1,7 +1,7 @@
 "use client"
 
 import { Container } from "@/app/_components/atoms/ui/container"
-import { PrimaryButton } from "@/app/_components/molecules/branded-button"
+import { BrandedButton } from "@/app/_components/molecules/branded-button"
 import { ArrowRight, Search, TrendingUp, Users, DollarSign, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
@@ -152,14 +152,14 @@ export function QuizResults({ answers }: QuizResultsProps) {
                     whileTap={{ scale: 0.95 }}
                     className="w-full"
                   >
-                    <PrimaryButton
+                    <BrandedButton
                       href="/"
                       icon={<ArrowRight className="h-5 w-5" />}
                       size="lg"
                       className="w-full h-auto min-h-[3.5rem] py-6 text-lg md:text-xl font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all text-white border-none whitespace-normal"
                     >
                       Conhecer a ferramenta agora
-                    </PrimaryButton>
+                    </BrandedButton>
                   </motion.div>
                 
                 <p className="mt-4 text-sm text-neutral-500">

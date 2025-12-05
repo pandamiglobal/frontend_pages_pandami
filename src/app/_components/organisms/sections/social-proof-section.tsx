@@ -5,7 +5,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import { Container } from "@/app/_components/atoms/ui/container";
 import { AboutVisagismComparisonSlider } from "@/app/_components/organisms/sections/about-visagism-comparison-slider";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import { ArrowLeft, ArrowRight, XCircle, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -365,14 +365,14 @@ export function SocialProofSection() {
 						</div>
 
 						<div className="mt-6">
-							<PrimaryButton
+							<BrandedButton
 									href="https://app.pandami.com.br/auth/sign-up"
 									size="lg"
 									className="w-full md:w-auto px-8 cursor-pointer"
 									icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 								>
 									Quero no meu salão
-								</PrimaryButton>
+								</BrandedButton>
 						</div>
 					</div>
 				</div>

@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-    "mcp": "npx @arabold/docs-mcp-server@latest"
+    "mcp": "bunx @arabold/docs-mcp-server@latest"
 
 	},
 	"dependencies": {

@@ -12,6 +12,7 @@ import { BarberTestimonialsSection } from "@/app/_components/organisms/sections/
 import { VideoCtaSection } from "@/app/_components/organisms/sections/video-cta-section";
 import { FAQ_DATA } from "@/common/constants";
 import PageLayout from "@/app/_components/templates/page-layout";
+import { B2CPricingSection } from "./_components/organisms/sections/b2c-pricing-section";
 
 export default function Home() {
 	return (
@@ -29,6 +30,7 @@ export default function Home() {
 				<SocialProofSection />
 				<BarberTestimonialsSection />
 				<PricingSection />
+				<B2CPricingSection />
 				<VideoCtaSection />
 				<FAQSection faq={FAQ_DATA} />
 				<CtaSection />

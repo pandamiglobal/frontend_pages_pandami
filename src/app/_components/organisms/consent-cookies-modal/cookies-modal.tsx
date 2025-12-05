@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import { useConsent } from "@/common/hooks/use-consent";
 import { useConsentAnalytics } from "@/common/hooks/use-consent-analytics";
 import { ConsentChoice } from "@/common/types/IConsentCookies";
@@ -46,29 +46,29 @@ export function CookiesModal() {
           Clique em <strong>Aceitar todos</strong> para permitir todos os cookies, <strong>Apenas essenciais</strong> para limitar ao necessário para o funcionamento do site, ou <strong>Recusar todos</strong> para usar o mínimo possível.
         </p>
         <div className="flex flex-wrap items-center gap-3 pt-1">
-          <PrimaryButton
+          <BrandedButton
             type="button"
             onClick={() => handleChoice("accepted")}
             aria-label="Aceitar todos os cookies"
           >
             Aceitar todos
-          </PrimaryButton>
-          <PrimaryButton
+          </BrandedButton>
+          <BrandedButton
             type="button"
             onClick={() => handleChoice("essentials_only")}
             aria-label="Aceitar apenas cookies essenciais"
             variant="outline"
           >
             Apenas essenciais
-          </PrimaryButton>
-          <PrimaryButton
+          </BrandedButton>
+          <BrandedButton
             type="button"
             variant="white"
             onClick={() => handleChoice("denied")}
             aria-label="Não aceitar cookies"
           >
             Recusar todos
-          </PrimaryButton>
+          </BrandedButton>
         </div>
         <p className="text-xs text-neutral-500">
           Você pode alterar sua escolha depois nas preferências do site.

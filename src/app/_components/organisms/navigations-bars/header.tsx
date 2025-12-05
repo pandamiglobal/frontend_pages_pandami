@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Globe, Menu, ChevronDown, ArrowRight, X } from "lucide-react";
 import { Container } from "@/app/_components/atoms/ui/container";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import { ThemeToggle } from "@/app/_components/molecules/theme-toggle";
 import type { INavItem } from "@/common/types/IHeader";
 import { useState, useEffect, useRef } from "react";
@@ -245,7 +245,7 @@ export function Header({ variant = "default" }: HeaderProps) {
                 </button>
               </div>
 
-              <PrimaryButton
+              <BrandedButton
                 href="https://app.pandami.com.br/auth/sign-in/"
                 icon={<ArrowRight className="h-4 w-4" />}
                 size="sm"
@@ -259,9 +259,9 @@ export function Header({ variant = "default" }: HeaderProps) {
                 }}
               >
                 ACESSAR PAINEL
-              </PrimaryButton>
+              </BrandedButton>
 
-              <PrimaryButton
+              <BrandedButton
                 href="https://app.pandami.com.br/auth/sign-up/"
                 icon={<ArrowRight className="h-4 w-4" />}
                 size="sm"
@@ -274,7 +274,7 @@ export function Header({ variant = "default" }: HeaderProps) {
                 }}
               >
                 COMEÇAR AGORA
-              </PrimaryButton>
+              </BrandedButton>
             </div>
 
             {/* Menu Mobile Toggle */}
@@ -366,7 +366,7 @@ export function Header({ variant = "default" }: HeaderProps) {
               </nav>
 
               <div className="flex flex-col gap-4 mt-10">
-                <PrimaryButton
+                <BrandedButton
                   href="https://app.pandami.com.br/auth/sign-in/"
                   onClick={handleLinkClick}
                   className="w-full flex"
@@ -375,9 +375,9 @@ export function Header({ variant = "default" }: HeaderProps) {
                   icon={<ArrowRight className="h-5 w-5" />}
                 >
                   ACESSAR PAINEL
-                </PrimaryButton>
+                </BrandedButton>
 
-                <PrimaryButton
+                <BrandedButton
                   href="https://app.pandami.com.br/auth/sign-up/"
                   onClick={handleLinkClick}
                   icon={<ArrowRight className="h-5 w-5" />}
@@ -385,7 +385,7 @@ export function Header({ variant = "default" }: HeaderProps) {
                   size="lg"
                 >
                   COMEÇAR AGORA
-                </PrimaryButton>
+                </BrandedButton>
               </div>
             </div>
           </Container>

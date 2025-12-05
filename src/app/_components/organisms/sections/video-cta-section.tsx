@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/app/_components/atoms/ui/container";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import { VturbVideoPlayer } from "@/app/_components/molecules/vturb-video-player";
 import { TrendingUp, Users, Zap, PlayCircle, ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -40,14 +40,14 @@ export function VideoCtaSection() {
 						</div>
 
 						<div className="pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-							<PrimaryButton
+							<BrandedButton
 								size="lg"
 								className="w-full sm:w-auto px-6 py-5 text-base font-bold  hover:-translate-y-0.5 transition-all duration-300"
 								href="https://app.pandami.com.br/auth/sign-up/"
 								icon={<ArrowRight className="size-5" />}
 							>
 								Quero no meu salão
-							</PrimaryButton>
+							</BrandedButton>
 						</div>
 						<p className="text-xs text-neutral-500 text-center lg:text-left">
 							Junte-se a centenas de barbearias inovadoras.

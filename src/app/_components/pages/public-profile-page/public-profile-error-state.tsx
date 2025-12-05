@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { XCircle, Search, AlertCircle, LucideIcon } from "lucide-react";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 
 export type PublicProfileErrorType =
 	| "invalid_slug"
@@ -81,18 +81,18 @@ export function PublicProfileErrorState({
 
 				<div className="space-y-3">
 					{type === "generic_error" && onRetry && (
-						<PrimaryButton onClick={onRetry} className="w-full justify-center">
+						<BrandedButton onClick={onRetry} className="w-full justify-center">
 							Tentar novamente
-						</PrimaryButton>
+						</BrandedButton>
 					)}
 
-					<PrimaryButton
+					<BrandedButton
 							href="/"
 							variant={type === "generic_error" ? "outline" : "default"}
 							className="w-full justify-center"
 						>
 							Voltar para o início
-						</PrimaryButton>
+						</BrandedButton>
 
 					{type === "not_found" && (
 						<p className="text-xs text-neutral-500">

@@ -1,7 +1,7 @@
 "use client"
 
 import { Container } from "@/app/_components/atoms/ui/container"
-import { PrimaryButton } from "@/app/_components/molecules/branded-button"
+import { BrandedButton } from "@/app/_components/molecules/branded-button"
 import { ArrowRight, HelpCircle } from "lucide-react"
 import Link from "next/link"
 
@@ -30,14 +30,14 @@ export function QuizCtaSection() {
           </p>
 
           {/* CTA Button */}
-          <PrimaryButton
+          <BrandedButton
               href="/ferramenta-que-aumenta-o-faturamento-dos-saloes"
               icon={<ArrowRight className="h-5 w-5" />}
               size="lg"
               className="px-8 py-4 text-lg"
             >
               Fazer o Quiz Gratuito
-            </PrimaryButton>
+            </BrandedButton>
 
           {/* Additional Info */}
           <p className="text-sm text-gray-500 mt-4">

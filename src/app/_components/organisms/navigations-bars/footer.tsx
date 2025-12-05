@@ -68,7 +68,7 @@ export function Footer() {
 									href="#pricing"
 									className="hover:text-primary transition-colors"
 								>
-									Planos profissionais
+									Planos para profissionais
 								</Link>
 							</li>
 

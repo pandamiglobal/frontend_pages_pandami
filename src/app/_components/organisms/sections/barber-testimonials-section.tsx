@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/app/_components/atoms/ui/container";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import { ArrowRight } from "lucide-react";
 
 // Interfaces para os componentes
@@ -184,7 +184,7 @@ export function BarberTestimonialsSection() {
 					</div>
 				</div>
 
-				<PrimaryButton
+				<BrandedButton
 					href="https://app.pandami.com.br/auth/sign-up/"
 					variant="default"
 					size="lg"
@@ -192,7 +192,7 @@ export function BarberTestimonialsSection() {
 					iconPosition="right"
 				>
 					Quero no meu salão
-				</PrimaryButton>
+				</BrandedButton>
 			</Container>
 		</section>
 	);

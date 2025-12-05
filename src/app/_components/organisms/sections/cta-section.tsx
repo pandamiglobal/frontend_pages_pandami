@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { PrimaryButton } from "@/app/_components/molecules/branded-button";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import { HeroIcon } from "@/app/_components/atoms/svg/hero-icon";
 import { Container } from "../../atoms/ui/container";
 
@@ -27,14 +27,14 @@ export const CtaSection: React.FC = () => {
 									oferece resultados baseados em ciência.
 								</p>
 							</div>
-							<PrimaryButton
+							<BrandedButton
 									href="https://app.pandami.com.br/auth/sign-up"
 									size="lg"
 									icon={<ArrowRight className="h-4 w-4" />}
 									className="w-full md:max-w-72 px-4"
 								>
 									COMEÇAR TESTE DE 7 DIAS
-								</PrimaryButton>
+								</BrandedButton>
 						</div>
 
 						{/* Imagem */}

@@ -7,7 +7,7 @@ import {
 	UsePublicProfileViewModelReturn,
 } from "@/common/types/IPublicProfile";
 import { ProfileHeaderWrapper } from "../../organisms/public-profile/wrappers/profile-header-wrapper";
-import { PrimaryButton } from "../../molecules/branded-button";
+import { BrandedButton } from "../../molecules/branded-button";
 import { Phone, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,7 +45,7 @@ export function PublicProfilePageView({
 			<div className={cn("flex items-center gap-2", isDesktop ? "flex-col w-full gap-3" : "justify-center w-full max-w-4xl mx-auto")}>
 				{/* Call Button */}
 				{profile.phone && (
-					<PrimaryButton
+					<BrandedButton
 						href={`tel:${profile.phone}`}
 						variant="custom"
 						className={cn(
@@ -55,12 +55,12 @@ export function PublicProfilePageView({
 					>
 						<Phone className="size-4 md:size-5" />
 						<span className="font-medium">Ligar</span>
-					</PrimaryButton>
+					</BrandedButton>
 				)}
 
 				{/* WhatsApp Button */}
 				{viewModel.whatsappUrl && (
-					<PrimaryButton
+					<BrandedButton
 						onClick={() => setIsWhatsAppModalOpen(true)}
 						variant="custom"
 						className={cn(
@@ -76,7 +76,7 @@ export function PublicProfilePageView({
 							className="size-4 md:size-5"
 						/>
 						<span className="font-medium">Falar no WhatsApp</span>
-					</PrimaryButton>
+					</BrandedButton>
 				)}
 			</div>
 		);
@@ -157,12 +157,12 @@ export function PublicProfilePageView({
 						</div>
 
 						<div className="w-full max-w-sm space-y-4 pt-2">
-							<PrimaryButton 
+							<BrandedButton 
 									href="/" 
 									className="w-full justify-center bg-neutral-900 hover:bg-neutral-800 text-white h-12 text-base"
 								>
 									Descobrir cortes de cabelo agora
-								</PrimaryButton>
+								</BrandedButton>
 
 							<Link
 								href="/ferramenta-que-aumenta-o-faturamento-dos-saloes"

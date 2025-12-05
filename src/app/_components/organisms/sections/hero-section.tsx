@@ -3,7 +3,7 @@
 import { Container } from "@/app/_components/atoms/ui/container";
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { PrimaryButton } from "@/app/_components/molecules/branded-button"
+import { BrandedButton } from "@/app/_components/molecules/branded-button"
 import { HeroAnimatedImage } from "@/app/_components/organisms/sections/hero-animated-image"
 
 
@@ -38,14 +38,14 @@ export function HeroSection() {
 							</p>
 
 							<div className="flex gap-3 items-center justify-center lg:justify-start mt-2">
-								<PrimaryButton
+								<BrandedButton
 										href="https://app.pandami.com.br/auth/sign-up/"
 										icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
 										size="lg"
 										className="px-4"
 									>
 										COMEÇAR TESTE DE 7 DIAS
-									</PrimaryButton>
+									</BrandedButton>
 							
 							</div>
 						</div>

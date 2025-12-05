@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { Container } from "@/app/_components/atoms/ui/container"
-import { PrimaryButton } from "@/app/_components/molecules/branded-button"
+import { BrandedButton } from "@/app/_components/molecules/branded-button"
 import { Confetti, type ConfettiRef } from "@/app/_components/atoms/ui/confetti"
 import { ArrowRight } from "lucide-react"
 import { QuizRadioGroup } from "./quiz-radio"
@@ -90,7 +90,7 @@ export function QuizForm({ onComplete }: QuizFormProps) {
             </QuizRadioGroup>
 
             <div className="flex justify-end items-center w-full">
-              <PrimaryButton
+              <BrandedButton
                 ref={buttonRef}
                 onClick={handleNext}
                 disabled={selectedOption === null || isAnimating}
@@ -101,7 +101,7 @@ export function QuizForm({ onComplete }: QuizFormProps) {
                 }`}
               >
                 {isLastQuestion ? "Ver Resultado" : "Continuar"}
-              </PrimaryButton>
+              </BrandedButton>
             </div>
           </div>
         </div>
