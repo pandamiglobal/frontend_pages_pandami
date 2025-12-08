@@ -51,7 +51,8 @@ export function FeatureCard({ title, description, image, badge, Icon }: FeatureC
                 height={300}
                 className="w-full object-cover object-bottom"
                 loading="lazy"
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 380px"
+                quality={85}
             />
         </div>
     )

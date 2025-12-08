@@ -47,8 +47,8 @@ const ProfileImage = ({ profileImageSrc }: ProfileImageProps) => (
       <Image 
         src={profileImageSrc}
         alt="Foto de perfil" 
-        width={32} 
-        height={32}
+        width={64} 
+        height={64}
         className="rounded-[999px] object-cover w-full h-full"
         loading="lazy"
         sizes="32px"

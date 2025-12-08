@@ -183,8 +183,9 @@ function GenderContent({ data, direction }: GenderContentProps) {
 										alt={`Estilo ${i + 1}`}
 										fill
 										className="object-cover"
-										sizes="(max-width: 768px) 25vw, (max-width: 1280px) 12vw, 100px"
+										sizes="(max-width: 640px) 80px, (max-width: 1024px) 120px, 160px"
 										loading="lazy"
+										quality={90}
 									/>
 								</button>
 							);

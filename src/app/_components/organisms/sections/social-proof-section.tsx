@@ -275,8 +275,8 @@ export function SocialProofSection() {
 										<Image
 											src={t.avatar}
 											alt={t.name}
-											width={48}
-											height={48}
+											width={96}
+											height={96}
 											className="w-12 h-12 object-cover object-center"
 											sizes="48px"
 											loading="lazy"

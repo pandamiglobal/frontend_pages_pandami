@@ -2,7 +2,6 @@
 
 import { Container } from "@/app/_components/atoms/ui/container";
 import FeaturesIcon from '@/app/_components/atoms/svg/features-icon';
-import Image from "next/image";
 import { FeatureCard } from "../../molecules/feature-card";
 
 export function FeaturesPandami() {
