@@ -14,11 +14,11 @@ test.describe('Cookies Consent Modal', () => {
 			window.sessionStorage.clear();
 		});
 
-		await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
+		await page.goto("http://localhost:3000", { waitUntil: "domcontentloaded" });
 
 		// Wait for hydration and modal to appear (hook has 100ms delay + React hydration)
 		const modal = page.locator('[role="dialog"]');
-		await expect(modal).toBeVisible({ timeout: 20000 });
+		await expect(modal).toBeVisible({ timeout: 10000 });
 
 		// Check for key elements using text content instead of role
 		await expect(page.getByText(/A Pandami usa cookies/i)).toBeVisible();
@@ -43,10 +43,10 @@ test.describe('Cookies Consent Modal', () => {
       window.sessionStorage.clear();
     });
 
-    await page.goto("http://localhost:3000");
+    await page.goto("http://localhost:3000", { waitUntil: "domcontentloaded" });
 
     const modal = page.locator('[role="dialog"]');
-    await expect(modal).toBeVisible({ timeout: 20000 });
+    await expect(modal).toBeVisible({ timeout: 10000 });
 
     // Setup event listener before clicking to capture the event
     const consentEventPromise = page.evaluate(() => {
@@ -83,10 +83,10 @@ test.describe('Cookies Consent Modal', () => {
       window.dataLayer = window.dataLayer || [];
     });
 
-    await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
+    await page.goto("http://localhost:3000", { waitUntil: "domcontentloaded" });
 
     const modal = page.locator('[role="dialog"]');
-    await expect(modal).toBeVisible({ timeout: 20000 });
+    await expect(modal).toBeVisible({ timeout: 10000 });
 
     // Click "Aceitar todos os cookies"
     await modal.getByRole("button", { name: "Aceitar todos os cookies" }).click();
