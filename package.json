@@ -2,6 +2,7 @@
 	"name": "frontend-pandami_pages",
 	"version": "0.1.1",
 	"private": true,
+	"packageManager": "bun@1.2.15",
 	"scripts": {
 		"dev": "next dev --turbopack",
 		"build": "next build",
