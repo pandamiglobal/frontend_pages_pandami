@@ -3,14 +3,8 @@
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { BrandedButton } from "@/app/_components/molecules/branded-button";
-import { ScanFace, ChartPie, SquarePen, History, type LucideIcon } from "lucide-react";
+import { type B2CFeature } from "@/lib/constants/pricing/b2c";
 import Image from "next/image";
-
-// Types
-export interface B2CPackageFeature {
-	icon: LucideIcon;
-	label: string;
-}
 
 export interface B2CPackageCardProps extends VariantProps<typeof cardVariants> {
 	id: string;
@@ -21,7 +15,7 @@ export interface B2CPackageCardProps extends VariantProps<typeof cardVariants> {
 	credits: number;
 	coinsImage: string;
 	discount?: number;
-	features?: B2CPackageFeature[];
+	features?: B2CFeature[];
 }
 
 // Variants
@@ -31,7 +25,7 @@ const cardVariants = cva(
 		variants: {
 			variant: {
 				default: "",
-				popular: "ring-1 ring-primary shadow-lg shadow-primary/10",
+				popular: "ring-1 ring-primary shadow-2xl shadow-primary/30",
 			},
 		},
 		defaultVariants: { variant: "default" },
@@ -97,7 +91,7 @@ export function B2CPackageCard({
 					alt="Coins"
 					width={80}
 					height={64}
-					className="w-14 sm:w-20 h-auto absolute right-2 bottom-2 object-contain"
+					className="w-26 h-auto absolute right-2 bottom-2 object-contain"
 				/>
 			</div>
 
@@ -122,14 +116,3 @@ export function B2CPackageCard({
 		</div>
 	);
 }
-
-// Feature builder
-export const buildB2CFeatures = (analyses: number): B2CPackageFeature[] => {
-	const isBasic = analyses <= 5;
-	return [
-		{ icon: ScanFace, label: `${analyses} análises de visagismo` },
-		{ icon: ChartPie, label: isBasic ? "Análise de colorimetria" : "Análise de colorimetria e terços do rosto" },
-		{ icon: SquarePen, label: isBasic ? "Fotos de 01 ângulo" : "Fotos de 03 ângulos" },
-		{ icon: History, label: isBasic ? "Análise da textura do cabelo" : "Análise avançada da textura do cabelo" },
-	];
-};

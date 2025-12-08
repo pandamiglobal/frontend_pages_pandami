@@ -1,10 +1,7 @@
 "use client";
 
 import { Container } from "@/app/_components/atoms/ui/container";
-import {
-	B2CPackageCard,
-	buildB2CFeatures,
-} from "@/app/_components/molecules/pricing-section/b2c-package-card";
+import { B2CPackageCard } from "@/app/_components/molecules/pricing-section/b2c-package-card";
 import { B2C_PACKAGES_CONFIG } from "@/lib/constants/pricing/b2c";
 
 export function B2CPricingSection() {
@@ -34,7 +31,7 @@ export function B2CPricingSection() {
 								coinsImage={pkg.coinsImage}
 								discount={pkg.discount}
 								variant={pkg.isPopular ? "popular" : "default"}
-								features={buildB2CFeatures(pkg.analyses)}
+								features={pkg.features}
 							/>
 						))}
 					</div>
