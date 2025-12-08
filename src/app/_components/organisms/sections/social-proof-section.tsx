@@ -275,11 +275,11 @@ export function SocialProofSection() {
 										<Image
 											src={t.avatar}
 											alt={t.name}
-											width={128}
-											height={128}
+											width={48}
+											height={48}
 											className="w-12 h-12 object-cover object-center"
-											sizes="256px"
-											priority={i === index}
+											sizes="48px"
+											loading="lazy"
 										/>
 									</button>
 								</li>

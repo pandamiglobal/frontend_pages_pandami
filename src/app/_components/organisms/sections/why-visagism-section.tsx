@@ -63,6 +63,7 @@ export function WhyVisagismSection() {
 							height={300}
 							className="lg:w-[40%] w-full max-w-[280px] max-h-[400px] md:max-w-[320px] lg:max-w-none h-full object-contain object-bottom mx-auto lg:mx-0"
 							sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 40vw"
+							loading="lazy"
 						/>
 					</div>
 
@@ -84,6 +85,7 @@ export function WhyVisagismSection() {
 							height={300}
 							className="lg:w-[40%] w-full max-w-[280px] max-h-[400px] md:max-w-[320px] lg:max-w-none h-full object-contain object-right ml-auto"
 							sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 30vw"
+							loading="lazy"
 						/>
 					</div>
 				</div>
@@ -108,6 +110,7 @@ export function WhyVisagismSection() {
 							height={300}
 							className="lg:w-[40%] w-full max-w-[280px] max-h-[400px] md:max-w-[320px] lg:max-w-none h-full object-contain object-bottom mx-auto lg:mx-0"
 							sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 30vw"
+							loading="lazy"
 						/>
 					</div>
 
@@ -129,6 +132,7 @@ export function WhyVisagismSection() {
 							height={300}
 							className="lg:w-[40%] w-full max-w-[280px] max-h-[400px] md:max-w-[320px] lg:max-w-none h-full object-contain object-bottom ml-auto"
 							sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 30vw"
+							loading="lazy"
 						/>
 					</div>
 				</div>

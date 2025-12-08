@@ -50,7 +50,9 @@ export const CtaSection: React.FC = () => {
 								alt="Mulher usando o visagismo Pandami"
 								width={400}
 								height={500}
-								className="w-80 h-auto max-w-96  md:w-96 md:h-128"
+								className="w-80 h-auto max-w-96 md:w-96 md:h-128"
+								loading="lazy"
+								sizes="(max-width: 768px) 320px, 384px"
 							/>
 						</div>
 

@@ -85,6 +85,7 @@ export function VideoCtaSection() {
 											fill
 											className="object-cover"
 											sizes="24px"
+											loading="lazy"
 										/>
 									</div>
 									<div className="relative w-6 h-6 rounded-full border border-white overflow-hidden z-1">
@@ -94,6 +95,7 @@ export function VideoCtaSection() {
 											fill
 											className="object-cover"
 											sizes="24px"
+											loading="lazy"
 										/>
 									</div>
 									<div className="w-6 h-6 rounded-full bg-neutral-400 border border-white flex items-center justify-center text-[8px] font-bold text-white z-2">

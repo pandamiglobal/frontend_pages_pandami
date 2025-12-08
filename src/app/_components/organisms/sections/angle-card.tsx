@@ -30,7 +30,8 @@ export const AngleCard = memo(({
         width={112}
         height={112}
         className="size-28 md:size-[7rem] rounded-xl object-cover aspect-square"
-        loading={index === 0 ? "eager" : "lazy"}
+        loading="lazy"
+        sizes="112px"
       />
     </div>
   );

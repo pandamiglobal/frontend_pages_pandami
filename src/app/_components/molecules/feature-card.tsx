@@ -23,9 +23,13 @@ export function FeatureCard({ title, description, image, badge, Icon }: FeatureC
                 <div className="pb-4 flex flex-row items-center justify-between">
                     {Icon}
                     {badge && <div className="py-2 px-4 bg-yellow-100 flex flex-row gap-2 rounded-full">
-                        <img src="lp/images/features-pandami/indevelopment.png"
+                        <Image 
+                            src="/lp/images/features-pandami/indevelopment.png"
+                            alt="Em desenvolvimento"
                             width={16}
-                            height={16} />
+                            height={16}
+                            loading="lazy"
+                        />
                         <p className="text-xs text-yellow-900">Em desenvolvimento</p>
                     </div>}
 
@@ -45,7 +49,9 @@ export function FeatureCard({ title, description, image, badge, Icon }: FeatureC
                 alt={image.alt}
                 width={400}
                 height={300}
-                className="w-full object-cover object-bottom "
+                className="w-full object-cover object-bottom"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
         </div>
     )

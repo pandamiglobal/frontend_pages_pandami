@@ -50,6 +50,8 @@ const ProfileImage = ({ profileImageSrc }: ProfileImageProps) => (
         width={32} 
         height={32}
         className="rounded-[999px] object-cover w-full h-full"
+        loading="lazy"
+        sizes="32px"
       />
     ) : (
       <div className="w-full h-full rounded-[999px] blur-[2px] bg-gray-300"></div>
@@ -83,6 +85,8 @@ const ImageCard = ({ profileImageSrc, imageUrl }: ImageCardProps) => {
           width={300} 
           height={245} 
           className="w-full h-60 object-cover"
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 33vw"
         />
       </div>
     </div>

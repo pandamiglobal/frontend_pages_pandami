@@ -56,7 +56,7 @@ export function AboutVisagismComparisonSlider({
         fill
         sizes="(max-width:768px) 100vw, 50vw"
         className="object-cover object-center"
-        priority={false}
+        loading="lazy"
       />
 
       {/* Imagem "antes" (clip) */}
@@ -70,7 +70,7 @@ export function AboutVisagismComparisonSlider({
           fill
           sizes="(max-width:768px) 100vw, 50vw"
           className="object-cover object-center"
-          priority={false}
+          loading="lazy"
         />
       </div>
 

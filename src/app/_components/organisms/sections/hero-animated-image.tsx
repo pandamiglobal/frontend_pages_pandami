@@ -655,6 +655,8 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 							height={659}
 							className="w-full h-auto object-contain object-bottom"
 							priority
+							sizes="(max-width: 768px) 320px, (max-width: 1024px) 400px, 480px"
+							fetchPriority="high"
 						/>
 					</div>
 
@@ -666,7 +668,8 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 							width={486}
 							height={659}
 							className="w-full h-auto object-contain object-bottom"
-							priority
+							loading="eager"
+							sizes="(max-width: 768px) 320px, (max-width: 1024px) 400px, 480px"
 						/>
 					</div>
 
