@@ -4,6 +4,7 @@ const nextConfig = {
   // Evita inferência incorreta do root quando existem múltiplos lockfiles no usuário
   outputFileTracingRoot: __dirname,
   images: {
+    qualities: [75, 85, 90],
     remotePatterns: [
       {
         protocol: 'https',

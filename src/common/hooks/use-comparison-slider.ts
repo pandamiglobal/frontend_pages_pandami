@@ -115,8 +115,8 @@ export function useComparisonSlider({
 
     window.addEventListener("mousemove", handleMove);
     window.addEventListener("mouseup", stop);
-    window.addEventListener("touchmove", handleMove);
-    window.addEventListener("touchend", stop);
+    window.addEventListener("touchmove", handleMove, { passive: true });
+    window.addEventListener("touchend", stop, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMove);

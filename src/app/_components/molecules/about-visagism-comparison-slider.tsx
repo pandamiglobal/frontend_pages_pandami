@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { useComparisonSlider } from "../../../common/hooks/use-comparison-slider";
-import type { AboutVisagismComparisonSliderProps } from "../../../common/types/about-visagism-comparison-slider.type";
+import { useComparisonSlider } from "@/common/hooks/use-comparison-slider";
+import type { AboutVisagismComparisonSliderProps } from "@/common/types/about-visagism-comparison-slider.type";
 
 /**
  * Comparison Slider para seção About Visagism
