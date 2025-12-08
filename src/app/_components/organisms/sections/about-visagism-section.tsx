@@ -5,7 +5,8 @@ import gsap from "gsap";
 import { Container } from "@/app/_components/atoms/ui/container";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/app/_components/atoms/ui/tabs";
-import { AboutVisagismComparisonSlider } from "@/app/_components/organisms/sections/about-visagism-comparison-slider";
+import { AboutVisagismComparisonSlider } from "@/app/_components/molecules/about-visagism-comparison-slider";
+import { SwipeHandAffordance } from "@/app/_components/atoms/svg/swipe-hand-affordance";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { BrandedButton } from "@/app/_components/molecules/branded-button";
@@ -231,6 +232,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
 					beforeAlt="Antes do visagismo"
 					afterAlt="Depois do visagismo"
 					className="w-full"
+					affordanceSlot={<SwipeHandAffordance />}
 				/>
 			</div>
 		</div>

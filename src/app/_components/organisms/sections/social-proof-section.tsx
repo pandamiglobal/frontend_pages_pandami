@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { Container } from "@/app/_components/atoms/ui/container";
-import { AboutVisagismComparisonSlider } from "@/app/_components/organisms/sections/about-visagism-comparison-slider";
+import { AboutVisagismComparisonSlider } from "@/app/_components/molecules/about-visagism-comparison-slider";
+import { SwipeHandAffordance } from "@/app/_components/atoms/svg/swipe-hand-affordance";
 import { BrandedButton } from "@/app/_components/molecules/branded-button";
 import { ArrowLeft, ArrowRight, XCircle, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -303,6 +304,7 @@ export function SocialProofSection() {
 							beforeAlt="Antes do visagismo"
 							afterAlt="Depois do visagismo"
 							className="w-full h-[420px] md:h-[500px]"
+							affordanceSlot={<SwipeHandAffordance />}
 						/>
 					</div>
 					<div
