@@ -4,13 +4,12 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/app/_components/atoms/ui/container";
 import { cn } from "@/lib/utils";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/app/_components/atoms/ui/tabs";
+import { ButtonGroup, ButtonGroupItem } from "@/app/_components/atoms/ui/button-group";
 import { AboutVisagismComparisonSlider } from "@/app/_components/molecules/about-visagism-comparison-slider";
 import { SwipeHandAffordance } from "@/app/_components/atoms/svg/swipe-hand-affordance";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { BrandedButton } from "@/app/_components/molecules/branded-button";
-import Link from "next/link";
 
 interface VariantSet {
   mainBefore: string;
@@ -74,45 +73,35 @@ export function AboutVisagismSection() {
 					Conheça o Visagismo PandaMi
 				</h2>
 
-				<Tabs
-					value={gender}
-					onValueChange={(v) => setGender(v as any)}
-					className="flex flex-col items-center"
-				>
-					<TabsList className="mb-10 bg-neutral-100 rounded-full p-1 h-auto">
-						<TabsTrigger
+				<div className="flex flex-col items-center">
+					<ButtonGroup
+						value={gender}
+						onValueChange={(v) => setGender(v as "woman" | "man")}
+						aria-label="Selecione o gênero"
+						className="mb-10 bg-neutral-100 rounded-full p-1 h-auto"
+					>
+						<ButtonGroupItem
 							value="woman"
-							className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
+							className="aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
 						>
 							Feminino
-						</TabsTrigger>
-						<TabsTrigger
+						</ButtonGroupItem>
+						<ButtonGroupItem
 							value="man"
-							className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
+							className="aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-stone-900 rounded-full px-6 py-2 text-sm md:text-base"
 						>
 							Masculino
-						</TabsTrigger>
-					</TabsList>
+						</ButtonGroupItem>
+					</ButtonGroup>
 
-					<TabsContent value="woman" className="w-full">
-						{gender === "woman" && (
-							<GenderContent
-								key={gender}
-								data={woman}
-								direction={directionRef.current}
-							/>
-						)}
-					</TabsContent>
-					<TabsContent value="man" className="w-full">
-						{gender === "man" && (
-							<GenderContent
-								key={gender}
-								data={man}
-								direction={directionRef.current}
-							/>
-						)}
-					</TabsContent>
-				</Tabs>
+					<div className="w-full">
+						<GenderContent
+							key={gender}
+							data={gender === "woman" ? woman : man}
+							direction={directionRef.current}
+						/>
+					</div>
+				</div>
 			</Container>
 		</section>
 	);

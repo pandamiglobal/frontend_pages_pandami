@@ -17,12 +17,12 @@ export function VideoCtaSection() {
 					{/* Text Content */}
 					<div className="flex flex-col gap-6 lg:flex-1 text-center lg:text-left order-1 lg:order-2">
 						<div className="space-y-4">
-							<div className="inline-flex mx-auto lg:mx-0 items-center gap-2 px-3 py-1 rounded-full bg-[#27D182]/10 border border-[#27D182]/20 w-fit">
+							<div className="inline-flex mx-auto lg:mx-0 items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 border border-emerald-300 w-fit">
 								<span className="relative flex h-2 w-2">
-									<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#27D182] opacity-75"></span>
-									<span className="relative inline-flex rounded-full h-2 w-2 bg-[#27D182]"></span>
+									<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-600 opacity-75"></span>
+									<span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
 								</span>
-								<span className="text-[10px] md:text-xs font-bold text-[#27D182] uppercase tracking-wider">
+								<span className="text-[10px] md:text-xs font-bold text-emerald-800 uppercase tracking-wider">
 									Para Profissionais de Beleza
 								</span>
 							</div>
@@ -98,7 +98,7 @@ export function VideoCtaSection() {
 											loading="lazy"
 										/>
 									</div>
-									<div className="w-6 h-6 rounded-full bg-neutral-400 border border-white flex items-center justify-center text-[8px] font-bold text-white z-2">
+									<div className="w-6 h-6 rounded-full bg-neutral-700 border border-white flex items-center justify-center text-[8px] font-bold text-white z-2">
 										+500
 									</div>
 								</div>

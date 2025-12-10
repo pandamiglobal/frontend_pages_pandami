@@ -38,7 +38,7 @@ export function CookiesModal() {
           A Pandami usa cookies, píxeis, tags e tecnologias semelhantes para medir audiência e personalizar sua experiência. Saiba mais sobre como utilizamos seus dados e cookies em nossa{" "}
           <a 
             href="/politica-de-privacidade" 
-            className="text-primary underline hover:text-primary/80 transition-colors"
+            className="text-blue-700 underline hover:text-blue-800 transition-colors font-medium"
           >
             Política de Privacidade
           </a>.

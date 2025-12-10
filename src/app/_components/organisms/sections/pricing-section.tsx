@@ -2,7 +2,7 @@
 
 import { Container } from "@/app/_components/atoms/ui/container";
 import { useState } from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/app/_components/atoms/ui/tabs";
+import { ButtonGroup, ButtonGroupItem } from "@/app/_components/atoms/ui/button-group";
 import { PricingCard } from "@/app/_components/molecules/pricing-section/pricing-card";
 import { UserRound, ScanFace, ChartPie, FileEdit, History } from "lucide-react";
 import {
@@ -35,32 +35,29 @@ export function PricingSection() {
 						Planos para profissionais
 					</h2>
 
-					{/* Tabs com defaultValue e value explicitamente definidos como "annual" */}
-					<Tabs
-						defaultValue="annual" // Adicionar defaultValue para garantir seleção inicial
+					<ButtonGroup
 						value={activePeriod}
 						onValueChange={(v) => setActivePeriod(v as PricingPeriod)}
-						className="flex flex-col items-center"
+						aria-label="Selecione o período de assinatura"
+						className="mb-3 bg-neutral-100 dark:bg-neutral-800 rounded-full p-1 h-auto"
 					>
-						<TabsList className="mb-3 bg-neutral-100 dark:bg-neutral-800 rounded-full p-1 h-auto">
-							{PERIOD_BUTTONS.map((p) => (
-								<TabsTrigger
-									key={p.id}
-									value={p.id}
-									className="relative rounded-full px-3 sm:px-4 md:px-6 py-2 text-xs sm:text-sm md:text-base data-[state=active]:bg-white dark:data-[state=active]:bg-neutral-700 data-[state=active]:shadow-sm data-[state=active]:text-neutral-800 dark:data-[state=active]:text-neutral-100 min-w-0"
-								>
-									<div className="flex flex-row items-center gap-2">
-										<span className="whitespace-nowrap">{p.label}</span>
-										{PERIOD_DISCOUNTS[p.id] > 0 && (
-											<span className="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-400/20 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-300/20 px-1.5 py-1.5 text-[9px] sm:text-[10px] md:text-[11px] font-medium leading-none">
-												{PERIOD_DISCOUNTS[p.id]}% OFF
-											</span>
-										)}
-									</div>
-								</TabsTrigger>
-							))}
-						</TabsList>
-					</Tabs>
+						{PERIOD_BUTTONS.map((p) => (
+							<ButtonGroupItem
+								key={p.id}
+								value={p.id}
+								className="relative rounded-full px-3 sm:px-4 md:px-6 py-2 text-xs sm:text-sm md:text-base aria-pressed:bg-white dark:aria-pressed:bg-neutral-700 aria-pressed:shadow-sm aria-pressed:text-neutral-800 dark:aria-pressed:text-neutral-100 min-w-0"
+							>
+								<div className="flex flex-row items-center gap-2">
+									<span className="whitespace-nowrap">{p.label}</span>
+									{PERIOD_DISCOUNTS[p.id] > 0 && (
+										<span className="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-400/20 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-300/20 px-1.5 py-1.5 text-[9px] sm:text-[10px] md:text-[11px] font-medium leading-none">
+											{PERIOD_DISCOUNTS[p.id]}% OFF
+										</span>
+									)}
+								</div>
+							</ButtonGroupItem>
+						))}
+					</ButtonGroup>
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -54,7 +54,7 @@ export function B2CPackageCard({
 	return (
 		<div className={cn(cardVariants({ variant }))}>
 			{variant === "popular" && (
-				<span className="absolute top-3 right-3 rounded-full bg-primary/15 text-primary border border-primary/20 px-3 py-1 text-xs font-medium">
+				<span className="absolute top-3 right-3 rounded-full bg-amber-100 text-amber-900 border border-amber-200 px-3 py-1 text-xs font-semibold">
 					Mais popular 🔥
 				</span>
 			)}

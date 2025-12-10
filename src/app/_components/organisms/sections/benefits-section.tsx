@@ -158,9 +158,9 @@ export function BenefitsSection() {
 				{/* Salon Benefits */}
 				<div className="flex flex-col-reverse lg:flex-row gap-6 sm:gap-8 lg:gap-16 justify-between items-center">
 					<div className="flex-1 flex flex-col gap-2 max-w-xl w-full">
-						<h4 className="text-white font-medium mb-2 text-lg sm:text-xl md:text-2xl">
+						<h3 className="text-white font-medium mb-2 text-lg sm:text-xl md:text-2xl">
 							Seu salão no mais alto nível
-						</h4>
+						</h3>
 						<ul className="flex flex-col gap-2 sm:gap-3 md:gap-4 w-full">
 							{salonBenefits.map((b) => (
 								<BenefitItem key={b.title} {...b} />
@@ -206,9 +206,9 @@ export function BenefitsSection() {
 				{/* Client Benefits */}
 				<div className="flex flex-col-reverse lg:flex-row-reverse gap-6 sm:gap-8 lg:gap-16 justify-between items-center mt-10 sm:mt-12 md:mt-20">
 					<div className="flex-1 flex flex-col gap-2 max-w-xl w-full">
-						<h4 className="text-white font-medium mb-2 text-lg sm:text-xl md:text-2xl">
+						<h3 className="text-white font-medium mb-2 text-lg sm:text-xl md:text-2xl">
 							Seus clientes sempre satisfeitos
-						</h4>
+						</h3>
 						<ul className="flex flex-col gap-2 sm:gap-3 md:gap-4 w-full">
 							{clientBenefits.map((b) => (
 								<BenefitItem key={b.title} {...b} />

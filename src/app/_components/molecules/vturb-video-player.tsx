@@ -85,12 +85,14 @@ export function VturbVideoPlayer({
 							loading="lazy"
 						/>
 					) : (
-						// Placeholder while not visible
+						/* Placeholder while not visible */
 						<div
 							className="absolute inset-0 bg-neutral-200 animate-pulse rounded-lg flex items-center justify-center"
-							aria-label="Carregando vídeo..."
+							role="status"
+							aria-live="polite"
 						>
-							<div className="w-16 h-16 rounded-full bg-neutral-300" />
+							<span className="sr-only">Carregando vídeo...</span>
+							<div className="w-16 h-16 rounded-full bg-neutral-300" aria-hidden="true" />
 						</div>
 					)}
 				</div>

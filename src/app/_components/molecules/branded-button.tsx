@@ -35,10 +35,10 @@ const BASE_CLASSES = "inline-flex items-center justify-center font-medium transi
 
 const VARIANT_CLASSES = {
   default: "bg-linear-to-r from-[hsl(var(--primary-gradient-from))] to-[hsl(var(--primary-gradient-to))] text-primary-foreground hover:from-[hsl(var(--primary-gradient-hover-from))] hover:to-[hsl(var(--primary-gradient-hover-to))]",
-  outline: "border-2 border-primary text-primary bg-transparent hover:bg-primary/10 dark:border-primary dark:text-primary",
+  outline: "border-2 border-primary text-neutral-800 bg-transparent hover:bg-primary/10 dark:border-primary dark:text-neutral-200",
   // Alias de compatibilidade: "outline-solid" usa o mesmo estilo de outline
-  "outline-solid": "border-2 border-primary text-primary bg-transparent hover:bg-primary/10 dark:border-primary dark:text-primary",
-  white: "bg-background text-primary border border-input hover:bg-accent dark:bg-background dark:text-primary",
+  "outline-solid": "border-2 border-primary text-neutral-800 bg-transparent hover:bg-primary/10 dark:border-primary dark:text-neutral-200",
+  white: "bg-background text-neutral-800 border border-neutral-300 hover:bg-accent dark:bg-background dark:text-neutral-200",
   custom: "text-primary"
 } as const
 
