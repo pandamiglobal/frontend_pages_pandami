@@ -1,23 +1,9 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { Container } from "@/app/_components/atoms/ui/container";
 import { ArrowRight } from "lucide-react";
 import { BrandedButton } from "@/app/_components/molecules/branded-button";
-
-// Dynamic import animation component - reduces initial JS
-const HeroAnimatedImage = dynamic(
-	() =>
-		import("@/app/_components/organisms/sections/hero-animated-image").then(
-			(mod) => mod.HeroAnimatedImage
-		),
-	{
-		ssr: false,
-		loading: () => (
-			<div className="w-full h-full bg-neutral-100/30 rounded-2xl animate-pulse" />
-		),
-	}
-);
+import { HeroAnimatedImage } from "@/app/_components/organisms/sections/hero-animated-image";
 
 export function HeroSection() {
 	return (
@@ -33,7 +19,7 @@ export function HeroSection() {
 					{/* Content */}
 					<div className="z-10 flex flex-col lg:flex-row items-center justify-between w-full h-full">
 						<div className="w-full max-w-[800px] flex flex-col gap-4 md:gap-6 px-0 text-center lg:text-left mb-4 lg:mb-0">
-							<h1 className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[48px] text-black leading-tight">
+							<h1 className="font-semibold text-fluid-hero text-black">
 								A primeira{" "}
 								<span className="text-gradient bg-clip-text text-transparent bg-linear-to-r from-primary to-[#C16C3F]">
 									{" "}
@@ -43,7 +29,7 @@ export function HeroSection() {
 								<br /> para cabeleireiros
 							</h1>
 
-							<p className="text-gray-600 max-w-[320px] lg:max-w-[450px] text-sm sm:text-base md:text-lg mx-auto lg:mx-0">
+							<p className="text-gray-600 max-w-[320px] lg:max-w-[450px] text-fluid-body mx-auto lg:mx-0">
 								Nossa inteligência artificial analisa matematicamente cada rosto
 								em 30 segundos e sugere exatamente qual corte e cor vão
 								valorizar. 94% das clientes aprovam na primeira tentativa.
@@ -61,7 +47,7 @@ export function HeroSection() {
 							</div>
 						</div>
 
-						{/* Hero Images - Animated (dynamically loaded) */}
+						{/* Hero Images - Animated */}
 						<div className="relative flex items-end justify-center w-full max-w-[480px] aspect-3/4">
 							<HeroAnimatedImage />
 						</div>

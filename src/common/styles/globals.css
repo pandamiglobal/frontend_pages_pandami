@@ -26,6 +26,29 @@
   font-family: var(--font-fahkwang), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
+/* ============================================================================
+   Fluid Typography - Uses clamp() for smooth scaling without layout shifts
+   Avoids breakpoint-based recalculations that delay LCP
+   ============================================================================ */
+
+/* Hero title: 30px (mobile) → 48px (desktop) */
+@utility text-fluid-hero {
+  font-size: clamp(1.875rem, 1.25rem + 2.5vw, 3rem);
+  line-height: 1.1;
+}
+
+/* Section title: 24px (mobile) → 40px (desktop) */
+@utility text-fluid-section {
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  line-height: 1.2;
+}
+
+/* Subtitle: 14px (mobile) → 18px (desktop) */
+@utility text-fluid-body {
+  font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1.125rem);
+  line-height: 1.6;
+}
+
 @theme {
   /*
     Fonte base do projeto (Ubuntu) usada por font-sans.

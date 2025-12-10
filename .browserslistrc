@@ -1,16 +1,17 @@
 # Target modern browsers only - disables legacy polyfills
 # Reduces bundle size by removing unnecessary compatibility code
+# This configuration tells Next.js/Babel to skip legacy transforms
 
-# Production: Modern browsers with ES2020+ support
+# Production: Last 2 versions of modern browsers (ES2020+ support)
 [production]
-chrome >= 80
-edge >= 80
-firefox >= 78
-safari >= 14
-ios >= 14
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+not dead
 
-# Development: Latest versions only
+# Development: Latest versions only for faster builds
 [development]
-last 1 chrome version
-last 1 firefox version
-last 1 safari version
+last 1 Chrome version
+last 1 Firefox version
+last 1 Safari version

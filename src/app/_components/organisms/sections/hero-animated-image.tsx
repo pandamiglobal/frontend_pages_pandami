@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, memo } from 'react';
+import { useState, useEffect, useCallback, memo, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { HeroIcon } from '@/app/_components/atoms/svg/hero-icon';
@@ -160,6 +160,8 @@ const KEYFRAME_IMAGES = {
 export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
   const [phase, setPhase] = useState<AnimationPhase>('idle');
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
+  const [isReady, setIsReady] = useState(false);
+  const hasStartedRef = useRef(false);
 
   // Dados de variantes
   const variantData = [
@@ -197,24 +199,65 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
     });
   }, []);
 
-  // Timer para avançar as fases automaticamente
+  // Wait for network idle before starting animation to avoid LCP delay
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (hasStartedRef.current) return;
     
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       setPhase('angleCards');
+      setIsReady(true);
+      hasStartedRef.current = true;
       return;
     }
 
+    // Use requestIdleCallback to start animation when browser is idle
+    // This prevents animation from competing with LCP resources
+    const startAnimation = () => {
+      if (hasStartedRef.current) return;
+      hasStartedRef.current = true;
+      setIsReady(true);
+    };
+
+    // Fallback timeout if requestIdleCallback takes too long (max 2s)
+    const fallbackTimeout = setTimeout(startAnimation, 2000);
+
+    if ('requestIdleCallback' in window) {
+      const idleId = window.requestIdleCallback(startAnimation, { timeout: 1500 });
+      return () => {
+        clearTimeout(fallbackTimeout);
+        window.cancelIdleCallback(idleId);
+      };
+    } else {
+      // Fallback for Safari: use setTimeout after load event
+      const handleLoad = () => setTimeout(startAnimation, 100);
+      if (document.readyState === 'complete') {
+        handleLoad();
+      } else {
+        window.addEventListener('load', handleLoad);
+        return () => {
+          clearTimeout(fallbackTimeout);
+          window.removeEventListener('load', handleLoad);
+        };
+      }
+    }
+
+    return () => clearTimeout(fallbackTimeout);
+  }, []);
+
+  // Timer para avançar as fases automaticamente (only when ready)
+  useEffect(() => {
+    if (!isReady) return;
+    
     const timing = PHASE_TIMINGS[phase] + (phase === 'variantCards' || phase === 'cardSelected' || phase === 'angleCards' ? waitTime * 1000 : 0);
     const timer = setTimeout(advancePhase, timing);
     
     return () => clearTimeout(timer);
-  }, [phase, waitTime, advancePhase]);
+  }, [phase, waitTime, advancePhase, isReady]);
 
-  // Derived states for visibility
-  const showPerson1 = ['person1Entry', 'scanning', 'scanComplete', 'variantCards', 'cardSelected'].includes(phase);
-  const showPersonFinal = ['personTransition', 'angleCards'].includes(phase);
+  // Derived states for visibility (show static image until animation is ready)
+  const showPerson1 = !isReady || ['person1Entry', 'scanning', 'scanComplete', 'variantCards', 'cardSelected'].includes(phase);
+  const showPersonFinal = isReady && ['personTransition', 'angleCards'].includes(phase);
   const showScanner = ['scanning', 'scanComplete'].includes(phase);
   const showScannerBar = phase === 'scanning';
   const showCheck = phase === 'scanComplete';
@@ -242,7 +285,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
               <motion.div
                 key="person1"
                 variants={personEntryVariants}
-                initial="hidden"
+                initial={isReady ? "hidden" : "visible"}
                 animate="visible"
                 exit="exit"
                 className="absolute inset-x-0 bottom-0"
@@ -329,7 +372,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
                   </motion.div>
                   
                   {/* Subtle grid overlay */}
-                  <div className="absolute inset-0 opacity-50" style={{
+                  <div className="absolute inset-0 opacity-10" style={{
                     backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.8) 1px, transparent 1px)',
                     backgroundSize: '20px 20px'
                   }} />

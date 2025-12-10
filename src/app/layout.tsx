@@ -85,6 +85,14 @@ export default function RootLayout({
 				<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 				<link rel="dns-prefetch" href="https://scripts.clarity.ms" />
 				<link rel="dns-prefetch" href="https://scripts.converteai.net" />
+
+				{/* Preload LCP image for faster initial render */}
+				<link
+					rel="preload"
+					as="image"
+					href="/lp/images/hero/heroPersonImage_Female1.png"
+					fetchPriority="high"
+				/>
 			</head>
 			<body className={`font-sans`}>
 				<Analytics />

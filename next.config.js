@@ -54,6 +54,9 @@ const nextConfig = {
       '@radix-ui/react-radio-group',
       '@radix-ui/react-slot',
     ],
+    // Reduce legacy polyfills for modern browsers
+    // Uses browserslist config to determine which polyfills are needed
+    optimizeCss: true,
   },
 
   // ============================================================================

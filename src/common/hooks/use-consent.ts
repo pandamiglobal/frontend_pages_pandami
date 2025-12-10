@@ -36,9 +36,33 @@ export const useConsent = () => {
       }
     };
 
-    // Aguarda hidratação completa
-    const timeoutId = setTimeout(checkConsent, 100);
-    return () => clearTimeout(timeoutId);
+    // Defer modal display until after LCP to avoid competing with critical resources
+    // Use requestIdleCallback for better timing, with fallback to setTimeout
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let idleId: number | undefined;
+    let loadHandler: (() => void) | undefined;
+    
+    const scheduleCheck = () => {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(checkConsent, { timeout: 2000 });
+      } else {
+        // Fallback for Safari - call immediately after load
+        checkConsent();
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      scheduleCheck();
+    } else {
+      loadHandler = () => scheduleCheck();
+      window.addEventListener('load', loadHandler);
+    }
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (idleId) window.cancelIdleCallback(idleId);
+      if (loadHandler) window.removeEventListener('load', loadHandler);
+    };
   }, []);
 
   const setConsent = useCallback((choice: ConsentChoice) => {
