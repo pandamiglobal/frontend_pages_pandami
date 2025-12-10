@@ -74,6 +74,20 @@ export default function RootLayout({
 			<head>
 				{/* Bing Webmaster Tool */}
 				<meta name="msvalidate.01" content="8A95AB149BD17EA6C91FC94BE3387B48" />
+
+				{/* Preload LCP image for faster rendering */}
+				<link
+					rel="preload"
+					href="/lp/images/hero/heroPersonImage_Female1.png"
+					as="image"
+					type="image/png"
+					fetchPriority="high"
+				/>
+
+				{/* DNS prefetch for third-party domains */}
+				<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+				<link rel="dns-prefetch" href="https://scripts.clarity.ms" />
+				<link rel="dns-prefetch" href="https://scripts.converteai.net" />
 			</head>
 			<body className={`font-sans`}>
 				<Analytics />

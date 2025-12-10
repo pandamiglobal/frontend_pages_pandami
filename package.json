@@ -5,6 +5,8 @@
 	"scripts": {
 		"dev": "next dev --turbopack",
 		"build": "next build",
+		"build:analyze": "ANALYZE=true next build",
+		"build:analyze:win": "set ANALYZE=true && next build",
 		"start": "next start",
 		"lint": "next lint",
 		"test": "playwright test"
@@ -56,6 +58,7 @@
 		"zustand": "^5.0.3"
 	},
 	"devDependencies": {
+		"@next/bundle-analyzer": "^16.0.8",
 		"@playwright/test": "^1.56.1",
 		"@tailwindcss/postcss": "^4.1.13",
 		"@testing-library/cypress": "^10.0.3",

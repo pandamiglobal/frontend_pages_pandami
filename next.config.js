@@ -1,8 +1,15 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   // Evita inferência incorreta do root quando existem múltiplos lockfiles no usuário
   outputFileTracingRoot: __dirname,
+
+  // ============================================================================
+  // Image Optimization
+  // ============================================================================
   images: {
     qualities: [75, 85, 90],
     remotePatterns: [
@@ -25,7 +32,87 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-  }
+  },
+
+  // ============================================================================
+  // Performance Optimizations (Turbopack compatible)
+  // ============================================================================
+  experimental: {
+    // Optimize package imports - tree-shake heavy libraries
+    // Works with both Webpack and Turbopack
+    optimizePackageImports: [
+      'lucide-react',
+      'recharts',
+      'framer-motion',
+      'date-fns',
+      'gsap',
+      '@radix-ui/react-accordion',
+      '@radix-ui/react-tabs',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-avatar',
+      '@radix-ui/react-popover',
+    ],
+  },
+
+  // ============================================================================
+  // Turbopack Configuration (for dev mode)
+  // ============================================================================
+  turbopack: {
+    // Resolve aliases for Turbopack
+    resolveAlias: {
+      // Optimize GSAP - use core only
+      'gsap/all': 'gsap',
+    },
+  },
+
+  // ============================================================================
+  // Caching Headers for Static Assets
+  // ============================================================================
+  async headers() {
+    return [
+      {
+        // Cache static assets for 1 year
+        source: '/lp/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache fonts
+        source: '/fonts/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache images
+        source: '/_next/image/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
+          },
+        ],
+      },
+    ];
+  },
+
+  // ============================================================================
+  // Compiler Optimizations (SWC - works with Turbopack)
+  // ============================================================================
+  compiler: {
+    // Remove console.log in production
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
+  },
 };
 
-module.exports = nextConfig; 
+module.exports = withBundleAnalyzer(nextConfig);

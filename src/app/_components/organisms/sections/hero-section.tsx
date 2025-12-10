@@ -1,14 +1,12 @@
 "use client";
 
 import { Container } from "@/app/_components/atoms/ui/container";
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { BrandedButton } from "@/app/_components/molecules/branded-button"
-import { HeroAnimatedImage } from "@/app/_components/organisms/sections/hero-animated-image"
-
+import { ArrowRight } from "lucide-react";
+import { BrandedButton } from "@/app/_components/molecules/branded-button";
+import { HeroAnimatedImage } from "@/app/_components/organisms/sections/hero-animated-image";
 
 export function HeroSection() {
-  return (
+	return (
 		<section
 			id="home"
 			className="relative bg-[#f7f7f7] overflow-hidden h-[screen] md:h-auto lg:min-h-[640px] xl:min-h-[700px] flex flex-col"
@@ -39,18 +37,17 @@ export function HeroSection() {
 
 							<div className="flex gap-3 items-center justify-center lg:justify-start mt-2">
 								<BrandedButton
-										href="https://app.pandami.com.br/auth/sign-up/"
-										icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
-										size="lg"
-										className="px-4"
-									>
-										COMEÇAR TESTE DE 7 DIAS
-									</BrandedButton>
-							
+									href="https://app.pandami.com.br/auth/sign-up/"
+									icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
+									size="lg"
+									className="px-4"
+								>
+									COMEÇAR TESTE DE 7 DIAS
+								</BrandedButton>
 							</div>
 						</div>
 
-						{/* Hero Images - Animated */}
+						{/* Hero Images - Animated (dynamically loaded) */}
 						<div className="relative flex items-end justify-center w-full max-w-[480px] aspect-3/4">
 							<HeroAnimatedImage />
 						</div>
