@@ -3,6 +3,7 @@
 import { Container } from "@/app/_components/atoms/ui/container";
 import { ArrowRight } from "lucide-react";
 import { BrandedButton } from "@/app/_components/molecules/branded-button";
+import { HeroStaticImage } from "@/app/_components/organisms/sections/hero-static-image";
 import { HeroAnimatedImage } from "@/app/_components/organisms/sections/hero-animated-image";
 
 export function HeroSection() {
@@ -47,8 +48,9 @@ export function HeroSection() {
 							</div>
 						</div>
 
-						{/* Hero Images - Animated */}
+						{/* Hero Images - Static for LCP, animated loads after */}
 						<div className="relative flex items-end justify-center w-full max-w-[480px] aspect-3/4">
+							<HeroStaticImage />
 							<HeroAnimatedImage />
 						</div>
 					</div>

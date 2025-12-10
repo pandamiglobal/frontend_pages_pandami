@@ -26,6 +26,7 @@ export const VariantCard = memo(({
   return (
     <div 
       ref={ref}
+      role="option"
       className={`p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-1px] ${
         isSelected ? 'outline-primary outline-2 shadow-lg shadow-primary/20' : 'outline-white/50'
       } backdrop-blur-xl flex items-center gap-3 transition-all duration-300`}

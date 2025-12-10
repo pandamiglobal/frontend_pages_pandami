@@ -216,6 +216,9 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
     const startAnimation = () => {
       if (hasStartedRef.current) return;
       hasStartedRef.current = true;
+      // Hide static image when animation starts
+      const staticImage = document.getElementById('hero-static-image');
+      if (staticImage) staticImage.style.display = 'none';
       setIsReady(true);
     };
 
@@ -427,6 +430,7 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
             {showVariantCards && (
               <motion.div
                 key="variant-cards-container"
+                role="listbox"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, transition: { duration: 0.3 } }}

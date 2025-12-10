@@ -86,11 +86,12 @@ export default function RootLayout({
 				<link rel="dns-prefetch" href="https://scripts.clarity.ms" />
 				<link rel="dns-prefetch" href="https://scripts.converteai.net" />
 
-				{/* Preload LCP image for faster initial render */}
+				{/* Preload LCP image for faster initial render - use Next.js optimized path */}
 				<link
 					rel="preload"
 					as="image"
-					href="/lp/images/hero/heroPersonImage_Female1.png"
+					href="/_next/image?url=%2Flp%2Fimages%2Fhero%2FheroPersonImage_Female1.png&w=640&q=75"
+					type="image/webp"
 					fetchPriority="high"
 				/>
 			</head>
