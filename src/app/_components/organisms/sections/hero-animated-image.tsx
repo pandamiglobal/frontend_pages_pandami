@@ -221,28 +221,30 @@ export function HeroAnimatedImage({ waitTime = 2 }: HeroAnimatedImageProps) {
 
     // Fallback timeout if requestIdleCallback takes too long (max 2s)
     const fallbackTimeout = setTimeout(startAnimation, 2000);
+    let idleId: number | undefined;
+    let loadHandler: (() => void) | undefined;
 
-    if ('requestIdleCallback' in window) {
-      const idleId = window.requestIdleCallback(startAnimation, { timeout: 1500 });
-      return () => {
-        clearTimeout(fallbackTimeout);
-        window.cancelIdleCallback(idleId);
-      };
-    } else {
-      // Fallback for Safari: use setTimeout after load event
-      const handleLoad = () => setTimeout(startAnimation, 100);
-      if (document.readyState === 'complete') {
-        handleLoad();
+    const scheduleStart = () => {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(startAnimation, { timeout: 1500 });
       } else {
-        window.addEventListener('load', handleLoad);
-        return () => {
-          clearTimeout(fallbackTimeout);
-          window.removeEventListener('load', handleLoad);
-        };
+        // Fallback for Safari - start immediately after load
+        startAnimation();
       }
+    };
+
+    if (document.readyState === 'complete') {
+      scheduleStart();
+    } else {
+      loadHandler = () => scheduleStart();
+      window.addEventListener('load', loadHandler);
     }
 
-    return () => clearTimeout(fallbackTimeout);
+    return () => {
+      clearTimeout(fallbackTimeout);
+      if (idleId) window.cancelIdleCallback(idleId);
+      if (loadHandler) window.removeEventListener('load', loadHandler);
+    };
   }, []);
 
   // Timer para avançar as fases automaticamente (only when ready)
