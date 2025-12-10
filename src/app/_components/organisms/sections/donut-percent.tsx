@@ -1,56 +1,58 @@
 "use client"
 
-import { memo } from 'react';
-import { PieChart, Pie, Label, Cell } from 'recharts';
+import { memo } from "react";
 
 interface DonutPercentProps {
-  percent: number;
+	percent: number;
 }
 
+/**
+ * Lightweight donut chart using pure SVG - no Recharts dependency
+ * Reduces bundle size by ~150KB
+ */
 export const DonutPercent = memo(({ percent }: DonutPercentProps) => {
-  const clamped = Math.max(0, Math.min(100, percent));
-  const data = [
-    { name: 'value', value: clamped },
-    { name: 'rest', value: 100 - clamped },
-  ];
-  const GREEN = '#bbf7d0'; // Tailwind green-200
-  const TRACK = '#e5e7eb';
+	const clamped = Math.max(0, Math.min(100, percent));
 
-  return (
-    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-      <PieChart width={64} height={64}>
-        <Pie
-          data={data}
-          dataKey="value"
-          startAngle={90}
-          endAngle={-270}
-          innerRadius={20}
-          outerRadius={30}
-          strokeWidth={0}
-          isAnimationActive
-          animationDuration={600}
-          cornerRadius={9999}
-        >
-          {data.map((entry, index) => (
-            <Cell key={index} fill={index === 0 ? GREEN : TRACK} />
-          ))}
-          <Label
-            content={({ viewBox }) => {
-              if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
-                return (
-                  <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
-                    <tspan className="fill-neutral-800 text-xs font-medium">{clamped}</tspan>
-                    <tspan className="fill-neutral-800 text-[9.6px] font-medium">%</tspan>
-                  </text>
-                );
-              }
-              return null;
-            }}
-          />
-        </Pie>
-      </PieChart>
-    </div>
-  );
+	// SVG circle parameters
+	const size = 64;
+	const strokeWidth = 10;
+	const radius = (size - strokeWidth) / 2;
+	const circumference = 2 * Math.PI * radius;
+	const offset = circumference - (clamped / 100) * circumference;
+
+	return (
+		<div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+			<svg width={size} height={size} className="transform -rotate-90">
+				{/* Background track */}
+				<circle
+					cx={size / 2}
+					cy={size / 2}
+					r={radius}
+					fill="none"
+					stroke="#e5e7eb"
+					strokeWidth={strokeWidth}
+				/>
+				{/* Progress arc */}
+				<circle
+					cx={size / 2}
+					cy={size / 2}
+					r={radius}
+					fill="none"
+					stroke="#bbf7d0"
+					strokeWidth={strokeWidth}
+					strokeDasharray={circumference}
+					strokeDashoffset={offset}
+					strokeLinecap="round"
+					className="transition-all duration-500 ease-out"
+				/>
+			</svg>
+			{/* Center text */}
+			<div className="absolute flex items-baseline">
+				<span className="text-neutral-800 text-xs font-medium">{clamped}</span>
+				<span className="text-neutral-800 text-[9.6px] font-medium">%</span>
+			</div>
+		</div>
+	);
 });
 
-DonutPercent.displayName = 'DonutPercent';
+DonutPercent.displayName = "DonutPercent";

@@ -1,9 +1,23 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Container } from "@/app/_components/atoms/ui/container";
 import { ArrowRight } from "lucide-react";
 import { BrandedButton } from "@/app/_components/molecules/branded-button";
-import { HeroAnimatedImage } from "@/app/_components/organisms/sections/hero-animated-image";
+
+// Dynamic import GSAP-heavy animation - reduces initial JS by ~200KB
+const HeroAnimatedImage = dynamic(
+	() =>
+		import("@/app/_components/organisms/sections/hero-animated-image").then(
+			(mod) => mod.HeroAnimatedImage
+		),
+	{
+		ssr: false, // GSAP is client-only
+		loading: () => (
+			<div className="w-full h-full bg-neutral-100/30 rounded-2xl animate-pulse" />
+		),
+	}
+);
 
 export function HeroSection() {
 	return (

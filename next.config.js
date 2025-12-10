@@ -42,7 +42,6 @@ const nextConfig = {
     // Works with both Webpack and Turbopack
     optimizePackageImports: [
       'lucide-react',
-      'recharts',
       'framer-motion',
       'date-fns',
       'gsap',
@@ -52,6 +51,9 @@ const nextConfig = {
       '@radix-ui/react-dropdown-menu',
       '@radix-ui/react-avatar',
       '@radix-ui/react-popover',
+      '@radix-ui/react-label',
+      '@radix-ui/react-radio-group',
+      '@radix-ui/react-slot',
     ],
   },
 
