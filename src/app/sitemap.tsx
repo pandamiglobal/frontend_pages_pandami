@@ -16,14 +16,13 @@ type WpUrlEntry = {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Resolve base URL de forma segura para evitar exceções em build/export
   const envSite =
-    process.env.NEXT_BLOG_API_URL ||
     process.env.SITE_URL ||
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '') ||
     'http://localhost:3000'
   const siteBase = envSite.replace(/\/$/, '')
 
-  const apiBase = (process.env.NEXT_BLOG_API_URL || '').replace(/\/$/, '')
-  const wpSitemapUrl = apiBase ? `${apiBase}/post/sitemap` : ''
+  const apiBase = (process.env.NEXT_BLOG_API_URL || process.env.NEXT_PUBLIC_CMS_URL || '').replace(/\/$/, '')
+  const wpSitemapUrl = apiBase ? `${apiBase}/wp-sitemap-posts-post-1.xml` : ''
 
   let wpUrls: Array<{ url: string; lastModified: string; images: string[] }> = []
 
