@@ -3,6 +3,8 @@ import "./globals.css";
 import { Ubuntu, Fahkwang } from "next/font/google";
 
 import { Metadata } from "next";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { DEFAULT_SEO } from "@/common/constants/default-seo";
 import Analytics from "@/app/_components/molecules/analytics";
@@ -75,14 +77,9 @@ export default function RootLayout({
 				{/* Bing Webmaster Tool */}
 				<meta name="msvalidate.01" content="8A95AB149BD17EA6C91FC94BE3387B48" />
 
-				{/* Preload LCP image for faster rendering */}
-				<link
-					rel="preload"
-					href="/lp/images/hero/heroPersonImage_Female1.png"
-					as="image"
-					type="image/png"
-					fetchPriority="high"
-				/>
+				{/* Preconnect to Google Fonts for faster font loading */}
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
 				{/* DNS prefetch for third-party domains */}
 				<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
@@ -91,6 +88,10 @@ export default function RootLayout({
 			</head>
 			<body className={`font-sans`}>
 				<Analytics />
+				
+				{/* Vercel Web Vitals Monitoring */}
+				<VercelAnalytics />
+				<SpeedInsights />
 			
 				{children}
 			</body>
