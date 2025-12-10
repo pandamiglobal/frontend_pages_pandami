@@ -44,7 +44,6 @@ const nextConfig = {
       'lucide-react',
       'framer-motion',
       'date-fns',
-      'gsap',
       '@radix-ui/react-accordion',
       '@radix-ui/react-tabs',
       '@radix-ui/react-dialog',
@@ -62,10 +61,7 @@ const nextConfig = {
   // ============================================================================
   turbopack: {
     // Resolve aliases for Turbopack
-    resolveAlias: {
-      // Optimize GSAP - use core only
-      'gsap/all': 'gsap',
-    },
+    resolveAlias: {},
   },
 
   // ============================================================================
@@ -115,6 +111,12 @@ const nextConfig = {
       exclude: ['error', 'warn'],
     } : false,
   },
+
+
+  productionBrowserSourceMaps: false, // Disable source maps in production for smaller bundles
+  
+  // Compress output
+  compress: true,
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

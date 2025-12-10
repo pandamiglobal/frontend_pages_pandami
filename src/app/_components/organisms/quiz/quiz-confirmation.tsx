@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 import { CheckCircle } from "lucide-react"
-import gsap from "gsap"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface QuizConfirmationProps {
   isVisible: boolean
@@ -30,85 +30,68 @@ function getGradientClass(color: string): string {
 function getShadowColor(color: string): string {
   switch (color) {
     case 'blue':
-      return 'rgba(59, 130, 246, 0.3)' // blue-500 with opacity
+      return 'rgba(59, 130, 246, 0.3)'
     case 'amber':
-      return 'rgba(245, 158, 11, 0.3)' // amber-500 with opacity
+      return 'rgba(245, 158, 11, 0.3)'
     case 'red':
-      return 'rgba(239, 68, 68, 0.3)' // red-500 with opacity
+      return 'rgba(239, 68, 68, 0.3)'
     case 'gray':
-      return 'rgba(107, 114, 128, 0.3)' // gray-500 with opacity
+      return 'rgba(107, 114, 128, 0.3)'
     case 'green':
     default:
-      return 'rgba(34, 197, 94, 0.3)' // green-500 with opacity
+      return 'rgba(34, 197, 94, 0.3)'
   }
 }
 
 export function QuizConfirmation({ isVisible, onComplete, color = 'green' }: QuizConfirmationProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const iconRef = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
-    if (isVisible && containerRef.current && iconRef.current) {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          setTimeout(() => {
-            onComplete?.()
-          }, 300)
-        }
-      })
-
-      // Reset inicial
-      gsap.set(containerRef.current, { opacity: 0, scale: 0 })
-      gsap.set(iconRef.current, { scale: 0, rotation: -180 })
-
-      // Animação principal - mais simples e focada
-      tl.to(containerRef.current, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.4,
-        ease: "back.out(2)"
-      })
-      .to(iconRef.current, {
-        scale: 1,
-        rotation: 0,
-        duration: 0.6,
-        ease: "elastic.out(1, 0.3)"
-      }, "-=0.2")
-      .to(iconRef.current, {
-        scale: 1.1,
-        duration: 0.2,
-        ease: "power2.out",
-        yoyo: true,
-        repeat: 1
-      }, "+=0.1")
-      .to(containerRef.current, {
-        opacity: 0,
-        scale: 0,
-        duration: 0.3,
-        ease: "power2.in"
-      }, "+=0.2")
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        onComplete?.()
+      }, 1500)
+      return () => clearTimeout(timer)
     }
   }, [isVisible, onComplete])
 
-  if (!isVisible) return null
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
-      <div
-        ref={containerRef}
-        className="flex items-center justify-center"
-      >
-        {/* Ícone único centralizado */}
-        <div
-          ref={iconRef}
-          className={`w-20 h-20 bg-gradient-to-br rounded-full flex items-center justify-center shadow-2xl border-4 border-white ${getGradientClass(color)}`}
-          style={{
-            filter: `drop-shadow(0 10px 20px ${getShadowColor(color)})`
-          }}
-        >
-          <CheckCircle className="w-10 h-10 text-white" />
+    <AnimatePresence>
+      {isVisible && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ 
+              type: "spring",
+              stiffness: 300,
+              damping: 20
+            }}
+            className="flex items-center justify-center"
+          >
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 15,
+                delay: 0.1
+              }}
+              className={`w-20 h-20 bg-gradient-to-br rounded-full flex items-center justify-center shadow-2xl border-4 border-white ${getGradientClass(color)}`}
+              style={{
+                filter: `drop-shadow(0 10px 20px ${getShadowColor(color)})`
+              }}
+            >
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ delay: 0.5, duration: 0.3 }}
+              >
+                <CheckCircle className="w-10 h-10 text-white" />
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   )
 }

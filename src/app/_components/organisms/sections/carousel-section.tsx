@@ -3,8 +3,8 @@
 import { Container } from "@/app/_components/atoms/ui/container";
 import { BadgeIcon } from "@/app/_components/atoms/svg/badge-icon";
 import { ImageComparisonSlider } from "./image-comparison-slider";
-import { useRef, useEffect, useCallback, useMemo } from "react";
-import gsap from "gsap";
+import { useRef, useEffect, useMemo, useState } from "react";
+import { motion, useAnimationControls } from "framer-motion";
 
 // Tipos otimizados para melhor performance e type safety
 interface BeforeAfterPair {
@@ -23,11 +23,7 @@ interface MarqueeRowProps {
 
 // Constantes para melhor manutenção e performance
 const ANIMATION_CONFIG = {
-	MIN_DURATION: 10, // Duração mínima (mais rápido)
-	MAX_DURATION: 120, // Duração máxima (mais lento)
 	BASE_SPEED: 50, // Velocidade base para cálculos
-	RESIZE_THROTTLE: 200,
-	INTERSECTION_THRESHOLD: 0.1,
 	GAP_BETWEEN_ITEMS: 6,
 	EDGE_FADE_WIDTH: 24,
 } as const;
@@ -64,228 +60,98 @@ const menPairs = [
 ] as const;
 
 /**
- * MarqueeRow - Componente de rolagem infinita otimizado usando GSAP
- * @param items - Array readonly de pares de imagens antes/depois
- * @param reverse - Se verdadeiro, a direção da animação é invertida
- * @param speed - Velocidade da animação (maior = mais lento)
+ * MarqueeRow - Componente de rolagem infinita usando framer-motion
  */
 function MarqueeRow({ items, reverse = false, speed = 50 }: MarqueeRowProps) {
-	// Referências otimizadas com tipos específicos
 	const containerRef = useRef<HTMLDivElement>(null);
-	const trackRef = useRef<HTMLDivElement>(null);
-	const firstRowRef = useRef<HTMLDivElement>(null);
-	const secondRowRef = useRef<HTMLDivElement>(null);
-	const animationRef = useRef<gsap.core.Timeline | null>(null);
-	const resizeTimerRef = useRef<number | null>(null);
+	const controls = useAnimationControls();
+	const [isVisible, setIsVisible] = useState(true);
 
-	// Cálculo corrigido da duração da animação baseado na velocidade
+	// Cálculo da duração baseado na velocidade
 	const animationDuration = useMemo(() => {
-		// Inversão da lógica: speed menor = animação mais rápida
 		const baseSpeed = speed || ANIMATION_CONFIG.BASE_SPEED;
-
-		// Cálculo inverso: valores menores de speed resultam em menor duração
-		const calculatedDuration = ANIMATION_CONFIG.BASE_SPEED / baseSpeed * 30;
-
-		// Limitação dentro dos valores mínimos e máximos
-		return Math.max(
-			ANIMATION_CONFIG.MIN_DURATION,
-			Math.min(ANIMATION_CONFIG.MAX_DURATION, calculatedDuration)
-		);
+		return Math.max(20, (ANIMATION_CONFIG.BASE_SPEED / baseSpeed) * 40);
 	}, [speed]);
 
-	// Função otimizada para configurar o marquee
-	const setupMarquee = useCallback(() => {
-		if (!firstRowRef.current || !secondRowRef.current || !trackRef.current) {
-			return 0;
-		}
-
-		const firstRow = firstRowRef.current;
-		const secondRow = secondRowRef.current;
-		const track = trackRef.current;
-		const firstRowWidth = firstRow.offsetWidth;
-
-		// Configuração otimizada dos elementos
-		gsap.set(secondRow, {
-			position: "absolute",
-			left: firstRowWidth,
-			top: 0,
-		});
-
-		gsap.set(track, {
-			width: firstRowWidth * 2,
-			position: "relative",
-			x: reverse ? -firstRowWidth : 0,
-		});
-
-		return firstRowWidth;
-	}, [reverse]);
-
-	// Função otimizada para reset da posição
-	const resetPosition = useCallback((newPosition: number) => {
-		if (trackRef.current) {
-			gsap.set(trackRef.current, { x: newPosition });
-		}
-	}, []);
-
-	// Função otimizada para criar timeline
-	const createTimeline = useCallback(
-		(firstRowWidth: number) => {
-			if (!trackRef.current) return null;
-
-			const timeline = gsap.timeline({
-				repeat: -1,
-				defaults: {
-					ease: "linear",
-					duration: animationDuration, // Duração agora é inversamente proporcional à velocidade
-				},
-			});
-
-			if (reverse) {
-				timeline.to(trackRef.current, {
-					x: 0,
-					onComplete: () => resetPosition(-firstRowWidth),
-				});
-			} else {
-				timeline.to(trackRef.current, {
-					x: -firstRowWidth,
-					onComplete: () => resetPosition(0),
-				});
-			}
-
-			return timeline;
-		},
-		[animationDuration, reverse, resetPosition]
-	);
-
-	// Função otimizada para redimensionamento
-	const handleResize = useCallback(() => {
-		if (resizeTimerRef.current) {
-			window.clearTimeout(resizeTimerRef.current);
-		}
-
-		resizeTimerRef.current = window.setTimeout(() => {
-			if (!animationRef.current) return;
-
-			animationRef.current.kill();
-
-			const updatedWidth = setupMarquee();
-			if (updatedWidth > 0) {
-				animationRef.current = createTimeline(updatedWidth);
-			}
-		}, ANIMATION_CONFIG.RESIZE_THROTTLE);
-	}, [setupMarquee, createTimeline]);
-
-	// Efeito principal otimizado
+	// Observer para pausar quando fora da viewport
 	useEffect(() => {
-		// Verificações de segurança
-		if (
-			!containerRef.current ||
-			!trackRef.current ||
-			!firstRowRef.current ||
-			!secondRowRef.current
-		) {
-			return;
-		}
-
 		const container = containerRef.current;
+		if (!container) return;
 
-		// Limpa animações anteriores
-		if (animationRef.current) {
-			animationRef.current.kill();
-		}
-
-		// Configura o marquee
-		const firstRowWidth = setupMarquee();
-		if (firstRowWidth === 0) return;
-
-		// Cria e inicia a timeline
-		animationRef.current = createTimeline(firstRowWidth);
-
-		// Observer otimizado para visibilidade
-		const visibilityObserver = new IntersectionObserver(
+		const observer = new IntersectionObserver(
 			([entry]) => {
-				if (!animationRef.current) return;
-
-				if (entry.isIntersecting) {
-					animationRef.current.play();
-				} else {
-					animationRef.current.pause();
-				}
+				setIsVisible(entry.isIntersecting);
 			},
-			{ threshold: ANIMATION_CONFIG.INTERSECTION_THRESHOLD }
+			{ threshold: 0.1 }
 		);
 
-		visibilityObserver.observe(container);
+		observer.observe(container);
+		return () => observer.disconnect();
+	}, []);
 
-		// Event listener otimizado para resize
-		window.addEventListener("resize", handleResize, { passive: true });
+	// Controla animação baseado na visibilidade
+	useEffect(() => {
+		if (isVisible) {
+			controls.start({
+				x: reverse ? "0%" : "-50%",
+				transition: {
+					x: {
+						repeat: Infinity,
+						repeatType: "loop",
+						duration: animationDuration,
+						ease: "linear",
+					},
+				},
+			});
+		} else {
+			controls.stop();
+		}
+	}, [isVisible, controls, reverse, animationDuration]);
 
-		// Cleanup otimizado
-		return () => {
-			if (animationRef.current) {
-				animationRef.current.kill();
-			}
-			if (resizeTimerRef.current) {
-				window.clearTimeout(resizeTimerRef.current);
-			}
-			visibilityObserver.disconnect();
-			window.removeEventListener("resize", handleResize);
-		};
-	}, [reverse, animationDuration, setupMarquee, createTimeline, handleResize]);
+	const renderItems = (keyPrefix: string) =>
+		items.map((item, i) => (
+			<div key={`${keyPrefix}-${i}`} className="relative shrink-0">
+				<ImageComparisonSlider
+					beforeImage={item.beforeSrc}
+					afterImage={item.afterSrc}
+					beforeAlt={item.beforeAlt}
+					afterAlt={item.afterAlt}
+					className={item.className}
+				/>
+			</div>
+		));
 
 	return (
 		<div ref={containerRef} className="relative w-full overflow-hidden">
-			<div
-				ref={trackRef}
-				className="will-change-transform"
-				style={{ display: "flex", position: "relative" }}
+			<motion.div
+				className="flex will-change-transform"
+				initial={{ x: reverse ? "-50%" : "0%" }}
+				animate={controls}
 			>
-				{/* Primeira sequência de imagens */}
+				{/* Primeira sequência */}
 				<div
-					ref={firstRowRef}
 					className="flex flex-nowrap shrink-0"
 					style={{
 						gap: `${ANIMATION_CONFIG.GAP_BETWEEN_ITEMS * 4}px`,
-						padding: `0 ${ANIMATION_CONFIG.GAP_BETWEEN_ITEMS * 1}px`,
+						padding: `0 ${ANIMATION_CONFIG.GAP_BETWEEN_ITEMS}px`,
 					}}
 				>
-					{items.map((item, i) => (
-						<div key={`first-${i}`} className="relative shrink-0">
-							<ImageComparisonSlider
-								beforeImage={item.beforeSrc}
-								afterImage={item.afterSrc}
-								beforeAlt={item.beforeAlt}
-								afterAlt={item.afterAlt}
-								className={item.className}
-							/>
-						</div>
-					))}
+					{renderItems("first")}
 				</div>
 
-				{/* Segunda sequência de imagens duplicada */}
+				{/* Segunda sequência duplicada para loop infinito */}
 				<div
-					ref={secondRowRef}
 					className="flex flex-nowrap shrink-0"
 					style={{
 						gap: `${ANIMATION_CONFIG.GAP_BETWEEN_ITEMS * 4}px`,
 						padding: `0 ${ANIMATION_CONFIG.GAP_BETWEEN_ITEMS * 4}px`,
 					}}
 				>
-					{items.map((item, i) => (
-						<div key={`second-${i}`} className="relative shrink-0">
-							<ImageComparisonSlider
-								beforeImage={item.beforeSrc}
-								afterImage={item.afterSrc}
-								beforeAlt={item.beforeAlt}
-								afterAlt={item.afterAlt}
-								className={item.className}
-							/>
-						</div>
-					))}
+					{renderItems("second")}
 				</div>
-			</div>
+			</motion.div>
 
-			{/* Efeito de fade nas bordas laterais otimizado */}
+			{/* Efeito de fade nas bordas */}
 			<div
 				className="pointer-events-none absolute inset-y-0 left-0 bg-linear-to-r from-neutral-50 to-transparent z-10"
 				style={{ width: `${ANIMATION_CONFIG.EDGE_FADE_WIDTH}px` }}

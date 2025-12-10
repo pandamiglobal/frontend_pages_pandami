@@ -1,20 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import gsap from "gsap"
 import { QUIZ_QUESTIONS } from "./quiz-questions"
 import type { ConfettiRef } from "@/app/_components/atoms/ui/confetti"
 
 const ANIMATION_DURATION = {
-  FAST: 0.2,
-  MEDIUM: 0.3,
-  SLOW: 0.5,
-  PROGRESS: 0.8
-} as const
-
-const EASING = {
-  POWER_OUT: "power1.out",
-  POWER_IN: "power2.in",
-  POWER_IN_OUT: "power2.inOut"
+  FAST: 200,
+  MEDIUM: 300,
+  SLOW: 500,
+  PROGRESS: 800
 } as const
 
 interface UseQuizProps {
@@ -30,7 +23,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null)
   const [selectedOptionColor, setSelectedOptionColor] = useState<'green' | 'blue' | 'amber' | 'red' | 'gray'>('green')
   const [isAnimating, setIsAnimating] = useState(false)
-  const [isGsapAnimating, setIsGsapAnimating] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
   
   const questionRef = useRef<HTMLDivElement>(null)
@@ -78,58 +71,65 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
 
 
   const animateOutTransition = useCallback(() => {
-    setIsGsapAnimating(true)
-    const timeline = gsap.timeline()
+    setIsTransitioning(true)
     
     if (questionRef.current && optionsRef.current) {
-      timeline
-        .to([questionRef.current, optionsRef.current], {
-          opacity: 0,
-          y: -20,
-          duration: 0.3,
-          stagger: 0.1,
-          ease: "power2.in"
-        })
-    } else {
-      // Fallback if refs are missing
-      timeline.to({}, { duration: 0.1 })
+      // Apply CSS transitions
+      questionRef.current.style.transition = 'opacity 0.3s ease-in, transform 0.3s ease-in'
+      optionsRef.current.style.transition = 'opacity 0.3s ease-in 0.1s, transform 0.3s ease-in 0.1s'
+      
+      questionRef.current.style.opacity = '0'
+      questionRef.current.style.transform = 'translateY(-20px)'
+      optionsRef.current.style.opacity = '0'
+      optionsRef.current.style.transform = 'translateY(-20px)'
     }
     
-    // Reset isGsapAnimating quando a animação terminar
-    timeline.eventCallback("onComplete", () => {
-      setIsGsapAnimating(false)
-    })
+    // Return a promise-like object for compatibility
+    const duration = 400 // 300ms + 100ms stagger
+    setTimeout(() => {
+      setIsTransitioning(false)
+    }, duration)
     
-    return timeline
+    return {
+      eventCallback: (event: string, callback: () => void) => {
+        if (event === 'onComplete') {
+          setTimeout(callback, duration)
+        }
+      }
+    }
   }, [])
 
   const animateInTransition = useCallback(() => {
     if (questionRef.current && optionsRef.current) {
-      setIsGsapAnimating(true)
-      gsap.fromTo(
-        [questionRef.current, optionsRef.current],
-        { 
-          opacity: 0, 
-          y: 20 
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          stagger: 0.1,
-          ease: "power2.out",
-          delay: 0.1,
-          onComplete: () => {
-            setIsGsapAnimating(false)
-          }
-        }
-      )
+      setIsTransitioning(true)
+      
+      // Set initial state
+      questionRef.current.style.opacity = '0'
+      questionRef.current.style.transform = 'translateY(20px)'
+      optionsRef.current.style.opacity = '0'
+      optionsRef.current.style.transform = 'translateY(20px)'
+      
+      // Trigger reflow
+      questionRef.current.offsetHeight
+      
+      // Apply transitions
+      questionRef.current.style.transition = 'opacity 0.4s ease-out 0.1s, transform 0.4s ease-out 0.1s'
+      optionsRef.current.style.transition = 'opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s'
+      
+      questionRef.current.style.opacity = '1'
+      questionRef.current.style.transform = 'translateY(0)'
+      optionsRef.current.style.opacity = '1'
+      optionsRef.current.style.transform = 'translateY(0)'
+      
+      setTimeout(() => {
+        setIsTransitioning(false)
+      }, 600)
     }
   }, [])
 
   const handleOptionSelect = useCallback((optionIndex: number) => {
     // Bloquear seleção durante animações ou confirmação
-    if (isAnimating || showConfirmation || isGsapAnimating) return
+    if (isAnimating || showConfirmation || isTransitioning) return
     
     setSelectedOption(optionIndex)
     
@@ -144,7 +144,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
         }
       }
     }
-  }, [currentQuestionData, isAnimating, showConfirmation, isGsapAnimating])
+  }, [currentQuestionData, isAnimating, showConfirmation, isTransitioning])
 
   const handleRadioChange = useCallback((value: string) => {
     const optionIndex = parseInt(value.replace('option-', ''))
@@ -243,13 +243,16 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
     
     // Reset estado de animação
     setIsAnimating(false)
-    setIsGsapAnimating(false)
+    setIsTransitioning(false)
 
     if (questionRef.current && optionsRef.current) {
-      gsap.set([questionRef.current, optionsRef.current], {
-        opacity: 1,
-        y: 0
-      })
+      // Reset styles without animation
+      questionRef.current.style.transition = 'none'
+      optionsRef.current.style.transition = 'none'
+      questionRef.current.style.opacity = '1'
+      questionRef.current.style.transform = 'translateY(0)'
+      optionsRef.current.style.opacity = '1'
+      optionsRef.current.style.transform = 'translateY(0)'
     }
     
     return () => {
@@ -261,11 +264,8 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
   // Separar animação da progress bar em useEffect separado
   useEffect(() => {
     if (progressRef.current) {
-      gsap.to(progressRef.current, {
-        width: `${progress}%`,
-        duration: 0.5,
-        ease: "power2.out"
-      })
+      progressRef.current.style.transition = 'width 0.5s ease-out'
+      progressRef.current.style.width = `${progress}%`
     }
   }, [progress])
 
@@ -274,7 +274,7 @@ export function useQuiz({ onComplete, confettiRef, buttonRef }: UseQuizProps) {
     selectedOption,
     selectedOptionColor,
     isAnimating,
-    isGsapAnimating,
+    isTransitioning,
     showConfirmation,
     stepIndex,
     currentQuestionData,

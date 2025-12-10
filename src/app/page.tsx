@@ -11,7 +11,7 @@ import { SectionSkeleton } from "@/app/_components/atoms/ui/section-skeleton";
 // Dynamic Imports - Defer below-the-fold sections to reduce initial JS
 // ============================================================================
 
-// GSAP-heavy carousel with many images
+// Framer-motion carousel with many images
 const CarouselSection = dynamic(
 	() => import("@/app/_components/organisms/sections/carousel-section"),
 	{
@@ -41,7 +41,7 @@ const FeaturesPandami = dynamic(
 	}
 );
 
-// GSAP animations + image comparison slider
+// Framer-motion animations + image comparison slider
 const AboutVisagismSection = dynamic(
 	() =>
 		import("@/app/_components/organisms/sections/about-visagism-section").then(
@@ -52,7 +52,7 @@ const AboutVisagismSection = dynamic(
 	}
 );
 
-// GSAP animations + testimonial carousel
+// Framer-motion animations + testimonial carousel
 const SocialProofSection = dynamic(
 	() =>
 		import("@/app/_components/organisms/sections/social-proof-section").then(

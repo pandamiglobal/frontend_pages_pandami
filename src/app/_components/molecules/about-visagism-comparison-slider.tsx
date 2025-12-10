@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useComparisonSlider } from "@/common/hooks/use-comparison-slider";
 import type { AboutVisagismComparisonSliderProps } from "@/common/types/about-visagism-comparison-slider.type";
@@ -83,7 +84,7 @@ export function AboutVisagismComparisonSlider({
         />
 
         {/* Handle */}
-        <button
+        <motion.button
           ref={handleRef}
           type="button"
           aria-label="Arraste para comparar"
@@ -91,6 +92,14 @@ export function AboutVisagismComparisonSlider({
           style={{ left: `${position}%` }}
           onMouseDown={handleButtonMouseDown}
           onTouchStart={handleButtonTouchStart}
+          animate={!hasInteracted && !isHovered ? {
+            scale: [1, 1.2, 1],
+          } : { scale: 1 }}
+          transition={{
+            duration: 0.8,
+            ease: "easeInOut",
+            repeat: !hasInteracted && !isHovered ? Infinity : 0,
+          }}
         >
           <span className="h-14 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
             {/* Affordance injetado via props - só exibe se não interagiu */}
@@ -105,7 +114,7 @@ export function AboutVisagismComparisonSlider({
               </div>
             )}
           </span>
-        </button>
+        </motion.button>
       </div>
 
       {/* Labels */}

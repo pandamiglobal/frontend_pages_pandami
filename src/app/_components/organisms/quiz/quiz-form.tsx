@@ -23,7 +23,7 @@ export function QuizForm({ onComplete }: QuizFormProps) {
   const {
     selectedOption,
     isAnimating,
-    isGsapAnimating,
+    isTransitioning,
     stepIndex,
     currentQuestionData,
     progress,

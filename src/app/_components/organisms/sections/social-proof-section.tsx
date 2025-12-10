@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Container } from "@/app/_components/atoms/ui/container";
 import { AboutVisagismComparisonSlider } from "@/app/_components/molecules/about-visagism-comparison-slider";
@@ -135,9 +135,6 @@ const testimonials: Testimonial[] = [
 export function SocialProofSection() {
 	const [index, setIndex] = useState(5); // começa no depoimento da Simone conforme screenshot
 	const current = testimonials[index];
-	const leftRef = useRef<HTMLDivElement | null>(null);
-	const rightRef = useRef<HTMLDivElement | null>(null);
-	const navRef = useRef<HTMLDivElement | null>(null);
 	const firstRender = useRef(true);
 	const prevIndex = useRef(index);
 	const directionRef = useRef<1 | -1>(1); // 1 = avançando, -1 = retrocedendo
@@ -157,7 +154,7 @@ export function SocialProofSection() {
 		};
 	}, []);
 
-	// Animação slide-in direcional a cada mudança de slide
+	// Determina direção para animação
 	useEffect(() => {
 		if (firstRender.current) {
 			firstRender.current = false;
@@ -175,45 +172,23 @@ export function SocialProofSection() {
 		}
 
 		prevIndex.current = index;
-
-		const reduceMotion =
-			typeof window !== "undefined" &&
-			window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-		if (reduceMotion) return;
-
-		const dir = directionRef.current; // 1 ou -1
-		const l = leftRef.current;
-		const r = rightRef.current;
-		const tl = gsap.timeline({
-			defaults: { ease: "power3.out", duration: 0.6 },
-		});
-
-		if (navRef.current) {
-			tl.fromTo(
-				navRef.current.querySelectorAll('button[aria-label^="Ver depoimento"]'),
-				{ opacity: 0.65 },
-				{ opacity: 1, stagger: 0.04, duration: 0.3 },
-				0
-			);
-		}
-
-		if (l && r) {
-			gsap.set([l, r], { willChange: "opacity, transform" });
-			// Estado inicial fora de tela leve + fade
-			gsap.set(l, { x: dir * 60, autoAlpha: 0 });
-			gsap.set(r, { x: dir * 80, autoAlpha: 0 });
-
-			tl.to(l, { x: 0, autoAlpha: 1 }, 0.05)
-				.to(r, { x: 0, autoAlpha: 1 }, 0.1)
-				.add(() => {
-					gsap.set([l, r], { clearProps: "willChange" });
-				});
-		}
-
-		return () => {
-			tl.kill();
-		};
 	}, [index]);
+
+	// Animation variants for framer-motion
+	const slideVariants = {
+		enter: (direction: number) => ({
+			x: direction * 60,
+			opacity: 0,
+		}),
+		center: {
+			x: 0,
+			opacity: 1,
+		},
+		exit: (direction: number) => ({
+			x: direction * -60,
+			opacity: 0,
+		}),
+	};
 
 	function prev() {
 		setIndex((i) => (i === 0 ? testimonials.length - 1 : i - 1));
@@ -237,7 +212,6 @@ export function SocialProofSection() {
 
 				{/* Navegação */}
 				<div
-					ref={navRef}
 					className="flex items-center justify-center gap-4 sm:gap-6 mb-10 max-w-full px-2"
 				>
 					<button
@@ -297,21 +271,38 @@ export function SocialProofSection() {
 
 				{/* Slide atual */}
 				<div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch">
-					<div ref={leftRef} key={current.id + "-left"} className="lg:w-1/2">
-						<AboutVisagismComparisonSlider
-							before={current.before.image}
-							after={current.after.image}
-							beforeAlt="Antes do visagismo"
-							afterAlt="Depois do visagismo"
-							className="w-full h-[420px] md:h-[500px]"
-							affordanceSlot={<SwipeHandAffordance />}
-						/>
-					</div>
-					<div
-						ref={rightRef}
-						key={current.id + "-right"}
-						className="lg:w-1/2 bg-white rounded-[32px] border border-gray-200 p-6 md:p-8 flex flex-col justify-between"
-					>
+					<AnimatePresence mode="wait" custom={directionRef.current}>
+						<motion.div
+							key={current.id + "-left"}
+							custom={directionRef.current}
+							variants={slideVariants}
+							initial="enter"
+							animate="center"
+							exit="exit"
+							transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
+							className="lg:w-1/2"
+						>
+							<AboutVisagismComparisonSlider
+								before={current.before.image}
+								after={current.after.image}
+								beforeAlt="Antes do visagismo"
+								afterAlt="Depois do visagismo"
+								className="w-full h-[420px] md:h-[500px]"
+								affordanceSlot={<SwipeHandAffordance />}
+							/>
+						</motion.div>
+					</AnimatePresence>
+					<AnimatePresence mode="wait" custom={directionRef.current}>
+						<motion.div
+							key={current.id + "-right"}
+							custom={directionRef.current}
+							variants={slideVariants}
+							initial="enter"
+							animate="center"
+							exit="exit"
+							transition={{ type: "tween", duration: 0.4, ease: "easeOut", delay: 0.05 }}
+							className="lg:w-1/2 bg-white rounded-[32px] border border-gray-200 p-6 md:p-8 flex flex-col justify-between"
+						>
 						<div className="flex flex-col gap-6">
 							{/* Título do depoimento */}
 							<h3 className="text-stone-900 text-xl md:text-2xl font-medium leading-tight">
@@ -376,7 +367,8 @@ export function SocialProofSection() {
 									Quero no meu salão
 								</BrandedButton>
 						</div>
-					</div>
+						</motion.div>
+					</AnimatePresence>
 				</div>
 			</Container>
 		</section>

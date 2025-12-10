@@ -1,10 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
-import gsap from "gsap";
 import {
-  ANIMATION_DURATION,
-  ANIMATION_EASING,
   type UseComparisonSliderProps,
   type UseComparisonSliderReturn,
 } from "../types/about-visagism-comparison-slider.type";
@@ -25,7 +22,6 @@ export function useComparisonSlider({
   const isDraggingRef = useRef(false);
   const isFinePointerRef = useRef<boolean>(true);
   const rafMoveRef = useRef<number | null>(null);
-  const scaleAnimationRef = useRef<gsap.core.Tween | null>(null);
 
   // State
   const [position, setPosition] = useState(initialPosition);
@@ -55,48 +51,7 @@ export function useComparisonSlider({
     }
   }, []);
 
-  // Gerenciamento da animação de escala do handle (pulse)
-  useEffect(() => {
-    const handle = handleRef.current;
-    if (!handle) return;
-
-    const stopScaleAnimation = () => {
-      if (scaleAnimationRef.current) {
-        scaleAnimationRef.current.kill();
-        scaleAnimationRef.current = null;
-      }
-      gsap.set(handle, { scale: 1 });
-    };
-
-    const startScaleAnimation = () => {
-      if (scaleAnimationRef.current) return;
-      scaleAnimationRef.current = gsap.to(handle, {
-        scale: 1.2,
-        duration: ANIMATION_DURATION.PULSE,
-        yoyo: true,
-        repeat: -1,
-        ease: ANIMATION_EASING.SINE_IN_OUT,
-      });
-    };
-
-    // Se o usuário já interagiu, nunca pulse novamente
-    if (hasInteracted) {
-      stopScaleAnimation();
-      return;
-    }
-
-    // Inicia o pulse por padrão
-    startScaleAnimation();
-
-    // Para o pulse durante hover
-    if (isHovered) {
-      stopScaleAnimation();
-    }
-
-    return () => {
-      stopScaleAnimation();
-    };
-  }, [hasInteracted, isHovered, handleRef]);
+  // Pulse animation is now handled by framer-motion in the component
 
   // Event listeners globais para drag
   useEffect(() => {

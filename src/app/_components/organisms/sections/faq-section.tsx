@@ -68,22 +68,6 @@ export default function FAQSection({ faq }: { faq: FAQArray }) {
 
 								{/* Testimonials and CTA - positioned after description on mobile, sticky on desktop */}
 								<div className="flex flex-col gap-4">
-									<div className="flex flex-col gap-2">
-										<div className="flex -space-x-2 justify-start">
-											{testimonialAvatars.map((avatar, i) => (
-												<Avatar
-													key={i}
-													className="border-2 border-white h-8 w-8 md:h-9 md:w-9"
-												>
-													<AvatarImage src={avatar.src} alt={avatar.alt} />
-													<AvatarFallback>{avatar.initials}</AvatarFallback>
-												</Avatar>
-											))}
-										</div>
-										<p className="text-sm text-gray-600 text-left">
-											+2 mil homens e mulheres já descobriram sua melhor versão
-										</p>
-									</div>
 									<div className="flex justify-center lg:justify-start">
 										<BrandedButton
 												href="https://app.pandami.com.br/auth/sign-up"

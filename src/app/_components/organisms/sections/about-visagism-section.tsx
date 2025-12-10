@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect } from "react";
-import gsap from "gsap";
+import { motion } from "framer-motion";
 import { Container } from "@/app/_components/atoms/ui/container";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/app/_components/atoms/ui/tabs";
@@ -121,26 +121,7 @@ export function AboutVisagismSection() {
 interface GenderContentProps { data: VariantSet; direction: 1 | -1 }
 
 function GenderContent({ data, direction }: GenderContentProps) {
-  const textRef = useRef<HTMLDivElement | null>(null);
-  const sliderRef = useRef<HTMLDivElement | null>(null);
-  const first = useRef(true);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (first.current) { first.current = false; return; }
-    const reduce = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return;
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.6 } });
-    if (textRef.current && sliderRef.current) {
-      gsap.set([textRef.current, sliderRef.current], { willChange: 'transform, opacity' });
-      gsap.set(textRef.current, { x: direction * 70, autoAlpha: 0 });
-      gsap.set(sliderRef.current, { x: direction * 50, autoAlpha: 0 });
-      tl.to(textRef.current, { x: 0, autoAlpha: 1 }, 0.05)
-        .to(sliderRef.current, { x: 0, autoAlpha: 1 }, 0.1)
-        .add(() => { gsap.set([textRef.current, sliderRef.current], { clearProps: 'willChange' }); });
-    }
-    return () => { tl.kill(); };
-  }, [data, direction]);
 
   // Sempre que o dataset (gênero) mudar, limpar seleção para voltar ao padrão
   useEffect(() => {
@@ -151,11 +132,16 @@ function GenderContent({ data, direction }: GenderContentProps) {
     setSelectedVariantIndex((curr) => (curr === idx ? null : idx));
   };
 
+  // Animation config for framer-motion
+  const getInitialX = direction * 60;
+
   return (
 		<div className="flex flex-col-reverse md:flex-row gap-8 md:gap-10">
 			{/* Right side (texto / variantes / chips / ações) – em mobile fica abaixo */}
-			<div
-				ref={textRef}
+			<motion.div
+				initial={{ x: getInitialX, opacity: 0 }}
+				animate={{ x: 0, opacity: 1 }}
+				transition={{ type: "tween", duration: 0.5 }}
 				className="md:w-1/2 flex flex-col gap-6 bg-white rounded-3xl border border-gray-200 p-6 md:p-8 h-full"
 			>
 				<div>
@@ -219,10 +205,15 @@ function GenderContent({ data, direction }: GenderContentProps) {
 							COMEÇAR TESTE DE 7 DIAS
 						</BrandedButton>
 				</div>
-			</div>
+			</motion.div>
 
 			{/* Left slider */}
-			<div ref={sliderRef} className="md:w-1/2">
+			<motion.div
+				initial={{ x: getInitialX, opacity: 0 }}
+				animate={{ x: 0, opacity: 1 }}
+				transition={{ type: "tween", duration: 0.5, delay: 0.1 }}
+				className="md:w-1/2"
+			>
 				<AboutVisagismComparisonSlider
 					before={data.mainBefore}
 					after={
@@ -235,7 +226,7 @@ function GenderContent({ data, direction }: GenderContentProps) {
 					className="w-full"
 					affordanceSlot={<SwipeHandAffordance />}
 				/>
-			</div>
+			</motion.div>
 		</div>
 	);
 }

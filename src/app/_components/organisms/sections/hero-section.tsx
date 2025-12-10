@@ -5,14 +5,14 @@ import { Container } from "@/app/_components/atoms/ui/container";
 import { ArrowRight } from "lucide-react";
 import { BrandedButton } from "@/app/_components/molecules/branded-button";
 
-// Dynamic import GSAP-heavy animation - reduces initial JS by ~200KB
+// Dynamic import animation component - reduces initial JS
 const HeroAnimatedImage = dynamic(
 	() =>
 		import("@/app/_components/organisms/sections/hero-animated-image").then(
 			(mod) => mod.HeroAnimatedImage
 		),
 	{
-		ssr: false, // GSAP is client-only
+		ssr: false,
 		loading: () => (
 			<div className="w-full h-full bg-neutral-100/30 rounded-2xl animate-pulse" />
 		),

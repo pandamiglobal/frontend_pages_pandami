@@ -19,7 +19,7 @@ export const AngleCard = memo(({
   return (
     <div 
       ref={ref}
-      className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-col justify-center items-center gap-2 opacity-0"
+      className="p-3 bg-gradient-to-br from-white/50 to-white/10 rounded-2xl outline outline-offset-[-0.98px] outline-white/50 flex flex-col justify-center items-center gap-2"
     >
       <div className="text-neutral-800 text-sm font-bold">
         {title}
