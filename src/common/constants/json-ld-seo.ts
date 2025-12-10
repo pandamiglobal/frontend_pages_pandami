@@ -38,7 +38,7 @@ export const JSON_LD_SEO = {
   },
   PRODUCT: {
     NAME: "PandaMi | Visagismo com IA",
-    DESCRIPTION: "Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!",
+    DESCRIPTION: "Descubra o melhor visual com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!",
     CATEGORY: "BeautyApplication",
     OPERATING_SYSTEM: "Web Browser",
     PRICE: {
@@ -61,7 +61,7 @@ export const JSON_LD_SEO = {
     ]
   },
   ARTICLE: {
-    HEADLINE: "Visagismo com IA: Descubra sua melhor versão",
+    HEADLINE: "Visagismo com IA: Descubra o melhor visual",
     DESCRIPTION: "Descubra como a inteligência artificial está revolucionando o visagismo. Análise personalizada em 30 segundos, sugestões para todos os tipos de cabelo brasileiro.",
     SECTION: "Beleza e Estilo",
     WORD_COUNT: 1500,

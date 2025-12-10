@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 		default: DEFAULT_SEO.title,
 		template: "%s | PandaMi",
 	},
-	description: "Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!",
+	description: "Descubra o melhor visual com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!",
 	keywords: DEFAULT_SEO.keywords,
 	robots: {
 		index: true,

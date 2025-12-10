@@ -67,8 +67,8 @@ export const PRICING_CONFIG = {
 
 // SEO configuration
 export const SEO_CONFIG = {
-  defaultTitle: 'Visagismo com IA | Descubra sua melhor versão | PandaMi',
-  defaultDescription: 'Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!',
+  defaultTitle: 'Visagismo com IA | Descubra o melhor visual | PandaMi',
+  defaultDescription: 'Descubra o melhor visual com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!',
   keywords: 'visagismo com IA, Pandami, IA Pandami',
   locale: 'pt_BR',
 } as const;
