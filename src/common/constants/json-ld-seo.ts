@@ -38,13 +38,13 @@ export const JSON_LD_SEO = {
   },
   PRODUCT: {
     NAME: "PandaMi | Visagismo com IA",
-    DESCRIPTION: "Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
+    DESCRIPTION: "Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!",
     CATEGORY: "BeautyApplication",
     OPERATING_SYSTEM: "Web Browser",
     PRICE: {
       AMOUNT: "0",
       CURRENCY: "BRL",
-      DESCRIPTION: "Teste grátis de 7 dias"
+      DESCRIPTION: "Teste de 7 dias"
     },
     RATING: {
       VALUE: "4.8",

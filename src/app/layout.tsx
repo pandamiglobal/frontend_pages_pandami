@@ -32,8 +32,11 @@ const siteUrl =
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteUrl),
-	title: DEFAULT_SEO.title,
-	description: DEFAULT_SEO.description,
+	title: {
+		default: DEFAULT_SEO.title,
+		template: "%s | PandaMi",
+	},
+	description: "Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!",
 	keywords: DEFAULT_SEO.keywords,
 	robots: {
 		index: true,

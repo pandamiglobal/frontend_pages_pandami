@@ -2,7 +2,7 @@ export const DEFAULT_SEO = {
 	title: "Visagismo com IA | Descubra sua melhor versão | PandaMi",
 	blog_title: "Blog | PandaMi",
 	description:
-		"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
+		"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!",
 	keywords: "visagismo com IA, Pandami, IA Pandami",
 	openGraph: {
 		type: "website" as const,
@@ -10,7 +10,7 @@ export const DEFAULT_SEO = {
 		url: process.env.NEXT_PUBLIC_SITE_URL,
 		title: "Visagismo com IA | Descubra sua melhor versão | PandaMi",
 		description:
-			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
+			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!",
 		siteName: "PandaMi",
 		images: [
 			{
@@ -25,7 +25,7 @@ export const DEFAULT_SEO = {
 		card: "summary_large_image" as const,
 		title: "PandaMi | Visagismo com IA",
 		description:
-			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
+			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste de 7 dias!",
 		images: [
 			`${process.env.NEXT_PUBLIC_SITE_URL}/lp/images/hero/hero-main.png`,
 		],
