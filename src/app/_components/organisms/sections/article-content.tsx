@@ -63,7 +63,7 @@ export default async function ArticleContent({
 		.replace(/contenteditable=/g, "contentEditable=");
 
 	return (
-		<section id="article" className="w-full bg-background py-8 md:py-12 mt-10">
+		<section id="article" className="w-full bg-background py-8 md:py-12">
 			<article
 				className="max-w-3xl mx-auto flex flex-col w-full overflow-hidden"
 				itemScope
