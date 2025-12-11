@@ -142,9 +142,9 @@
 }
 
 .post-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 0.5rem !important;
   margin: 0;
 }
 
@@ -192,6 +192,73 @@
 }
 
 .post-content th {
-  background-color: hsl(var(--muted));
+  background-color: hsl(var(--primary) / 0.1);
   font-weight: 600;
+}
+
+.post-content tr:nth-child(even) {
+  background-color: hsl(var(--muted) / 0.5);
+}
+
+/* ============================================
+   Article Header Styles
+   ============================================ */
+
+.article-header {
+  position: relative;
+}
+
+.article-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: hsl(var(--primary));
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .article-header::after {
+    width: 40px;
+    height: 2px;
+  }
+}
+
+/* ============================================
+   Figure and Media Styles
+   ============================================ */
+
+.post-content figure {
+  margin: 0.6rem 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.post-content figcaption {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+  padding-top: 0.5rem;
+}
+
+.post-content iframe,
+.post-content video {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* ============================================
+   Overflow Protection
+   ============================================ */
+
+.post-content * {
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.post-content table tbody {
+  display: table;
+  width: 100%;
 }
