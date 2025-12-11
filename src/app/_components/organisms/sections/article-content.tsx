@@ -5,6 +5,8 @@ import { Container } from "../../atoms/ui/container";
 import { notFound } from "next/navigation";
 import { LeadFormBlog } from "../forms/lead-form-blog";
 import { CtaSectionBlog } from "./cta-section-blog";
+import { parseFaqFromHtml } from "@/lib/utils/parse-faq-html";
+import { FAQAccordion } from "@/app/_components/molecules/faq-accordion";
 
 export default async function ArticleContent({
 	postSlug,
@@ -30,8 +32,11 @@ export default async function ArticleContent({
 		notFound();
 	}
 
+	// Parse FAQ from content
+	const { contentWithoutFaq, faqItems } = parseFaqFromHtml(post.content.rendered);
+
 	// Transform content for better React compatibility
-	const transformedContent = post.content.rendered
+	const transformedContent = contentWithoutFaq
 		.replace(/class=/g, "className=")
 		.replace(/fetchpriority=/g, "fetchPriority=")
 		.replace(/<(br)([^>]*)(?!\/)>/g, "<$1$2 />")
@@ -66,7 +71,7 @@ export default async function ArticleContent({
 			>
 				<header className="mb-6 md:mb-8 article-header pb-4 w-full">
 					<h1
-						className="font-fahkwang text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 break-words"
+						className="font-fahkwang text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 break-words"
 						itemProp="headline"
 					>
 						{post.title.rendered}
@@ -97,13 +102,15 @@ export default async function ArticleContent({
 					</div>
 				</header>
 
-				<div className="prose prose-lg max-w-none mb-12 w-full overflow-hidden">
+				<div className="prose max-w-none mb-12 w-full overflow-hidden">
 					<div
 						className="post-content text-gray-700 w-full overflow-hidden"
 						data-nosnippet
 						dangerouslySetInnerHTML={{ __html: transformedContent }}
 					/>
 				</div>
+
+				{faqItems.length > 0 && <FAQAccordion items={faqItems} />}
 
 				<CtaSectionBlog />
 			</article>
