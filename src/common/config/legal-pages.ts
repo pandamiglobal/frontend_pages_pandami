@@ -13,7 +13,7 @@ const createMetadata = (
   keywords: string[],
   path: string
 ) => ({
-  title: `${title} | Pandami`,
+  title: `${title}`,
   description,
   keywords: [...COMMON_KEYWORDS, ...keywords],
   lastUpdated: LAST_UPDATED,
