@@ -76,10 +76,6 @@ export default async function ArticleContent({
 					>
 						{post.title.rendered}
 					</h1>
-					<meta
-						name="description"
-						content={post.excerpt.rendered.replace(/<\/?[^>]+(>|$)/g, "")}
-					/>
 					<div className="description-snippet mb-4 w-full" data-snippet="true">
 						<p className="text-gray-700 break-words" itemProp="description">
 							{post.excerpt.rendered.replace(/<\/?[^>]+(>|$)/g, "")}
