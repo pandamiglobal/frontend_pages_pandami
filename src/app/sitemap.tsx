@@ -15,11 +15,7 @@ type WpUrlEntry = {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Resolve base URL de forma segura para evitar exceções em build/export
-  const envSite =
-    process.env.SITE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '') ||
-    'http://localhost:3000'
-  const siteBase = envSite.replace(/\/$/, '')
+  const siteBase = process.env.NEXT_PUBLIC_SITE_URL;
 
   const apiBase = (process.env.NEXT_BLOG_API_URL || process.env.NEXT_PUBLIC_CMS_URL || '').replace(/\/$/, '')
   const wpSitemapUrl = apiBase ? `${apiBase}/wp-sitemap-posts-post-1.xml` : ''
@@ -72,14 +68,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date().toISOString(),
       changeFrequency: 'weekly',
       priority: 1.0,
-      // images: [],
     },
     {
       url: `${siteBase}/blog`,
       lastModified: new Date().toISOString(),
       changeFrequency: 'monthly',
       priority: 0.8,
-      // images: ['https://seusite.com/image-sobre.jpg'],
     },
     {
       url: `${siteBase}/termos-de-uso`,
@@ -95,26 +89,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  const wpEntries: MetadataRoute.Sitemap[number][] = wpUrls.map(item => {
-    const regex = new RegExp(`^https?:\/\/(www\.)?${process.env.POST_SITEMAP_DOMAIN || ''}\/`)
-    let url = item.url.replace(regex, `${siteBase}/`)
-    if (url.startsWith('http://')) {
-      url = url.replace('http://', 'https://');
-    }
+  // URLs já definidas nas páginas estáticas (para evitar duplicatas)
+  const staticUrls = new Set(nextPages.map(p => p.url.replace(/\/$/, '')))
 
-    return {
-      url,
-      lastModified: item.lastModified,
-      changeFrequency: 'weekly',
-      priority: 0.5,
-      images: item.images,
-    }
-  })
+  const wpEntries: MetadataRoute.Sitemap[number][] = wpUrls
+    .map(item => {
+      // Remove o subdomínio 'cms' e substitui pela URL pública (pandami.com.br)
+      let url = item.url.replace(/^https?:\/\/cms\.pandami\.com\.br/, siteBase || 'https://pandami.com.br')
+      if (url.startsWith('http://')) {
+        url = url.replace('http://', 'https://');
+      }
 
-  const combinedSitemap: MetadataRoute.Sitemap = [
-    ...nextPages,
-    ...wpEntries,
-  ]
+      return {
+        url,
+        lastModified: item.lastModified,
+        changeFrequency: 'monthly' as const,
+        priority: 0.5,
+        images: item.images,
+      }
+    })
+    .filter(entry => !staticUrls.has(entry.url.replace(/\/$/, '')))
 
-  return combinedSitemap
+  return [...nextPages, ...wpEntries]
 }
