@@ -48,7 +48,7 @@ export const JSON_LD_SEO = {
     },
     RATING: {
       VALUE: "4.8",
-      COUNT: "2000",
+      COUNT: "2247",
       BEST: "5",
       WORST: "1"
     },
