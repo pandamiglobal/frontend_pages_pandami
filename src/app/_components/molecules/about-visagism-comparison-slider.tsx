@@ -42,7 +42,7 @@ export function AboutVisagismComparisonSlider({
       className={cn(
         "relative w-full h-[480px] rounded-3xl overflow-hidden select-none touch-none bg-neutral-200",
         "md:h-[520px]",
-        className
+        className,
       )}
       onMouseDown={handleContainerMouseDown}
       onTouchStart={handleContainerTouchStart}
@@ -92,28 +92,32 @@ export function AboutVisagismComparisonSlider({
           style={{ left: `${position}%` }}
           onMouseDown={handleButtonMouseDown}
           onTouchStart={handleButtonTouchStart}
-          animate={!hasInteracted && !isHovered ? {
-            scale: [1, 1.2, 1],
-          } : { scale: 1 }}
+          animate={
+            !hasInteracted && !isHovered
+              ? {
+                  scale: [1, 1.2, 1],
+                }
+              : { scale: 1 }
+          }
           transition={{
             duration: 0.8,
             ease: "easeInOut",
             repeat: !hasInteracted && !isHovered ? Infinity : 0,
           }}
         >
-          <span className="h-14 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
-            {/* Affordance injetado via props - só exibe se não interagiu */}
-            {!hasInteracted && affordanceSlot && (
+          {/* Affordance injetado via props - só exibe se não interagiu */}
+          {!hasInteracted && affordanceSlot && (
+            <span className="h-14 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
               <div
                 className={cn(
                   "transition-opacity duration-200",
-                  isHovered && "opacity-0"
+                  isHovered && "opacity-0",
                 )}
               >
                 {affordanceSlot}
               </div>
-            )}
-          </span>
+            </span>
+          )}
         </motion.button>
       </div>
 
@@ -121,7 +125,7 @@ export function AboutVisagismComparisonSlider({
       <span
         className={cn(
           "absolute top-4 left-4 px-4 py-1 rounded-md bg-white text-stone-900 text-sm font-medium shadow-sm transition-opacity",
-          position < 45 && "opacity-40"
+          position < 45 && "opacity-40",
         )}
       >
         {beforeLabel}
@@ -129,7 +133,7 @@ export function AboutVisagismComparisonSlider({
       <span
         className={cn(
           "absolute top-4 right-4 px-4 py-1 rounded-md bg-white text-stone-900 text-sm font-medium shadow-sm transition-opacity",
-          position > 55 && "opacity-40"
+          position > 55 && "opacity-40",
         )}
       >
         {afterLabel}
